@@ -1,0 +1,7 @@
+c -o -x -i0:d: vicdemo1.c 0:d:libc3l.lib 0:a:libc.lib
+c -o -x -i0:d: vicdemo2.c 0:d:libc3l.lib 0:a:libc.lib
+c -o -x -i0:d: vicdemo3.c 0:d:libc3l.lib 0:a:libc.lib
+c -o -x -i0:d: vicdemo4.c 0:d:libc3l.lib 0:a:libc.lib
+c -o -x -i0:d: vdcdemo1.c 0:d:libc3l.lib
+c -o -x -i0:d: vdcdemo2.c 0:d:libc3l.lib
+c -o -x -i0:d: keydemo.c 0:d:libc3l.lib 0:a:libc.lib
