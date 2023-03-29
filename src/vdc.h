@@ -83,11 +83,6 @@
 #define vdcScrMem 0x0000  /* VDC default screen memory */
 #define vdcColMem 0x0800  /* VDC default attribute memory */
 #define vdcChrMem 0x2000  /* VDC default character set memory */
-#define vdcScrSize 2000   /* VDC screen size in bytes */
-#define vdcBmpSize 16000  /* VDC bitmap size in bytes */
-
-#define vdcBmpSize 16000      /* 640x200 screen size in bytes */
-#define vdcOddFldOfs 21360    /* 640 X 480 interlace odd field offset */
 
 extern void saveVdc();
 extern void restoreVdc();
@@ -104,10 +99,15 @@ extern void fillVdcMem(ushort vdcMem, ushort len, uchar value);
 extern void copyVdcChrMem(uchar *mem, ushort vdcMem, ushort chars);
 extern void copyVdcMemChr(uchar *mem, ushort vdcMem, ushort chars);
 extern void clearVdcScr(uchar c);
-extern void clearVdcCol(uchar c);
+extern void clearVdcScrCol(uchar c);
 extern void printVdc(uchar x, uchar y, char *str);
 extern void printVdcCol(uchar x, uchar y, uchar color, char *str);
+extern void scrollVdcUpY(uchar y1, uchar y2);
+extern void scrollVdcUpYCol(uchar y1, uchar y2);
+extern void scrollVdcUp(uchar x1, uchar y1, uchar x2, uchar y2);
+extern void scrollVdcUpCol(uchar x1, uchar y1, uchar x2, uchar y2);
 extern void setVdcBmpMode(ushort dispPage, ushort attrPage);
+extern void copyVdcMem(ushort source, ushort dest, ushort len);
 extern void clearVdcBmp(uchar c);
 extern void clearVdcBmpCol(uchar c);
 extern void setVdcPix(ushort x, ushort y);

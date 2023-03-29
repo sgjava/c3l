@@ -47,14 +47,14 @@ void init(uchar *scr, uchar *chr) {
     outp(vicBorderCol, 13);
     outp(vicBgCol0, 0);
     /* Clear color to black */
-    clearCol(0);
+    clearScrCol(0);
     /* Clear screen */
     clearScr(32);
     /* Set standard character mode using MMU bank 1 and set VIC based on scr location */
     setVicChrMode(1, vicBank, ((ushort) scr - (vicBank * 16384)) / 1024,
             ((ushort) chr - (vicBank * 16384)) / 2048);
     /* Clear color to white */
-    clearCol(1);
+    clearScrCol(1);
     /* Enable screen */
     outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }
@@ -68,7 +68,7 @@ void done(uchar bgCol, uchar fgCol) {
     outp(vicBorderCol, bgCol);
     outp(vicBgCol0, fgCol);
     /* Clear color to black */
-    clearCol(0);
+    clearScrCol(0);
     /* CPM default */
     setVicChrMode(0, 0, 11, 3);
     /* Enable CIA 1 IRQ */
@@ -205,13 +205,15 @@ main() {
     /* Save screen/border color */
     uchar border = inp(vicBorderCol);
     uchar background = inp(vicBgCol0);
-    scrSize = vicScrSize;
+	scrWidth = 40;
+	scrHeight = 25;
+    scrSize = scrWidth * scrHeight;
     scrMem = scr;
     scrColMem = (uchar *) vicColMem;
     chrMem = chr;
     /* Set screen functions */
     clearScr = clearVicScr;
-    clearCol = clearVicCol;
+    clearScrCol = clearVicCol;
     /* Use VIC print functions */
     print = printVicPet;
     printCol = printVicColPet;

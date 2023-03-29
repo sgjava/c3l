@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+extern ushort bmpWidth;
+extern ushort bmpHeight;
 extern uchar *bmpMem;
 extern ushort bmpSize;
 extern uchar *bmpColMem;

@@ -31,7 +31,7 @@ void init(uchar *chr) {
     outp(vicBorderCol, 0);
     outp(vicBgCol0, 0);
     /* Clear color to black */
-    clearCol(0);
+    clearScrCol(0);
     /* Clear screen */
     clearScr(32);
     /* Copy VDC alt char set to VIC mem */
@@ -39,7 +39,7 @@ void init(uchar *chr) {
     /* Set standard character mode using MMU bank 1 and VIC bank 0 */
     setVicChrMode(1, 0, (ushort) scrMem / 1024, (ushort) chr / 2048);
     /* Clear color to white */
-    clearCol(1);
+    clearScrCol(1);
     /* Enable screen */
     outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }
@@ -52,7 +52,7 @@ void done(uchar bgCol, uchar fgCol) {
     outp(vicBorderCol, bgCol);
     outp(vicBgCol0, fgCol);
     /* Clear color to black */
-    clearCol(0);
+    clearScrCol(0);
     /* CPM default */
     setVicChrMode(0, 0, 11, 3);
     /* Enable CIA 1 IRQ */
@@ -80,7 +80,7 @@ void waitKey() {
 void readLine() {
     char *str;
     clearScr(32);
-    clearCol(1);
+    clearScrCol(1);
     printCol(0, 0, 14, "Type in line and press return:");
     str = readVicLine(0, 2, 40);
     printCol(0, 4, 14, "You entered:");
@@ -96,7 +96,7 @@ void keyboard() {
     char str[40];
     uchar *ciaKeyScan, exitKey;
     clearScr(32);
-    clearCol(1);
+    clearScrCol(1);
     print(4, 0, "Standard and extended key scan");
     printCol(0, 2, 14, " 0  1  2  3  4  5  6  7  8  9 10");
     printCol(0, 6, 3, "Key pressed:");
@@ -145,13 +145,15 @@ main() {
     /* Save screen/border color */
     uchar border = inp(vicBorderCol);
     uchar background = inp(vicBgCol0);
-    scrSize = vicScrSize;
+	scrWidth = 40;
+	scrHeight = 25;
+    scrSize = scrWidth * scrHeight;
     scrMem = scr;
     scrColMem = (uchar *) vicColMem;
     chrMem = chr;
     /* Set screen functions */
     clearScr = clearVicScr;
-    clearCol = clearVicCol;
+    clearScrCol = clearVicCol;
     /* Use VIC print functions */
     print = printVic;
     printCol = printVicCol;

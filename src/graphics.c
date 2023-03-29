@@ -11,6 +11,16 @@
 #include <hitech.h>
 
 /*
+ * Screen width in characters.
+ */
+ushort bmpWidth;
+
+/*
+ * Screen height in characters.
+ */
+ushort bmpHeight;
+
+/*
  * Bitmap memory location.
  */
 uchar *bmpMem;

@@ -13,6 +13,7 @@
 #include <hitech.h>
 #include <cia.h>
 #include <vic.h>
+#include <screen.h>
 #include <graphics.h>
 
 /*
@@ -268,8 +269,13 @@ main() {
     uchar border = inp(vicBorderCol);
     uchar background = inp(vicBgCol0);
     /* Set default sizes and locations */
-    bmpSize = vicBmpSize;
-    bmpColSize = vicScrSize;
+	bmpWidth = 320;
+	bmpHeight = 200;
+	bmpSize = bmpWidth * bmpHeight / 8;
+	scrWidth = 40;
+	scrHeight = 25;
+    scrSize = scrWidth * scrHeight;
+    bmpColSize = scrSize;
     bmpMem = bmp;
     bmpColMem = scr;
     bmpChrMem = chr;

@@ -13,14 +13,24 @@
 #include <hitech.h>
 
 /*
- * Screen memory location.
+ * Screen width in characters.
  */
-uchar *scrMem;
+uchar scrWidth;
+
+/*
+ * Screen height in characters.
+ */
+uchar scrHeight;
 
 /*
  * Screen size in bytes.
  */
 ushort scrSize;
+
+/*
+ * Screen memory location.
+ */
+uchar *scrMem;
 
 /*
  * Screen color location.
@@ -40,7 +50,7 @@ void (*clearScr)(uchar);
 /*
  * Clear screen color.
  */
-void (*clearCol)(uchar);
+void (*clearScrCol)(uchar);
 
 /*
  * Print text without color.

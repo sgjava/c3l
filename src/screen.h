@@ -4,12 +4,14 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+extern uchar scrWidth;
+extern uchar scrHeight;
 extern uchar *scrMem;
 extern ushort scrSize;
 extern uchar *scrColMem;
 extern uchar *chrMem;
 extern void (*clearScr)( uchar);
-extern void (*clearCol)( uchar);
+extern void (*clearScrCol)( uchar);
 extern void (*print)( uchar, uchar, char *);
 extern void (*printCol)( uchar, uchar, uchar, char *);
 extern char *asciiToPet(char *str);

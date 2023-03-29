@@ -55,9 +55,24 @@
 #define vicPcrcr       0xd030 /* Processor clock rate control register */
 
 #define vicColMem 0xd800  /* VIC I/O mapped color memory */
-#define vicScrSize 1000   /* VIC screen size in bytes */
-#define vicBmpSize 8000   /* VIC bitmap size in bytes */
 #define vicSprMemOfs 1016 /* Sprite memory pointers offset in screen.  */
+
+#define vicBlack       0      /* VIC colors */
+#define vicWhite       1
+#define vicRed         2
+#define vicCyan        3
+#define vicPurple      4
+#define vicGreen       5
+#define vicBlue        6
+#define vicYellow      7
+#define vicOrange      8
+#define vicBrown       9
+#define vicLightRed   10
+#define vicDarkGray   11
+#define vicMedGray    12
+#define vicLightGreen 13
+#define vicLightBlue  14
+#define vdcLightGray  15
 
 extern uchar *allocVicMem(uchar maxBank);
 extern void setVicMmuBank(uchar mmuRcr);
