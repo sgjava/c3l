@@ -21,6 +21,14 @@ uchar vdcBitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
 uchar vdcFillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
 
 /*
+ * Set bitmap memory location, attribute memory location and bitmap mode.
+ */
+void setVdcBmpMode(ushort dispPage, ushort attrPage) {
+	setVdcDspPage(dispPage, attrPage);
+	outVdc(vdcHzSmScroll, inVdc(vdcHzSmScroll) | 0x80);
+}
+
+/*
  * Clear screen.
  */
 void clearVdcBmp(uchar c) {

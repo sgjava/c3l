@@ -1,16 +1,29 @@
 r d:libc3l.lib \
 rtc.obj \
 sid.obj \
-cia.obj \
 graphics.obj \
 grline.obj \
 grellip.obj \
 grbezier.obj \
-vic.obj \
-vicscr.obj \
-vicbmp.obj \
-vicspr.obj \
-vdc.obj \
 vdcscr.obj \
 vdcbmp.obj \
-screen.obj
+screen.obj \
+vic.obj \
+vicscr.obj \
+ciadec.obj \
+ciagk.obj \
+ciagkc.obj \
+ciagks.obj \
+ciaglkc.obj \
+ciagrkc.obj \
+vicbmp.obj \
+vicspr.obj \
+vdcand.obj \
+vdcchrm.obj \
+vdccpym.obj \
+vdcfmem.obj \
+vdcin.obj \
+vdcmchr.obj \
+vdcor.obj \
+vdcout.obj \
+vdcsr.obj

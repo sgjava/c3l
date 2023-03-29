@@ -1,16 +1,29 @@
 -c -o -x -i0:d: \
-rtc.c \
-sid.c \
-cia.c \
-screen.c \
+ciadec.c \
+ciagk.c \
+ciagkc.c \
+ciagks.c \
+ciaglkc.c \
+ciagrkc.c \
 graphics.c \
-grline.c \
-grellip.c \
 grbezier.c \
+grellip.c \
+grline.c \
+rtc.c \
+screen.c \
+sid.c \
+vdcand.c \
+vdcbmp.c \
+vdcchrm.c \
+vdccpym.c \
+vdcfmem.c \
+vdcin.c \
+vdcmchr.c \
+vdcor.c \
+vdcout.c \
+vdcscr.c \
+vdcsr.c \
+vicbmp.c \
 vic.c \
 vicscr.c \
-vicbmp.c \
-vicspr.c \
-vdc.c \
-vdcscr.c \
-vdcbmp.c
+vicspr.c

@@ -10,22 +10,6 @@
 #include <stdlib.h>
 #include <hitech.h>
 #include <cia.h>
-#include <vic.h>
-
-/*
- * Key column.
- */
-uchar keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f };
-
-/*
- * Left shift key column.
- */
-uchar lsKeyCol[8] = { 0x7e, 0x7d, 0x7b, 0x77, 0x6f, 0x5f, 0x3f, 0x7f };
-
-/*
- * Right shift key column.
- */
-uchar rsKeyCol[8] = { 0xee, 0xed, 0xeb, 0xe7, 0xdf, 0xcf, 0xaf, 0x6f };
 
 /*
  * Key to ASCII code unshifted. Unmapped keys are set to 0x00.
@@ -51,80 +35,6 @@ uchar shiftKeys[11][8] = { { 0x7f, 0x0d, 0x04, 0x00, 0x00, 0x00, 0x00, 0x18 }, {
         0x00, '"', 0x20, 0x00, 'Q', 0x00 }, { 0x00, '8', '5', 0x09, '2', '4',
         '7', '1' }, { 0x1b, '+', '-', 0x0a, 0x0d, '6', '9', '3' }, { 0x00, '0',
         '.', 0x05, 0x18, 0x13, 0x04, 0x00 } };
-
-/*
- * Get key column. If column not found then 8 is returned.
- */
-uchar getKeyCol(uchar keyVal) {
-    register uchar i = 0;
-    while ((i < 8) && (keyCol[i] != keyVal)) {
-        i++;
-    }
-    return i;
-}
-
-/*
- * Get left shift key column. If column not found then 8 is returned.
- */
-uchar getLsKeyCol(uchar keyVal) {
-    register uchar i = 0;
-    while ((i < 8) && (lsKeyCol[i] != keyVal)) {
-        i++;
-    }
-    return i;
-}
-
-/*
- * Get left shift key column. If column not found then 8 is returned.
- */
-uchar getRsKeyCol(uchar keyVal) {
-    register uchar i = 0;
-    while ((i < 8) && (rsKeyCol[i] != keyVal)) {
-        i++;
-    }
-    return i;
-}
-
-/*
- * Get standard or extended key code for single row. 0xff is returned if no key
- * pressed. keyRow is 0 - 10.
- */
-uchar getKey(uchar keyRow) {
-    uchar keyCode;
-    /* Standard keys? */
-    if (keyRow < 8) {
-        outp(vicExtKey, 0xff);
-        outp(cia1DataA, keyCol[keyRow]);
-        keyCode = inp(cia1DataB);
-    } else {
-        /* Extended keys */
-        outp(cia1DataA, 0xff);
-        outp(vicExtKey, keyCol[keyRow - 8]);
-        keyCode = inp(cia1DataB);
-    }
-    return keyCode;
-}
-
-/*
- * Get all standard and extended key rows.
- */
-uchar *getKeys() {
-    register uchar i;
-    uchar *ciaKeyScan = (uchar *) malloc(11);
-    outp(vicExtKey, 0xff);
-    /* Scan standard keys */
-    for (i = 0; i < 8; i++) {
-        outp(cia1DataA, keyCol[i]);
-        ciaKeyScan[i] = inp(cia1DataB);
-    }
-    outp(cia1DataA, 0xff);
-    /* Scan extended keys */
-    for (i = 0; i < 3; i++) {
-        outp(vicExtKey, keyCol[i]);
-        ciaKeyScan[i + 8] = inp(cia1DataB);
-    }
-    return ciaKeyScan;
-}
 
 /*
  * Decode key from getKeys array. Handle shifted and unshifted keys. 0x00 is
