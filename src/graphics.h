@@ -6,8 +6,8 @@
 
 extern ushort bmpWidth;
 extern ushort bmpHeight;
-extern uchar *bmpMem;
 extern ushort bmpSize;
+extern uchar *bmpMem;
 extern uchar *bmpColMem;
 extern ushort bmpColSize;
 extern uchar *bmpChrMem;

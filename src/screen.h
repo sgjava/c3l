@@ -6,8 +6,8 @@
 
 extern uchar scrWidth;
 extern uchar scrHeight;
-extern uchar *scrMem;
 extern ushort scrSize;
+extern uchar *scrMem;
 extern uchar *scrColMem;
 extern uchar *chrMem;
 extern void (*clearScr)( uchar);

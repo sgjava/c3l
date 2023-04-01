@@ -4,9 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <stdlib.h>
-#include <assert.h>
 #include <hitech.h>
+#include <stdlib.h>
 #include <graphics.h>
 
 /*

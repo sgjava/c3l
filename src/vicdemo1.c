@@ -7,7 +7,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys.h>
 #include <hitech.h>
 #include <cia.h>

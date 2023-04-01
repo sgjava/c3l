@@ -4,8 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <stdlib.h>
 #include <hitech.h>
+#include <sys.h>
+#include <stdlib.h>
 #include <graphics.h>
 
 /*
@@ -53,27 +54,4 @@ void drawLine(int x0, int y0, int x1, int y1, uchar setPix) {
             }
         }
     }
-}
-
-/*
- * Draw rectangle using line drawing.
- */
-void drawRect(int x0, int y0, int x1, int y1, uchar setPix) {
-    /* Top */
-    drawLine(x0, y0, x1, y0, setPix);
-    /* Left */
-    drawLine(x0, y0, x0, y1, setPix);
-    /* Right */
-    drawLine(x1, y0, x1, y1, setPix);
-    /* Bottom */
-    drawLine(x0, y1, x1, y1, setPix);
-}
-
-/*
- * Draw square using rectangle with aspect ratio adjustment.
- */
-void drawSquare(int x, int y, int len, uchar setPix) {
-    /* Square approximation based on 1:0.75 aspect ratio */
-    int yLen = (len / aspectRatio) + ((len / aspectRatio) / aspectRatio);
-    drawRect(x, y, x + len - 1, y + yLen - 1, setPix);
 }

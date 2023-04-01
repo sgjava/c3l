@@ -69,12 +69,3 @@ void drawEllipse(int xc, int yc, int a, int b, uchar setPix) {
         }
     }
 }
-
-/*
- * Draw circle using ellipse with aspect ratio adjustment.
- */
-void drawCircle(int xc, int yc, int a, uchar setPix) {
-    /* Circle approximation based on 1:0.75 aspect ratio */
-    drawEllipse(xc, yc, a,
-            (a / aspectRatio) + ((a / aspectRatio) / aspectRatio), setPix);
-}

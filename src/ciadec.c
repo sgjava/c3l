@@ -6,42 +6,38 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sys.h>
-#include <stdlib.h>
 #include <hitech.h>
 #include <cia.h>
-
-/*
- * Key to ASCII code unshifted. Unmapped keys are set to 0x00.
- */
-uchar stdKeys[11][8] = { { 0x7f, 0x0d, 0x04, 0x00, 0x00, 0x00, 0x00, 0x18 }, {
-        '3', 'w', 'a', '4', 'z', 's', 'e', 0x00 }, { '5', 'r', 'd', '6', 'c',
-        'f', 't', 'x' }, { '7', 'y', 'g', '8', 'b', 'h', 'u', 'v' }, { '9', 'i',
-        'j', '0', 'm', 'k', 'o', 'n' },
-        { '+', 'p', 'l', '-', '.', ':', '@', ',' }, { '\\', '*', ';', 0x00,
-                0x00, '=', '^', '/' }, { '1', 0x00, 0x00, '2', 0x20, 0x00, 'q',
-                0x00 }, { 0x00, '8', '5', 0x09, '2', '4', '7', '1' }, { 0x1b,
-                '+', '-', 0x0a, 0x0d, '6', '9', '3' }, { 0x00, '0', '.', 0x05,
-                0x18, 0x13, 0x04, 0x00 } };
-
-/*
- * Key to ASCII code shifted. Unmapped keys are set to 0x00.
- */
-uchar shiftKeys[11][8] = { { 0x7f, 0x0d, 0x04, 0x00, 0x00, 0x00, 0x00, 0x18 }, {
-        '#', 'W', 'A', '$', 'Z', 'S', 'E', 0x00 }, { '%', 'R', 'D', '&', 'C',
-        'F', 'T', 'X' }, { '\'', 'Y', 'G', '(', 'B', 'H', 'U', 'V' }, { ')',
-        'I', 'J', '0', 'M', 'K', 'O', 'N' }, { '+', 'P', 'L', '-', '>', '[',
-        '@', '<' }, { '\\', '*', ']', 0x00, 0x00, '=', '^', '?' }, { '!', 0x00,
-        0x00, '"', 0x20, 0x00, 'Q', 0x00 }, { 0x00, '8', '5', 0x09, '2', '4',
-        '7', '1' }, { 0x1b, '+', '-', 0x0a, 0x0d, '6', '9', '3' }, { 0x00, '0',
-        '.', 0x05, 0x18, 0x13, 0x04, 0x00 } };
 
 /*
  * Decode key from getKeys array. Handle shifted and unshifted keys. 0x00 is
  * returned if no keys pressed, unmapped keys pressed or unable to decode.
  */
 uchar decodeKey() {
-    register uchar i = 0;
+	/*
+	 * Key to ASCII code unshifted. Unmapped keys are set to 0x00.
+	 */
+	static uchar stdKeys[11][8] = { { 0x7f, 0x0d, 0x04, 0x00, 0x00, 0x00, 0x00, 0x18 }, {
+	        '3', 'w', 'a', '4', 'z', 's', 'e', 0x00 }, { '5', 'r', 'd', '6', 'c',
+	        'f', 't', 'x' }, { '7', 'y', 'g', '8', 'b', 'h', 'u', 'v' }, { '9', 'i',
+	        'j', '0', 'm', 'k', 'o', 'n' },
+	        { '+', 'p', 'l', '-', '.', ':', '@', ',' }, { '\\', '*', ';', 0x00,
+	                0x00, '=', '^', '/' }, { '1', 0x00, 0x00, '2', 0x20, 0x00, 'q',
+	                0x00 }, { 0x00, '8', '5', 0x09, '2', '4', '7', '1' }, { 0x1b,
+	                '+', '-', 0x0a, 0x0d, '6', '9', '3' }, { 0x00, '0', '.', 0x05,
+	                0x18, 0x13, 0x04, 0x00 } };
+
+	/*
+	 * Key to ASCII code shifted. Unmapped keys are set to 0x00.
+	 */
+	static uchar shiftKeys[11][8] = { { 0x7f, 0x0d, 0x04, 0x00, 0x00, 0x00, 0x00, 0x18 }, {
+	        '#', 'W', 'A', '$', 'Z', 'S', 'E', 0x00 }, { '%', 'R', 'D', '&', 'C',
+	        'F', 'T', 'X' }, { '\'', 'Y', 'G', '(', 'B', 'H', 'U', 'V' }, { ')',
+	        'I', 'J', '0', 'M', 'K', 'O', 'N' }, { '+', 'P', 'L', '-', '>', '[',
+	        '@', '<' }, { '\\', '*', ']', 0x00, 0x00, '=', '^', '?' }, { '!', 0x00,
+	        0x00, '"', 0x20, 0x00, 'Q', 0x00 }, { 0x00, '8', '5', 0x09, '2', '4',
+	        '7', '1' }, { 0x1b, '+', '-', 0x0a, 0x0d, '6', '9', '3' }, { 0x00, '0',
+	        '.', 0x05, 0x18, 0x13, 0x04, 0x00 } };    register uchar i = 0;
     uchar keyCode = 0x00;
     uchar lsCol, rsCol, col;
     uchar *ciaKeyScan;

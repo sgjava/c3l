@@ -7,7 +7,6 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys.h>
 #include <hitech.h>
 #include <cia.h>
@@ -126,8 +125,7 @@ void fillScrCol() {
 void run() {
 	char str[40];
 	char *dateStr, *timeStr;
-	/* Binary, 24h, DST */
-	setRtcMode(0x87);
+	setRtcMode(rtcDefaultMode);
 	dateStr = getRtcDate();
 	timeStr = getRtcTime();
 	print(0, 0, "Simple character mode using the VDC "

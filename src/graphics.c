@@ -21,14 +21,14 @@ ushort bmpWidth;
 ushort bmpHeight;
 
 /*
- * Bitmap memory location.
- */
-uchar *bmpMem;
-
-/*
  * Bitmap size in bytes.
  */
 ushort bmpSize;
+
+/*
+ * Bitmap memory location.
+ */
+uchar *bmpMem;
 
 /*
  * Bitmap color location.

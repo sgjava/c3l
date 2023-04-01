@@ -7,13 +7,11 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys.h>
 #include <hitech.h>
 #include <cia.h>
 #include <vic.h>
 #include <screen.h>
-#include <vdc.h>
 
 /*
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen

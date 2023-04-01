@@ -6,8 +6,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys.h>
 #include <hitech.h>
 #include <cia.h>
