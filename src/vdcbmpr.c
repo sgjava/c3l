@@ -7,6 +7,7 @@
 #include <string.h>
 #include <hitech.h>
 #include <vdc.h>
+#include <screen.h>
 #include <graphics.h>
 
 /*
@@ -14,7 +15,7 @@
  */
 void printVdcBmp(uchar x, uchar y, char *str) {
     ushort vdcMem = (ushort) bmpMem;
-    ushort dispOfs = ((y * 80) * 8) + vdcMem + x;
+    ushort dispOfs = ((y * scrWidth) * 8) + vdcMem + x;
     ushort len = strlen(str);
     ushort i, chrOfs;
     uchar c;
@@ -27,6 +28,6 @@ void printVdcBmp(uchar x, uchar y, char *str) {
             outVdc(vdcCPUData, bmpChrMem[chrOfs]);
         }
         /* Next scan line */
-        dispOfs += 80;
+        dispOfs += scrWidth;
     }
 }

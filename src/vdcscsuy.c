@@ -13,6 +13,6 @@
  * copyVdcMem the entire block for speed.
  */
 void scrollVdcUpY(uchar y1, uchar y2) {
-	ushort dispOfs = (y1 * 80) + (ushort) scrMem;
+	ushort dispOfs = (y1 * scrWidth) + (ushort) scrMem;
 	copyVdcMem(dispOfs, dispOfs - scrWidth, (y2 - y1 + 1) * scrWidth);
 }

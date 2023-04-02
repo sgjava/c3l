@@ -58,5 +58,18 @@ vdcscsyc.c \
 vdcsr.c \
 vicbmp.c \
 vic.c \
-vicscr.c \
+vicsccc.c \
+vicscclr.c \
+vicsccm.c \
+vicscpc.c \
+vicscpp.c \
+vicscppc.c \
+vicscpr.c \
+vicscrl.c \
+vicscsc.c \
+vicscsm.c \
+vicscsu.c \
+vicscsuc.c \
+vicscsuy.c \
+vicscup.c \
 vicspr.c

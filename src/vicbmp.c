@@ -8,6 +8,7 @@
 #include <string.h>
 #include <hitech.h>
 #include <graphics.h>
+#include <screen.h>
 #include <vic.h>
 
 /*
@@ -42,21 +43,21 @@ void setVicBmpMode(uchar mmuRcr, uchar vicBank, uchar scrLoc, uchar bmpLoc) {
  * Clear screen using 16 bit word.
  */
 void clearVicBmp(uchar c) {
-    fillVicMem(bmpMem, 0, bmpSize >> 1, (c << 8) + c);
+    fillVicMem(bmpMem, bmpSize >> 1, (c << 8) + c);
 }
 
 /*
  * Clear bitmap color memory.
  */
 void clearVicBmpCol(uchar c) {
-    fillVicMem(bmpColMem, 0, bmpColSize >> 1, (c << 8) + c);
+    fillVicMem(bmpColMem, bmpColSize >> 1, (c << 8) + c);
 }
 
 /*
  * Set pixel.
  */
 void setVicPix(ushort x, ushort y) {
-    ushort pixByte = 40 * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
+    ushort pixByte = scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
     bmpMem[pixByte] = bmpMem[pixByte] | (bitTable[x & 0x07]);
 }
 
@@ -64,7 +65,7 @@ void setVicPix(ushort x, ushort y) {
  * Clear pixel.
  */
 void clearVicPix(ushort x, ushort y) {
-    ushort pixByte = 40 * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
+    ushort pixByte = scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
     bmpMem[pixByte] = bmpMem[pixByte] & ~(bitTable[x & 0x07]);
 }
 
@@ -72,7 +73,7 @@ void clearVicPix(ushort x, ushort y) {
  * Optimized horizontal line algorithm up to 15x faster than Bresenham.
  */
 void drawVicLineH(ushort x, ushort y, ushort len, uchar setPix) {
-    ushort pixByte = 40 * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
+    ushort pixByte = scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
     uchar firstBits = x % 8;
     uchar lastBits = (x + len - 1) % 8;
     ushort fillBytes = (len - lastBits - 1) >> 3;
@@ -112,7 +113,7 @@ void drawVicLineH(ushort x, ushort y, ushort len, uchar setPix) {
  * Optimized vertical line algorithm uses less calculation than setVicPix.
  */
 void drawVicLineV(ushort x, ushort y, ushort len, uchar setPix) {
-    ushort pixByte = 40 * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
+    ushort pixByte = scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
     uchar vBit = bitTable[x & 0x07];
     uchar i;
     /* Plot pixels */
@@ -139,7 +140,7 @@ void printVicBmp(uchar x, uchar y, uchar color, char *str) {
     ushort *bmp16 = (ushort *) bmpMem;
     ushort *chr16 = (ushort *) bmpChrMem;
     ushort bmpOfs = (y * 160) + (x * 4);
-    ushort colOfs = (y * 40) + x;
+    ushort colOfs = (y * scrWidth) + x;
     ushort len = strlen(str);
     ushort i, chrOfs, destOfs;
     uchar c;

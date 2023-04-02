@@ -47,13 +47,13 @@ void setVicBank(uchar vicBank) {
 }
 
 /*
- * Fill memory with word value starting at start.
+ * Fill memory with word value.
  */
-void fillVicMem(uchar *mem, ushort start, ushort len, ushort value) {
+void fillVicMem(uchar *mem, ushort len, ushort value) {
     register ushort i;
     ushort *mem16 = (ushort *) mem;
     for (i = 0; i < len; i++) {
-        mem16[start + i] = value;
+        mem16[i] = value;
     }
 }
 

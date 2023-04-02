@@ -49,14 +49,27 @@ vdcscsyc.obj \
 vdcsr.obj \
 vicbmp.obj \
 vic.obj \
-vicscr.obj \
+vicsccc.obj \
+vicscclr.obj \
+vicsccm.obj \
+vicscpp.obj \
+vicscppc.obj \
+vicscpr.obj \
+vicscrl.obj \
+vicscsc.obj \
+vicscsm.obj \
+vicscsu.obj \
+vicscsuc.obj \
+vicscsuy.obj \
+vicscup.obj \
 vicspr.obj \
 ciadec.obj \
-ciaglkc.obj \
-ciagrkc.obj \
 ciagk.obj \
 ciagkc.obj \
 ciagks.obj \
+ciaglkc.obj \
+ciagrkc.obj \
 scatop.obj \
 vdccpym.obj \
-vdcand.obj
+vdcand.obj \
+vicscpc.obj

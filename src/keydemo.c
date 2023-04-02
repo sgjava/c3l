@@ -80,7 +80,7 @@ void readLine() {
     clearScr(32);
     clearScrCol(1);
     printCol(0, 0, 14, "Type in line and press return:");
-    str = readVicLine(0, 2, 40);
+    str = readVicLine(0, 2, scrWidth);
     printCol(0, 4, 14, "You entered:");
     printCol(0, 6, 13, str);
     free(str);

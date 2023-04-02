@@ -77,7 +77,7 @@
 extern uchar *allocVicMem(uchar maxBank);
 extern void setVicMmuBank(uchar mmuRcr);
 extern void setVicBank(uchar vicBank);
-extern void fillVicMem(uchar *mem, ushort start, ushort len, ushort value);
+extern void fillVicMem(uchar *mem, ushort len, ushort value);
 extern void setVicMode(uchar ecm, uchar bmm, uchar mcm);
 extern void setVicScrMem(uchar scrLoc);
 extern void setVicChrMem(uchar chrLoc);
@@ -89,8 +89,10 @@ extern void printVic(uchar x, uchar y, char *str);
 extern void printVicCol(uchar x, uchar y, uchar color, char *str);
 extern void printVicPet(uchar x, uchar y, char *str);
 extern void printVicColPet(uchar x, uchar y, uchar color, char *str);
-extern void scrollVicUpX(uchar x, uchar y, uchar len, uchar lines);
-extern void scrollVicUp(uchar y, uchar lines);
+extern void scrollVicUpY(uchar y1, uchar y2);
+extern void scrollVicUpYCol(uchar y1, uchar y2);
+extern void scrollVicUp(uchar x1, uchar y1, uchar x2, uchar y2);
+extern void scrollVicUpCol(uchar x1, uchar y1, uchar x2, uchar y2);
 extern char *readVicLine(uchar x, uchar y, uchar len);
 extern void setVicBmpMem(uchar bmpLoc);
 extern void setVicBmpMode(uchar mmuRcr, uchar vicBank, uchar scrLoc,

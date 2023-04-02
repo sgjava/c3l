@@ -7,6 +7,7 @@
 #include <hitech.h>
 #include <vdc.h>
 #include <graphics.h>
+#include <screen.h>
 
 /*
  * Optimized vertical line algorithm uses less calculation than setVdcPix.
@@ -29,6 +30,6 @@ void drawVdcLineV(ushort x, ushort y, ushort len, uchar setPix) {
         } else {
             outVdc(vdcCPUData, saveByte & ~vBit);
         }
-        pixByte += 80;
+        pixByte += scrWidth;
     }
 }

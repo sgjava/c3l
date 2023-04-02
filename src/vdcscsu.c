@@ -17,7 +17,7 @@ void scrollVdcUp(uchar x1, uchar y1, uchar x2, uchar y2) {
 		scrollVdcUpY(y1, y2);
 	} else {
 		uchar len = x2 - x1 + 1;
-		ushort dispOfs = (y1 * 80) + (ushort) scrMem + x1;
+		ushort dispOfs = (y1 * scrWidth) + (ushort) scrMem + x1;
 		for (; y1 <= y2; y1++) {
 			copyVdcMem(dispOfs, dispOfs - scrWidth, len);
 			dispOfs += scrWidth;

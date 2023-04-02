@@ -86,8 +86,6 @@ void fillScr() {
 				"| Watch how fast you can fill the screen with text. CP/M will never be as fast |");
 	}
 	waitKey();
-	/* Prime scroll */
-	scrollVdcUp(0, 0, scrWidth -1, scrHeight - 1);
 	/* Blank out bottom line */
 	fillVdcMem((ushort) scrMem + scrSize - scrWidth, scrWidth, 32);
 	for (i = 0; i < 24; i++) {
@@ -123,7 +121,7 @@ void fillScrCol() {
  * Run demo.
  */
 void run() {
-	char str[40];
+	char str[80];
 	char *dateStr, *timeStr;
 	setRtcMode(rtcDefaultMode);
 	dateStr = getRtcDate();

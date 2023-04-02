@@ -75,7 +75,7 @@ void waitKey() {
  * Print centered text on top line in bitmap.
  */
 void bannerBmp(char *str) {
-	printVdcBmp(((80 - strlen(str)) >> 1), 0, str);
+	printVdcBmp(((scrWidth - strlen(str)) >> 1), 0, str);
 }
 
 /*
