@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include	"hitech.h"
+
 #define sidVoice1   0xD400 /* Voices */
 #define sidVoice2   0xD407
 #define sidVoice3   0xD40E

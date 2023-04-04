@@ -16,7 +16,7 @@ extern int	errno;			/* system error number */
 
 /*	hitech.h has definitions for uchar, ushort etc */
 
-#include	"../include/hitech.h"
+#include	"hitech.h"
 #if	z80
 #define	MAXFILE		8	/* max number of files open */
 #else	z80

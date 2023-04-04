@@ -10,7 +10,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <hitech.h>
+
+#include "hitech.h"
 
 /*
  * Screen width in characters.

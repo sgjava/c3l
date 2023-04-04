@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include	"hitech.h"
+
 #define vicSpr0X       0xd000 /* Sprite 0 horizontal position register */
 #define vicSpr0y       0xd001 /* Sprite 0 vertical position register */
 #define vicSpr1X       0xd002 /* Sprite 1 horizontal position register */

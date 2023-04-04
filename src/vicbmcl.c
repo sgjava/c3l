@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
 #include <graphics.h>
 #include <vic.h>
+#include "hitech.h"
 
 /*
  * Clear screen using 16 bit word.

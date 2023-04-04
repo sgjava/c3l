@@ -9,12 +9,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys.h>
-#include <hitech.h>
 #include <cia.h>
 #include <vdc.h>
 #include <screen.h>
 #include <graphics.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Set screen color, screen memory and char set memory.

@@ -6,11 +6,11 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
 #include <stdlib.h>
-#include <sys.h>
 #include <cia.h>
 #include <vic.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Get all standard and extended key rows.

@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include	"hitech.h"
+
 #define cia1DataA    0xdc00 /* Port A data I/O register */
 #define cia1DataB    0xdc01 /* Port B data I/O register */
 #define cia1DdrA     0xdc02 /* Port A data direction register */

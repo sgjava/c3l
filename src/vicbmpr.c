@@ -5,9 +5,9 @@
  */
 
 #include <string.h>
-#include <hitech.h>
 #include <graphics.h>
 #include <screen.h>
+#include "hitech.h"
 
 /*
  * Print with foreground/background color.

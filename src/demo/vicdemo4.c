@@ -8,12 +8,12 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <sys.h>
-#include <hitech.h>
 #include <cia.h>
 #include <vic.h>
 #include <screen.h>
 #include <sid.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Sprite data.

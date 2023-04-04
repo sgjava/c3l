@@ -4,12 +4,12 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sys.h>
 #include <stdlib.h>
-#include <hitech.h>
 #include <cia.h>
 #include <screen.h>
 #include <vic.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Use screen memory as simple input line. Only backspace supported, but insert

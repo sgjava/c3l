@@ -5,10 +5,10 @@
  */
 
 #include <string.h>
-#include <hitech.h>
 #include <vdc.h>
 #include <screen.h>
 #include <graphics.h>
+#include "hitech.h"
 
 /*
  * Print without color. Optimized by setting VDC address once for each scan line.

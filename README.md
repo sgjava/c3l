@@ -46,7 +46,8 @@ Inside the myz80 dir you'll find makedisk.sh which will import soucre directly f
 
 ### Install DOSBox
 This is needed to run MyZ80. In essance you are running a Ubuntu VM that is running a DOS emulator that is running a Z80 emulator.
-Talk about a Russian doll, but it works nicely.
+Talk about a Russian doll, but it works nicely. C: is mounted to `~/myz80` abd D: is 
+mounted to `~/eclipse-workspace/c3l`.
 * `sudo apt install dosbox`
 * Run DOSBox and close it to create configuration file.
     * `dosbox`
@@ -57,7 +58,7 @@ Talk about a Russian doll, but it works nicely.
     ```
     mount c ~/myz80
     del c:\tmp\*.*
-    mount d ~/eclipse-workspace/c3l/src
+    mount d ~/eclipse-workspace/c3l
     c:
     myz80
     exit
@@ -68,6 +69,8 @@ Just extract [myz80.zip](https://github.com/sgjava/c3l/tree/master/myz80) to you
 Install [Eclipse](https://www.eclipse.org/downloads).
 
 You can use the installer to install C/C++ package with JRE already built in. Or you can install JDK and Eclipse. Just make sure you install CDT from the Eclipse Marketplace. Use the default `~/eclipse-workspace` for your workspace since everything is configured to work off that path.
+While you cannot build the project in Eclipse it does syntax checking, refactoring, 
+etc. It's way more advanced than anything on CP/M or DOS to edit a project of this size.
 
 ## Building
 

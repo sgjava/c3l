@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sys.h>
-#include <hitech.h>
 #include <sid.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Set pulse waveform width.

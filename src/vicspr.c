@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sys.h>
-#include <hitech.h>
 #include <vic.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Sprite table.

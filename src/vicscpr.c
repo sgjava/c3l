@@ -5,8 +5,8 @@
  */
 
 #include <string.h>
-#include <hitech.h>
 #include <screen.h>
+#include "hitech.h"
 
 /*
  * Print without color.

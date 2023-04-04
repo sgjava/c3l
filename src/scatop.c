@@ -10,7 +10,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <hitech.h>
+
+#include "hitech.h"
 
 /*
  * Convert string to from ASCII to PETSCII.

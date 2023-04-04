@@ -5,9 +5,9 @@
  */
 
 #include <stdlib.h>
-#include <hitech.h>
 #include <screen.h>
 #include <vic.h>
+#include "hitech.h"
 
 /*
  * Print PETSCII without color.

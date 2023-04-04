@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sys.h>
-#include <hitech.h>
 #include <vic.h>
+#include "hitech.h"
+#include "sys.h"
 
 void setVicBmpMem(uchar bmpLoc) {
     outp(vicMemCtrl, (inp(vicMemCtrl) & 0xf0) | (bmpLoc << 3));

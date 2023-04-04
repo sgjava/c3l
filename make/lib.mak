@@ -1,5 +1,4 @@
 r b:libc3l.lib \
-vicbmsbm.obj \
 ciadec.obj \
 ciagk.obj \
 ciagkc.obj \
@@ -54,15 +53,15 @@ vdcscsuc.obj \
 vdcscsuy.obj \
 vdcscsyc.obj \
 vdcsr.obj \
-vicbmbm.obj \
+vicam.obj \
 vicbmcl.obj \
 vicbmclc.obj \
 vicbmcp.obj \
 vicbmdhl.obj \
 vicbmdvl.obj \
 vicbmpr.obj \
+vicbmsbm.obj \
 vicbmsp.obj \
-vic.obj \
 vicsccc.obj \
 vicscclr.obj \
 vicsccm.obj \
@@ -76,8 +75,13 @@ vicscsu.obj \
 vicscsuc.obj \
 vicscsuy.obj \
 vicscup.obj \
+vicsmb.obj \
+vicsm.obj \
 vicspr.obj \
+vicfm.obj \
+vicsb.obj \
 scatop.obj \
 vicscpc.obj \
-vdcand.obj \
-vdccpym.obj
+vicbmbm.obj \
+vdccpym.obj \
+vdcand.obj

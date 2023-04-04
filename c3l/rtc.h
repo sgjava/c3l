@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include	"hitech.h"
+
 #define rtcRegA      0xde00 /* Register A address */
 #define rtcRegB      0xde01 /* Register B address */
 #define rtcSeconds      0x0 /* Seconds */

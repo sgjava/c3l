@@ -6,8 +6,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
 #include <cia.h>
+#include "hitech.h"
 
 /*
  * Decode key from getKeys array. Handle shifted and unshifted keys. 0x00 is

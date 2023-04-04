@@ -7,13 +7,13 @@
  */
 
 #include <stdio.h>
-#include <sys.h>
-#include <hitech.h>
 #include <cia.h>
 #include <vic.h>
 #include <vdc.h>
 #include <screen.h>
 #include <rtc.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
@@ -92,7 +92,7 @@ void fillScr() {
 	/* Blank out bottom line */
 	fillVicMem((uchar*) scrMem + scrSize - scrWidth, scrWidth / 2, 0x2020);
 	for (i = 0; i < 24; i++) {
-		scrollVicUp(10, 0, scrWidth -1, scrHeight - 1);
+		scrollVicUp(1, 0, scrWidth -2, scrHeight - 1);
 	}
 	waitKey();
 }
@@ -110,7 +110,7 @@ void fillScrCol() {
 	/* Blank out bottom line */
 	fillVicMem((uchar*) scrMem + scrSize - scrWidth, scrWidth / 2, 0x2020);
 	for (i = 0; i < 24; i++) {
-		scrollVicUpCol(10, 0, scrWidth -1, scrHeight - 1);
+		scrollVicUpCol(5, 0, 32, scrHeight - 1);
 	}
 	waitKey();
 }

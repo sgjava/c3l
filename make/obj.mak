@@ -56,6 +56,7 @@ vdcscsuc.c \
 vdcscsuy.c \
 vdcscsyc.c \
 vdcsr.c \
+vicam.c \
 vicbmbm.c \
 vicbmcl.c \
 vicbmclc.c \
@@ -65,7 +66,8 @@ vicbmdvl.c \
 vicbmpr.c \
 vicbmsbm.c \
 vicbmsp.c \
-vic.c \
+vicfm.c \
+vicsb.c \
 vicsccc.c \
 vicscclr.c \
 vicsccm.c \
@@ -80,4 +82,6 @@ vicscsu.c \
 vicscsuc.c \
 vicscsuy.c \
 vicscup.c \
+vicsmb.c \
+vicsm.c \
 vicspr.c

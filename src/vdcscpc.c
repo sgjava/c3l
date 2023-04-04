@@ -4,10 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
 #include <string.h>
 #include <screen.h>
 #include <vdc.h>
+#include "hitech.h"
 
 /*
  * Print with color.

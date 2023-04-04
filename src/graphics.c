@@ -8,7 +8,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
+#include "hitech.h"
 
 /*
  * Screen width in characters.

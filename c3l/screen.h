@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include	"hitech.h"
+
 extern uchar scrWidth;
 extern uchar scrHeight;
 extern ushort scrSize;

@@ -7,12 +7,12 @@
  */
 
 #include <stdio.h>
-#include <sys.h>
-#include <hitech.h>
 #include <cia.h>
 #include <vdc.h>
 #include <screen.h>
 #include <rtc.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Set screen color, screen memory and char set memory.

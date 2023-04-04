@@ -8,12 +8,12 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <sys.h>
-#include <hitech.h>
 #include <cia.h>
 #include <vic.h>
 #include <screen.h>
 #include <graphics.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Clear bitmap.

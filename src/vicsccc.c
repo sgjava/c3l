@@ -4,10 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sys.h>
-#include <hitech.h>
 #include <screen.h>
 #include <vic.h>
+#include "hitech.h"
+#include "sys.h"
 
 /*
  * Clear color memory. Color memory is port mapped.

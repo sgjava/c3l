@@ -4,6 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include	"hitech.h"
+
 #define vdcStatusReg 0xD600    /* VDC status register */
 #define vdcDataReg   0xD601    /* VDC data register */
 

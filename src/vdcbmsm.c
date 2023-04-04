@@ -4,8 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
 #include <vdc.h>
+#include "hitech.h"
 
 /*
  * Set bitmap memory location, attribute memory location and bitmap mode.

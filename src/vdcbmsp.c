@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <hitech.h>
 #include <vdc.h>
 #include <graphics.h>
+#include "hitech.h"
 
 /*
  * Set pixel.
