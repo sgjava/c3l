@@ -1,4 +1,4 @@
--c -o -x -i0:d: \
+-c -o -x -i0:b: \
 ciadec.c \
 ciagk.c \
 ciagkc.c \
@@ -56,7 +56,15 @@ vdcscsuc.c \
 vdcscsuy.c \
 vdcscsyc.c \
 vdcsr.c \
-vicbmp.c \
+vicbmbm.c \
+vicbmcl.c \
+vicbmclc.c \
+vicbmcp.c \
+vicbmdhl.c \
+vicbmdvl.c \
+vicbmpr.c \
+vicbmsbm.c \
+vicbmsp.c \
 vic.c \
 vicsccc.c \
 vicscclr.c \

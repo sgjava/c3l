@@ -66,12 +66,33 @@ C_SRCS += \
 ../src/vdcscsyc.c \
 ../src/vdcsr.c \
 ../src/vic.c \
-../src/vicbmp.c \
+../src/vicbmbm.c \
+../src/vicbmcl.c \
+../src/vicbmclc.c \
+../src/vicbmcp.c \
+../src/vicbmdhl.c \
+../src/vicbmdvl.c \
+../src/vicbmpr.c \
+../src/vicbmsbm.c \
+../src/vicbmsp.c \
 ../src/vicdemo1.c \
 ../src/vicdemo2.c \
 ../src/vicdemo3.c \
 ../src/vicdemo4.c \
-../src/vicscr.c \
+../src/vicsccc.c \
+../src/vicscclr.c \
+../src/vicsccm.c \
+../src/vicscpc.c \
+../src/vicscpp.c \
+../src/vicscppc.c \
+../src/vicscpr.c \
+../src/vicscrl.c \
+../src/vicscsc.c \
+../src/vicscsm.c \
+../src/vicscsu.c \
+../src/vicscsuc.c \
+../src/vicscsuy.c \
+../src/vicscup.c \
 ../src/vicspr.c 
 
 C_DEPS += \
@@ -137,12 +158,33 @@ C_DEPS += \
 ./src/vdcscsyc.d \
 ./src/vdcsr.d \
 ./src/vic.d \
-./src/vicbmp.d \
+./src/vicbmbm.d \
+./src/vicbmcl.d \
+./src/vicbmclc.d \
+./src/vicbmcp.d \
+./src/vicbmdhl.d \
+./src/vicbmdvl.d \
+./src/vicbmpr.d \
+./src/vicbmsbm.d \
+./src/vicbmsp.d \
 ./src/vicdemo1.d \
 ./src/vicdemo2.d \
 ./src/vicdemo3.d \
 ./src/vicdemo4.d \
-./src/vicscr.d \
+./src/vicsccc.d \
+./src/vicscclr.d \
+./src/vicsccm.d \
+./src/vicscpc.d \
+./src/vicscpp.d \
+./src/vicscppc.d \
+./src/vicscpr.d \
+./src/vicscrl.d \
+./src/vicscsc.d \
+./src/vicscsm.d \
+./src/vicscsu.d \
+./src/vicscsuc.d \
+./src/vicscsuy.d \
+./src/vicscup.d \
 ./src/vicspr.d 
 
 OBJS += \
@@ -208,12 +250,33 @@ OBJS += \
 ./src/vdcscsyc.o \
 ./src/vdcsr.o \
 ./src/vic.o \
-./src/vicbmp.o \
+./src/vicbmbm.o \
+./src/vicbmcl.o \
+./src/vicbmclc.o \
+./src/vicbmcp.o \
+./src/vicbmdhl.o \
+./src/vicbmdvl.o \
+./src/vicbmpr.o \
+./src/vicbmsbm.o \
+./src/vicbmsp.o \
 ./src/vicdemo1.o \
 ./src/vicdemo2.o \
 ./src/vicdemo3.o \
 ./src/vicdemo4.o \
-./src/vicscr.o \
+./src/vicsccc.o \
+./src/vicscclr.o \
+./src/vicsccm.o \
+./src/vicscpc.o \
+./src/vicscpp.o \
+./src/vicscppc.o \
+./src/vicscpr.o \
+./src/vicscrl.o \
+./src/vicscsc.o \
+./src/vicscsm.o \
+./src/vicscsu.o \
+./src/vicscsuc.o \
+./src/vicscsuy.o \
+./src/vicscup.o \
 ./src/vicspr.o 
 
 
@@ -229,7 +292,7 @@ src/%.o: ../src/%.c src/subdir.mk
 clean: clean-src
 
 clean-src:
-	-$(RM) ./src/baseline.d ./src/baseline.o ./src/ciadec.d ./src/ciadec.o ./src/ciagk.d ./src/ciagk.o ./src/ciagkc.d ./src/ciagkc.o ./src/ciagks.d ./src/ciagks.o ./src/ciaglkc.d ./src/ciaglkc.o ./src/ciagrkc.d ./src/ciagrkc.o ./src/graphics.d ./src/graphics.o ./src/grbezier.d ./src/grbezier.o ./src/grcir.d ./src/grcir.o ./src/grellip.d ./src/grellip.o ./src/grline.d ./src/grline.o ./src/grrect.d ./src/grrect.o ./src/grsqr.d ./src/grsqr.o ./src/keydemo.d ./src/keydemo.o ./src/rtcgd.d ./src/rtcgd.o ./src/rtcgr.d ./src/rtcgr.o ./src/rtcgt.d ./src/rtcgt.o ./src/rtcsm.d ./src/rtcsm.o ./src/rtcsr.d ./src/rtcsr.o ./src/scatop.d ./src/scatop.o ./src/screen.d ./src/screen.o ./src/sidatt.d ./src/sidatt.o ./src/sidclr.d ./src/sidclr.o ./src/sidenv.d ./src/sidenv.o ./src/sidfreq.d ./src/sidfreq.o ./src/sidpw.d ./src/sidpw.o ./src/sidrel.d ./src/sidrel.o ./src/sidvol.d ./src/sidvol.o ./src/vdcand.d ./src/vdcand.o ./src/vdcbmcc.d ./src/vdcbmcc.o ./src/vdcbmcl.d ./src/vdcbmcl.o ./src/vdcbmcp.d ./src/vdcbmcp.o ./src/vdcbmhl.d ./src/vdcbmhl.o ./src/vdcbmpr.d ./src/vdcbmpr.o ./src/vdcbmsm.d ./src/vdcbmsm.o ./src/vdcbmsp.d ./src/vdcbmsp.o ./src/vdcbmvl.d ./src/vdcbmvl.o ./src/vdcchrm.d ./src/vdcchrm.o ./src/vdccpym.d ./src/vdccpym.o ./src/vdcdemo1.d ./src/vdcdemo1.o ./src/vdcdemo2.d ./src/vdcdemo2.o ./src/vdcfmem.d ./src/vdcfmem.o ./src/vdcin.d ./src/vdcin.o ./src/vdcmchr.d ./src/vdcmchr.o ./src/vdcor.d ./src/vdcor.o ./src/vdcout.d ./src/vdcout.o ./src/vdcscaof.d ./src/vdcscaof.o ./src/vdcscaon.d ./src/vdcscaon.o ./src/vdcsccc.d ./src/vdcsccc.o ./src/vdcscclr.d ./src/vdcscclr.o ./src/vdcscfb.d ./src/vdcscfb.o ./src/vdcscp.d ./src/vdcscp.o ./src/vdcscpc.d ./src/vdcscpc.o ./src/vdcscsc.d ./src/vdcscsc.o ./src/vdcscsdp.d ./src/vdcscsdp.o ./src/vdcscsu.d ./src/vdcscsu.o ./src/vdcscsuc.d ./src/vdcscsuc.o ./src/vdcscsuy.d ./src/vdcscsuy.o ./src/vdcscsyc.d ./src/vdcscsyc.o ./src/vdcsr.d ./src/vdcsr.o ./src/vic.d ./src/vic.o ./src/vicbmp.d ./src/vicbmp.o ./src/vicdemo1.d ./src/vicdemo1.o ./src/vicdemo2.d ./src/vicdemo2.o ./src/vicdemo3.d ./src/vicdemo3.o ./src/vicdemo4.d ./src/vicdemo4.o ./src/vicscr.d ./src/vicscr.o ./src/vicspr.d ./src/vicspr.o
+	-$(RM) ./src/baseline.d ./src/baseline.o ./src/ciadec.d ./src/ciadec.o ./src/ciagk.d ./src/ciagk.o ./src/ciagkc.d ./src/ciagkc.o ./src/ciagks.d ./src/ciagks.o ./src/ciaglkc.d ./src/ciaglkc.o ./src/ciagrkc.d ./src/ciagrkc.o ./src/graphics.d ./src/graphics.o ./src/grbezier.d ./src/grbezier.o ./src/grcir.d ./src/grcir.o ./src/grellip.d ./src/grellip.o ./src/grline.d ./src/grline.o ./src/grrect.d ./src/grrect.o ./src/grsqr.d ./src/grsqr.o ./src/keydemo.d ./src/keydemo.o ./src/rtcgd.d ./src/rtcgd.o ./src/rtcgr.d ./src/rtcgr.o ./src/rtcgt.d ./src/rtcgt.o ./src/rtcsm.d ./src/rtcsm.o ./src/rtcsr.d ./src/rtcsr.o ./src/scatop.d ./src/scatop.o ./src/screen.d ./src/screen.o ./src/sidatt.d ./src/sidatt.o ./src/sidclr.d ./src/sidclr.o ./src/sidenv.d ./src/sidenv.o ./src/sidfreq.d ./src/sidfreq.o ./src/sidpw.d ./src/sidpw.o ./src/sidrel.d ./src/sidrel.o ./src/sidvol.d ./src/sidvol.o ./src/vdcand.d ./src/vdcand.o ./src/vdcbmcc.d ./src/vdcbmcc.o ./src/vdcbmcl.d ./src/vdcbmcl.o ./src/vdcbmcp.d ./src/vdcbmcp.o ./src/vdcbmhl.d ./src/vdcbmhl.o ./src/vdcbmpr.d ./src/vdcbmpr.o ./src/vdcbmsm.d ./src/vdcbmsm.o ./src/vdcbmsp.d ./src/vdcbmsp.o ./src/vdcbmvl.d ./src/vdcbmvl.o ./src/vdcchrm.d ./src/vdcchrm.o ./src/vdccpym.d ./src/vdccpym.o ./src/vdcdemo1.d ./src/vdcdemo1.o ./src/vdcdemo2.d ./src/vdcdemo2.o ./src/vdcfmem.d ./src/vdcfmem.o ./src/vdcin.d ./src/vdcin.o ./src/vdcmchr.d ./src/vdcmchr.o ./src/vdcor.d ./src/vdcor.o ./src/vdcout.d ./src/vdcout.o ./src/vdcscaof.d ./src/vdcscaof.o ./src/vdcscaon.d ./src/vdcscaon.o ./src/vdcsccc.d ./src/vdcsccc.o ./src/vdcscclr.d ./src/vdcscclr.o ./src/vdcscfb.d ./src/vdcscfb.o ./src/vdcscp.d ./src/vdcscp.o ./src/vdcscpc.d ./src/vdcscpc.o ./src/vdcscsc.d ./src/vdcscsc.o ./src/vdcscsdp.d ./src/vdcscsdp.o ./src/vdcscsu.d ./src/vdcscsu.o ./src/vdcscsuc.d ./src/vdcscsuc.o ./src/vdcscsuy.d ./src/vdcscsuy.o ./src/vdcscsyc.d ./src/vdcscsyc.o ./src/vdcsr.d ./src/vdcsr.o ./src/vic.d ./src/vic.o ./src/vicbmbm.d ./src/vicbmbm.o ./src/vicbmcl.d ./src/vicbmcl.o ./src/vicbmclc.d ./src/vicbmclc.o ./src/vicbmcp.d ./src/vicbmcp.o ./src/vicbmdhl.d ./src/vicbmdhl.o ./src/vicbmdvl.d ./src/vicbmdvl.o ./src/vicbmpr.d ./src/vicbmpr.o ./src/vicbmsbm.d ./src/vicbmsbm.o ./src/vicbmsp.d ./src/vicbmsp.o ./src/vicdemo1.d ./src/vicdemo1.o ./src/vicdemo2.d ./src/vicdemo2.o ./src/vicdemo3.d ./src/vicdemo3.o ./src/vicdemo4.d ./src/vicdemo4.o ./src/vicsccc.d ./src/vicsccc.o ./src/vicscclr.d ./src/vicscclr.o ./src/vicsccm.d ./src/vicsccm.o ./src/vicscpc.d ./src/vicscpc.o ./src/vicscpp.d ./src/vicscpp.o ./src/vicscppc.d ./src/vicscppc.o ./src/vicscpr.d ./src/vicscpr.o ./src/vicscrl.d ./src/vicscrl.o ./src/vicscsc.d ./src/vicscsc.o ./src/vicscsm.d ./src/vicscsm.o ./src/vicscsu.d ./src/vicscsu.o ./src/vicscsuc.d ./src/vicscsuc.o ./src/vicscsuy.d ./src/vicscsuy.o ./src/vicscup.d ./src/vicscup.o ./src/vicspr.d ./src/vicspr.o
 
 .PHONY: clean-src
 

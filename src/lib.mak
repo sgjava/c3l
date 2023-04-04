@@ -1,4 +1,11 @@
-r d:libc3l.lib \
+r b:libc3l.lib \
+vicbmsbm.obj \
+ciadec.obj \
+ciagk.obj \
+ciagkc.obj \
+ciagks.obj \
+ciaglkc.obj \
+ciagrkc.obj \
 graphics.obj \
 grbezier.obj \
 grcir.obj \
@@ -47,7 +54,14 @@ vdcscsuc.obj \
 vdcscsuy.obj \
 vdcscsyc.obj \
 vdcsr.obj \
-vicbmp.obj \
+vicbmbm.obj \
+vicbmcl.obj \
+vicbmclc.obj \
+vicbmcp.obj \
+vicbmdhl.obj \
+vicbmdvl.obj \
+vicbmpr.obj \
+vicbmsp.obj \
 vic.obj \
 vicsccc.obj \
 vicscclr.obj \
@@ -63,13 +77,7 @@ vicscsuc.obj \
 vicscsuy.obj \
 vicscup.obj \
 vicspr.obj \
-ciadec.obj \
-ciagk.obj \
-ciagkc.obj \
-ciagks.obj \
-ciaglkc.obj \
-ciagrkc.obj \
 scatop.obj \
-vdccpym.obj \
+vicscpc.obj \
 vdcand.obj \
-vicscpc.obj
+vdccpym.obj
