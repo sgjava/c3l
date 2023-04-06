@@ -106,8 +106,6 @@ void fillScrCol() {
 				"You can do fast color text as well");
 	}
 	waitKey();
-	/* Prime scroll */
-	scrollVdcUpCol(0, 0, scrWidth -1, scrHeight - 1);
 	/* Blank out bottom line */
 	fillVdcMem((ushort) scrMem + scrSize - scrWidth, scrWidth, 32);
 	fillVdcMem((ushort) scrColMem + scrSize - scrWidth, scrWidth, vdcBlack);
