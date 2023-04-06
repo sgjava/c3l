@@ -38,10 +38,8 @@ vdcbmvl.c \
 vdcchrm.c \
 vdccpym.c \
 vdcfmem.c \
-vdcin.c \
 vdcmchr.c \
 vdcor.c \
-vdcout.c \
 vdcscaof.c \
 vdcscaon.c \
 vdcsccc.c \
