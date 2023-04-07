@@ -3,19 +3,19 @@
 ;
 ; Assembled with HI-TECH C 3.09 (CP/M-80) ZAS.
 ;
-; Set pixel in 640 x 200 bit map mode.  Math and local VDC optimized for speed.
+; Set pixel in 640 x 200 bit map mode.  Math and local VDC I/O optimized for speed.
 ;
 
 psect   text
-global  _setpixvdc
+global  _setVdcPix
 
-_setpixvdc:
+_setVdcPix:
 
 psect   data
 
 ;fast pixel look up using x mod 8 as index into bit table
 
-bittable:
+bitTable:
 
 defb    -128
 defb    64
@@ -27,7 +27,7 @@ defb    2
 defb    1
 
 psect   text
-global  _vdcdispmem
+global  _bmpMem
 
         pop     hl              ;return address
         pop     bc              ;x
@@ -67,7 +67,7 @@ global  _vdcdispmem
         rr      e
 
         add     hl,de           ;hl = (y * 80) + (x / 8)
-        ld      de,(_vdcdispmem)
+        ld      de,(_bmpMem)
         add     hl,de           ;hl = (y * 80) + (x / 8) + bit map offset
 
         ld      a,c             ;a = x low byte
@@ -75,41 +75,41 @@ global  _vdcdispmem
         ld      d,0             ;de = x mod 8
         ld      e,a
         push    ix
-        ld      ix,bittable     ;get address of bit table
+        ld      ix,bitTable     ;get address of bit table
         add     ix,de           ;ix = table addr + (x mod 8)
         ld      a,(ix+0)        ;a = bit to set from bit table
         pop     ix
 
         ld      d,18            ;set vdc update addr
         ld      e,h
-        call    vdcset
+        call    vdcSet
 
         ld      d,19
         ld      e,l
-        call    vdcset
+        call    vdcSet
 
         ld      d,31            ;get current byte
-        call    vdcget
+        call    vdcGet
 
         or      e               ;a = current byte or bit table bit
 
         ld      d,18            ;set vdc update addr
         ld      e,h
-        call    vdcset
+        call    vdcSet
 
         ld      d,19
         ld      e,l
-        call    vdcset
+        call    vdcSet
 
         ld      d,31            ;set pixel
         ld      e,a
-        call    vdcset
+        call    vdcSet
 
         ret
 
 ;set vdc reg, d = reg, e = val
 
-vdcset:
+vdcSet:
         ld      bc,0d600h
         out     (c),d
 1:
@@ -122,7 +122,7 @@ vdcset:
 
 ;get vdc reg, d = reg, e = val
 
-vdcget:
+vdcGet:
 
         ld      bc,0d600h
         out     (c),d
