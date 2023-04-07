@@ -33,7 +33,6 @@ vdcbmcp.c \
 vdcbmhl.c \
 vdcbmpr.c \
 vdcbmsm.c \
-vdcbmsp.c \
 vdcbmvl.c \
 vdcchrm.c \
 vdccpym.c \

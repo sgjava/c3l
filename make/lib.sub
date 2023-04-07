@@ -1,4 +1,5 @@
 zas -j vdcin.as
 zas -j vdcout.as
+zas -j vdcbmsp.as
 c < obj.mak
 libr < lib.mak
