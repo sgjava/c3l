@@ -27,7 +27,6 @@ sidrel.obj \
 sidvol.obj \
 vdcbmcc.obj \
 vdcbmcl.obj \
-vdcbmcp.obj \
 vdcbmhl.obj \
 vdcbmpr.obj \
 vdcbmsm.obj \
@@ -56,7 +55,6 @@ vdcsr.obj \
 vicam.obj \
 vicbmcl.obj \
 vicbmclc.obj \
-vicbmcp.obj \
 vicbmdhl.obj \
 vicbmdvl.obj \
 vicbmpr.obj \

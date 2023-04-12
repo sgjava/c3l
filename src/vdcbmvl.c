@@ -12,7 +12,7 @@
 /*
  * Optimized vertical line algorithm uses less calculation than setVdcPix.
  */
-void drawVdcLineV(ushort x, ushort y, ushort len, uchar setPix) {
+void drawVdcLineV(ushort x, ushort y, ushort len, uchar color) {
 	static uchar vdcBitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
     ushort vdcMem = (ushort) bmpMem;
     ushort pixByte = vdcMem + (y << 6) + (y << 4) + (x >> 3);
@@ -25,7 +25,7 @@ void drawVdcLineV(ushort x, ushort y, ushort len, uchar setPix) {
         saveByte = inVdc(vdcCPUData);
         outVdc(vdcUpdAddrHi, (uchar) (pixByte >> 8));
         outVdc(vdcUpdAddrLo, (uchar) pixByte);
-        if (setPix) {
+        if (color) {
             outVdc(vdcCPUData, saveByte | vBit);
         } else {
             outVdc(vdcCPUData, saveByte & ~vBit);

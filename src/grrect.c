@@ -10,13 +10,13 @@
 /*
  * Draw rectangle using line drawing.
  */
-void drawRect(int x0, int y0, int x1, int y1, uchar setPix) {
+void drawRect(int x0, int y0, int x1, int y1, uchar color) {
     /* Top */
-    drawLine(x0, y0, x1, y0, setPix);
+    drawLine(x0, y0, x1, y0, color);
     /* Left */
-    drawLine(x0, y0, x0, y1, setPix);
+    drawLine(x0, y0, x0, y1, color);
     /* Right */
-    drawLine(x1, y0, x1, y1, setPix);
+    drawLine(x1, y0, x1, y1, color);
     /* Bottom */
-    drawLine(x0, y1, x1, y1, setPix);
+    drawLine(x0, y1, x1, y1, color);
 }

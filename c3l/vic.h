@@ -101,12 +101,12 @@ extern void setVicBmpMode(uchar mmuRcr, uchar vicBank, uchar scrLoc,
         uchar bmpLoc);
 extern void clearVicBmp(uchar c);
 extern void clearVicBmpCol(uchar c);
-extern void setVicPix(ushort x, ushort y);
+extern void setVicPix(ushort x, ushort y, uchar color);
 extern void clearVicPix(ushort x, ushort y);
 extern void drawVicLineH(ushort x, ushort y, ushort len,
-        uchar setPix);
+        uchar color);
 extern void drawVicLineV(ushort x, ushort y, ushort len,
-        uchar setPix);
+        uchar color);
 extern void printVicBmp(uchar x, uchar y, uchar color, char *str);
 extern void configVicSpr(uchar *scr, uchar *spr, uchar sprNum, uchar sprCol);
 extern void enableVicSpr(uchar sprNum);

@@ -53,12 +53,7 @@ uchar aspectRatio;
 /*
  * Set pixel.
  */
-void (*setPixel)(ushort, ushort);
-
-/*
- * Clear pixel.
- */
-void (*clearPixel)(ushort, ushort);
+void (*setPixel)(ushort, ushort, uchar);
 
 /*
  * Clear bitmap.

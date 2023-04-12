@@ -29,7 +29,6 @@ sidvol.c \
 vdcand.c \
 vdcbmcc.c \
 vdcbmcl.c \
-vdcbmcp.c \
 vdcbmhl.c \
 vdcbmpr.c \
 vdcbmsm.c \
@@ -57,7 +56,6 @@ vicam.c \
 vicbmbm.c \
 vicbmcl.c \
 vicbmclc.c \
-vicbmcp.c \
 vicbmdhl.c \
 vicbmdvl.c \
 vicbmpr.c \

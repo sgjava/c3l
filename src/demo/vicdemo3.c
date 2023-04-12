@@ -283,7 +283,6 @@ main() {
     clearBmpCol= clearVicBmpCol;
     /* Use VIC pixel functions */
     setPixel = setVicPix;
-    clearPixel = clearVicPix;
     /* Use optimized horizontal and vertical lines on the VIC */
     drawLineH = drawVicLineH;
     drawLineV = drawVicLineV;

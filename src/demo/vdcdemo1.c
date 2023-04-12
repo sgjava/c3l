@@ -245,7 +245,6 @@ main() {
 	clearBmpCol = clearVdcBmpCol;
 	/* Use VDC pixel functions */
 	setPixel = setVdcPix;
-	clearPixel = clearVdcPix;
 	/* Use optimized horizontal and vertical lines on the VDC */
 	drawLineH = drawVdcLineH;
 	drawLineV = drawVdcLineV;

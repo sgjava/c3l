@@ -10,31 +10,25 @@
 /*
  * Draw ellipse using digital differential analyzer (DDA) method.
  */
-void drawEllipse(int xc, int yc, int a, int b, uchar setPix) {
+void drawEllipse(int xc, int yc, int a, int b, uchar color) {
     long aa = (long) a * a; /* a^2 */
     long bb = (long) b * b; /* b^2 */
     long aa2 = aa << 1; /* 2(a^2) */
     long bb2 = bb << 1; /* 2(b^2) */
-    void (*drawPix)(ushort, ushort);
     {
         long x = 0;
         long y = b;
         long xbb2 = 0;
         long yaa2 = y * aa2;
         long errVal = -y * aa; /* b^2 x^2 + a^2 y^2 - a^2 b^2 -b^2x */
-    	/* Do this outside loop */
-        if (setPix) {
-        	drawPix = setPixel;
-        } else {
-        	drawPix = clearPixel;
-        }
+
         while (xbb2 <= yaa2) /* draw octant from top to top right */
         {
         	/* Draw octant */
-            (*drawPix)(xc + x, yc + y);
-            (*drawPix)(xc + x, yc - y);
-            (*drawPix)(xc - x, yc + y);
-            (*drawPix)(xc - x, yc - y);
+            (*setPixel)(xc + x, yc + y, color);
+            (*setPixel)(xc + x, yc - y, color);
+            (*setPixel)(xc - x, yc + y, color);
+            (*setPixel)(xc - x, yc - y, color);
             x += 1;
             xbb2 += bb2;
             errVal += xbb2 - bb;
@@ -54,10 +48,10 @@ void drawEllipse(int xc, int yc, int a, int b, uchar setPix) {
         while (xbb2 > yaa2) /* draw octant from right to top right */
         {
         	/* Draw octant */
-            (*drawPix)(xc + x, yc + y);
-            (*drawPix)(xc + x, yc - y);
-            (*drawPix)(xc - x, yc + y);
-            (*drawPix)(xc - x, yc - y);
+            (*setPixel)(xc + x, yc + y, color);
+            (*setPixel)(xc + x, yc - y, color);
+            (*setPixel)(xc - x, yc + y, color);
+            (*setPixel)(xc - x, yc - y, color);
             y += 1;
             yaa2 += aa2;
             errVal += yaa2 - aa;

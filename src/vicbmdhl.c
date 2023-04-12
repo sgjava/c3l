@@ -11,7 +11,7 @@
 /*
  * Optimized horizontal line algorithm up to 15x faster than Bresenham.
  */
-void drawVicLineH(ushort x, ushort y, ushort len, uchar setPix) {
+void drawVicLineH(ushort x, ushort y, ushort len, uchar color) {
 	static uchar fillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
     ushort pixByte = scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
     uchar firstBits = x % 8;
@@ -21,7 +21,7 @@ void drawVicLineH(ushort x, ushort y, ushort len, uchar setPix) {
     ushort i;
     if (firstBits > 0) {
         /* Handle left over bits on first byte */
-        if (setPix) {
+        if (color) {
             bmpMem[pixByte] = bmpMem[pixByte] | fillTable[firstBits - 1];
         } else {
             bmpMem[pixByte] = bmpMem[pixByte] & ~fillTable[firstBits - 1];
@@ -29,7 +29,7 @@ void drawVicLineH(ushort x, ushort y, ushort len, uchar setPix) {
         pixByte += 8;
     }
 	/* Do this outside loop */
-    if (setPix) {
+    if (color) {
     	fillByte = 0xff;
     } else {
     	fillByte = 0x00;
@@ -41,7 +41,7 @@ void drawVicLineH(ushort x, ushort y, ushort len, uchar setPix) {
     }
     /* Handle left over bits on last byte */
     if (lastBits > 0) {
-        if (setPix) {
+        if (color) {
             bmpMem[pixByte] = bmpMem[pixByte] | ~fillTable[lastBits - 1];
         } else {
             bmpMem[pixByte] = bmpMem[pixByte] & fillTable[lastBits - 1];

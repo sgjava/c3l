@@ -3,21 +3,24 @@
 ;
 ; Assembled with HI-TECH C 3.09 (CP/M-80) ZAS.
 ;
-; Set pixel in 640 x 200 bit map mode.  Math and local VDC I/O optimized for speed.
+; Set pixel in 640 x 200 bit map mode. Math and local VDC I/O optimized for speed.
 ;
 
-psect   text
-global  _setVdcPix
-
-_setVdcPix:
+global  _setVdcPix, _bmpMem
 
 psect   data
 
 ;fast pixel look up using x mod 8 as index into bit table
 
-bitTable:
+setBitTable:
 
 defb    -128, 64, 32, 16, 8, 4, 2, 1
+
+;fast pixel look up using x mod 8 as index into bit table
+
+clearBitTable:
+
+defb    127, -65, -33, -17, -9, -5, -3, -2
 
 ;fast y * 80 look up using y as index into table
 
@@ -44,14 +47,31 @@ defw    13600, 13680, 13760, 13840, 13920, 14000, 14080, 14160, 14240, 14320
 defw    14400, 14480, 14560, 14640, 14720, 14800, 14880, 14960, 15040, 15120
 defw    15200, 15280, 15360, 15440, 15520, 15600, 15680, 15760, 15840, 15920
 
+;return address
+
+return:
+
+defw    0
+
+;color
+
+color:
+
+defw    0
+
 psect   text
-global  _bmpMem
+_setVdcPix:
 
         pop     hl              ;return address
+        ld      (return),hl     ;save return address
         pop     bc              ;x
-        pop     de              ;y        
+        pop     de              ;y
+        pop     hl              ;color
+        ld      (color),hl      ;save color
+        push    hl             
         push    de
         push    bc
+        ld      hl,(return)     ;get saved return address        
         push    hl
 
                                 ;calc y * 80 using lookup table
@@ -76,15 +96,21 @@ global  _bmpMem
         add     hl,bc           ;hl = (y * 80) + (x / 8)
         ld      de,(_bmpMem)    ;de = bitmap offset
         add     hl,de           ;hl = (y * 80) + (x / 8) + bit map offset
+        
+        ex      de,hl           ;swap de and hl
+        ld      b,0             ;bc = x mod 8
+        ld      c,a
+        ld      a,(color)       ;get color
+        cp      0
+        jr      z,1f            ;zero color means clear pixel  
 
-        ld      d,0             ;de = x mod 8
-        ld      e,a
-        push    ix
-        ld      ix,bitTable     ;get address of bit table
-        add     ix,de           ;ix = table addr + (x mod 8)
-        ld      a,(ix)          ;a = bit to set from bit table
-        pop     ix
+        ld      hl,setBitTable     ;load bit table address into hl
+        add     hl,bc           ;hl = bit table addr + (x mod 8)
+        ld      a,(hl)          ;a = bit to set from bit table 
+        ex      de,hl           ;swap de and hl
 
+        ld      bc,0d600h       ;prime pump with vdc status register        
+        
         ld      d,18            ;set vdc update addr
         ld      e,h
         call    vdcSet
@@ -96,7 +122,41 @@ global  _bmpMem
         ld      d,31            ;get current byte
         call    vdcGet
 
-        or      e               ;a = current byte or bit table bit
+        or      e               ;a = current byte or with bit table bit
+
+        ld      d,18            ;set vdc update addr
+        ld      e,h
+        call    vdcSet
+
+        ld      d,19
+        ld      e,l
+        call    vdcSet
+
+        ld      d,31            ;set pixel
+        ld      e,a
+        call    vdcSet
+
+        ret
+        
+1:
+        ld      hl,clearBitTable ;load bit table address into hl
+        add     hl,bc           ;hl = bit table addr + (x mod 8)
+        ld      a,(hl)          ;a = bit to set from bit table 
+        ex      de,hl           ;swap de and hl
+        ld      bc,0d600h       ;prime pump with vdc status register        
+        
+        ld      d,18            ;set vdc update addr
+        ld      e,h
+        call    vdcSet
+
+        ld      d,19
+        ld      e,l
+        call    vdcSet
+
+        ld      d,31            ;get current byte
+        call    vdcGet
+
+        and      e               ;a = current byte or with bit table bit
 
         ld      d,18            ;set vdc update addr
         ld      e,h
@@ -115,7 +175,6 @@ global  _bmpMem
 ;set vdc reg, d = reg, e = val
 
 vdcSet:
-        ld      bc,0d600h
         out     (c),d
 1:
         in      d,(c)
@@ -123,13 +182,12 @@ vdcSet:
         jr      z,1b
         inc     c
         out     (c),e
+        dec     c
         ret
 
 ;get vdc reg, d = reg, e = val
 
 vdcGet:
-
-        ld      bc,0d600h
         out     (c),d
 2:
         in      d,(c)
@@ -137,4 +195,5 @@ vdcGet:
         jr      z,2b
         inc     c
         in      e,(c)
+        dec     c
         ret
