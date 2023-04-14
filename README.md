@@ -52,6 +52,8 @@ mounted to `~/eclipse-workspace/c3l`.
 * Run DOSBox and close it to create configuration file.
     * `dosbox`
 * `nano ~/.dosbox/dosbox*.conf`
+    * [sdl] section change
+    `usescancodes=false`
     * [cpu] section change
     `cycles=max`
     * [autoexec] section add    

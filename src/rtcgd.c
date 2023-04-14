@@ -13,7 +13,6 @@
  */
 char *getRtcDate() {
     char *curDate = (char *) malloc(11);
-    sprintf(curDate, "%02d/%02d/20%02d", getRtcReg(8), getRtcReg(7),
-            getRtcReg(9));
+    sprintf(curDate, "%02d/%02d/20%02d", getRtcReg(rtcMonth), getRtcReg(rtcDay), getRtcReg(rtcYear));
     return curDate;
 }
