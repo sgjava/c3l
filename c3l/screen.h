@@ -27,6 +27,8 @@ typedef void (*clearBmpPtr)(screen*, uchar);
 typedef void (*clearBmpColPtr)(screen*, uchar);
 typedef void (*drawLineHPtr)(screen*, ushort, ushort, ushort, uchar);
 typedef void (*drawLineVPtr)(screen*, ushort, ushort, ushort, uchar);
+typedef void (*printBmpPtr)(screen*, uchar, uchar, char*);
+typedef void (*printBmpColPtr)(screen*, uchar, uchar, uchar, char*);
 
 /*
  * We treat the screen struct like an object and encapsulate member variables and function pointers that allow polymorphism.
@@ -124,6 +126,14 @@ typedef struct screen {
 	 * Draw vertical line.
 	 */
 	drawLineVPtr drawLineV;
+	/*
+	 * Print bitmap text without color.
+	 */
+	printBmpPtr printBmp;
+	/*
+	 * Print bitmap text with color.
+	 */
+	printBmpColPtr printBmpColPtr;
 };
 
 extern char* asciiToPet(char *str);

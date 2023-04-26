@@ -11,5 +11,6 @@
  * Set pixel.
  */
 void setVdcPix(screen *scr, ushort x, ushort y, uchar color) {
+	/* Call assembler code */
 	setVdcPixAsm(x, y, color, (ushort) scr->bmpMem);
 }

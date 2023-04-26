@@ -51,16 +51,14 @@ void init(screen *scr, uchar *chr) {
 	scr->scrWidth = 80;
 	scr->scrHeight = 25;
 	scr->bmpColSize = scr->scrWidth * scr->scrHeight;
-	/* VDC aspect ratio */
 	scr->aspectRatio = 3;
-	/* Use VDC clear functions */
 	scr->clearBmp = clearVdcBmp;
 	scr->clearBmpCol = clearVdcBmpCol;
-	/* Use VDC pixel functions */
 	scr->setPixel = setVdcPix;
-	/* Use optimized horizontal and vertical lines on the VDC */
 	scr->drawLineH = drawVdcLineH;
 	scr->drawLineV = drawVdcLineV;
+	scr->printBmp = printVdcBmp;
+	/* Set bitmap mode */
 	setVdcFgBg(15, 0);
 	setVdcAttrsOff();
 	setVdcBmpMode((ushort) scr->bmpMem, (ushort) scr->bmpColMem);
@@ -103,7 +101,7 @@ void waitKey(screen *scr) {
  * Print centered text on top line in bitmap.
  */
 void bannerBmp(screen *scr, char *str) {
-	printVdcBmp(scr, ((scr->scrWidth - strlen(str)) >> 1), 0, str);
+	(scr->printBmp)(scr, ((scr->scrWidth - strlen(str)) >> 1), 0, str);
 }
 
 /*

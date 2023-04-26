@@ -120,3 +120,4 @@ extern void drawVdcLineH(screen* scr, ushort x, ushort y, ushort len,
 extern void drawVdcLineV(screen* scr, ushort x, ushort y, ushort len,
         uchar color);
 extern void printVdcBmp(screen* scr, uchar x, uchar y, char *str);
+extern void printVdcBmpCol(screen* scr, uchar x, uchar y, uchar color, char *str);

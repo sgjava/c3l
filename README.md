@@ -1,9 +1,9 @@
 ![C3L is the Commodore 128 CP/M C Library](images/title.png)
 
-C3L is an ANSI C based API to access C128 specific features under CP/M.
-Currently there are two abstraction layers. One for bitmap graphics and one for
-character mode. This allows you to set the target (VIC or VDC) at runtime and use
-the same functions. You only need to initialize which display chip you would like
+C3L (C128 CP/M C library) is an C89 based API to access C128 specific features under CP/M.
+VDC and VIC common data and functions are abstracted into the [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) struct.
+Displays use the same common functions for text and graphics ruducing one off code in your programs.
+This allows you to set the target (VIC, VDC or virtual screen) at runtime. You only need to initialize which display chip you would like
 to use or use both at the same time! This allows you to switch between VIC and VDC
 with minimal effort. One cool feature of the VIC is that you can use the PETSCII
 character ROM without having to worry about translation. Then if you change to

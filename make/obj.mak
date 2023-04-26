@@ -28,6 +28,7 @@ vdcand.c \
 vdcbmcc.c \
 vdcbmcl.c \
 vdcbmhl.c \
+vdcbmpc.c \
 vdcbmpr.c \
 vdcbmsm.c \
 vdcbmsp.c \
@@ -57,6 +58,7 @@ vicbmcl.c \
 vicbmclc.c \
 vicbmdhl.c \
 vicbmdvl.c \
+vicbmpc.c \
 vicbmpr.c \
 vicbmsbm.c \
 vicbmsp.c \
