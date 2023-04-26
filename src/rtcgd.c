@@ -11,8 +11,9 @@
 /*
  * Get RTC date as mm/dd/yyyy.
  */
-char *getRtcDate() {
-    char *curDate = (char *) malloc(11);
-    sprintf(curDate, "%02d/%02d/20%02d", getRtcReg(rtcMonth), getRtcReg(rtcDay), getRtcReg(rtcYear));
-    return curDate;
+char* getRtcDate() {
+	char *curDate = (char*) malloc(11);
+	sprintf(curDate, "%02d/%02d/20%02d", getRtcReg(rtcMonth), getRtcReg(rtcDay),
+			getRtcReg(rtcYear));
+	return curDate;
 }

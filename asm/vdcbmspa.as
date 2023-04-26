@@ -6,7 +6,7 @@
 ; Set pixel in 640 x 200 bit map mode. Math and local VDC I/O optimized for speed.
 ;
 
-global  _setVdcPix, _bmpMem
+global  _setVdcPixAsm
 
 psect   data
 
@@ -53,24 +53,36 @@ return:
 
 defw    0
 
+;Bitmap memory
+
+bmpMem:
+
+defw    0
+
 ;color
 
 color:
 
 defw    0
 
+
 psect   text
-_setVdcPix:
+_setVdcPixAsm:
 
         pop     hl              ;return address
-        ld      (return),hl     ;save return address
+        ld      (return),hl     ;save return address      
         pop     bc              ;x
         pop     de              ;y
         pop     hl              ;color
         ld      (color),hl      ;save color
-        push    hl             
+        pop     hl              ;bitmap address
+        ld      (bmpMem),hl     ;save bitmap address          
+        push    hl
+        ld      hl,(color)     ;get saved color        
+        push    hl                   
         push    de
         push    bc
+        push    hl
         ld      hl,(return)     ;get saved return address        
         push    hl
 
@@ -94,7 +106,7 @@ _setVdcPix:
         rr      c
 
         add     hl,bc           ;hl = (y * 80) + (x / 8)
-        ld      de,(_bmpMem)    ;de = bitmap offset
+        ld      de,(bmpMem)    ;de = bitmap offset
         add     hl,de           ;hl = (y * 80) + (x / 8) + bit map offset
         
         ex      de,hl           ;swap de and hl

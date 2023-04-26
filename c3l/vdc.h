@@ -4,7 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include	"hitech.h"
+#include "hitech.h"
+#include <screen.h>
 
 #define vdcStatusReg 0xD600    /* VDC status register */
 #define vdcDataReg   0xD601    /* VDC data register */
@@ -100,21 +101,22 @@ extern void andVdcByte(ushort vdcMem, uchar value);
 extern void fillVdcMem(ushort vdcMem, ushort len, uchar value);
 extern void copyVdcChrMem(uchar *mem, ushort vdcMem, ushort chars);
 extern void copyVdcMemChr(uchar *mem, ushort vdcMem, ushort chars);
-extern void clearVdcScr(uchar c);
-extern void clearVdcScrCol(uchar c);
-extern void printVdc(uchar x, uchar y, char *str);
-extern void printVdcCol(uchar x, uchar y, uchar color, char *str);
-extern void scrollVdcUpY(uchar y1, uchar y2);
-extern void scrollVdcUpYCol(uchar y1, uchar y2);
-extern void scrollVdcUp(uchar x1, uchar y1, uchar x2, uchar y2);
-extern void scrollVdcUpCol(uchar x1, uchar y1, uchar x2, uchar y2);
+extern void clearVdcScr(screen* scr, uchar c);
+extern void clearVdcScrCol(screen* scr, uchar c);
+extern void printVdc(screen* scr, uchar x, uchar y, char *str);
+extern void printVdcCol(screen* scr, uchar x, uchar y, uchar color, char *str);
+extern void scrollVdcUpY(screen* scr, uchar y1, uchar y2);
+extern void scrollVdcUpYCol(screen* scr, uchar y1, uchar y2);
+extern void scrollVdcUp(screen* scr, uchar x1, uchar y1, uchar x2, uchar y2);
+extern void scrollVdcUpCol(screen* scr, uchar x1, uchar y1, uchar x2, uchar y2);
 extern void setVdcBmpMode(ushort dispPage, ushort attrPage);
 extern void copyVdcMem(ushort source, ushort dest, ushort len);
-extern void clearVdcBmp(uchar c);
-extern void clearVdcBmpCol(uchar c);
-extern void setVdcPix(ushort x, ushort y, uchar color);
-extern void drawVdcLineH(ushort x, ushort y, ushort len,
+extern void clearVdcBmp(screen* scr, uchar c);
+extern void clearVdcBmpCol(screen* scr, uchar c);
+extern void setVdcPix(screen* scr, ushort x, ushort y, uchar color);
+extern void setVdcPixAsm(ushort x, ushort y, uchar color, ushort bmpMem);
+extern void drawVdcLineH(screen* scr, ushort x, ushort y, ushort len,
         uchar color);
-extern void drawVdcLineV(ushort x, ushort y, ushort len,
+extern void drawVdcLineV(screen* scr, ushort x, ushort y, ushort len,
         uchar color);
-extern void printVdcBmp(uchar x, uchar y, char *str);
+extern void printVdcBmp(screen* scr, uchar x, uchar y, char *str);

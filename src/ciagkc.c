@@ -14,9 +14,9 @@
  */
 uchar getKeyCol(uchar keyVal) {
 	static uchar keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f };
-    register uchar i = 0;
-    while ((i < 8) && (keyCol[i] != keyVal)) {
-        i++;
-    }
-    return i;
+	register uchar i = 0;
+	while ((i < 8) && (keyCol[i] != keyVal)) {
+		i++;
+	}
+	return i;
 }

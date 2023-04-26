@@ -5,31 +5,29 @@
  */
 
 #include <vdc.h>
-#include <graphics.h>
-#include <screen.h>
 #include "hitech.h"
 
 /*
  * Optimized vertical line algorithm uses less calculation than setVdcPix.
  */
-void drawVdcLineV(ushort x, ushort y, ushort len, uchar color) {
+void drawVdcLineV(screen *scr, ushort x, ushort y, ushort len, uchar color) {
 	static uchar vdcBitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
-    ushort vdcMem = (ushort) bmpMem;
-    ushort pixByte = vdcMem + (y << 6) + (y << 4) + (x >> 3);
-    uchar vBit = vdcBitTable[x & 0x07];
-    uchar saveByte, i;
-    /* Plot pixels */
-    for (i = 0; i < len; i++) {
-        outVdc(vdcUpdAddrHi, (uchar) (pixByte >> 8));
-        outVdc(vdcUpdAddrLo, (uchar) pixByte);
-        saveByte = inVdc(vdcCPUData);
-        outVdc(vdcUpdAddrHi, (uchar) (pixByte >> 8));
-        outVdc(vdcUpdAddrLo, (uchar) pixByte);
-        if (color) {
-            outVdc(vdcCPUData, saveByte | vBit);
-        } else {
-            outVdc(vdcCPUData, saveByte & ~vBit);
-        }
-        pixByte += scrWidth;
-    }
+	ushort vdcMem = (ushort) scr->bmpMem;
+	ushort pixByte = vdcMem + (y << 6) + (y << 4) + (x >> 3);
+	uchar vBit = vdcBitTable[x & 0x07];
+	uchar saveByte, i;
+	/* Plot pixels */
+	for (i = 0; i < len; i++) {
+		outVdc(vdcUpdAddrHi, (uchar) (pixByte >> 8));
+		outVdc(vdcUpdAddrLo, (uchar) pixByte);
+		saveByte = inVdc(vdcCPUData);
+		outVdc(vdcUpdAddrHi, (uchar) (pixByte >> 8));
+		outVdc(vdcUpdAddrLo, (uchar) pixByte);
+		if (color) {
+			outVdc(vdcCPUData, saveByte | vBit);
+		} else {
+			outVdc(vdcCPUData, saveByte & ~vBit);
+		}
+		pixByte += scr->scrWidth;
+	}
 }

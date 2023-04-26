@@ -5,17 +5,17 @@
  */
 
 #include <string.h>
-#include <screen.h>
+#include <vic.h>
 #include "hitech.h"
 
 /*
  * Print without color.
  */
-void printVic(uchar x, uchar y, char *str) {
-	ushort scrOfs = (y * scrWidth) + x;
+void printVic(screen *scr, uchar x, uchar y, char *str) {
+	ushort scrOfs = (y * scr->scrWidth) + x;
 	ushort len = strlen(str);
 	ushort i;
 	for (i = 0; i < len; i++) {
-		scrMem[scrOfs + i] = str[i];
+		scr->scrMem[scrOfs + i] = str[i];
 	}
 }

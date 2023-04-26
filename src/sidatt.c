@@ -12,5 +12,5 @@
  * Start attack, decay, sustain cycle.  Gate bit is not needed.
  */
 void setSidAtt(ushort voice, uchar waveform) {
-    outp(voice + 4, waveform | sidGate);
+	outp(voice + 4, waveform | sidGate);
 }

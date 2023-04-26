@@ -13,6 +13,6 @@
  */
 void setSidEnv(ushort voice, uchar attack, uchar decay, uchar sustain,
 uchar release) {
-    outp(voice + 5, (attack << 4) | decay);
-    outp(voice + 6, (sustain << 4) | release);
+	outp(voice + 5, (attack << 4) | decay);
+	outp(voice + 6, (sustain << 4) | release);
 }

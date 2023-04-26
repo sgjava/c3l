@@ -89,7 +89,7 @@ void fillScr() {
 	/* Blank out bottom line */
 	fillVdcMem((ushort) scrMem + scrSize - scrWidth, scrWidth, 32);
 	for (i = 0; i < 24; i++) {
-		scrollVdcUp(0, 0, scrWidth -1, scrHeight - 1);
+		scrollVdcUp(0, 0, scrWidth - 1, scrHeight - 1);
 	}
 	waitKey();
 }
@@ -110,7 +110,7 @@ void fillScrCol() {
 	fillVdcMem((ushort) scrMem + scrSize - scrWidth, scrWidth, 32);
 	fillVdcMem((ushort) scrColMem + scrSize - scrWidth, scrWidth, vdcBlack);
 	for (i = 0; i < 24; i++) {
-		scrollVdcUpCol(0, 0, scrWidth -1, scrHeight - 1);
+		scrollVdcUpCol(0, 0, scrWidth - 1, scrHeight - 1);
 	}
 	waitKey();
 }

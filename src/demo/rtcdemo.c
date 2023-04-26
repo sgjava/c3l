@@ -16,7 +16,7 @@ main() {
 	setRtcMode(rtcDefaultMode);
 	dateStr = getRtcDate();
 	timeStr = getRtcTime();
-	printf("Date: %s, Time: %s\n",dateStr,timeStr);
+	printf("Date: %s, Time: %s\n", dateStr, timeStr);
 	free(dateStr);
 	free(timeStr);
 }

@@ -8,8 +8,8 @@
 #include "hitech.h"
 
 /*
- * Clear bitmap color memory.
+ * Set pixel.
  */
-void clearVdcBmpCol(screen *scr, uchar c) {
-	fillVdcMem((ushort) scr->bmpColMem, scr->bmpColSize, c);
+void setVdcPix(screen *scr, ushort x, ushort y, uchar color) {
+	setVdcPixAsm(x, y, color, (ushort) scr->bmpMem);
 }

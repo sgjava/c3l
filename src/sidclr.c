@@ -12,8 +12,8 @@
  * Clear all SID registers.
  */
 void clearSid() {
-    register ushort i;
-    for (i = sidVoice1; i <= sidEnvGen3; i++) {
-        outp(i, 0);
-    }
+	register ushort i;
+	for (i = sidVoice1; i <= sidEnvGen3; i++) {
+		outp(i, 0);
+	}
 }

@@ -15,7 +15,7 @@ main() {
 	/* ~1 millisecond */
 	int timerA = 992;
 	int timerB = 0xffff;
-    int timerVal;
+	int timerVal;
 	/* Clear all CIA 1 IRQ enable bits */
 	outp(cia1Icr, ciaClearIcr);
 	/* Clear CIA 1 ICR status */
@@ -38,7 +38,7 @@ main() {
 	outp(cia2CtrlRegA, ciaCpuCont);
 	printf("Stop timer\n");
 	outp(cia2CtrlRegA, ciaStopTimer);
-	timerVal = timerB - (inp(cia2TimerBHi)*256 + inp(cia2TimerBLo));
+	timerVal = timerB - (inp(cia2TimerBHi) * 256 + inp(cia2TimerBLo));
 	printf("Milliseconds elapsed: %u\n", timerVal);
 	/* Enable CIA 1 IRQ */
 	outp(cia1Icr, ciaEnableIrq);

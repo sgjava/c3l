@@ -1,20 +1,136 @@
 /*
- * Generic text based screen functions.
+ * C128 CP/M text and graphics abstraction.
+ *
+ * Screen abstraction uses function pointers to drive output, thus the
+ * same code will work on the VIC and VDC. This will allow for virtual
+ * screens, page flipping, etc.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include	"hitech.h"
+#include "hitech.h"
 
-extern uchar scrWidth;
-extern uchar scrHeight;
-extern ushort scrSize;
-extern uchar *scrMem;
-extern uchar *scrColMem;
-extern uchar *chrMem;
-extern void (*clearScr)( uchar);
-extern void (*clearScrCol)( uchar);
-extern void (*print)( uchar, uchar, char *);
-extern void (*printCol)( uchar, uchar, uchar, char *);
-extern char *asciiToPet(char *str);
+/*
+ * Forward reference for function pointer typedefs.
+ */
+typedef struct screen screen;
 
+/*
+ * Text and bitmap function pointers.
+ */
+typedef void (*clearScrPtr)(screen*, uchar);
+typedef void (*clearScrColPtr)(screen*, uchar);
+typedef void (*printPtr)(screen*, uchar, uchar, char*);
+typedef void (*printColPtr)(screen*, uchar, uchar, uchar, char*);
+typedef void (*setPixelPtr)(screen*, ushort, ushort, uchar);
+typedef void (*clearBmpPtr)(screen*, uchar);
+typedef void (*clearBmpColPtr)(screen*, uchar);
+typedef void (*drawLineHPtr)(screen*, ushort, ushort, ushort, uchar);
+typedef void (*drawLineVPtr)(screen*, ushort, ushort, ushort, uchar);
+
+/*
+ * We treat the screen struct like an object and encapsulate member variables and function pointers that allow polymorphism.
+ */
+typedef struct screen {
+	/*
+	 * Screen width in characters.
+	 */
+	uchar scrWidth;
+	/*
+	 * Screen height in characters.
+	 */
+	uchar scrHeight;
+	/*
+	 * Screen size in bytes.
+	 */
+	ushort scrSize;
+	/*
+	 * Screen memory location.
+	 */
+	uchar *scrMem;
+	/*
+	 * Screen color location.
+	 */
+	uchar *scrColMem;
+	/*
+	 * Character set location.
+	 */
+	uchar *chrMem;
+	/*
+	 * Clear screen.
+	 */
+	clearScrPtr clearScr;
+	/*
+	 * Clear screen color.
+	 */
+	clearScrColPtr clearScrCol;
+	/*
+	 * Print text without color.
+	 */
+	printPtr print;
+	/*
+	 * Print text with color.
+	 */
+	printColPtr printCol;
+	/*
+	 * Screen width in pixels.
+	 */
+	ushort bmpWidth;
+	/*
+	 * Screen height in pixels.
+	 */
+	ushort bmpHeight;
+	/*
+	 * Bitmap size in bytes.
+	 */
+	ushort bmpSize;
+	/*
+	 * Bitmap memory location.
+	 */
+	uchar *bmpMem;
+	/*
+	 * Bitmap color location.
+	 */
+	uchar *bmpColMem;
+	/*
+	 * Bitmap color size.
+	 */
+	ushort bmpColSize;
+	/*
+	 * Bitmap character set location.
+	 */
+	uchar *bmpChrMem;
+	/*
+	 * Aspect ratio used by circle and square functions.
+	 */
+	uchar aspectRatio;
+	/*
+	 * Set pixel.
+	 */
+	setPixelPtr setPixel;
+	/*
+	 * Clear bitmap.
+	 */
+	clearBmpPtr clearBmp;
+	/*
+	 * Clear bitmap color.
+	 */
+	clearBmpColPtr clearBmpCol;
+	/*
+	 * Draw horizontal line.
+	 */
+	drawLineHPtr drawLineH;
+	/*
+	 * Draw vertical line.
+	 */
+	drawLineVPtr drawLineV;
+};
+
+extern char* asciiToPet(char *str);
+extern void drawLine(screen *scr, int x0, int y0, int x1, int y1, uchar color);
+extern void drawBezier(screen *scr, int x0, int y0, int x1, int y1, int x2,
+		int y2, uchar color);
+extern void drawEllipse(screen *scr, int xc, int yc, int a, int b, uchar color);
+extern void drawCircle(screen *scr, int xc, int yc, int a, uchar color);
+extern void drawRect(screen *scr, int x0, int y0, int x1, int y1, uchar color);
+extern void drawSquare(screen *scr, int x, int y, int len, uchar color);

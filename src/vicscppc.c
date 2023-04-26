@@ -5,15 +5,14 @@
  */
 
 #include <stdlib.h>
-#include <screen.h>
 #include <vic.h>
 #include "hitech.h"
 
 /*
  * Print PETSCII with color.
  */
-void printVicColPet(uchar x, uchar y, uchar color, char *str) {
+void printVicColPet(screen *scr, uchar x, uchar y, uchar color, char *str) {
 	char *petStr = asciiToPet(str);
-	printVicCol(x, y, color, petStr);
+	printVicCol(scr, x, y, color, petStr);
 	free(petStr);
 }

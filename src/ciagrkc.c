@@ -9,7 +9,6 @@
 #include <cia.h>
 #include "hitech.h"
 
-
 /*
  * Right shift key column.
  */
@@ -19,9 +18,9 @@ uchar rsKeyCol[8] = { 0xee, 0xed, 0xeb, 0xe7, 0xdf, 0xcf, 0xaf, 0x6f };
  * Get left shift key column. If column not found then 8 is returned.
  */
 uchar getRsKeyCol(uchar keyVal) {
-    register uchar i = 0;
-    while ((i < 8) && (rsKeyCol[i] != keyVal)) {
-        i++;
-    }
-    return i;
+	register uchar i = 0;
+	while ((i < 8) && (rsKeyCol[i] != keyVal)) {
+		i++;
+	}
+	return i;
 }

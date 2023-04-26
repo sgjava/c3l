@@ -12,5 +12,5 @@
  * Start release cycle.
  */
 void setSidRel(ushort Voice, uchar Waveform) {
-    outp(Voice + 4, Waveform);
+	outp(Voice + 4, Waveform);
 }

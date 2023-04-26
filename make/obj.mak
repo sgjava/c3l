@@ -5,7 +5,6 @@ ciagkc.c \
 ciagks.c \
 ciaglkc.c \
 ciagrkc.c \
-graphics.c \
 grbezier.c \
 grcir.c \
 grellip.c \
@@ -18,7 +17,6 @@ rtcgt.c \
 rtcsm.c \
 rtcsr.c \
 scatop.c \
-screen.c \
 sidatt.c \
 sidclr.c \
 sidenv.c \
@@ -32,6 +30,7 @@ vdcbmcl.c \
 vdcbmhl.c \
 vdcbmpr.c \
 vdcbmsm.c \
+vdcbmsp.c \
 vdcbmvl.c \
 vdcchrm.c \
 vdccpym.c \

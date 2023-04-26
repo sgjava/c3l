@@ -13,12 +13,12 @@
  * should be allocated manually since that's the top bank of memory and
  * not all 16K is available.
  */
-uchar *allocVicMem(uchar maxBank) {
-    uchar bank, *vicMem;
-    ushort gap;
-    vicMem = (uchar *) malloc(1);
-    bank = (ushort) vicMem / 16384;
-    gap = 16384 - ((ushort) vicMem - (bank * 16384));
-    realloc(vicMem, ((maxBank - bank) * 16384) + gap);
-    return vicMem;
+uchar* allocVicMem(uchar maxBank) {
+	uchar bank, *vicMem;
+	ushort gap;
+	vicMem = (uchar*) malloc(1);
+	bank = (ushort) vicMem / 16384;
+	gap = 16384 - ((ushort) vicMem - (bank * 16384));
+	realloc(vicMem, ((maxBank - bank) * 16384) + gap);
+	return vicMem;
 }

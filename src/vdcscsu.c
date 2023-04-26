@@ -4,23 +4,22 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <screen.h>
 #include <vdc.h>
 #include "hitech.h"
 
 /*
  * Scroll line up given x1, y1, x2, y2 rectangle in current page.
  */
-void scrollVdcUp(uchar x1, uchar y1, uchar x2, uchar y2) {
+void scrollVdcUp(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2) {
 	/* If line is screen width use optimized  */
-	if (x2 - x1 + 1 == scrWidth) {
-		scrollVdcUpY(y1, y2);
+	if (x2 - x1 + 1 == scr->scrWidth) {
+		scrollVdcUpY(scr, y1, y2);
 	} else {
 		uchar len = x2 - x1 + 1;
-		ushort dispOfs = (y1 * scrWidth) + (ushort) scrMem + x1;
+		ushort dispOfs = (y1 * scr->scrWidth) + (ushort) scr->scrMem + x1;
 		for (; y1 <= y2; y1++) {
-			copyVdcMem(dispOfs, dispOfs - scrWidth, len);
-			dispOfs += scrWidth;
+			copyVdcMem(dispOfs, dispOfs - scr->scrWidth, len);
+			dispOfs += scr->scrWidth;
 		}
 	}
 }

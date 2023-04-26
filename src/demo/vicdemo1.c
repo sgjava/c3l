@@ -117,7 +117,7 @@ main() {
 	/* Set default sizes and locations */
 	scrWidth = 40;
 	scrHeight = 25;
-    scrSize = scrWidth * scrHeight;
+	scrSize = scrWidth * scrHeight;
 	scrColMem = (uchar*) vicColMem;
 	/* Set screen functions */
 	clearScr = clearVicScr;

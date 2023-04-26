@@ -5,14 +5,14 @@
  */
 
 #include <string.h>
-#include <screen.h>
 #include <vdc.h>
 #include "hitech.h"
 
 /*
  * Print with color.
  */
-void printVdcCol(uchar x, uchar y, uchar color, char *str) {
-	fillVdcMem((y * scrWidth) + (ushort) scrColMem + x, strlen(str), color);
-	printVdc(x, y, str);
+void printVdcCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
+	fillVdcMem((y * scr->scrWidth) + (ushort) scr->scrColMem + x, strlen(str),
+			color);
+	printVdc(scr, x, y, str);
 }

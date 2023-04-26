@@ -5,7 +5,6 @@ ciagkc.obj \
 ciagks.obj \
 ciaglkc.obj \
 ciagrkc.obj \
-graphics.obj \
 grbezier.obj \
 grcir.obj \
 grellip.obj \
@@ -17,7 +16,6 @@ rtcgr.obj \
 rtcgt.obj \
 rtcsm.obj \
 rtcsr.obj \
-screen.obj \
 sidatt.obj \
 sidclr.obj \
 sidenv.obj \
@@ -31,6 +29,7 @@ vdcbmhl.obj \
 vdcbmpr.obj \
 vdcbmsm.obj \
 vdcbmsp.obj \
+vdcbmspa.obj \
 vdcbmvl.obj \
 vdcchrm.obj \
 vdcfmem.obj \

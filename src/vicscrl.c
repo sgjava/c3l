@@ -6,7 +6,6 @@
 
 #include <stdlib.h>
 #include <cia.h>
-#include <screen.h>
 #include <vic.h>
 #include "hitech.h"
 #include "sys.h"
@@ -15,16 +14,16 @@
  * Use screen memory as simple input line. Only backspace supported, but insert
  * and delete could be added later.
  */
-char* readVicLine(uchar x, uchar y, uchar len) {
+char* readVicLine(screen *scr, uchar x, uchar y, uchar len) {
 	uchar strLen;
 	char *str;
 	uchar keyVal, lastKeyVal, i;
-	ushort scrOfs = (y * scrWidth) + x;
+	ushort scrOfs = (y * scr->scrWidth) + x;
 	ushort scrMin = scrOfs;
 	ushort scrMax = scrMin + len - 1;
 	lastKeyVal = 0x00;
 	/* Show cursor */
-	scrMem[scrOfs] = '_';
+	scr->scrMem[scrOfs] = '_';
 	do {
 		keyVal = decodeKey();
 		/* Debounce if current key equals last key */
@@ -46,17 +45,17 @@ char* readVicLine(uchar x, uchar y, uchar len) {
 			/* Backspace? */
 			if (keyVal == 0x7f) {
 				if (scrOfs > scrMin) {
-					scrMem[scrOfs] = ' ';
+					scr->scrMem[scrOfs] = ' ';
 					scrOfs--;
 				}
 			} else {
 				if ((scrOfs <= scrMax) && (keyVal != 0x0d)) {
-					scrMem[scrOfs] = keyVal;
+					scr->scrMem[scrOfs] = keyVal;
 					scrOfs++;
 				}
 			}
 			/* Show cursor */
-			scrMem[scrOfs] = '_';
+			scr->scrMem[scrOfs] = '_';
 		}
 	} while (keyVal != 0x0d);
 	/* Figure out string length based on current screen offset */
@@ -64,7 +63,7 @@ char* readVicLine(uchar x, uchar y, uchar len) {
 	str = (char*) malloc(strLen + 1);
 	/* Screen to string */
 	for (i = 0; i < strLen; i++) {
-		str[i] = scrMem[scrMin + i];
+		str[i] = scr->scrMem[scrMin + i];
 	}
 	str[strLen] = 0;
 	return str;

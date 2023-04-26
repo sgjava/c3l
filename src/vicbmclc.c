@@ -4,12 +4,12 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <graphics.h>
+#include <vic.h>
 #include "hitech.h"
 
 /*
  * Clear bitmap color memory.
  */
-void clearVicBmpCol(uchar c) {
-    fillVicMem(bmpColMem, bmpColSize >> 1, (c << 8) + c);
+void clearVicBmpCol(screen *scr, uchar c) {
+	fillVicMem(scr->bmpColMem, scr->bmpColSize >> 1, (c << 8) + c);
 }

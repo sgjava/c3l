@@ -12,5 +12,5 @@
  * Set master volume and filter select.
  */
 void setSidVol(uchar amp, uchar filter) {
-    outp(sidVolume, filter | amp);
+	outp(sidVolume, filter | amp);
 }

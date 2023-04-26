@@ -9,5 +9,5 @@
 #include "sys.h"
 
 void setVicBmpMem(uchar bmpLoc) {
-    outp(vicMemCtrl, (inp(vicMemCtrl) & 0xf0) | (bmpLoc << 3));
+	outp(vicMemCtrl, (inp(vicMemCtrl) & 0xf0) | (bmpLoc << 3));
 }

@@ -4,7 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include	"hitech.h"
+#include "hitech.h"
+#include <screen.h>
 
 #define vicSpr0X       0xd000 /* Sprite 0 horizontal position register */
 #define vicSpr0y       0xd001 /* Sprite 0 vertical position register */
@@ -83,31 +84,26 @@ extern void fillVicMem(uchar *mem, ushort len, ushort value);
 extern void setVicMode(uchar ecm, uchar bmm, uchar mcm);
 extern void setVicScrMem(uchar scrLoc);
 extern void setVicChrMem(uchar chrLoc);
-extern void setVicChrMode(uchar mmuRcr, uchar vicBank, uchar scrLoc,
-        uchar chrLoc);
-extern void clearVicScr(uchar c);
-extern void clearVicCol(uchar c);
-extern void printVic(uchar x, uchar y, char *str);
-extern void printVicCol(uchar x, uchar y, uchar color, char *str);
-extern void printVicPet(uchar x, uchar y, char *str);
-extern void printVicColPet(uchar x, uchar y, uchar color, char *str);
-extern void scrollVicUpY(uchar y1, uchar y2);
-extern void scrollVicUpYCol(uchar y1, uchar y2);
-extern void scrollVicUp(uchar x1, uchar y1, uchar x2, uchar y2);
-extern void scrollVicUpCol(uchar x1, uchar y1, uchar x2, uchar y2);
-extern char *readVicLine(uchar x, uchar y, uchar len);
+extern void setVicChrMode(uchar mmuRcr, uchar vicBank, uchar scrLoc, uchar chrLoc);
+extern void clearVicScr(screen* scr, uchar c);
+extern void clearVicCol(screen* scr, uchar c);
+extern void printVic(screen* scr, uchar x, uchar y, char *str);
+extern void printVicCol(screen* scr, uchar x, uchar y, uchar color, char *str);
+extern void printVicPet(screen* scr, uchar x, uchar y, char *str);
+extern void printVicColPet(screen* scr, uchar x, uchar y, uchar color, char *str);
+extern void scrollVicUpY(screen* scr, uchar y1, uchar y2);
+extern void scrollVicUpYCol(screen* scr, uchar y1, uchar y2);
+extern void scrollVicUp(screen* scr, uchar x1, uchar y1, uchar x2, uchar y2);
+extern void scrollVicUpCol(screen* scr, uchar x1, uchar y1, uchar x2, uchar y2);
+extern char *readVicLine(screen* scr, uchar x, uchar y, uchar len);
 extern void setVicBmpMem(uchar bmpLoc);
-extern void setVicBmpMode(uchar mmuRcr, uchar vicBank, uchar scrLoc,
-        uchar bmpLoc);
-extern void clearVicBmp(uchar c);
-extern void clearVicBmpCol(uchar c);
-extern void setVicPix(ushort x, ushort y, uchar color);
-extern void clearVicPix(ushort x, ushort y);
-extern void drawVicLineH(ushort x, ushort y, ushort len,
-        uchar color);
-extern void drawVicLineV(ushort x, ushort y, ushort len,
-        uchar color);
-extern void printVicBmp(uchar x, uchar y, uchar color, char *str);
+extern void setVicBmpMode(uchar mmuRcr, uchar vicBank, uchar scrLoc, uchar bmpLoc);
+extern void clearVicBmp(screen* scr, uchar c);
+extern void clearVicBmpCol(screen* scr, uchar c);
+extern void setVicPix(screen* scr, ushort x, ushort y, uchar color);
+extern void drawVicLineH(screen* scr, ushort x, ushort y, ushort len, uchar color);
+extern void drawVicLineV(screen* scr, ushort x, ushort y, ushort len, uchar color);
+extern void printVicBmp(screen* scr, uchar x, uchar y, uchar color, char *str);
 extern void configVicSpr(uchar *scr, uchar *spr, uchar sprNum, uchar sprCol);
 extern void enableVicSpr(uchar sprNum);
 extern void disableVicSpr(uchar sprNum);

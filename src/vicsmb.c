@@ -12,6 +12,6 @@
  * Set VIC to MMU bank 0 or 1.
  */
 void setVicMmuBank(uchar mmuRcr) {
-    /* Set MMU RCR bit 6 to point VIC to MMU bank */
-    outp(mmuRamCfg, (inp(mmuRamCfg) & 0xbf) | (mmuRcr * 0x40));
+	/* Set MMU RCR bit 6 to point VIC to MMU bank */
+	outp(mmuRamCfg, (inp(mmuRamCfg) & 0xbf) | (mmuRcr * 0x40));
 }

@@ -92,7 +92,7 @@ void fillScr() {
 	/* Blank out bottom line */
 	fillVicMem((uchar*) scrMem + scrSize - scrWidth, scrWidth / 2, 0x2020);
 	for (i = 0; i < 24; i++) {
-		scrollVicUp(1, 0, scrWidth -2, scrHeight - 1);
+		scrollVicUp(1, 0, scrWidth - 2, scrHeight - 1);
 	}
 	waitKey();
 }
