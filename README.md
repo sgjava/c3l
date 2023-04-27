@@ -46,7 +46,7 @@ Inside the myz80 dir you'll find makedisk.sh which will import soucre directly f
 
 ### Install DOSBox
 This is needed to run MyZ80. In essance you are running a Ubuntu VM that is running a DOS emulator that is running a Z80 emulator.
-Talk about a Russian doll, but it works nicely. C: is mounted to `~/myz80` abd D: is 
+Talk about a Russian doll, but it works nicely. C: is mounted to `~/myz80` and D: is 
 mounted to `~/eclipse-workspace/c3l`.
 * `sudo apt install dosbox`
 * Run DOSBox and close it to create configuration file.
