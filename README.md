@@ -66,7 +66,8 @@ mounted to `~/eclipse-workspace/c3l`.
     exit
 ### Install MyZ80
 
-Just extract [myz80.zip](https://github.com/sgjava/c3l/tree/master/myz80) to your user's home dir. This is preconfigured with ZPM 3 and Hi-Tech C on A0. ~/myz80/PROFILE.SUB is the file auto submitted when the OS starts. You can modify this and import to A0 if needed. I left Drives B0 and C0 empty, so you can do what you want there. The memory disk D0 is used for imported code. It's gone once MyZ80 exits.
+Just extract [myz80.zip](https://github.com/sgjava/c3l/tree/master/myz80) to your user's home dir. This is preconfigured with ZPM 3 and Hi-Tech C on A0. ~/myz80/PROFILE.SUB is the file auto submitted when the OS starts. You can modify this and import to A0 if needed. I left Drives C0 and D0 empty, so you can do what you want there. Drive 
+B0 is used for source and binaries (COM files).
 
 Install [Eclipse](https://www.eclipse.org/downloads).
 
