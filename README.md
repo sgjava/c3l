@@ -21,7 +21,7 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-I have streamedlined the development process. Native hardware and VICE are no longer supported, but obviously you can do this yourself if you really want to. I've standardized on Ubuntu VM, Eclipse CDT, DOSBox, MyZ80 and ctools. It's just the fastest way to develop C for C128 CP/M. You can adapt this for your own projects that are not C3L related obviously.
+I have streamlined the development process. Native hardware and VICE are no longer supported, but obviously you can do this yourself if you really want to. I've standardized on Ubuntu VM, Eclipse CDT, DOSBox, MyZ80 and ctools. It's just the fastest way to develop C for C128 CP/M. You can adapt this for your own projects that are not C3L related obviously.
 
 Inside the myz80 dir you'll find makedisk.sh which will import soucre directly from Eclipse workspace, build C3L library, compile demos, export demos and create a new d71 disk. 
 
