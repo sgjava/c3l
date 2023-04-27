@@ -55,7 +55,7 @@ void init(screen *scr) {
 	scr->bmpChrMem = (uchar*) 0x4000;
 	/* Use ram after character set for screen */
 	scr->bmpColMem = (uchar*) 0x4800;
-	/* Use bottom of bank 2 for bitmap */
+	/* Use bottom of bank 1 for bitmap */
 	scr->bmpMem = (uchar*) 0x6000;
 	scr->bmpWidth = 320;
 	scr->bmpHeight = 200;

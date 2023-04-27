@@ -6,18 +6,17 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <cia.h>
 #include <vic.h>
-#include <screen.h>
 #include "hitech.h"
 #include "sys.h"
 
 /*
- * Initialize screen and key scan.
+ * Configure CIA to kill interrupts and enable keyboard scan.
  */
-void init() {
-	uchar vicBank = (ushort) scrMem / 16384;
+void initCia() {
 	/* Clear all CIA 1 IRQ enable bits */
 	outp(cia1Icr, ciaClearIcr);
 	/* Clear CIA 1 ICR status */
@@ -29,18 +28,40 @@ void init() {
 	/* Set CIA 1 DDRs for keyboard scan */
 	outp(cia1DdrA, 0xff);
 	outp(cia1DdrB, 0x00);
+}
+
+/*
+ * Initialize key scan and screen.
+ */
+void init(screen *scr) {
+	uchar vicBank;
+	initCia();
+	/* VIC Screen configuration */
+	scr->scrWidth = 40;
+	scr->scrHeight = 25;
+	scr->scrSize = scr->scrWidth * scr->scrHeight;
+	/* Use ROM character set */
+	scr->chrMem = (uchar*) 0x1800;
+	/* Use ram at end of bank 0 */
+	scr->scrMem = (uchar*) 0x3c00;
+	scr->scrColMem = (uchar*) vicColMem;
+	scr->clearScr = clearVicScr;
+	scr->clearScrCol = clearVicCol;
+	scr->print = printVicPet;
+	scr->printCol = printVicColPet;
 	/* Black screen and border */
 	outp(vicBorderCol, vicBlack);
 	outp(vicBgCol0, vicBlack);
 	/* Clear color to black */
-	clearScrCol(vicBlack);
+	(scr->clearScrCol)(scr, vicBlack);
 	/* Clear screen to spaces */
-	clearScr(32);
+	(scr->clearScr)(scr, 32);
 	/* Set standard character mode using MMU bank 1 and set VIC based on scr location */
-	setVicChrMode(1, vicBank, ((ushort) scrMem - (vicBank * 16384)) / 1024,
-			((ushort) chrMem - (vicBank * 16384)) / 2048);
+	vicBank = (ushort) scr->scrMem / 16384;
+	setVicChrMode(1, vicBank, ((ushort) scr->scrMem - (vicBank * 16384)) / 1024,
+			((ushort) scr->chrMem - (vicBank * 16384)) / 2048);
 	/* Clear color to white */
-	clearScrCol(vicWhite);
+	(scr->clearScrCol)(scr, vicWhite);
 	/* Enable screen */
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }
@@ -49,12 +70,13 @@ void init() {
  * Restore screen color, set MMU bank, VIC bank, screen
  * memory and char set memory location for CP/M return.
  */
-void done(uchar bgCol, uchar fgCol) {
+void done(screen *scr, uchar bgCol, uchar fgCol) {
 	/* Restore screen/border colors */
 	outp(vicBorderCol, bgCol);
 	outp(vicBgCol0, fgCol);
 	/* Clear color to black */
-	clearScrCol(vicBlack);
+	(scr->clearScrCol)(scr, vicBlack);
+	free(scr);
 	/* CPM default */
 	setVicChrMode(0, 0, 11, 3);
 	/* Enable CIA 1 IRQ */
@@ -64,8 +86,8 @@ void done(uchar bgCol, uchar fgCol) {
 /*
  * Wait for Return key to be pressed.
  */
-void waitKey() {
-	printCol(0, 24, 7, "Press Return");
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, 24, 7, "Press Return");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
 		;
@@ -79,25 +101,25 @@ void waitKey() {
 /*
  * Run demo.
  */
-void run(uchar *vicMem) {
+void run(screen *scr, uchar *vicMem) {
 	uchar i;
 	char str[40];
-	print(0, 0, "Simple character mode using ROM for the "
+	(scr->print)(scr, 0, 0, "Simple character mode using ROM for the "
 			"character set and one screen at the end "
 			"of VIC bank 0. This leaves about 15K for"
 			"your program. Once your program grows   "
 			"beyond 0x3c00 you have to move to VIC   "
 			"bank 1.");
 	for (i = 0; i < 255; i++) {
-		scrMem[i + 280] = i;
+		scr->scrMem[i + 280] = i;
 	}
-	sprintf(str, "vicMem: %04x", vicMem);
-	printCol(0, 15, vicLightBlue, str);
-	sprintf(str, "chrMem: %04x", chrMem);
-	printCol(0, 16, vicLightBlue, str);
-	sprintf(str, "scrMem: %04x", scrMem);
-	printCol(0, 17, vicLightBlue, str);
-	waitKey();
+	sprintf(str, "mem: %04x", vicMem);
+	(scr->printCol)(scr, 0, 15, vicLightBlue, str);
+	sprintf(str, "chr: %04x", scr->chrMem);
+	(scr->printCol)(scr, 0, 16, vicLightBlue, str);
+	sprintf(str, "scr: %04x", scr->scrMem);
+	(scr->printCol)(scr, 0, 17, vicLightBlue, str);
+	waitKey(scr);
 }
 
 /*
@@ -106,27 +128,14 @@ void run(uchar *vicMem) {
  */
 main() {
 	/* Program is small enough to use left over bank 0 memory */
-	uchar *vicMem = allocVicMem(0);
+	uchar *vicMem = allocVicMem(1);
+	/* Create screen struct */
+	screen *scr = (screen*) malloc(sizeof(screen));
 	/* Save screen/border color */
 	uchar border = inp(vicBorderCol);
 	uchar background = inp(vicBgCol0);
-	/* Use ROM character set */
-	chrMem = (uchar*) 0x1800;
-	/* Use ram at end of bank */
-	scrMem = (uchar*) 0x3c00;
-	/* Set default sizes and locations */
-	scrWidth = 40;
-	scrHeight = 25;
-	scrSize = scrWidth * scrHeight;
-	scrColMem = (uchar*) vicColMem;
-	/* Set screen functions */
-	clearScr = clearVicScr;
-	clearScrCol = clearVicCol;
-	/* Use VIC print functions (in this case PETSCII) */
-	print = printVicPet;
-	printCol = printVicColPet;
-	init();
-	run(vicMem);
+	init(scr);
+	run(scr, vicMem);
 	free(vicMem);
-	done(border, background);
+	done(scr, border, background);
 }
