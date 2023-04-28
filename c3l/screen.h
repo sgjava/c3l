@@ -15,6 +15,9 @@
  */
 typedef struct screen screen;
 
+/*
+ * General function pointers.
+ */
 typedef void (*fillMemPtr)(uchar*, ushort, ushort);
 
 /*
@@ -24,8 +27,9 @@ typedef void (*clearScrPtr)(screen*, uchar);
 typedef void (*clearScrColPtr)(screen*, uchar);
 typedef void (*printPtr)(screen*, uchar, uchar, char*);
 typedef void (*printColPtr)(screen*, uchar, uchar, uchar, char*);
-typedef void (*scrollUpPtr)(screen*, uchar, uchar, uchar , uchar);
-typedef void (*scrollUpColPtr)(screen*, uchar, uchar, uchar , uchar);
+typedef void (*scrollUpPtr)(screen*, uchar, uchar, uchar, uchar);
+typedef void (*scrollUpColPtr)(screen*, uchar, uchar, uchar, uchar);
+
 /*
  * Bitmap function pointers.
  */
@@ -90,7 +94,7 @@ typedef struct screen {
 	 */
 	scrollUpPtr scrollUp;
 	/*
-	 * Scroll test color one line.
+	 * Scroll text color one line.
 	 */
 	scrollUpColPtr scrollUpCol;
 	/*
