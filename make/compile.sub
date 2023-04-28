@@ -2,6 +2,7 @@ c -o -x baseline.c
 c -o -x rtcdemo.c b:libc3l.lib
 c -o -x ciademo.c b:libc3l.lib
 c -o -x -i0:b: vdcdemo1.c 0:b:libc3l.lib 0:a:libc.lib
+c -o -x -i0:b: vdcdemo2.c 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: vicdemo1.c 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: vicdemo2.c 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: vicdemo3.c 0:b:libc3l.lib 0:a:libc.lib

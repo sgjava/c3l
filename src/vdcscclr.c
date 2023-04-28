@@ -11,5 +11,5 @@
  * Clear screen.
  */
 void clearVdcScr(screen *scr, uchar c) {
-	fillVdcMem((ushort) scr->scrMem, scr->scrSize, c);
+	fillVdcMem(scr->scrMem, scr->scrSize, c);
 }

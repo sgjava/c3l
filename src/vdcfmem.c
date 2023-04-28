@@ -11,11 +11,11 @@
 /*
  * Fast fill using block writes.
  */
-void fillVdcMem(ushort vdcMem, ushort len, uchar value) {
+void fillVdcMem(uchar *mem, ushort len, ushort value) {
 	uchar blocks, remain;
 	register uchar i;
-	outVdc(vdcUpdAddrHi, (uchar) (vdcMem >> 8));
-	outVdc(vdcUpdAddrLo, (uchar) vdcMem);
+	outVdc(vdcUpdAddrHi, (uchar) ((ushort) mem >> 8));
+	outVdc(vdcUpdAddrLo, (uchar) (ushort) mem);
 	outVdc(vdcVtSmScroll, (inVdc(vdcVtSmScroll) & 0x7f));
 	outVdc(vdcCPUData, value);
 	if (len > vdcMaxBlock) {

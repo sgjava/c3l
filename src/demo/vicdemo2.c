@@ -43,7 +43,6 @@ void init(screen *scr) {
 	scr->scrSize = scr->scrWidth * scr->scrHeight;
 	/* Use space after ROM character set for RAM character set */
 	scr->chrMem = (uchar*) 0x3000;
-	;
 	/* Use ram after character set for screen */
 	scr->scrMem = (uchar*) 0x3800;
 	scr->scrColMem = (uchar*) vicColMem;
@@ -51,6 +50,9 @@ void init(screen *scr) {
 	scr->clearScrCol = clearVicCol;
 	scr->print = printVic;
 	scr->printCol = printVicCol;
+	scr->scrollUp = scrollVicUp;
+	scr->scrollUpCol = scrollVicUpCol;
+	scr->fillMem = fillVicMem;
 	/* Black screen and border */
 	outp(vicBorderCol, vicBlack);
 	outp(vicBgCol0, vicBlack);
@@ -111,10 +113,10 @@ void fillScr(screen *scr) {
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
-	fillVicMem((uchar*) scr->scrMem + scr->scrSize - scr->scrWidth,
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
 			scr->scrWidth / 2, 0x2020);
 	for (i = 0; i < 24; i++) {
-		scrollVicUp(scr, 1, 0, scr->scrWidth - 2, scr->scrHeight - 1);
+		(scr->scrollUp)(scr, 1, 0, scr->scrWidth - 2, scr->scrHeight - 1);
 	}
 	waitKey(scr);
 }
@@ -130,10 +132,10 @@ void fillScrCol(screen *scr) {
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
-	fillVicMem((uchar*) scr->scrMem + scr->scrSize - scr->scrWidth,
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
 			scr->scrWidth / 2, 0x2020);
 	for (i = 0; i < 24; i++) {
-		scrollVicUpCol(scr, 4, 0, 32, scr->scrHeight - 1);
+		(scr->scrollUpCol)(scr, 4, 0, 32, scr->scrHeight - 1);
 	}
 	waitKey(scr);
 }

@@ -2,7 +2,7 @@
  * C128 CP/M text and graphics abstraction.
  *
  * Screen abstraction uses function pointers to drive output, thus the
- * same code will work on the VIC and VDC. This will allow for virtual
+ * same code will work on the VIC and VDC. This will also allow for virtual
  * screens, page flipping, etc.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
@@ -15,13 +15,20 @@
  */
 typedef struct screen screen;
 
+typedef void (*fillMemPtr)(uchar*, ushort, ushort);
+
 /*
- * Text and bitmap function pointers.
+ * Text function pointers.
  */
 typedef void (*clearScrPtr)(screen*, uchar);
 typedef void (*clearScrColPtr)(screen*, uchar);
 typedef void (*printPtr)(screen*, uchar, uchar, char*);
 typedef void (*printColPtr)(screen*, uchar, uchar, uchar, char*);
+typedef void (*scrollUpPtr)(screen*, uchar, uchar, uchar , uchar);
+typedef void (*scrollUpColPtr)(screen*, uchar, uchar, uchar , uchar);
+/*
+ * Bitmap function pointers.
+ */
 typedef void (*setPixelPtr)(screen*, ushort, ushort, uchar);
 typedef void (*clearBmpPtr)(screen*, uchar);
 typedef void (*clearBmpColPtr)(screen*, uchar);
@@ -59,6 +66,10 @@ typedef struct screen {
 	 */
 	uchar *chrMem;
 	/*
+	 * Fill memory with uchar.
+	 */
+	fillMemPtr fillMem;
+	/*
 	 * Clear screen.
 	 */
 	clearScrPtr clearScr;
@@ -74,6 +85,14 @@ typedef struct screen {
 	 * Print text with color.
 	 */
 	printColPtr printCol;
+	/*
+	 * Scroll text up one line.
+	 */
+	scrollUpPtr scrollUp;
+	/*
+	 * Scroll test color one line.
+	 */
+	scrollUpColPtr scrollUpCol;
 	/*
 	 * Screen width in pixels.
 	 */
@@ -133,7 +152,7 @@ typedef struct screen {
 	/*
 	 * Print bitmap text with color.
 	 */
-	printBmpColPtr printBmpColPtr;
+	printBmpColPtr printBmpCol;
 };
 
 extern char* asciiToPet(char *str);
