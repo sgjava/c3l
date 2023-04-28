@@ -72,9 +72,6 @@ void done(screen *scr, uchar *chr) {
 	restoreVdc();
 	/* Copy character set from memory to VDC */
 	copyVdcMemChr(chr, 0x2000, 512);
-	/* Free memory */
-	free(chr);
-	free(scr);
 	/* Enable CIA 1 IRQ */
 	outp(cia1Icr, ciaEnableIrq);
 	/* ADM-3A clear-home cursor */
@@ -257,4 +254,7 @@ main() {
 	init(scr, chr);
 	run(scr);
 	done(scr, chr);
+	/* Free memory */
+	free(chr);
+	free(scr);
 }

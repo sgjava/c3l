@@ -76,7 +76,6 @@ void done(screen *scr, uchar bgCol, uchar fgCol) {
 	outp(vicBgCol0, fgCol);
 	/* Clear color to black */
 	(scr->clearScrCol)(scr, vicBlack);
-	free(scr);
 	/* CPM default */
 	setVicChrMode(0, 0, 11, 3);
 	/* Enable CIA 1 IRQ */
@@ -136,6 +135,8 @@ main() {
 	uchar background = inp(vicBgCol0);
 	init(scr);
 	run(scr, vicMem);
-	free(vicMem);
 	done(scr, border, background);
+	/* Free memory */
+	free(vicMem);
+	free(scr);
 }

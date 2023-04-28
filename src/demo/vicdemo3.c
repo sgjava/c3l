@@ -97,7 +97,6 @@ void done(screen *scr, uchar bgCol, uchar fgCol) {
 	(scr->clearBmpCol)(scr, 0x10);
 	/* CPM default */
 	setVicChrMode(0, 0, 11, 3);
-	free(scr);
 	/* Enable CIA 1 IRQ */
 	outp(cia1Icr, 0x82);
 }
@@ -293,5 +292,7 @@ main() {
 	init(scr);
 	run(scr, vicMem);
 	done(scr, border, background);
+	/* Free memory */
 	free(vicMem);
+	free(scr);
 }
