@@ -18,7 +18,7 @@ typedef struct screen screen;
 /*
  * General function pointers.
  */
-typedef void (*fillMemPtr)(uchar*, ushort, ushort);
+typedef void (*fillMemPtr)(uchar*, ushort, uchar);
 
 /*
  * Text function pointers.

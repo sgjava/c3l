@@ -12,7 +12,7 @@
  * Scroll color window up given x1, y1, x2, y2 rectangle in current page.
  */
 void scrollVicUpCol(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2) {
-	/* If line is screen width use optimized  */
+	/* If line is screen width use optimized function */
 	if (x2 - x1 + 1 == scr->scrWidth) {
 		scrollVicUpYCol(scr, y1, y2);
 	} else {

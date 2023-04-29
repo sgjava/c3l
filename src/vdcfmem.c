@@ -11,7 +11,7 @@
 /*
  * Fast fill using block writes.
  */
-void fillVdcMem(uchar *mem, ushort len, ushort value) {
+void fillVdcMem(uchar *mem, ushort len, uchar value) {
 	uchar blocks, remain;
 	register uchar i;
 	outVdc(vdcUpdAddrHi, (uchar) ((ushort) mem >> 8));

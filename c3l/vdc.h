@@ -98,7 +98,7 @@ extern void setVdcAttrsOff();
 extern void setVdcCursor(uchar top, uchar bottom, uchar mode);
 extern void orVdcByte(ushort vdcMem, uchar value);
 extern void andVdcByte(ushort vdcMem, uchar value);
-extern void fillVdcMem(uchar *mem, ushort len, ushort value);
+extern void fillVdcMem(uchar *mem, ushort len, uchar value);
 extern void copyVdcChrMem(uchar *mem, ushort vdcMem, ushort chars);
 extern void copyVdcMemChr(uchar *mem, ushort vdcMem, ushort chars);
 extern void clearVdcScr(screen* scr, uchar c);

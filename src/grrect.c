@@ -1,5 +1,5 @@
 /*
- * C128 CP/M bitmap line abstraction.
+ * C128 CP/M bitmap rectangle abstraction.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */

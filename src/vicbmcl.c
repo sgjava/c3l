@@ -8,8 +8,8 @@
 #include "hitech.h"
 
 /*
- * Clear screen using 16 bit word.
+ * Clear screen uchar.
  */
 void clearVicBmp(screen *scr, uchar c) {
-	fillVicMem(scr->bmpMem, scr->bmpSize >> 1, (c << 8) + c);
+	fillVicMem(scr->bmpMem, scr->bmpSize, c);
 }

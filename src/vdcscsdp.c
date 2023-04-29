@@ -8,7 +8,7 @@
 #include "hitech.h"
 
 /*
- * Sets which disp and attr page is showing.
+ * Sets which display and attribute page is showing.
  */
 void setVdcDspPage(ushort dispPage, ushort attrPage) {
 	outVdc(vdcDspStAddrHi, (uchar) (dispPage >> 8));

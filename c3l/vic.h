@@ -80,7 +80,7 @@
 extern uchar *allocVicMem(uchar maxBank);
 extern void setVicMmuBank(uchar mmuRcr);
 extern void setVicBank(uchar vicBank);
-extern void fillVicMem(uchar *mem, ushort len, ushort value);
+extern void fillVicMem(uchar *mem, ushort len, uchar value);
 extern void setVicMode(uchar ecm, uchar bmm, uchar mcm);
 extern void setVicScrMem(uchar scrLoc);
 extern void setVicChrMem(uchar chrLoc);
@@ -105,7 +105,7 @@ extern void drawVicLineH(screen* scr, ushort x, ushort y, ushort len, uchar colo
 extern void drawVicLineV(screen* scr, ushort x, ushort y, ushort len, uchar color);
 extern void printVicBmp(screen* scr, uchar x, uchar y, char *str);
 extern void printVicBmpCol(screen* scr, uchar x, uchar y, uchar color, char *str);
-extern void configVicSpr(uchar *scr, uchar *spr, uchar sprNum, uchar sprCol);
+extern void configVicSpr(screen* scr, uchar *spr, uchar sprNum, uchar sprCol);
 extern void enableVicSpr(uchar sprNum);
 extern void disableVicSpr(uchar sprNum);
 extern void setVicSprLoc(uchar sprNum, ushort x, uchar y);

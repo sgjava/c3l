@@ -71,8 +71,8 @@ void init(screen *scr) {
 	scr->drawLineV = drawVicLineV;
 	scr->printBmp = printVicBmp;
 	/* Set bitmap mode */
-	outp(vicBorderCol, 14);
-	outp(vicBgCol0, 0);
+	outp(vicBorderCol, vicLightBlue);
+	outp(vicBgCol0, vicBlack);
 	/* Clear bitmap */
 	clearBitmap(scr);
 	/* Copy VDC alt char set to VIC mem */

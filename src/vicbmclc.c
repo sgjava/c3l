@@ -11,5 +11,5 @@
  * Clear bitmap color memory.
  */
 void clearVicBmpCol(screen *scr, uchar c) {
-	fillVicMem(scr->bmpColMem, scr->bmpColSize >> 1, (c << 8) + c);
+	fillVicMem(scr->bmpColMem, scr->bmpColSize, c);
 }

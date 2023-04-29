@@ -24,8 +24,9 @@ uchar vdcRegs[sizeof(vdcSavedRegs) - 1];
  */
 void saveVdc() {
 	uchar i;
-	for (i = 0; i < sizeof(vdcRegs); i++)
+	for (i = 0; i < sizeof(vdcRegs); i++) {
 		vdcRegs[i] = inVdc(vdcSavedRegs[i]);
+	}
 }
 
 /*
@@ -33,6 +34,7 @@ void saveVdc() {
  */
 void restoreVdc() {
 	uchar i;
-	for (i = 0; i < sizeof(vdcRegs); i++)
+	for (i = 0; i < sizeof(vdcRegs); i++) {
 		outVdc(vdcSavedRegs[i], vdcRegs[i]);
+	}
 }

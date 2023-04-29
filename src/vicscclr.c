@@ -11,5 +11,5 @@
  * Clear screen using 16 bit word.
  */
 void clearVicScr(screen *scr, uchar c) {
-	fillVicMem(scr->scrMem, scr->scrSize >> 1, (c << 8) + c);
+	fillVicMem(scr->scrMem, scr->scrSize, c);
 }

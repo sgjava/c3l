@@ -16,10 +16,10 @@ uchar sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 /*
  * Configure sprite.
  */
-void configVicSpr(uchar *scr, uchar *spr, uchar sprNum, uchar sprCol) {
-	uchar vicBank = (ushort) scr / 16384;
+void configVicSpr(screen *scr, uchar *spr, uchar sprNum, uchar sprCol) {
+	uchar vicBank = (ushort) scr->scrMem / 16384;
 	/* Set sprite memory location */
-	scr[vicSprMemOfs + sprNum] = ((ushort) spr - (vicBank * 16384)) / 64;
+	scr->scrMem[vicSprMemOfs + sprNum] = ((ushort) spr - (vicBank * 16384)) / 64;
 	/* Sprite color */
 	outp(vicSpr0Col + sprNum, sprCol);
 }
