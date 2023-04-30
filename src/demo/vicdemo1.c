@@ -79,7 +79,7 @@ void done(screen *scr, uchar bgCol, uchar fgCol) {
 	/* CPM default */
 	setVicChrMode(0, 0, 11, 3);
 	/* Enable CIA 1 IRQ */
-	outp(cia1Icr, 0x82);
+	outp(cia1Icr, ciaEnableIrq);
 }
 
 /*

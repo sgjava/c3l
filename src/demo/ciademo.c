@@ -26,7 +26,7 @@ main() {
 	inp(cia2Icr);
 	/* CIA 2 Timer A lo */
 	outp(cia2TimerALo, (uchar) timerA);
-	/* Timer A hi */
+	/* CIA 2 Timer A hi */
 	outp(cia2TimerAHi, (uchar) (timerA >> 8));
 	/* CIA 2 Timer B lo */
 	outp(cia2TimerBLo, (uchar) timerB);

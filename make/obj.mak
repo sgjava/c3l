@@ -80,4 +80,9 @@ vicscsuy.c \
 vicscup.c \
 vicsmb.c \
 vicsm.c \
-vicspr.c
+vicsprbg.c \
+vicsprc.c \
+vicsprdi.c \
+vicspren.c \
+vicsprfg.c \
+vicsprsl.c

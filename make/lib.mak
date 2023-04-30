@@ -76,7 +76,12 @@ vicscsuy.obj \
 vicscup.obj \
 vicsmb.obj \
 vicsm.obj \
-vicspr.obj \
+vicsprbg.obj \
+vicsprc.obj \
+vicsprdi.obj \
+vicspren.obj \
+vicsprfg.obj \
+vicsprsl.obj \
 vicfm.obj \
 vicsb.obj \
 scatop.obj \

@@ -6,16 +6,16 @@
 
 #include	"hitech.h"
 
-#define sidVoice1   0xD400 /* Voices */
-#define sidVoice2   0xD407
-#define sidVoice3   0xD40E
-#define sidCutoffLo 0xD415 /* Cutoff filter */
-#define sidCutoffHi 0xD416
-#define sidResCtrl  0xD417 /* Resonance control */
-#define sidVolume   0xD418 /* Master volume and filter select */
-#define sidPotX     0xD419 /* Paddle X */
-#define sidPotY     0xD41A /* Paddle Y */
-#define sidEnvGen3  0xD41C
+#define sidVoice1   0xd400 /* Voices */
+#define sidVoice2   0xd407
+#define sidVoice3   0xd40E
+#define sidCutoffLo 0xd415 /* Cutoff filter */
+#define sidCutoffHi 0xd416
+#define sidResCtrl  0xd417 /* Resonance control */
+#define sidVolume   0xd418 /* Master volume and filter select */
+#define sidPotX     0xd419 /* Paddle X */
+#define sidPotY     0xd41A /* Paddle Y */
+#define sidEnvGen3  0xd41C
 
 #define sidGate 0x01 /* Waveforms */
 #define sidSync 0x02
