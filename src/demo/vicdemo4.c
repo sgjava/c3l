@@ -28,6 +28,9 @@ uchar sprData[] = { 0x00, 0x7e, 0x00, 0x03, 0xff, 0xc0, 0x07, 0xff, 0xe0, 0x1f,
  * Configure CIA to kill interrupts and enable keyboard scan.
  */
 void initCia() {
+	/* ~1 millisecond */
+	int timerA = 992;
+	int timerB = 0xffff;
 	/* Clear all CIA 1 IRQ enable bits */
 	outp(cia1Icr, ciaClearIcr);
 	/* Clear CIA 1 ICR status */
@@ -36,6 +39,16 @@ void initCia() {
 	outp(cia2Icr, ciaClearIcr);
 	/* Clear CIA 2 ICR status */
 	inp(cia2Icr);
+	/* CIA 2 Timer A lo */
+	outp(cia2TimerALo, (uchar) timerA);
+	/* CIA 2 Timer A hi */
+	outp(cia2TimerAHi, (uchar) (timerA >> 8));
+	/* CIA 2 Timer B lo */
+	outp(cia2TimerBLo, (uchar) timerB);
+	/* CIA 2 Timer B hi */
+	outp(cia2TimerBHi, (uchar) (timerB >> 8));
+	/* Link time to count and enable timer */
+	outp(cia2CtrlRegB, ciaCountA);
 	/* Set CIA 1 DDRs for keyboard scan */
 	outp(cia1DdrA, 0xff);
 	outp(cia1DdrB, 0x00);
@@ -124,6 +137,10 @@ void sound() {
  * Bounce sprite around screen.
  */
 void bounceSpr(screen *scr) {
+	char str[40];
+	int moves = 0;
+	int timerB = 0xffff;
+	int timerVal;
 	uchar y = 50, inFront = 0, color = 6, i;
 	ushort x = 24;
 	int xDir = 1, yDir = 1;
@@ -137,6 +154,7 @@ void bounceSpr(screen *scr) {
 	enableVicSpr(0);
 	(scr->printCol)(scr, 0, 24, 7, "Press Return");
 	setSidVol(15, 0);
+	outp(cia2CtrlRegA, ciaCpuCont);
 	/* Bounce sprite until return pressed */
 	while (getKey(0) != 0xfd) {
 		x += xDir;
@@ -159,8 +177,8 @@ void bounceSpr(screen *scr) {
 			sound();
 		}
 		/* Raster off screen? */
-		while ((inp(vicCtrlReg1) & 0x80) != 0x80)
-			;
+		 while ((inp(vicCtrlReg1) & 0x80) != 0x80)
+		 ;
 		/* Move sprite */
 		setVicSprLoc(0, x, y);
 		/* Did sprite collide with text? */
@@ -185,9 +203,15 @@ void bounceSpr(screen *scr) {
 				setVicSprBg(0);
 			}
 		}
+		moves++;
 	}
+	outp(cia2CtrlRegA, ciaStopTimer);
+	timerVal = timerB - (inp(cia2TimerBHi) * 256 + inp(cia2TimerBLo));
+	sprintf(str, "Each movement %d ms", timerVal / moves);
+	(scr->printCol)(scr, 0, 19, 1, str);
 	disableVicSpr(0);
 	clearSid();
+	waitKey(scr);
 }
 
 /*
