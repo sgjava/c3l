@@ -1,4 +1,9 @@
 -c -o -x -i0:b: \
+appciad.c \
+appciai.c \
+appciati.c \
+appvicd.c \
+appvicir.c \
 ciadec.c \
 ciagk.c \
 ciagkc.c \

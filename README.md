@@ -109,7 +109,7 @@ banks like CP/M does, but this is very inefficient. Plus there is very little
 free RAM in bank 0 that you could leverage. For C3L programs MMU bank 1 is
 used and your program manages the VIC's memory.
 
-You can use [allocVicMem()](https://github.com/sgjava/c3l/blob/be5396dbebb6b99084f3128bf62baf0d6e4c1427/src/vicmem.c#L19)
+You can use [allocVicMem()](https://github.com/sgjava/c3l/blob/main/src/vicam.c)
 function to handle reserving memory for the VIC and
 protect it from the running program. There are several configurations you can
 use based on program size and VIC features you want to use. The simplest
@@ -137,7 +137,7 @@ setVicChrMode(0, 0, 11, 3);
 
 ### Limitations
 As I mentioned above 0x1000 is always read by the VIC as character ROM. Your
-program will still use this memory normally. See [vicdemo1](https://github.com/sgjava/c3l/blob/master/src/vicdemo1.c)
+program will still use this memory normally. See [vicdemo1](https://github.com/sgjava/c3l/blob/main/src/demo/vicdemo1.c)
 for an example of using the ROM character set and the ASCII to PETSCII translation
 of printVicPet.
 
@@ -218,13 +218,13 @@ another key being on the scan row. The formula is 255-2^k1-2^k2, but I
 calculated the values for the left and right shift using a lookup table, so no
 calculation or bit fiddling is needed with these combinations.
 
-[getKey](https://github.com/sgjava/c3l/blob/75755335d3a512c2b535649a376d46523dc98814/src/ciakey.c#L101)
+[getKey](https://github.com/sgjava/c3l/blob/main/src/ciagk.c)
 allows you to read a single key row. This can be used for video games or other
 time sensitive applications. In order to read standard and extended rows requires
 18 out and 16 in operations. getKey only requires 2 out and 1 in operations. Plus
 you do not need to decode the row saving that time as well.
 
-[readVicLine](https://github.com/sgjava/c3l/blob/9ef99675463c5abf3eff9b8dda75937cb114f464/src/vicscr.c#L169)
+[readVicLine](https://github.com/sgjava/c3l/blob/main/src/vicscrl.c)
 is a simple line editor that takes advantage of screen memory to allow input
 from the keyboard to be displayed and saved. Debounce logic makes sure the input
 is smooth while still allowing for auto repeat. Only Backspace is allowed to

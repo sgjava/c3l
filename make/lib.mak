@@ -1,4 +1,9 @@
 r b:libc3l.lib \
+appciad.obj \
+appciai.obj \
+appciati.obj \
+appvicd.obj \
+appvicir.obj \
 ciadec.obj \
 ciagk.obj \
 ciagkc.obj \
@@ -89,4 +94,3 @@ vicscpc.obj \
 vicbmbm.obj \
 vdccpym.obj \
 vdcand.obj
-
