@@ -9,7 +9,7 @@
 #include "vdc.h"
 
 /*
- * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
+ * Configure screen struct for VDC and clear screen.
  */
 void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar chrCol) {
 	saveVdc();
