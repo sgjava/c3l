@@ -9,10 +9,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <cia.h>
-#include <vdc.h>
+#include "cia.h"
+#include "vdc.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Configure CIA to kill interrupts and enable keyboard scan.

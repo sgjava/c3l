@@ -5,7 +5,7 @@
  */
 
 #include <string.h>
-#include <screen.h>
+#include "screen.h"
 #include "hitech.h"
 
 /*

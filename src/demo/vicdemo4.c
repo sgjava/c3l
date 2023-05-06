@@ -8,11 +8,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <cia.h>
-#include <vic.h>
-#include <sid.h>
+#include "cia.h"
+#include "vic.h"
+#include "sid.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Sprite data.
@@ -25,94 +25,29 @@ uchar sprData[] = { 0x00, 0x7e, 0x00, 0x03, 0xff, 0xc0, 0x07, 0xff, 0xe0, 0x1f,
 		0xff, 0xc0, 0x00, 0x7e, 0x00 };
 
 /*
- * Configure CIA to kill interrupts and enable keyboard scan.
- */
-void initCia() {
-	/* ~1 millisecond */
-	int timerA = 992;
-	int timerB = 0xffff;
-	/* Clear all CIA 1 IRQ enable bits */
-	outp(cia1Icr, ciaClearIcr);
-	/* Clear CIA 1 ICR status */
-	inp(cia1Icr);
-	/* Clear all CIA 2 IRQ enable bits */
-	outp(cia2Icr, ciaClearIcr);
-	/* Clear CIA 2 ICR status */
-	inp(cia2Icr);
-	/* CIA 2 Timer A lo */
-	outp(cia2TimerALo, (uchar) timerA);
-	/* CIA 2 Timer A hi */
-	outp(cia2TimerAHi, (uchar) (timerA >> 8));
-	/* CIA 2 Timer B lo */
-	outp(cia2TimerBLo, (uchar) timerB);
-	/* CIA 2 Timer B hi */
-	outp(cia2TimerBHi, (uchar) (timerB >> 8));
-	/* Link time to count and enable timer */
-	outp(cia2CtrlRegB, ciaCountA);
-	/* Set CIA 1 DDRs for keyboard scan */
-	outp(cia1DdrA, 0xff);
-	outp(cia1DdrB, 0x00);
-}
-
-/*
  * Initialize key scan and screen.
  */
 void init(screen *scr) {
-	uchar vicBank;
 	initCia();
-	clearSid();
-	/* VIC Screen configuration */
-	scr->scrWidth = 40;
-	scr->scrHeight = 25;
-	scr->scrSize = scr->scrWidth * scr->scrHeight;
-	/* Use ROM character set */
-	scr->chrMem = (uchar*) 0x1800;
 	/* Use ram at end of bank 0 */
-	scr->scrMem = (uchar*) 0x3c00;
-	scr->scrColMem = (uchar*) vicColMem;
-	scr->clearScr = clearVicScr;
-	scr->clearScrCol = clearVicCol;
-	scr->print = printVicPet;
-	scr->printCol = printVicColPet;
-	/* Black screen and border */
-	outp(vicBorderCol, vicBlack);
-	outp(vicBgCol0, vicBlack);
-	/* Clear color to black */
-	(scr->clearScrCol)(scr, vicBlack);
-	/* Clear screen to spaces */
-	(scr->clearScr)(scr, 32);
-	/* Set standard character mode using MMU bank 1 and set VIC based on scr location */
-	vicBank = (ushort) scr->scrMem / 16384;
-	setVicChrMode(1, vicBank, ((ushort) scr->scrMem - (vicBank * 16384)) / 1024,
-			((ushort) scr->chrMem - (vicBank * 16384)) / 2048);
-	/* Clear color to white */
-	(scr->clearScrCol)(scr, vicWhite);
-	/* Enable screen */
-	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
+	initVicScrRom(scr, 0x3c00, vicBlack, vicBlack, vicWhite);
 }
 
 /*
  * Restore screen color, set MMU bank, VIC bank, screen
  * memory and char set memory location for CP/M return.
  */
-void done(screen *scr, uchar bgCol, uchar fgCol) {
+void done(uchar bgCol, uchar fgCol) {
 	clearSid();
-	/* Restore screen/border colors */
-	outp(vicBorderCol, bgCol);
-	outp(vicBgCol0, fgCol);
-	/* Clear color to black */
-	(scr->clearScrCol)(scr, vicBlack);
-	/* CPM default */
-	setVicChrMode(0, 0, 11, 3);
-	/* Enable CIA 1 IRQ */
-	outp(cia1Icr, ciaEnableIrq);
+	doneVic(bgCol, fgCol);
+	doneCia();
 }
 
 /*
  * Wait for Return key to be pressed.
  */
 void waitKey(screen *scr) {
-	(scr->printCol)(scr, 0, 24, 7, "Press Return");
+	(scr->printCol)(scr, 0, scr->scrHeight-1, vicYellow, "Press Return");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
 		;
@@ -152,8 +87,10 @@ void bounceSpr(screen *scr) {
 	configVicSpr(scr, spr, 0, 6);
 	setVicSprLoc(0, x, y);
 	enableVicSpr(0);
-	(scr->printCol)(scr, 0, 24, 7, "Press Return");
+	(scr->printCol)(scr, 0, scr->scrHeight-1, vicYellow, "Press Return");
 	setSidVol(15, 0);
+	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
+	initCiaTimer(ciaMs, 0xffff);
 	outp(cia2CtrlRegA, ciaCpuCont);
 	/* Bounce sprite until return pressed */
 	while (getKey(0) != 0xfd) {
@@ -249,7 +186,7 @@ main() {
 	uchar background = inp(vicBgCol0);
 	init(scr);
 	run(scr, vicMem);
-	done(scr, border, background);
+	done(border, background);
 	/* Free memory */
 	free(vicMem);
 	free(scr);

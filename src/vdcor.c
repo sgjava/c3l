@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <vdc.h>
+#include "vdc.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Or VDC byte with value and store it.

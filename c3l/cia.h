@@ -4,7 +4,11 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include	"hitech.h"
+#ifndef _CIA_H
+#define _CIA_H
+
+#include "hitech.h"
+#include "screen.h"
 
 #define cia1DataA    0xdc00 /* Port A data I/O register */
 #define cia1DataB    0xdc01 /* Port B data I/O register */
@@ -62,10 +66,16 @@
 #define ciaPotsPort1 0x40     /* 4066 analog switch settings for CIA 1 */
 #define ciaPotsPort2 0x80
 
+#define ciaMs 912             /* ~1 millisecond using CIA microsecond timer */
+
 extern uchar getKeyCol(uchar keyVal);
 extern uchar getLsKeyCol(uchar keyVal);
 extern uchar getRsKeyCol(uchar keyVal);
 extern uchar getKey(uchar keyRow);
 extern uchar *getKeys();
 extern uchar decodeKey();
+extern void initCia();
+extern void doneCia();
+extern void initCiaTimer(ushort timerA, ushort timerB);
 
+#endif

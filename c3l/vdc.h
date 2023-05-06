@@ -4,8 +4,11 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#ifndef _VDC_H
+#define _VDC_H
+
 #include "hitech.h"
-#include <screen.h>
+#include "screen.h"
 
 #define vdcStatusReg 0xD600    /* VDC status register */
 #define vdcDataReg   0xD601    /* VDC data register */
@@ -121,3 +124,7 @@ extern void drawVdcLineV(screen* scr, ushort x, ushort y, ushort len,
         uchar color);
 extern void printVdcBmp(screen* scr, uchar x, uchar y, char *str);
 extern void printVdcBmpCol(screen* scr, uchar x, uchar y, uchar color, char *str);
+extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar chrCol);
+extern void doneVdc();
+
+#endif

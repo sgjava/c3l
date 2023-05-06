@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <cia.h>
+#include "cia.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Set CIA2 count down timers. Timer B counts timer A.

@@ -4,7 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include	"hitech.h"
+#ifndef _SID_H
+#define _SID_H
+
+#include "hitech.h"
 
 #define sidVoice1   0xd400 /* Voices */
 #define sidVoice2   0xd407
@@ -44,3 +47,5 @@ extern void setSidRel(ushort Voice, uchar Waveform);
 extern void setSidFreq(ushort voice, ushort freq);
 extern void setSidAtt(ushort voice, uchar waveform);
 extern void setSidPulWav(ushort voice, ushort width);
+
+#endif

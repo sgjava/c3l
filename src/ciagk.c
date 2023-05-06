@@ -6,10 +6,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <cia.h>
-#include <vic.h>
+#include "cia.h"
+#include "vic.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Get standard or extended key code for single row. 0xff is returned if no key

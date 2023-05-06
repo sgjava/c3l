@@ -4,7 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include	"hitech.h"
+#ifndef _RTC_H
+#define _RTC_H
+
+#include "hitech.h"
 
 #define rtcRegA      0xde00 /* Register A address */
 #define rtcRegB      0xde01 /* Register B address */
@@ -22,3 +25,5 @@ extern uchar getRtcReg(uchar reg);
 extern void setRtcMode(uchar mode);
 extern char *getRtcTime();
 extern char *getRtcDate();
+
+#endif

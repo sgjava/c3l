@@ -4,8 +4,11 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#ifndef _VIC_H
+#define _VIC_H
+
 #include "hitech.h"
-#include <screen.h>
+#include "screen.h"
 
 #define vicSpr0X       0xd000 /* Sprite 0 horizontal position register */
 #define vicSpr0y       0xd001 /* Sprite 0 vertical position register */
@@ -111,3 +114,9 @@ extern void disableVicSpr(uchar sprNum);
 extern void setVicSprLoc(uchar sprNum, ushort x, uchar y);
 extern void setVicSprFg(uchar sprNum);
 extern void setVicSprBg(uchar sprNum);
+extern void initVicScrRom(screen *scr, ushort scrMem, uchar bgCol, uchar fgCol, uchar chrCol);
+extern void initVicScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar chrCol);
+extern void initVicBmp(screen *scr, ushort bmpMem, ushort colMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
+extern void doneVic(uchar bgCol, uchar fgCol);
+
+#endif

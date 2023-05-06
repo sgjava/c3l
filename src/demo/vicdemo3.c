@@ -6,29 +6,30 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <sys.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <cia.h>
-#include <vic.h>
 #include "hitech.h"
-#include "sys.h"
+#include "cia.h"
+#include "vic.h"
 
 /*
- * Configure CIA to kill interrupts and enable keyboard scan.
+ * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
+ * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
  */
-void initCia() {
-	/* Clear all CIA 1 IRQ enable bits */
-	outp(cia1Icr, ciaClearIcr);
-	/* Clear CIA 1 ICR status */
-	inp(cia1Icr);
-	/* Clear all CIA 2 IRQ enable bits */
-	outp(cia2Icr, ciaClearIcr);
-	/* Clear CIA 2 ICR status */
-	inp(cia2Icr);
-	/* Set CIA 1 DDRs for keyboard scan */
-	outp(cia1DdrA, 0xff);
-	outp(cia1DdrB, 0x00);
+void init(screen *scr) {
+	initCia();
+	initVicBmp(scr, 0x6000, 0x4800, 0x4000, vicLightBlue, vicBlack, 0x10);
+}
+
+/*
+ * Restore screen color, set MMU bank, VIC bank, screen
+ * memory and char set memory location for CP/M return.
+ */
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
+	doneCia();
 }
 
 /*
@@ -41,64 +42,6 @@ void clearBitmap(screen *scr) {
 	(scr->clearBmp)(scr, 0);
 	/* White foreground and black background */
 	(scr->clearBmpCol)(scr, 0x10);
-}
-
-/*
- * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
- * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
- */
-void init(screen *scr) {
-	uchar vicBank;
-	initCia();
-	/* VIC Screen configuration */
-	/* Use ram after character set for screen */
-	scr->bmpChrMem = (uchar*) 0x4000;
-	/* Use ram after character set for screen */
-	scr->bmpColMem = (uchar*) 0x4800;
-	/* Use bottom of bank 1 for bitmap */
-	scr->bmpMem = (uchar*) 0x6000;
-	scr->bmpWidth = 320;
-	scr->bmpHeight = 200;
-	scr->bmpSize = ((ulong) scr->bmpWidth * scr->bmpHeight) / 8;
-	scr->scrWidth = 40;
-	scr->scrHeight = 25;
-	scr->bmpColSize = scr->scrWidth * scr->scrHeight;
-	scr->aspectRatio = 2;
-	scr->clearBmp = clearVicBmp;
-	scr->clearBmpCol = clearVicBmpCol;
-	scr->setPixel = setVicPix;
-	scr->drawLineH = drawVicLineH;
-	scr->drawLineV = drawVicLineV;
-	scr->printBmp = printVicBmp;
-	/* Set bitmap mode */
-	outp(vicBorderCol, vicLightBlue);
-	outp(vicBgCol0, vicBlack);
-	/* Clear bitmap */
-	clearBitmap(scr);
-	/* Copy VDC alt char set to VIC mem */
-	copyVdcChrMem(scr->bmpChrMem, 0x3000, 256);
-	/* Set standard bitmap mode using MMU bank 1 */
-	vicBank = (ushort) scr->bmpMem / 16384;
-	setVicBmpMode(1, vicBank,
-			((ushort) scr->bmpColMem - (vicBank * 16384)) / 1024,
-			((ushort) scr->bmpMem - (vicBank * 16384)) / 8192);
-	/* Enable screen */
-	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
-}
-
-/*
- * Restore screen color, set MMU bank, VIC bank, screen
- * memory and char set memory location for CP/M return.
- */
-void done(screen *scr, uchar bgCol, uchar fgCol) {
-	outp(vicBorderCol, bgCol);
-	outp(vicBgCol0, fgCol);
-	/* Clear color to black */
-	(scr->clearBmpCol)(scr, 0x10);
-	/* CPM default */
-	setVicChrMode(0, 0, 11, 3);
-	/* Enable CIA 1 IRQ */
-	outp(cia1Icr, ciaEnableIrq);
 }
 
 /*
@@ -291,7 +234,7 @@ main() {
 	uchar background = inp(vicBgCol0);
 	init(scr);
 	run(scr, vicMem);
-	done(scr, border, background);
+	done(border, background);
 	/* Free memory */
 	free(vicMem);
 	free(scr);

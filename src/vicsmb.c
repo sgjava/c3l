@@ -6,7 +6,7 @@
 
 #include <mmu.h>
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Set VIC to MMU bank 0 or 1.

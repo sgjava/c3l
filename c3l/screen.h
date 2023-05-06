@@ -8,6 +8,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#ifndef _SCREEN_H
+#define _SCREEN_H
+
 #include "hitech.h"
 
 /*
@@ -167,3 +170,5 @@ extern void drawEllipse(screen *scr, int xc, int yc, int a, int b, uchar color);
 extern void drawCircle(screen *scr, int xc, int yc, int a, uchar color);
 extern void drawRect(screen *scr, int x0, int y0, int x1, int y1, uchar color);
 extern void drawSquare(screen *scr, int x, int y, int len, uchar color);
+
+#endif

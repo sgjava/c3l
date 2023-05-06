@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <rtc.h>
+#include "rtc.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Get RTC register.

@@ -4,7 +4,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <vic.h>
+#include "vic.h"
 #include "hitech.h"
 
 /*

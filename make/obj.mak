@@ -2,7 +2,11 @@
 appciad.c \
 appciai.c \
 appciati.c \
+appvdcd.c \
+appvdci.c \
+appvicbi.c \
 appvicd.c \
+appvici.c \
 appvicir.c \
 ciadec.c \
 ciagk.c \

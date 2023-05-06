@@ -8,11 +8,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <hitech.h>
+#include "hitech.h"
 #include <sys.h>
 #include "cia.h"
 #include "vic.h"
-#include "app.h"
 
 /*
  * Initialize key scan and screen.
@@ -26,8 +25,8 @@ void init(screen *scr) {
 /*
  * Restore VIC back to CP/M defaults.
  */
-void done(screen *scr, uchar bgCol, uchar fgCol) {
-	doneVic(scr, bgCol, fgCol);
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
 	doneCia();
 }
 
@@ -71,8 +70,7 @@ void run(screen *scr, uchar *vicMem) {
 }
 
 /*
- * Configure memory to protect VIC, save off screen and background colors, set
- * character/screen/color memory locations, set print function pointers and run demo.
+ * Configure memory to protect VIC, save off screen and background colors and run demo.
  */
 main() {
 	/* Program is small enough to use left over bank 0 memory */
@@ -84,7 +82,7 @@ main() {
 	uchar background = inp(vicBgCol0);
 	init(scr);
 	run(scr, vicMem);
-	done(scr, border, background);
+	done(border, background);
 	/* Free memory */
 	free(vicMem);
 	free(scr);

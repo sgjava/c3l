@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <sid.h>
+#include "sid.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Set ADSR envelope.  All ADSR values must be >= 0 and <= 15.

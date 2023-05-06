@@ -4,7 +4,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <screen.h>
+#include "screen.h"
 #include "hitech.h"
 
 /*

@@ -5,7 +5,7 @@
  */
 
 #include <string.h>
-#include <vic.h>
+#include "vic.h"
 #include "hitech.h"
 
 /*

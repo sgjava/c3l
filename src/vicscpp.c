@@ -5,7 +5,7 @@
  */
 
 #include <stdlib.h>
-#include <vic.h>
+#include "vic.h"
 #include "hitech.h"
 
 /*

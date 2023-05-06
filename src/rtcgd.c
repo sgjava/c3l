@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <rtc.h>
+#include "rtc.h"
 
 /*
  * Get RTC date as mm/dd/yyyy.

@@ -7,7 +7,7 @@
  */
 
 #include "hitech.h"
-#include "stdio.h"
+#include <stdio.h>
 
 main() {
 	printf("Hello");

@@ -7,10 +7,10 @@
  */
 
 #include <stdlib.h>
-#include <cia.h>
-#include <vic.h>
+#include "cia.h"
+#include "vic.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Get all standard and extended key rows.

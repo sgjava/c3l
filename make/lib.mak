@@ -2,7 +2,11 @@ r b:libc3l.lib \
 appciad.obj \
 appciai.obj \
 appciati.obj \
+appvdcd.obj \
+appvdci.obj \
+appvicbi.obj \
 appvicd.obj \
+appvici.obj \
 appvicir.obj \
 ciadec.obj \
 ciagk.obj \

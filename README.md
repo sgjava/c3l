@@ -7,7 +7,8 @@ This allows you to set the target (VIC, VDC or virtual screen) at runtime. You o
 to use or use both at the same time! This allows you to switch between VIC and VDC
 with minimal effort. One cool feature of the VIC is that you can use the PETSCII
 character ROM without having to worry about translation. Then if you change to
-ASCII character set (CP/M default) there is only one simple change to make.
+ASCII character set (CP/M default) there is only one simple change to make. Of course, 
+there are CIA and SID functions to round things out.
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
@@ -98,7 +99,6 @@ the library by name simply repeat its name.
 
 ### Features
 * Easy to configure VIC mode and memory layout
-* 16 bit operations used where possible
 * Character and bitmap mode options galore
 * Sprites
 

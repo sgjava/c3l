@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <vic.h>
+#include "vic.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Set ecm, bmm and mcm to 0 (off) or 1 (on).

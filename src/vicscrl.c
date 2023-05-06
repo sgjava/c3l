@@ -5,10 +5,10 @@
  */
 
 #include <stdlib.h>
-#include <cia.h>
-#include <vic.h>
+#include "cia.h"
+#include "vic.h"
 #include "hitech.h"
-#include "sys.h"
+#include <sys.h>
 
 /*
  * Use screen memory as simple input line. Only backspace supported, but insert

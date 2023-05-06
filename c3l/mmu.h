@@ -4,6 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#ifndef _MMU_H
+#define _MMU_H
+
 #define mmuCtrlReg1     0xd500 /* Configuration register */
 #define mmuPreCfgRegA   0xd501 /* Preconfiguration register A */
 #define mmuPreCfgRegB   0xd502 /* Preconfiguration register B */
@@ -16,3 +19,5 @@
 #define mmuPage1PagePtr 0xd509 /* Page 1 page pointer */
 #define mmuPage1BlkPtr  0xd50a /* Page 1 block pointer */
 #define mmuVerReg       0xd50b /* MMU version register */
+
+#endif
