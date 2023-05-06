@@ -6,13 +6,12 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <cia.h>
+#include <hitech.h>
+#include <screen.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
-#include "cia.h"
-#include "vdc.h"
-#include "hitech.h"
-#include <sys.h>
+#include <vdc.h>
 
 /*
  * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.

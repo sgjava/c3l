@@ -6,13 +6,14 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <stdlib.h>
+#include <cia.h>
+#include <hitech.h>
+#include <screen.h>
+#include <sid.h>
 #include <stdio.h>
-#include "cia.h"
-#include "vic.h"
-#include "sid.h"
-#include "hitech.h"
+#include <stdlib.h>
 #include <sys.h>
+#include <vic.h>
 
 /*
  * Sprite data.

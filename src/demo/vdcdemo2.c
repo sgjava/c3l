@@ -6,13 +6,12 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <stdlib.h>
+#include <cia.h>
+#include <hitech.h>
+#include <screen.h>
 #include <stdio.h>
-#include <string.h>
-#include <sys.h>
-#include "cia.h"
-#include "vdc.h"
-#include "hitech.h"
+#include <stdlib.h>
+#include <vdc.h>
 
 /*
  * Initialize key scan and screen.

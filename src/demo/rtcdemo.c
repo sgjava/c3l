@@ -6,9 +6,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "hitech.h"
-#include <stdio.h>
 #include "rtc.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 main() {
 	char *dateStr, *timeStr;
