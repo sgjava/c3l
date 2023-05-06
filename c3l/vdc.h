@@ -125,6 +125,7 @@ extern void drawVdcLineV(screen* scr, ushort x, ushort y, ushort len,
 extern void printVdcBmp(screen* scr, uchar x, uchar y, char *str);
 extern void printVdcBmpCol(screen* scr, uchar x, uchar y, uchar color, char *str);
 extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar chrCol);
+extern void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
 extern void doneVdc();
 
 #endif

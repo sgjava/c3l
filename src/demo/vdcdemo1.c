@@ -15,67 +15,21 @@
 #include <sys.h>
 
 /*
- * Configure CIA to kill interrupts and enable keyboard scan.
- */
-void initCia() {
-	/* Clear all CIA 1 IRQ enable bits */
-	outp(cia1Icr, ciaClearIcr);
-	/* Clear CIA 1 ICR status */
-	inp(cia1Icr);
-	/* Clear all CIA 2 IRQ enable bits */
-	outp(cia2Icr, ciaClearIcr);
-	/* Clear CIA 2 ICR status */
-	inp(cia2Icr);
-	/* Set CIA 1 DDRs for keyboard scan */
-	outp(cia1DdrA, 0xff);
-	outp(cia1DdrB, 0x00);
-}
-
-/*
  * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
  */
 void init(screen *scr, uchar *chr) {
 	initCia();
-	saveVdc();
-	/* Turn off cursor for bitmap mode */
-	setVdcCursor(0, 0, vdcCurNone);
-	/* Copy VDC char sets to VIC mem */
-	copyVdcChrMem(chr, 0x2000, 512);
-	/* VDC Screen configuration */
-	scr->bmpChrMem = (uchar*) ((ushort) chr) + 0x0800;
-	scr->bmpColMem = (uchar*) vdcColMem;
-	scr->bmpMem = (uchar*) vdcScrMem;
-	scr->bmpWidth = 640;
-	scr->bmpHeight = 200;
-	scr->bmpSize = ((ulong) scr->bmpWidth * scr->bmpHeight) / 8;
-	scr->scrWidth = 80;
-	scr->scrHeight = 25;
-	scr->bmpColSize = scr->scrWidth * scr->scrHeight;
-	scr->aspectRatio = 3;
-	scr->clearBmp = clearVdcBmp;
-	scr->clearBmpCol = clearVdcBmpCol;
-	scr->setPixel = setVdcPix;
-	scr->drawLineH = drawVdcLineH;
-	scr->drawLineV = drawVdcLineV;
-	scr->printBmp = printVdcBmp;
-	/* Set bitmap mode */
-	setVdcFgBg(15, 0);
-	setVdcAttrsOff();
-	setVdcBmpMode((ushort) scr->bmpMem, (ushort) scr->bmpColMem);
-	(scr->clearBmp)(scr, 0);
+	initVdcBmp(scr, vdcScrMem, vdcColMem, chr, vdcBlack, vdcWhite, vdcBlack);
 }
 
 /*
  * Restore VDC registers, screen color, screen memory and char set memory location for CP/M return.
  */
 void done(screen *scr, uchar *chr) {
-	restoreVdc();
+	doneVdc();
+	doneCia();
 	/* Copy character set from memory to VDC */
 	copyVdcMemChr(chr, 0x2000, 512);
-	/* Enable CIA 1 IRQ */
-	outp(cia1Icr, ciaEnableIrq);
-	/* ADM-3A clear-home cursor */
-	putchar(0x1a);
 }
 
 /*

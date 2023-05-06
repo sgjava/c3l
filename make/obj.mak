@@ -2,6 +2,7 @@
 appciad.c \
 appciai.c \
 appciati.c \
+appvdcbi.c \
 appvdcd.c \
 appvdci.c \
 appvicbi.c \
