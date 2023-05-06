@@ -8,7 +8,6 @@
 #define _CIA_H
 
 #include "hitech.h"
-#include "screen.h"
 
 #define cia1DataA    0xdc00 /* Port A data I/O register */
 #define cia1DataB    0xdc01 /* Port B data I/O register */
