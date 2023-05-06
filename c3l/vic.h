@@ -7,8 +7,8 @@
 #ifndef _VIC_H
 #define _VIC_H
 
-#include "hitech.h"
-#include "screen.h"
+#include <hitech.h>
+#include <screen.h>
 
 #define vicSpr0X       0xd000 /* Sprite 0 horizontal position register */
 #define vicSpr0y       0xd001 /* Sprite 0 vertical position register */
