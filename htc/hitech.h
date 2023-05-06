@@ -1,3 +1,6 @@
+#ifndef _HTC_HITECH_H
+#define _HTC_HITECH_H
+
 /*	Standard types for HI-TECH Software code
 	These types may need to be tuned for different
 	machines/compilers. Notes with each one indicate assumptions
@@ -23,7 +26,6 @@
 #define	ushort	unsigned short
 
 /* useful, tuneable types. Change only if:
-
 	1) compiler does not support type, e.g. unsigned char.
 	2) compiler generates bad code for a particular type.
 	3) a larger type would generate faster code, e.g. byte counters
@@ -67,3 +69,4 @@
 #define	REG3	register
 #endif	i8096 || m68k
 
+#endif
