@@ -78,11 +78,10 @@ _setVdcPixAsm:
         pop     hl              ;bitmap address
         ld      (bmpMem),hl     ;save bitmap address          
         push    hl
-        ld      hl,(color)     ;get saved color        
+        ld      hl,(color)      ;get saved color        
         push    hl                   
         push    de
         push    bc
-        push    hl
         ld      hl,(return)     ;get saved return address        
         push    hl
 
