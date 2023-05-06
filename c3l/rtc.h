@@ -23,7 +23,7 @@
 extern void setRtcReg(uchar reg, uchar value);
 extern uchar getRtcReg(uchar reg);
 extern void setRtcMode(uchar mode);
-extern char *getRtcTime();
-extern char *getRtcDate();
+extern char* getRtcTime();
+extern char* getRtcDate();
 
 #endif

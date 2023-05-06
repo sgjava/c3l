@@ -8,7 +8,6 @@
 #include <sys.h>
 #include <vic.h>
 
-
 /*
  * Make sprite appear in foreground.
  */

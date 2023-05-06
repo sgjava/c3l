@@ -71,7 +71,7 @@ extern uchar getKeyCol(uchar keyVal);
 extern uchar getLsKeyCol(uchar keyVal);
 extern uchar getRsKeyCol(uchar keyVal);
 extern uchar getKey(uchar keyRow);
-extern uchar *getKeys();
+extern uchar* getKeys();
 extern uchar decodeKey();
 extern void initCia();
 extern void doneCia();

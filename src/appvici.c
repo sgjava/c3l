@@ -14,7 +14,8 @@
 /*
  * Initialize VIC using  VDC alt character set in RAM.
  */
-void initVicScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar chrCol) {
+void initVicScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol,
+		uchar fgCol, uchar chrCol) {
 	uchar vicBank;
 	initCia();
 	/* VIC Screen configuration */

@@ -48,7 +48,7 @@ void done(uchar bgCol, uchar fgCol) {
  * Wait for Return key to be pressed.
  */
 void waitKey(screen *scr) {
-	(scr->printCol)(scr, 0, scr->scrHeight-1, vicYellow, "Press Return");
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
 		;
@@ -88,7 +88,7 @@ void bounceSpr(screen *scr) {
 	configVicSpr(scr, spr, 0, 6);
 	setVicSprLoc(0, x, y);
 	enableVicSpr(0);
-	(scr->printCol)(scr, 0, scr->scrHeight-1, vicYellow, "Press Return");
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
 	setSidVol(15, 0);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
 	initCiaTimer(ciaMs, 0xffff);
@@ -115,8 +115,8 @@ void bounceSpr(screen *scr) {
 			sound();
 		}
 		/* Raster off screen? */
-		 while ((inp(vicCtrlReg1) & 0x80) != 0x80)
-		 ;
+		while ((inp(vicCtrlReg1) & 0x80) != 0x80)
+			;
 		/* Move sprite */
 		setVicSprLoc(0, x, y);
 		/* Did sprite collide with text? */

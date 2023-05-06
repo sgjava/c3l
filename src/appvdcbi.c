@@ -12,7 +12,8 @@
 /*
  * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
  */
-void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol) {
+void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem,
+		uchar bgCol, uchar fgCol, uchar pixCol) {
 	initCia();
 	saveVdc();
 	/* Turn off cursor for bitmap mode */

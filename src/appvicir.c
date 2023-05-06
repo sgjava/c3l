@@ -13,7 +13,8 @@
 /*
  * Initialize VIC using character ROM and ASCII to PETSCII conversion for print operations.
  */
-void initVicScrRom(screen *scr, ushort scrMem, uchar bgCol, uchar fgCol, uchar chrCol) {
+void initVicScrRom(screen *scr, ushort scrMem, uchar bgCol, uchar fgCol,
+		uchar chrCol) {
 	uchar vicBank;
 	initCia();
 	/* VIC Screen configuration */

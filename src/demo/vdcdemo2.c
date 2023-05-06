@@ -17,7 +17,8 @@
  */
 void init(screen *scr) {
 	initCia();
-	initVdcScr(scr, vdcScrMem, vdcChrMem, vdcBlack, vdcWhite, vdcAltChrSet | vdcWhite);
+	initVdcScr(scr, vdcScrMem, vdcChrMem, vdcBlack, vdcWhite,
+			vdcAltChrSet | vdcWhite);
 }
 
 /*
@@ -32,7 +33,7 @@ void done() {
  * Wait for Return.
  */
 void waitKey(screen *scr) {
-	(scr->printCol)(scr, 0, scr->scrHeight-1, vdcAltChrSet | vdcLightYellow,
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vdcAltChrSet | vdcLightYellow,
 			" Press Return ");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
@@ -57,8 +58,8 @@ void fillScr(screen *scr) {
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
-	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
-			scr->scrWidth, 32);
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
 	for (i = 0; i < 24; i++) {
 		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 	}
@@ -78,10 +79,10 @@ void fillScrCol(screen *scr) {
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
-	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
-			scr->scrWidth, 32);
-	(scr->fillMem)(scr->scrColMem + scr->scrSize - scr->scrWidth,
-			scr->scrWidth, vdcBlack);
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
+	(scr->fillMem)(scr->scrColMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			vdcBlack);
 	for (i = 0; i < 24; i++) {
 		(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 	}

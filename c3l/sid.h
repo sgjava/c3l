@@ -42,7 +42,7 @@
 extern void clearSid();
 extern void setSidVol(uchar amp, uchar filter);
 extern void setSidEnv(ushort voice, uchar attack, uchar decay, uchar sustain,
-        uchar release);
+uchar release);
 extern void setSidRel(ushort Voice, uchar Waveform);
 extern void setSidFreq(ushort voice, ushort freq);
 extern void setSidAtt(ushort voice, uchar waveform);

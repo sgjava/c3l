@@ -34,7 +34,7 @@ void done(uchar bgCol, uchar fgCol) {
  * Wait for Return key to be pressed.
  */
 void waitKey(screen *scr) {
-	(scr->printCol)(scr, 0, scr->scrHeight-1, vicYellow, "Press Return");
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
 		;
@@ -55,8 +55,8 @@ void fillScr(screen *scr) {
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
-	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
-			scr->scrWidth, 32);
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
 	for (i = 0; i < 24; i++) {
 		(scr->scrollUp)(scr, 1, 0, scr->scrWidth - 2, scr->scrHeight - 1);
 	}
@@ -74,8 +74,8 @@ void fillScrCol(screen *scr) {
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
-	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
-			scr->scrWidth, 32);
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
 	for (i = 0; i < 24; i++) {
 		(scr->scrollUpCol)(scr, 4, 0, 32, scr->scrHeight - 1);
 	}

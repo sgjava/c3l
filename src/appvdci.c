@@ -11,7 +11,8 @@
 /*
  * Configure screen struct for VDC and clear screen.
  */
-void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol, uchar fgCol, uchar chrCol) {
+void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol,
+		uchar fgCol, uchar chrCol) {
 	saveVdc();
 	/* VDC Screen configuration */
 	scr->scrWidth = 80;

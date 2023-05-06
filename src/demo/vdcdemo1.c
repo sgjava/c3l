@@ -61,13 +61,15 @@ void lines(screen *scr) {
 	uchar i;
 	bannerBmp(scr, " Bresenham lines ");
 	for (i = 0; i < 32; i++) {
-		drawLine(scr, 0, 0, i * 20, scr->bmpHeight-1, 1);
-		drawLine(scr, scr->bmpWidth-1, 0, scr->bmpWidth-1 - (i * 20), scr->bmpHeight-1, 1);
+		drawLine(scr, 0, 0, i * 20, scr->bmpHeight - 1, 1);
+		drawLine(scr, scr->bmpWidth - 1, 0, scr->bmpWidth - 1 - (i * 20),
+				scr->bmpHeight - 1, 1);
 	}
 	waitKey(scr);
 	for (i = 0; i < 32; i++) {
-		drawLine(scr, 0, 0, i * 20, scr->bmpHeight-1, 0);
-		drawLine(scr, scr->bmpWidth-1, 0, scr->bmpWidth-1 - (i * 20), scr->bmpHeight-1, 0);
+		drawLine(scr, 0, 0, i * 20, scr->bmpHeight - 1, 0);
+		drawLine(scr, scr->bmpWidth - 1, 0, scr->bmpWidth - 1 - (i * 20),
+				scr->bmpHeight - 1, 0);
 	}
 }
 
@@ -78,12 +80,12 @@ void linesH(screen *scr) {
 	uchar i;
 	bannerBmp(scr, " Optimized horizontal lines ");
 	/* Use optimized horizontal lines */
-	for (i = 0; i < scr->bmpHeight-40; i++) {
-		drawLine(scr, i, i + 20, scr->bmpWidth-1 - i, i + 20, 1);
+	for (i = 0; i < scr->bmpHeight - 40; i++) {
+		drawLine(scr, i, i + 20, scr->bmpWidth - 1 - i, i + 20, 1);
 	}
 	waitKey(scr);
-	for (i = 0; i < scr->bmpHeight-40; i++) {
-		drawLine(scr, i, i + 20, scr->bmpWidth-1 - i, i + 20, 0);
+	for (i = 0; i < scr->bmpHeight - 40; i++) {
+		drawLine(scr, i, i + 20, scr->bmpWidth - 1 - i, i + 20, 0);
 	}
 }
 
@@ -93,11 +95,11 @@ void linesH(screen *scr) {
 void linesV(screen *scr) {
 	uchar i;
 	bannerBmp(scr, " Optimized vertical lines ");
-	for (i = 10; i < scr->bmpHeight-1; i++) {
+	for (i = 10; i < scr->bmpHeight - 1; i++) {
 		drawLine(scr, i + 114, 10, i + 114, i + 1, 1);
 	}
 	waitKey(scr);
-	for (i = 10; i < scr->bmpHeight-1; i++) {
+	for (i = 10; i < scr->bmpHeight - 1; i++) {
 		drawLine(scr, i + 114, 10, i + 114, i + 1, 0);
 	}
 }
@@ -109,11 +111,13 @@ void bezier(screen *scr) {
 	uchar i;
 	bannerBmp(scr, " Bezier curves ");
 	for (i = 0; i < 35; i++) {
-		drawBezier(scr, i * 5, 10, scr->bmpWidth-1, 15 + i * 5, scr->bmpWidth-1, 15 + i * 5, 1);
+		drawBezier(scr, i * 5, 10, scr->bmpWidth - 1, 15 + i * 5,
+				scr->bmpWidth - 1, 15 + i * 5, 1);
 	}
 	waitKey(scr);
 	for (i = 0; i < 35; i++) {
-		drawBezier(scr, i * 5, 10, scr->bmpWidth-1, 15 + i * 5, scr->bmpWidth-1, 15 + i * 5, 0);
+		drawBezier(scr, i * 5, 10, scr->bmpWidth - 1, 15 + i * 5,
+				scr->bmpWidth - 1, 15 + i * 5, 0);
 	}
 }
 
