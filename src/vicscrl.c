@@ -31,9 +31,7 @@ char* readVicLine(screen *scr, uchar x, uchar y, uchar len) {
 			i = 0;
 			do {
 				/* ~1/60th second delay */
-				while (inp(vicRaster) != 0xff)
-					;
-				while (inp(vicRaster) == 0xff)
+				while (inp(vicRaster) != 0x00)
 					;
 				keyVal = decodeKey();
 				i++;
