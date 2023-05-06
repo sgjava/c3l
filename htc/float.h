@@ -1,5 +1,8 @@
 /*	Characteristics of floating types */
 
+#ifndef _FLOAT_H
+#define _FLOAT_H
+
 #define	DBL_RADIX	2		/* radix of exponent for a double */
 #define	DBL_ROUNDS	1		/* doubles round when converted to int */
 #define	FLT_RADIX	2		/* radix of float exponent */
@@ -66,3 +69,4 @@
 #define	LDBL_MAX	DBL_MAX
 #define	LDBL_MAX_10_EXP	DBL_MAX_10_EXP
 
+#endif

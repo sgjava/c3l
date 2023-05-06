@@ -1,3 +1,6 @@
+#ifndef _TIME_H
+#define _TIME_H
+
 #ifndef	_TIME
 
 typedef	long	time_t;		/* for representing times in seconds */
@@ -26,3 +29,4 @@ extern char *	ctime();	/* current local time in ascii form */
 extern struct tm *	gmtime();	/* Universal time */
 extern struct tm *	localtime();	/* local time */
 
+#endif

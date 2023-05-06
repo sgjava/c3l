@@ -1,3 +1,6 @@
+#ifndef _SETJMP_H
+#define _SETJMP_H
+
 #if	z80
 typedef	int	jmp_buf[4];
 #endif
@@ -17,3 +20,4 @@ typedef	int	jmp_buf[10];
 extern	int	setjmp(jmp_buf);
 extern void	longjmp(jmp_buf, int);
 
+#endif

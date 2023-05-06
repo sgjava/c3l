@@ -2,6 +2,9 @@
  *	Declarations for Unix style low-level I/O functions.
  */
 
+#ifndef _UNIXIO_H
+#define _UNIXIO_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -26,3 +29,4 @@ extern int	write(int, void *, int);
 extern int	isatty(int);
 extern int	chmod(char *, int);
 
+#endif

@@ -1,6 +1,10 @@
 /*
  *	Signal definitions for CP/M
  */
+
+#ifndef _SIGNAL_H
+#define _SIGNAL_H
+
 #ifdef	unix
 #define NSIG 17
 
@@ -28,3 +32,4 @@
 
 extern void (*	signal(int, void (*)(int)))(int);
 
+#endif

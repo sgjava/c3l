@@ -1,3 +1,6 @@
+#ifndef _STDDEF_H
+#define _STDDEF_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -11,3 +14,4 @@ typedef	unsigned	size_t;		/* type yielded by sizeof */
 
 extern int	errno;			/* system error number */
 
+#endif

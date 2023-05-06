@@ -1,3 +1,6 @@
+#ifndef _STDIO_H
+#define _STDIO_H
+
 #if	z80
 #define	BUFSIZ		512
 #define	_NFILE		8
@@ -92,3 +95,4 @@ extern long	ftell(FILE *);
 extern char *	fgets(char *, int, FILE *);
 extern char *	_bufallo(void);
 
+#endif

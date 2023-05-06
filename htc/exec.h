@@ -2,6 +2,9 @@
  *	Definitions of the EXEC format
  */
 
+#ifndef _EXEC_H
+#define _EXEC_H
+
 #define	EXITIT	0x80
 #define	EXEC	0x81
 #define	IGN_ERR	0x82
@@ -15,3 +18,4 @@
 #define	RM_FILE	0x8A
 #define	RM_EXIT	0x8B
 
+#endif

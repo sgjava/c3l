@@ -2,6 +2,9 @@
  *	System-dependent functions.
  */
 
+#ifndef _SYS_H
+#define _SYS_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -34,3 +37,4 @@ extern int	_argc_;
 extern int	inp(int);
 extern void	outp(int, int);
 
+#endif

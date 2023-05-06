@@ -2,6 +2,9 @@
  *	Low-level console I/O functions
  */
 
+#ifndef _CONIO_H
+#define _CONIO_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -23,3 +26,4 @@ extern int	kbhit(void);
 extern char *	cgets(char *);
 extern void	cputs(char *);
 
+#endif

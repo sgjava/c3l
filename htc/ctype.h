@@ -1,3 +1,6 @@
+#ifndef _CTYPE_H
+#define _CTYPE_H
+
 #define	_U	0x01
 #define	_L	0x02
 #define	_N	0x04
@@ -24,3 +27,4 @@ extern	unsigned char	_ctype_[];	/* in libc.lib */
 #define tolower(c)	((c)-'A'+'a')
 #define toascii(c)	((c)&0x7F)
 
+#endif

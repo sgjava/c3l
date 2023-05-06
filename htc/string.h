@@ -1,5 +1,8 @@
 /*	String functions */
 
+#ifndef _STRING_H
+#define _STRING_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -35,3 +38,4 @@ extern size_t	strlen(char *);
 extern char *	strchr(char *, int);
 extern char *	strrchr(char *, int);
 
+#endif

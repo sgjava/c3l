@@ -9,6 +9,9 @@
  *
  */
 
+#ifndef _ASSERT_H
+#define _ASSERT_H
+
 #ifndef	NDEBUG
 extern void	_fassert(int, char *, char *);
 #define	assert(exp)	if(!(exp)) {_fassert(__LINE__, __FILE__, "exp");}
@@ -16,3 +19,4 @@ extern void	_fassert(int, char *, char *);
 #define	assert(exp)
 #endif
 
+#endif

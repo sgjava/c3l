@@ -1,5 +1,8 @@
 /*	Characteristics of integral types */
 
+#ifndef _LIMITS_H
+#define _LIMITS_H
+
 #define	CHAR_BIT	8		/* bits per char */
 #define	CHAR_MAX	127		/* max value of a char */
 #define	CHAR_MIN	-128		/* min value */
@@ -16,3 +19,4 @@
 #define	LONG_MIN	-2147483648	/* min value */
 #define	ULONG_MAX	4294967295	/* unsigned long */
 
+#endif

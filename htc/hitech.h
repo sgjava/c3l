@@ -1,5 +1,5 @@
-#ifndef _HTC_HITECH_H
-#define _HTC_HITECH_H
+#ifndef _HITECH_H
+#define _HITECH_H
 
 /*	Standard types for HI-TECH Software code
 	These types may need to be tuned for different

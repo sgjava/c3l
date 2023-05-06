@@ -2,6 +2,9 @@
 
 /* get basic definitions */
 
+#ifndef _CPM_H
+#define _CPM_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -107,3 +110,4 @@ extern uchar		setfcb(struct fcb *, char *);
 #define	CPMCFS	35		/* compute file size */
 #define	CPMDSEG	51		/* set DMA segment */
 
+#endif

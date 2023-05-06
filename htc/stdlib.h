@@ -1,5 +1,8 @@
 /*	Standard utility functions */
 
+#ifndef _STDLIB_H
+#define _STDLIB_H
+
 #ifndef	_STDDEF
 typedef	int		ptrdiff_t;	/* result type of pointer difference */
 typedef	unsigned	size_t;		/* type yielded by sizeof */
@@ -34,3 +37,4 @@ extern void	qsort(void *, size_t, size_t, int (*)(void *, void *));
 extern int	abs(int);
 extern long	labs(long);
 
+#endif
