@@ -4,8 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "screen.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
 
 /*
  * Draw circle using ellipse with aspect ratio adjustment.

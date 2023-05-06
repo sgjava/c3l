@@ -4,10 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <hitech.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "hitech.h"
 
 /*
  * Convert string from ASCII to PETSCII.

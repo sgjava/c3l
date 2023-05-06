@@ -4,8 +4,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "cia.h"
-#include "hitech.h"
+#include <cia.h>
 #include <sys.h>
 
 /*

@@ -4,8 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vic.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
+#include <sys.h>
+#include <vic.h>
 
 /*
  * Scroll line color up given y1 and y2 lines in current page.

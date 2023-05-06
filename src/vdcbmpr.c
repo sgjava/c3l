@@ -4,9 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <hitech.h>
+#include <screen.h>
 #include <string.h>
-#include "vdc.h"
-#include "hitech.h"
+#include <vdc.h>
 
 /*
  * Print without color. Optimized by setting VDC address once for each scan line.

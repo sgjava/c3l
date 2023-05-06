@@ -6,8 +6,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "cia.h"
-#include "hitech.h"
+#include <hitech.h>
 
 /*
  * Get left shift key column. If column not found then 8 is returned.

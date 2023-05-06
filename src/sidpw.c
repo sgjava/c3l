@@ -4,8 +4,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "sid.h"
-#include "hitech.h"
+#include <hitech.h>
 #include <sys.h>
 
 /*

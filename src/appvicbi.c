@@ -4,9 +4,12 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "hitech.h"
+#include <cia.h>
+#include <hitech.h>
+#include <screen.h>
 #include <sys.h>
-#include "vic.h"
+#include <vdc.h>
+#include <vic.h>
 
 /*
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen

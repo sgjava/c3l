@@ -4,8 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vic.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
 #include <sys.h>
 
 /*

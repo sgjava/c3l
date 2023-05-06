@@ -5,7 +5,7 @@
  */
 
 #include <stdio.h>
-#include "vdc.h"
+#include <vdc.h>
 
 /*
  * Restore VDC registers, screen color, screen memory and char set memory location for CP/M return.

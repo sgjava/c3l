@@ -4,8 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vdc.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
+#include <vdc.h>
 
 /*
  * Scroll line up given y1 and y2 lines in current page.

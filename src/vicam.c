@@ -4,9 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <hitech.h>
 #include <stdlib.h>
-#include "vic.h"
-#include "hitech.h"
 
 /*
  * Allocate memory in TPA for VIC to use. maxBank Should be 0 - 2. Bank 3

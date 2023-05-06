@@ -4,8 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "rtc.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <rtc.h>
 #include <sys.h>
 
 /**

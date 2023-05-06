@@ -4,9 +4,10 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vic.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
 #include <sys.h>
+#include <vic.h>
 
 /*
  * Scroll color window up given x1, y1, x2, y2 rectangle in current page.

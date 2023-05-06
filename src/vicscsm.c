@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vic.h"
-#include "hitech.h"
+#include <hitech.h>
 #include <sys.h>
+#include <vic.h>
 
 /*
  * Set screen 0-15 memory location (1K per screen).

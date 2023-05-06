@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <hitech.h>
+#include <screen.h>
 #include <stdlib.h>
-#include "screen.h"
-#include "hitech.h"
 
 /*
  * Bézier curve using Bresenham’s line algorithm.

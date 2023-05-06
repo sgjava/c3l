@@ -4,8 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vic.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
 
 /*
  * Scroll line up given y1 and y2 lines. Use words instead of bytes for performance.

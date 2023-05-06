@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "hitech.h"
-#include <sys.h>
-#include "vdc.h"
+#include <hitech.h>
+#include <screen.h>
+#include <vdc.h>
 
 /*
  * Configure screen struct for VDC and clear screen.

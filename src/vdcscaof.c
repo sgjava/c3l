@@ -4,8 +4,7 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vdc.h"
-#include "hitech.h"
+#include <vdc.h>
 
 /*
  * Turn attributes off.

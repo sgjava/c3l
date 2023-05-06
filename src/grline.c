@@ -4,10 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <hitech.h>
+#include <screen.h>
 #include <stdlib.h>
-#include "screen.h"
-#include "hitech.h"
-#include <sys.h>
 
 /*
  * Bresenham’s line algorithm. Color is 1 to set or 0 to clear pixel.

@@ -4,8 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include "vdc.h"
-#include "hitech.h"
+#include <hitech.h>
+#include <screen.h>
+#include <vdc.h>
 
 /*
  * Optimized horizontal line algorithm up to 40x faster than Bresenham.

@@ -4,9 +4,9 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <stdlib.h>
+#include <rtc.h>
 #include <stdio.h>
-#include "rtc.h"
+#include <stdlib.h>
 
 /*
  * Get RTC time as hh:mm:ss.
