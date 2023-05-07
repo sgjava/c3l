@@ -7,7 +7,6 @@
 #include <hitech.h>
 #include <screen.h>
 #include <string.h>
-#include <sys.h>
 #include <vic.h>
 
 /*
@@ -16,9 +15,6 @@
 void printVicCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
 	ushort colOfs = (ushort) scr->scrColMem + (y * scr->scrWidth) + x;
 	ushort len = strlen(str);
-	ushort i;
-	for (i = 0; i < len; i++) {
-		outp(colOfs + i, color);
-	}
+	fillVicMemCol(colOfs, len, color);
 	printVic(scr, x, y, str);
 }

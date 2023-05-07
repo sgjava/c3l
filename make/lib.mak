@@ -98,4 +98,5 @@ scatop.obj \
 vicscpc.obj \
 vicbmbm.obj \
 vdccpym.obj \
-vdcand.obj
+vdcand.obj \
+vicscfc.obj

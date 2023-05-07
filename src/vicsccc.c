@@ -6,14 +6,11 @@
 
 #include <hitech.h>
 #include <screen.h>
-#include <sys.h>
+#include <vic.h>
 
 /*
  * Clear color memory. Color memory is port mapped.
  */
 void clearVicCol(screen *scr, uchar c) {
-	register ushort i;
-	for (i = 0; i < scr->scrSize; i++) {
-		outp((ushort) scr->scrColMem + i, c);
-	}
+	fillVicMemCol((ushort) scr->scrColMem, scr->scrSize, c);
 }

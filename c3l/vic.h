@@ -84,6 +84,7 @@ extern uchar* allocVicMem(uchar maxBank);
 extern void setVicMmuBank(uchar mmuRcr);
 extern void setVicBank(uchar vicBank);
 extern void fillVicMem(uchar *mem, ushort len, uchar value);
+extern void fillVicMemCol(ushort address, ushort length, uchar color);
 extern void setVicMode(uchar ecm, uchar bmm, uchar mcm);
 extern void setVicScrMem(uchar scrLoc);
 extern void setVicChrMem(uchar chrLoc);
