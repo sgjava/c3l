@@ -104,25 +104,25 @@ _setVdcPixAsm:
         srl     b
         rr      c
 
-        add     hl,bc           ;hl = (y * 80) + (x / 8)
-        ld      de,(bmpMem)    ;de = bitmap offset
-        add     hl,de           ;hl = (y * 80) + (x / 8) + bit map offset
+        add     hl,bc            ;hl = (y * 80) + (x / 8)
+        ld      de,(bmpMem)      ;de = bitmap offset
+        add     hl,de            ;hl = (y * 80) + (x / 8) + bit map offset
         
-        ex      de,hl           ;swap de and hl
-        ld      b,0             ;bc = x mod 8
+        ex      de,hl            ;swap de and hl
+        ld      b,0              ;bc = x mod 8
         ld      c,a
-        ld      a,(color)       ;get color
+        ld      a,(color)        ;get color
         cp      0
-        jr      z,1f            ;zero color means clear pixel  
+        jr      z,1f             ;zero color means clear pixel  
 
-        ld      hl,setBitTable     ;load bit table address into hl
-        add     hl,bc           ;hl = bit table addr + (x mod 8)
-        ld      a,(hl)          ;a = bit to set from bit table 
-        ex      de,hl           ;swap de and hl
+        ld      hl,setBitTable   ;load bit table address into hl
+        add     hl,bc            ;hl = bit table addr + (x mod 8)
+        ld      a,(hl)           ;a = bit to set from bit table 
+        ex      de,hl            ;swap de and hl
 
-        ld      bc,0d600h       ;prime pump with vdc status register        
+        ld      bc,0d600h        ;prime pump with vdc status register        
         
-        ld      d,18            ;set vdc update addr
+        ld      d,18             ;set vdc update addr
         ld      e,h
         call    vdcSet
 
@@ -130,12 +130,12 @@ _setVdcPixAsm:
         ld      e,l
         call    vdcSet
 
-        ld      d,31            ;get current byte
+        ld      d,31             ;get current byte
         call    vdcGet
 
-        or      e               ;a = current byte or with bit table bit
+        or      e                ;a = current byte or with bit table bit
 
-        ld      d,18            ;set vdc update addr
+        ld      d,18             ;set vdc update addr
         ld      e,h
         call    vdcSet
 
@@ -143,7 +143,7 @@ _setVdcPixAsm:
         ld      e,l
         call    vdcSet
 
-        ld      d,31            ;set pixel
+        ld      d,31             ;set pixel
         ld      e,a
         call    vdcSet
 
@@ -151,12 +151,12 @@ _setVdcPixAsm:
         
 1:
         ld      hl,clearBitTable ;load bit table address into hl
-        add     hl,bc           ;hl = bit table addr + (x mod 8)
-        ld      a,(hl)          ;a = bit to set from bit table 
-        ex      de,hl           ;swap de and hl
-        ld      bc,0d600h       ;prime pump with vdc status register        
+        add     hl,bc            ;hl = bit table addr + (x mod 8)
+        ld      a,(hl)           ;a = bit to set from bit table 
+        ex      de,hl            ;swap de and hl
+        ld      bc,0d600h        ;prime pump with vdc status register        
         
-        ld      d,18            ;set vdc update addr
+        ld      d,18             ;set vdc update addr
         ld      e,h
         call    vdcSet
 
@@ -164,12 +164,12 @@ _setVdcPixAsm:
         ld      e,l
         call    vdcSet
 
-        ld      d,31            ;get current byte
+        ld      d,31             ;get current byte
         call    vdcGet
 
         and      e               ;a = current byte or with bit table bit
 
-        ld      d,18            ;set vdc update addr
+        ld      d,18             ;set vdc update addr
         ld      e,h
         call    vdcSet
 
@@ -177,7 +177,7 @@ _setVdcPixAsm:
         ld      e,l
         call    vdcSet
 
-        ld      d,31            ;set pixel
+        ld      d,31             ;set pixel
         ld      e,a
         call    vdcSet
 
