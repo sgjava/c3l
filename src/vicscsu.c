@@ -17,18 +17,10 @@ void scrollVicUpCol(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2) {
 	if (x2 - x1 + 1 == scr->scrWidth) {
 		scrollVicUpYCol(scr, y1, y2);
 	} else {
-		register uchar w;
-		uchar i;
-		ushort destLine = (y1 * scr->scrWidth) + x1 + (ushort) scr->scrColMem;
-		ushort sourceLine = destLine + scr->scrWidth;
+		ushort colOfs = (y1 * scr->scrWidth) + (ushort) scr->scrColMem + x1;
 		uchar len = x2 - x1 + 1;
+		uchar lines = y2 - y1 + 1;
 		scrollVicUp(scr, x1, y1, x2, y2);
-		for (i = y1; i < y2; i++) {
-			for (w = 0; w < len; w++) {
-				outp(destLine + w, inp(sourceLine + w));
-			}
-			destLine += scr->scrWidth;
-			sourceLine = destLine + scr->scrWidth;
-		}
+		scrollVicUpColAsm(colOfs, len, lines);
 	}
 }

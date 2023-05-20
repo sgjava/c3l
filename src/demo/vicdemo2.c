@@ -50,15 +50,17 @@ void waitKey(screen *scr) {
  */
 void fillScr(screen *scr) {
 	register uchar i;
+	(scr->clearScr)(scr, 32);
 	for (i = 0; i < 24; i++) {
-		(scr->print)(scr, 0, i, "|Watch how fast you can fill the screen|");
+		(scr->print)(scr, 0, i, "Watch how fast you can fill the screen");
 	}
 	waitKey(scr);
 	/* Blank out bottom line */
 	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
 			32);
+	fillVicMemCol((24 * scr->scrWidth) + (ushort) scr->scrColMem, scr->scrWidth, vicBlack);
 	for (i = 0; i < 24; i++) {
-		(scr->scrollUp)(scr, 1, 0, scr->scrWidth - 2, scr->scrHeight - 1);
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 	}
 	waitKey(scr);
 }
@@ -77,7 +79,7 @@ void fillScrCol(screen *scr) {
 	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
 			32);
 	for (i = 0; i < 24; i++) {
-		(scr->scrollUpCol)(scr, 4, 0, 32, scr->scrHeight - 1);
+		(scr->scrollUpCol)(scr, 4, 0, scr->scrWidth - 7, scr->scrHeight - 1);
 	}
 	waitKey(scr);
 }

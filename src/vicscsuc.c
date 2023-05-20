@@ -13,12 +13,9 @@
  * Scroll line color up given y1 and y2 lines in current page.
  */
 void scrollVicUpYCol(screen *scr, uchar y1, uchar y2) {
-	ushort i;
-	ushort dest = y1 * scr->scrWidth + (ushort) scr->scrColMem;
-	ushort source = dest + scr->scrWidth;
-	ushort len = (y2 - y1) * scr->scrWidth;
+	/* This is the destination color address */
+	ushort colOfs = y1 * scr->scrWidth + (ushort) scr->scrColMem;
+	uchar lines = y2 - y1 + 1;
 	scrollVicUpY(scr, y1, y2);
-	for (i = 0; i < len; i++) {
-		outp(dest + i, inp(source + i));
-	}
+	scrollVicUpColAsm(colOfs, scr->scrWidth, lines);
 }

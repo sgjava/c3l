@@ -71,8 +71,10 @@ vicbmpc.obj \
 vicbmpr.obj \
 vicbmsbm.obj \
 vicbmsp.obj \
+vicfm.obj \
 vicsccc.obj \
 vicscclr.obj \
+vicscfc.obj \
 vicsccm.obj \
 vicscpp.obj \
 vicscppc.obj \
@@ -83,6 +85,7 @@ vicscsm.obj \
 vicscsu.obj \
 vicscsuc.obj \
 vicscsuy.obj \
+vicscuc.obj \
 vicscup.obj \
 vicsmb.obj \
 vicsm.obj \
@@ -92,11 +95,9 @@ vicsprdi.obj \
 vicspren.obj \
 vicsprfg.obj \
 vicsprsl.obj \
-vicfm.obj \
+vdcand.obj \
+vdccpym.obj \
 vicsb.obj \
 scatop.obj \
 vicscpc.obj \
-vicbmbm.obj \
-vdccpym.obj \
-vdcand.obj \
-vicscfc.obj
+vicbmbm.obj
