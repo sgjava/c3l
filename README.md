@@ -10,6 +10,12 @@ character ROM without having to worry about translation. Then if you change to
 ASCII character set (CP/M default) there is only one simple change to make. Of course, 
 there are CIA and SID functions to round things out.
 
+This started out as a pure C library, but Z80 assembler is creeping in where things 
+are too slow like VIC color memory (it's accessed through Z80 IN/OUT). Parity between VIC and VDC is coming together as 
+I go through the demos and remove chip specific code. This will allow you to write 
+programs that can use either chip without changing code. It seems simple on the surface, 
+but when you take text and bitmap modes into account it becomes more complex.
+
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
 * `x128 -80col`
