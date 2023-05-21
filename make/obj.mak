@@ -6,9 +6,11 @@ appvdcbi.c \
 appvdcd.c \
 appvdci.c \
 appvicbi.c \
+appvicbm.c \
 appvicd.c \
 appvici.c \
-appvicir.c \
+appvicis.c \
+appvici.c \
 ciadec.c \
 ciagk.c \
 ciagkc.c \

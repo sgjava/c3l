@@ -20,7 +20,8 @@
  */
 void init(screen *scr) {
 	initCia();
-	initVicBmp(scr, 0x6000, 0x4800, 0x4000, vicLightBlue, vicBlack, 0x10);
+	initVicBmp(scr, 0x6000, 0x4800, 0x4000);
+	initVicBmpMode(scr, vicBlack, vicLightBlue, 0x10);
 }
 
 /*

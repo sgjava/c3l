@@ -19,7 +19,8 @@
 void init(screen *scr) {
 	initCia();
 	/* Use ram at end of bank 0 for screen and copy VDC character set just above that */
-	initVicScr(scr, 0x3c00, 0x3000, vicBlack, vicBlack, vicWhite);
+	initVicScr(scr, 0x3c00, 0x3000);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
 }
 
 /*
@@ -58,7 +59,7 @@ void fillScr(screen *scr) {
 	/* Blank out bottom line */
 	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
 			32);
-	fillVicMemCol((24 * scr->scrWidth) + (ushort) scr->scrColMem, scr->scrWidth, vicBlack);
+	/* fillVicMemCol((24 * scr->scrWidth) + (ushort) scr->scrColMem, scr->scrWidth, vicBlack); */
 	for (i = 0; i < 24; i++) {
 		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 	}

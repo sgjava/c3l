@@ -122,12 +122,10 @@ extern void disableVicSpr(uchar sprNum);
 extern void setVicSprLoc(uchar sprNum, ushort x, uchar y);
 extern void setVicSprFg(uchar sprNum);
 extern void setVicSprBg(uchar sprNum);
-extern void initVicScrRom(screen *scr, ushort scrMem, uchar bgCol, uchar fgCol,
-uchar chrCol);
-extern void initVicScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol,
-uchar fgCol, uchar chrCol);
-extern void initVicBmp(screen *scr, ushort bmpMem, ushort colMem, ushort chrMem,
-uchar bgCol, uchar fgCol, uchar pixCol);
+extern void initVicScr(screen *scr, ushort scrMem, ushort chrMem);
+extern void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
+extern void initVicBmp(screen *scr, ushort bmpMem, ushort colMem, ushort chrMem);
+extern void initVicBmpMode(screen *scr, uchar bgCol, uchar fgCol, uchar pixCol);
 extern void doneVic(uchar bgCol, uchar fgCol);
 
 #endif

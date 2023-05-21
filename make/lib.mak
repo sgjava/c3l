@@ -6,9 +6,10 @@ appvdcbi.obj \
 appvdcd.obj \
 appvdci.obj \
 appvicbi.obj \
+appvicbm.obj \
 appvicd.obj \
 appvici.obj \
-appvicir.obj \
+appvicis.obj \
 ciadec.obj \
 ciagk.obj \
 ciagkc.obj \

@@ -31,7 +31,8 @@ uchar sprData[] = { 0x00, 0x7e, 0x00, 0x03, 0xff, 0xc0, 0x07, 0xff, 0xe0, 0x1f,
 void init(screen *scr) {
 	initCia();
 	/* Use ram at end of bank 0 */
-	initVicScrRom(scr, 0x3c00, vicBlack, vicBlack, vicWhite);
+	initVicScr(scr, 0x3c00, 0x1800);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
 }
 
 /*
