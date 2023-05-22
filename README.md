@@ -8,7 +8,7 @@ structures, respectively. By employing these structures, developers can utilize 
 need for customized code in their programs.
 
 A noteworthy advantage of this approach is the ability to dynamically set the target display (VIC, VDC, or virtual screen) during runtime. Initialization
-involves simply specifying the desired display chip or utilizing both simultaneously. Notably, the VIC offers a notable feature where the PETSCII character
+involves simply specifying the desired display chip or utilizing both simultaneously. Notably, the VIC offers a feature where the PETSCII character
 ROM can be utilized without any translation concerns. In the event of switching to the ASCII character set (the default for CP/M), only a single,
 straightforward change is required. Additionally, the library encompasses CIA (Complex Interface Adapter) and SID (Sound Interface Device) functions to provide
 comprehensive functionality.
