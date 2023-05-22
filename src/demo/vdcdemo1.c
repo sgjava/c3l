@@ -18,7 +18,8 @@
  */
 void init(screen *scr, uchar *chr) {
 	initCia();
-	initVdcBmp(scr, vdcScrMem, vdcColMem, chr, vdcBlack, vdcWhite, vdcBlack);
+	initVdcBmp(scr, vdcScrMem, vdcColMem, chr);
+	initVdcBmpMode(scr, chr, vdcBlack, vdcWhite, vdcBlack);
 }
 
 /*

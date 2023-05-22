@@ -9,11 +9,9 @@
 #include <vdc.h>
 
 /*
- * Configure screen struct for VDC and clear screen.
+ * Configure screen struct for VDC.
  */
-void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol,
-		uchar fgCol, uchar chrCol) {
-	saveVdc();
+void initVdcScr(screen *scr, ushort scrMem, ushort chrMem) {
 	/* VDC Screen configuration */
 	scr->scrWidth = 80;
 	scr->scrHeight = 25;
@@ -28,9 +26,4 @@ void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol,
 	scr->scrollUp = scrollVdcUp;
 	scr->scrollUpCol = scrollVdcUpCol;
 	scr->fillMem = fillVdcMem;
-	saveVdc();
-	setVdcCursor(0, 0, vdcCurNone);
-	(scr->clearScrCol)(scr, chrCol);
-	(scr->clearScr)(scr, 32);
-	setVdcFgBg(fgCol, bgCol);
 }

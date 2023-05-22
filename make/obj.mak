@@ -3,8 +3,10 @@ appciad.c \
 appciai.c \
 appciati.c \
 appvdcbi.c \
+appvdcbm.c \
 appvdcd.c \
 appvdci.c \
+appvdcis.c \
 appvicbi.c \
 appvicbm.c \
 appvicd.c \

@@ -3,8 +3,10 @@ appciad.obj \
 appciai.obj \
 appciati.obj \
 appvdcbi.obj \
+appvdcbm.obj \
 appvdcd.obj \
 appvdci.obj \
+appvdcis.obj \
 appvicbi.obj \
 appvicbm.obj \
 appvicd.obj \

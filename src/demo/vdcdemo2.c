@@ -17,8 +17,8 @@
  */
 void init(screen *scr) {
 	initCia();
-	initVdcScr(scr, vdcScrMem, vdcChrMem, vdcBlack, vdcWhite,
-			vdcAltChrSet | vdcWhite);
+	initVdcScr(scr, vdcScrMem, vdcChrMem);
+	initVdcScrMode(scr, vdcBlack, vdcWhite, vdcAltChrSet | vdcWhite);
 }
 
 /*

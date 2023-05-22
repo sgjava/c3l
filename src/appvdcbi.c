@@ -4,23 +4,16 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <cia.h>
 #include <hitech.h>
 #include <screen.h>
 #include <vdc.h>
 
 /*
- * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
+ * Initialize screen struct for VIC.
  */
-void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem,
-		uchar bgCol, uchar fgCol, uchar pixCol) {
-	initCia();
-	saveVdc();
-	/* Turn off cursor for bitmap mode */
-	setVdcCursor(0, 0, vdcCurNone);
-	/* Copy VDC char sets to VIC mem */
-	copyVdcChrMem(chrMem, 0x2000, 512);
+void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem) {
 	/* VDC Screen configuration */
+	/* Use the alternate character set 0x0800 offset */
 	scr->bmpChrMem = (uchar*) ((ushort) chrMem) + 0x0800;
 	scr->bmpColMem = (uchar*) colMem;
 	scr->bmpMem = (uchar*) bmpMem;
@@ -37,9 +30,4 @@ void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem,
 	scr->drawLineH = drawVdcLineH;
 	scr->drawLineV = drawVdcLineV;
 	scr->printBmp = printVdcBmp;
-	/* Set bitmap mode */
-	setVdcFgBg(fgCol, bgCol);
-	setVdcAttrsOff();
-	setVdcBmpMode((ushort) scr->bmpMem, (ushort) scr->bmpColMem);
-	(scr->clearBmp)(scr, pixCol);
 }

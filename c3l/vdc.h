@@ -9,7 +9,6 @@
 
 #include <hitech.h>
 #include <screen.h>
-#include <stdio.h>
 
 #define vdcStatusReg 0xD600    /* VDC status register */
 #define vdcDataReg   0xD601    /* VDC data register */
@@ -126,10 +125,10 @@ uchar color);
 extern void printVdcBmp(screen *scr, uchar x, uchar y, char *str);
 extern void printVdcBmpCol(screen *scr, uchar x, uchar y, uchar color,
 		char *str);
-extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem, uchar bgCol,
-uchar fgCol, uchar chrCol);
-extern void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem,
-uchar bgCol, uchar fgCol, uchar pixCol);
+extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem);
+extern void initVdcScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
+extern void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem);
+extern void initVdcBmpMode(screen *scr, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
 extern void doneVdc();
 
 #endif
