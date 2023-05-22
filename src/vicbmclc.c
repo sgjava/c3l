@@ -5,12 +5,12 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <vic.h>
 
 /*
  * Clear bitmap color memory.
  */
-void clearVicBmpCol(screen *scr, uchar c) {
-	fillVicMem(scr->bmpColMem, scr->bmpColSize, c);
+void clearVicBmpCol(bitmap *bmp, uchar c) {
+	fillVicMem(bmp->bmpColMem, bmp->bmpColSize, c);
 }

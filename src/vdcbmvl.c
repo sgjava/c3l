@@ -5,16 +5,16 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <vdc.h>
 
 /*
  * Optimized vertical line algorithm uses less calculation and flow control than drawLine.
  */
-void drawVdcLineV(screen *scr, ushort x, ushort y, ushort len, uchar color) {
+void drawVdcLineV(bitmap *bmp, ushort x, ushort y, ushort len, uchar color) {
 	uchar i, end = y + len;
 	/* Plot pixels */
 	for (i = y; i < end; i++) {
-		setVdcPix(scr, x, i, color);
+		setVdcPix(bmp, x, i, color);
 	}
 }

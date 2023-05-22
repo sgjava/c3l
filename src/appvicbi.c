@@ -4,29 +4,29 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <bitmap.h>
 #include <hitech.h>
-#include <screen.h>
 #include <vic.h>
 
 /*
  * Initialize screen struct for VIC.
  */
-void initVicBmp(screen *scr, ushort bmpMem, ushort colMem, ushort chrMem) {
+void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem) {
 	/* VIC bitmap configuration */
-	scr->bmpChrMem = (uchar*) chrMem;
-	scr->bmpColMem = (uchar*) colMem;
-	scr->bmpMem = (uchar*) bmpMem;
-	scr->bmpWidth = 320;
-	scr->bmpHeight = 200;
-	scr->bmpSize = ((ulong) scr->bmpWidth * scr->bmpHeight) / 8;
-	scr->scrWidth = 40;
-	scr->scrHeight = 25;
-	scr->bmpColSize = scr->scrWidth * scr->scrHeight;
-	scr->aspectRatio = 2;
-	scr->clearBmp = clearVicBmp;
-	scr->clearBmpCol = clearVicBmpCol;
-	scr->setPixel = setVicPix;
-	scr->drawLineH = drawVicLineH;
-	scr->drawLineV = drawVicLineV;
-	scr->printBmp = printVicBmp;
+	bmp->bmpChrMem = (uchar*) chrMem;
+	bmp->bmpColMem = (uchar*) colMem;
+	bmp->bmpMem = (uchar*) bmpMem;
+	bmp->bmpWidth = 320;
+	bmp->bmpHeight = 200;
+	bmp->bmpSize = ((ulong) bmp->bmpWidth * bmp->bmpHeight) / 8;
+	bmp->scrWidth = 40;
+	bmp->scrHeight = 25;
+	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
+	bmp->aspectRatio = 2;
+	bmp->clearBmp = clearVicBmp;
+	bmp->clearBmpCol = clearVicBmpCol;
+	bmp->setPixel = setVicPix;
+	bmp->drawLineH = drawVicLineH;
+	bmp->drawLineV = drawVicLineV;
+	bmp->printBmp = printVicBmp;
 }

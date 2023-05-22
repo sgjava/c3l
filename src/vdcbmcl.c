@@ -5,12 +5,12 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <vdc.h>
 
 /*
  * Clear screen.
  */
-void clearVdcBmp(screen *scr, uchar c) {
-	fillVdcMem(scr->bmpMem, scr->bmpSize, c);
+void clearVdcBmp(bitmap *bmp, uchar c) {
+	fillVdcMem(bmp->bmpMem, bmp->bmpSize, c);
 }

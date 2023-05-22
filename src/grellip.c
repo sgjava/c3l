@@ -4,13 +4,13 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <bitmap.h>
 #include <hitech.h>
-#include <screen.h>
 
 /*
  * Draw ellipse using digital differential analyzer (DDA) method.
  */
-void drawEllipse(screen *scr, int xc, int yc, int a, int b, uchar color) {
+void drawEllipse(bitmap *bmp, int xc, int yc, int a, int b, uchar color) {
 	long aa = (long) a * a; /* a^2 */
 	long bb = (long) b * b; /* b^2 */
 	long aa2 = aa << 1; /* 2(a^2) */
@@ -25,10 +25,10 @@ void drawEllipse(screen *scr, int xc, int yc, int a, int b, uchar color) {
 		while (xbb2 <= yaa2) /* draw octant from top to top right */
 		{
 			/* Draw octant */
-			(scr->setPixel)(scr, xc + x, yc + y, color);
-			(scr->setPixel)(scr, xc + x, yc - y, color);
-			(scr->setPixel)(scr, xc - x, yc + y, color);
-			(scr->setPixel)(scr, xc - x, yc - y, color);
+			(bmp->setPixel)(bmp, xc + x, yc + y, color);
+			(bmp->setPixel)(bmp, xc + x, yc - y, color);
+			(bmp->setPixel)(bmp, xc - x, yc + y, color);
+			(bmp->setPixel)(bmp, xc - x, yc - y, color);
 			x += 1;
 			xbb2 += bb2;
 			errVal += xbb2 - bb;
@@ -48,10 +48,10 @@ void drawEllipse(screen *scr, int xc, int yc, int a, int b, uchar color) {
 		while (xbb2 > yaa2) /* draw octant from right to top right */
 		{
 			/* Draw octant */
-			(scr->setPixel)(scr, xc + x, yc + y, color);
-			(scr->setPixel)(scr, xc + x, yc - y, color);
-			(scr->setPixel)(scr, xc - x, yc + y, color);
-			(scr->setPixel)(scr, xc - x, yc - y, color);
+			(bmp->setPixel)(bmp, xc + x, yc + y, color);
+			(bmp->setPixel)(bmp, xc + x, yc - y, color);
+			(bmp->setPixel)(bmp, xc - x, yc + y, color);
+			(bmp->setPixel)(bmp, xc - x, yc - y, color);
 			y += 1;
 			yaa2 += aa2;
 			errVal += yaa2 - aa;

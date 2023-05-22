@@ -7,6 +7,7 @@
 #ifndef _VIC_H
 #define _VIC_H
 
+#include <bitmap.h>
 #include <hitech.h>
 #include <screen.h>
 
@@ -106,15 +107,15 @@ extern char* readVicLine(screen *scr, uchar x, uchar y, uchar len);
 extern void setVicBmpMem(uchar bmpLoc);
 extern void setVicBmpMode(uchar mmuRcr, uchar vicBank, uchar scrLoc,
 uchar bmpLoc);
-extern void clearVicBmp(screen *scr, uchar c);
-extern void clearVicBmpCol(screen *scr, uchar c);
-extern void setVicPix(screen *scr, ushort x, ushort y, uchar color);
-extern void drawVicLineH(screen *scr, ushort x, ushort y, ushort len,
+extern void clearVicBmp(bitmap *bmp, uchar c);
+extern void clearVicBmpCol(bitmap *bmp, uchar c);
+extern void setVicPix(bitmap *bmp, ushort x, ushort y, uchar color);
+extern void drawVicLineH(bitmap *bmp, ushort x, ushort y, ushort len,
 uchar color);
-extern void drawVicLineV(screen *scr, ushort x, ushort y, ushort len,
+extern void drawVicLineV(bitmap *bmp, ushort x, ushort y, ushort len,
 uchar color);
-extern void printVicBmp(screen *scr, uchar x, uchar y, char *str);
-extern void printVicBmpCol(screen *scr, uchar x, uchar y, uchar color,
+extern void printVicBmp(bitmap *bmp, uchar x, uchar y, char *str);
+extern void printVicBmpCol(bitmap *bmp, uchar x, uchar y, uchar color,
 		char *str);
 extern void configVicSpr(screen *scr, uchar *spr, uchar sprNum, uchar sprCol);
 extern void enableVicSpr(uchar sprNum);
@@ -124,8 +125,8 @@ extern void setVicSprFg(uchar sprNum);
 extern void setVicSprBg(uchar sprNum);
 extern void initVicScr(screen *scr, ushort scrMem, ushort chrMem);
 extern void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
-extern void initVicBmp(screen *scr, ushort bmpMem, ushort colMem, ushort chrMem);
-extern void initVicBmpMode(screen *scr, uchar bgCol, uchar fgCol, uchar pixCol);
+extern void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem);
+extern void initVicBmpMode(bitmap *bmp, uchar bgCol, uchar fgCol, uchar pixCol);
 extern void doneVic(uchar bgCol, uchar fgCol);
 
 #endif

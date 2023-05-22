@@ -4,14 +4,14 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <bitmap.h>
 #include <hitech.h>
-#include <screen.h>
 #include <stdlib.h>
 
 /*
  * Bézier curve using Bresenham’s line algorithm.
  */
-void drawBezier(screen *scr, int x0, int y0, int x1, int y1, int x2, int y2,
+void drawBezier(bitmap *bmp, int x0, int y0, int x1, int y1, int x2, int y2,
 uchar color) {
 	int sx = x0 < x2 ? 1 : -1;
 	int sy = y0 < y2 ? 1 : -1;
@@ -26,7 +26,7 @@ uchar color) {
 	int cy = y0;
 	int e2;
 	for (;;) {
-		(scr->setPixel)(scr, cx, cy, color);
+		(bmp->setPixel)(bmp, cx, cy, color);
 		if (cx == x2 && cy == y2) {
 			break;
 		}

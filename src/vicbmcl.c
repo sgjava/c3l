@@ -5,12 +5,12 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <vic.h>
 
 /*
  * Clear screen uchar.
  */
-void clearVicBmp(screen *scr, uchar c) {
-	fillVicMem(scr->bmpMem, scr->bmpSize, c);
+void clearVicBmp(bitmap *bmp, uchar c) {
+	fillVicMem(bmp->bmpMem, bmp->bmpSize, c);
 }

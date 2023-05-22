@@ -5,15 +5,15 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <vdc.h>
 
 /*
  * Optimized horizontal line algorithm up to 40x faster than Bresenham.
  */
-void drawVdcLineH(screen *scr, ushort x, ushort y, ushort len, uchar color) {
+void drawVdcLineH(bitmap *bmp, ushort x, ushort y, ushort len, uchar color) {
 	static uchar fillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
-	ushort vdcMem = (ushort) scr->bmpMem;
+	ushort vdcMem = (ushort) bmp->bmpMem;
 	ushort pixByte = vdcMem + (y << 6) + (y << 4) + (x >> 3);
 	uchar firstBits = x % 8;
 	uchar lastBits = (x + len - 1) % 8;

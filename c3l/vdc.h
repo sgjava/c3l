@@ -7,6 +7,7 @@
 #ifndef _VDC_H
 #define _VDC_H
 
+#include <bitmap.h>
 #include <hitech.h>
 #include <screen.h>
 
@@ -114,21 +115,21 @@ extern void scrollVdcUp(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2);
 extern void scrollVdcUpCol(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2);
 extern void setVdcBmpMode(ushort dispPage, ushort attrPage);
 extern void copyVdcMem(ushort source, ushort dest, ushort len);
-extern void clearVdcBmp(screen *scr, uchar c);
-extern void clearVdcBmpCol(screen *scr, uchar c);
-extern void setVdcPix(screen *scr, ushort x, ushort y, uchar color);
+extern void clearVdcBmp(bitmap *bmp, uchar c);
+extern void clearVdcBmpCol(bitmap *bmp, uchar c);
+extern void setVdcPix(bitmap *bmp, ushort x, ushort y, uchar color);
 extern void setVdcPixAsm(ushort x, ushort y, uchar color, ushort bmpMem);
-extern void drawVdcLineH(screen *scr, ushort x, ushort y, ushort len,
+extern void drawVdcLineH(bitmap *bmp, ushort x, ushort y, ushort len,
 uchar color);
-extern void drawVdcLineV(screen *scr, ushort x, ushort y, ushort len,
+extern void drawVdcLineV(bitmap *bmp, ushort x, ushort y, ushort len,
 uchar color);
-extern void printVdcBmp(screen *scr, uchar x, uchar y, char *str);
-extern void printVdcBmpCol(screen *scr, uchar x, uchar y, uchar color,
+extern void printVdcBmp(bitmap *bmp, uchar x, uchar y, char *str);
+extern void printVdcBmpCol(bitmap *bmp, uchar x, uchar y, uchar color,
 		char *str);
 extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem);
 extern void initVdcScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
-extern void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem);
-extern void initVdcBmpMode(screen *scr, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
+extern void initVdcBmp(bitmap *bmp, ushort bmpMem, ushort colMem, uchar *chrMem);
+extern void initVdcBmpMode(bitmap *bmp, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
 extern void doneVdc();
 
 #endif

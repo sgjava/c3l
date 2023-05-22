@@ -5,29 +5,29 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <vdc.h>
 
 /*
  * Initialize screen struct for VIC.
  */
-void initVdcBmp(screen *scr, ushort bmpMem, ushort colMem, uchar *chrMem) {
+void initVdcBmp(bitmap *bmp, ushort bmpMem, ushort colMem, uchar *chrMem) {
 	/* VDC Screen configuration */
 	/* Use the alternate character set 0x0800 offset */
-	scr->bmpChrMem = (uchar*) ((ushort) chrMem) + 0x0800;
-	scr->bmpColMem = (uchar*) colMem;
-	scr->bmpMem = (uchar*) bmpMem;
-	scr->bmpWidth = 640;
-	scr->bmpHeight = 200;
-	scr->bmpSize = ((ulong) scr->bmpWidth * scr->bmpHeight) / 8;
-	scr->scrWidth = 80;
-	scr->scrHeight = 25;
-	scr->bmpColSize = scr->scrWidth * scr->scrHeight;
-	scr->aspectRatio = 3;
-	scr->clearBmp = clearVdcBmp;
-	scr->clearBmpCol = clearVdcBmpCol;
-	scr->setPixel = setVdcPix;
-	scr->drawLineH = drawVdcLineH;
-	scr->drawLineV = drawVdcLineV;
-	scr->printBmp = printVdcBmp;
+	bmp->bmpChrMem = (uchar*) ((ushort) chrMem) + 0x0800;
+	bmp->bmpColMem = (uchar*) colMem;
+	bmp->bmpMem = (uchar*) bmpMem;
+	bmp->bmpWidth = 640;
+	bmp->bmpHeight = 200;
+	bmp->bmpSize = ((ulong) bmp->bmpWidth * bmp->bmpHeight) / 8;
+	bmp->scrWidth = 80;
+	bmp->scrHeight = 25;
+	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
+	bmp->aspectRatio = 3;
+	bmp->clearBmp = clearVdcBmp;
+	bmp->clearBmpCol = clearVdcBmpCol;
+	bmp->setPixel = setVdcPix;
+	bmp->drawLineH = drawVdcLineH;
+	bmp->drawLineV = drawVdcLineV;
+	bmp->printBmp = printVdcBmp;
 }

@@ -4,15 +4,15 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <bitmap.h>
 #include <hitech.h>
-#include <screen.h>
 
 /*
  * Draw circle using ellipse with aspect ratio adjustment.
  */
-void drawCircle(screen *scr, int xc, int yc, int a, uchar color) {
+void drawCircle(bitmap *bmp, int xc, int yc, int a, uchar color) {
 	/* Circle approximation based on 1:0.75 aspect ratio */
-	drawEllipse(scr, xc, yc, a,
-			(a / scr->aspectRatio)
-					+ ((a / scr->aspectRatio) / scr->aspectRatio), color);
+	drawEllipse(bmp, xc, yc, a,
+			(a / bmp->aspectRatio)
+					+ ((a / bmp->aspectRatio) / bmp->aspectRatio), color);
 }

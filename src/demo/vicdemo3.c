@@ -8,7 +8,7 @@
 
 #include <cia.h>
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys.h>
@@ -18,10 +18,10 @@
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
  * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
  */
-void init(screen *scr) {
+void init(bitmap *bmp) {
 	initCia();
-	initVicBmp(scr, 0x6000, 0x4800, 0x4000);
-	initVicBmpMode(scr, vicBlack, vicLightBlue, 0x10);
+	initVicBmp(bmp, 0x6000, 0x4800, 0x4000);
+	initVicBmpMode(bmp, vicBlack, vicLightBlue, 0x10);
 }
 
 /*
@@ -36,20 +36,20 @@ void done(uchar bgCol, uchar fgCol) {
 /*
  * Clear bitmap.
  */
-void clearBitmap(screen *scr) {
+void clearBitmap(bitmap *bmp) {
 	/* Set color to black */
-	(scr->clearBmpCol)(scr, 0x00);
+	(bmp->clearBmpCol)(bmp, 0x00);
 	/* Clear bitmap */
-	(scr->clearBmp)(scr, 0);
+	(bmp->clearBmp)(bmp, 0);
 	/* White foreground and black background */
-	(scr->clearBmpCol)(scr, 0x10);
+	(bmp->clearBmpCol)(bmp, 0x10);
 }
 
 /*
  * Wait for Return.
  */
-void waitKey(screen *scr) {
-	printVicBmp(scr, 0, 24, " Press Return ");
+void waitKey(bitmap *bmp) {
+	printVicBmp(bmp, 0, 24, " Press Return ");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
 		;
@@ -58,189 +58,189 @@ void waitKey(screen *scr) {
 	/* Debounce */
 	while (getKey(0) == 0xfd)
 		;
-	(scr->printBmp)(scr, 0, 24, " Erasing pixels ");
+	(bmp->printBmp)(bmp, 0, 24, " Erasing pixels ");
 }
 
 /*
  * Print centered text on top line in bitmap.
  */
-void bannerBmp(screen *scr, char *str) {
-	(scr->printBmp)(scr, ((scr->scrWidth - strlen(str)) >> 1), 0, str);
+void bannerBmp(bitmap *bmp, char *str) {
+	(bmp->printBmp)(bmp, ((bmp->scrWidth - strlen(str)) >> 1), 0, str);
 }
 
 /*
  * Draw lines.
  */
-void lines(screen *scr) {
+void lines(bitmap *bmp) {
 	uchar i;
-	bannerBmp(scr, " Bresenham lines ");
+	bannerBmp(bmp, " Bresenham lines ");
 	for (i = 0; i < 16; i++) {
-		drawLine(scr, 0, 0, i * 20, scr->bmpHeight - 1, 1);
-		drawLine(scr, scr->bmpWidth - 1, 0, scr->bmpWidth - 1 - (i * 20),
-				scr->bmpHeight - 1, 1);
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 1);
+		drawLine(bmp, bmp->bmpWidth - 1, 0, bmp->bmpWidth - 1 - (i * 20),
+				bmp->bmpHeight - 1, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 0; i < 16; i++) {
-		drawLine(scr, 0, 0, i * 20, scr->bmpHeight - 1, 0);
-		drawLine(scr, scr->bmpWidth - 1, 0, scr->bmpWidth - 1 - (i * 20),
-				scr->bmpHeight - 1, 0);
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 0);
+		drawLine(bmp, bmp->bmpWidth - 1, 0, bmp->bmpWidth - 1 - (i * 20),
+				bmp->bmpHeight - 1, 0);
 	}
 }
 
 /*
  * Draw horizontal lines.
  */
-void linesH(screen *scr) {
+void linesH(bitmap *bmp) {
 	uchar i;
-	bannerBmp(scr, " Optimized horizontal lines ");
+	bannerBmp(bmp, " Optimized horizontal lines ");
 	for (i = 0; i < 159; i++) {
-		drawLine(scr, i, i + 20, scr->bmpWidth - 1 - i, i + 20, 1);
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 0; i < 159; i++) {
-		drawLine(scr, i, i + 20, scr->bmpWidth - 1 - i, i + 20, 0);
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 0);
 	}
 }
 
 /*
  * Draw vertical lines.
  */
-void linesV(screen *scr) {
+void linesV(bitmap *bmp) {
 	uchar i;
-	bannerBmp(scr, " Optimized vertical lines ");
-	for (i = 10; i < scr->bmpHeight - 1; i++) {
-		drawLine(scr, i + 57, 10, i + 57, i + 1, 1);
+	bannerBmp(bmp, " Optimized vertical lines ");
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 57, 10, i + 57, i + 1, 1);
 	}
-	waitKey(scr);
-	for (i = 10; i < scr->bmpHeight - 1; i++) {
-		drawLine(scr, i + 57, 10, i + 57, i + 1, 0);
+	waitKey(bmp);
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 57, 10, i + 57, i + 1, 0);
 	}
 }
 
 /*
  * Draw Bezier curves.
  */
-void bezier(screen *scr) {
+void bezier(bitmap *bmp) {
 	uchar i;
-	bannerBmp(scr, " Bezier curves ");
+	bannerBmp(bmp, " Bezier curves ");
 	for (i = 0; i < 35; i++) {
-		drawBezier(scr, i * 5, 10, scr->bmpWidth - 1, 15 + i * 5,
-				scr->bmpWidth - 1, 15 + i * 5, 1);
+		drawBezier(bmp, i * 5, 10, bmp->bmpWidth - 1, 15 + i * 5,
+				bmp->bmpWidth - 1, 15 + i * 5, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 0; i < 35; i++) {
-		drawBezier(scr, i * 5, 10, scr->bmpWidth - 1, 15 + i * 5,
-				scr->bmpWidth - 1, 15 + i * 5, 0);
+		drawBezier(bmp, i * 5, 10, bmp->bmpWidth - 1, 15 + i * 5,
+				bmp->bmpWidth - 1, 15 + i * 5, 0);
 	}
 }
 
 /*
  * Draw rectangles.
  */
-void rectangles(screen *scr) {
+void rectangles(bitmap *bmp) {
 	uchar i;
-	bannerBmp(scr, " Rectangles ");
+	bannerBmp(bmp, " Rectangles ");
 	for (i = 1; i < 30; i++) {
-		drawRect(scr, i * 2, i * 2, (i * 10) + 20, (i * 5) + 20, 1);
+		drawRect(bmp, i * 2, i * 2, (i * 10) + 20, (i * 5) + 20, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 1; i < 30; i++) {
-		drawRect(scr, i * 2, i * 2, (i * 10) + 20, (i * 5) + 20, 0);
+		drawRect(bmp, i * 2, i * 2, (i * 10) + 20, (i * 5) + 20, 0);
 	}
 }
 
 /*
  * Draw squares.
  */
-void squares(screen *scr) {
+void squares(bitmap *bmp) {
 	uchar i;
-	bannerBmp(scr, " Squares ");
+	bannerBmp(bmp, " Squares ");
 	for (i = 0; i < 10; i++) {
-		drawSquare(scr, i * 8, i * 8, (i * 8) + 8, 1);
+		drawSquare(bmp, i * 8, i * 8, (i * 8) + 8, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 0; i < 10; i++) {
-		drawSquare(scr, i * 8, i * 8, (i * 8) + 8, 0);
+		drawSquare(bmp, i * 8, i * 8, (i * 8) + 8, 0);
 	}
 }
 
 /*
  * Draw ellipses.
  */
-void ellipses(screen *scr) {
+void ellipses(bitmap *bmp) {
 	ushort i;
-	bannerBmp(scr, " Ellipses ");
+	bannerBmp(bmp, " Ellipses ");
 	for (i = 1; i < 9; i++) {
-		drawEllipse(scr, 159, 99, i * 19, i * 10, 1);
+		drawEllipse(bmp, 159, 99, i * 19, i * 10, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 1; i < 9; i++) {
-		drawEllipse(scr, 159, 99, i * 19, i * 10, 0);
+		drawEllipse(bmp, 159, 99, i * 19, i * 10, 0);
 	}
 }
 
 /*
  * Draw circles.
  */
-void circles(screen *scr) {
+void circles(bitmap *bmp) {
 	ushort i;
-	bannerBmp(scr, " Circles ");
+	bannerBmp(bmp, " Circles ");
 	for (i = 1; i < 12; i++) {
-		drawCircle(scr, 159, 99, i * 10, 1);
+		drawCircle(bmp, 159, 99, i * 10, 1);
 	}
-	waitKey(scr);
+	waitKey(bmp);
 	for (i = 1; i < 12; i++) {
-		drawCircle(scr, 159, 99, i * 10, 0);
+		drawCircle(bmp, 159, 99, i * 10, 0);
 	}
 }
 
 /*
  * Run demo.
  */
-void run(screen *scr, uchar *vicMem) {
+void run(bitmap *bmp, uchar *vicMem) {
 	char str[40];
-	(scr->printBmp)(scr, 0, 0, "This demo will show off bitmap graphics."
+	(bmp->printBmp)(bmp, 0, 0, "This demo will show off bitmap graphics."
 			"Interrupts are disabled and getKey is   "
 			"used to read keyboard.                  ");
 	sprintf(str, "mem: %04x", vicMem);
-	(scr->printBmp)(scr, 0, 4, str);
-	sprintf(str, "chr: %04x", scr->bmpChrMem);
-	(scr->printBmp)(scr, 0, 6, str);
-	sprintf(str, "col: %04x", scr->bmpColMem);
-	(scr->printBmp)(scr, 0, 8, str);
-	sprintf(str, "bmp: %04x", scr->bmpMem);
-	(scr->printBmp)(scr, 0, 10, str);
-	waitKey(scr);
-	clearBitmap(scr);
-	lines(scr);
-	clearBitmap(scr);
-	linesH(scr);
-	clearBitmap(scr);
-	linesV(scr);
-	clearBitmap(scr);
-	bezier(scr);
-	clearBitmap(scr);
-	rectangles(scr);
-	clearBitmap(scr);
-	squares(scr);
-	clearBitmap(scr);
-	ellipses(scr);
-	clearBitmap(scr);
-	circles(scr);
+	(bmp->printBmp)(bmp, 0, 4, str);
+	sprintf(str, "chr: %04x", bmp->bmpChrMem);
+	(bmp->printBmp)(bmp, 0, 6, str);
+	sprintf(str, "col: %04x", bmp->bmpColMem);
+	(bmp->printBmp)(bmp, 0, 8, str);
+	sprintf(str, "bmp: %04x", bmp->bmpMem);
+	(bmp->printBmp)(bmp, 0, 10, str);
+	waitKey(bmp);
+	clearBitmap(bmp);
+	lines(bmp);
+	clearBitmap(bmp);
+	linesH(bmp);
+	clearBitmap(bmp);
+	linesV(bmp);
+	clearBitmap(bmp);
+	bezier(bmp);
+	clearBitmap(bmp);
+	rectangles(bmp);
+	clearBitmap(bmp);
+	squares(bmp);
+	clearBitmap(bmp);
+	ellipses(bmp);
+	clearBitmap(bmp);
+	circles(bmp);
 }
 
 main() {
 	/* We need to use bank 1 since program is close to 16K */
 	uchar *vicMem = allocVicMem(1);
-	/* Create screen struct */
-	screen *scr = (screen*) malloc(sizeof(screen));
+	/* Create bitmap struct */
+	bitmap *bmp = (bitmap*) malloc(sizeof(bitmap));
 	/* Save border/background color */
 	uchar border = inp(vicBorderCol);
 	uchar background = inp(vicBgCol0);
-	init(scr);
-	run(scr, vicMem);
+	init(bmp);
+	run(bmp, vicMem);
 	done(border, background);
 	/* Free memory */
 	free(vicMem);
-	free(scr);
+	free(bmp);
 }

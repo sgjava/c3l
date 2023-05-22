@@ -1,20 +1,22 @@
 ![C3L is the Commodore 128 CP/M C Library](images/title.png)
 
-C3L (C128 CP/M C library) is a C89 based API to access C128 specific features under CP/M.
-VDC and VIC common data and functions are abstracted into the [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) struct.
-Displays use the same common functions for text and graphics reducing one off code in your programs.
-This allows you to set the target (VIC, VDC or virtual screen) at runtime. You only need to initialize which display chip you would like
-to use or use both at the same time! This allows you to switch between VIC and VDC
-with minimal effort. One cool feature of the VIC is that you can use the PETSCII
-character ROM without having to worry about translation. Then if you change to
-ASCII character set (CP/M default) there is only one simple change to make. Of course, 
-there are CIA and SID functions to round things out.
 
-This started out as a pure C library, but Z80 assembler is creeping in where things 
-are too slow like VIC color memory (it's accessed through Z80 IN/OUT). Parity between VIC and VDC is coming together as 
-I go through the demos and remove chip specific code. This will allow you to write 
-programs that can use either chip without changing code. It seems simple on the surface, 
-but when you take text and bitmap modes into account it becomes more complex.
+C3L (C128 CP/M C library) is an API based on the C89 standard, designed to facilitate access to C128 specific features within the CP/M environment.
+The library provides an abstraction layer for VDC (Video Display Controller) and VIC (Video Interface Chip) common data and functions, which are
+encapsulated in the [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) and [bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h)
+structures, respectively. By employing these structures, developers can utilize unified functions for both text and graphics, thereby reducing the
+need for customized code in their programs.
+
+A noteworthy advantage of this approach is the ability to dynamically set the target display (VIC, VDC, or virtual screen) during runtime. Initialization
+involves simply specifying the desired display chip or utilizing both simultaneously. Notably, the VIC offers a notable feature where the PETSCII character
+ROM can be utilized without any translation concerns. In the event of switching to the ASCII character set (the default for CP/M), only a single,
+straightforward change is required. Additionally, the library encompasses CIA (Complex Interface Adapter) and SID (Sound Interface Device) functions to provide
+comprehensive functionality.
+
+Initially conceived as a pure C library, C3L has incorporated Z80 assembler code in specific areas where performance issues arise, such as accessing VIC color memory
+through Z80 IN/OUT instructions. Furthermore, efforts are underway to achieve parity between VIC and VDC by eliminating chip-specific code from the existing demos.
+This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase. While this may seem straightforward
+on the surface, the inclusion of text and bitmap modes introduces additional complexity that must be carefully addressed.
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
@@ -28,9 +30,15 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-I have streamlined the development process. Native hardware and VICE are no longer supported, but obviously you can do this yourself if you really want to. I've standardized on Ubuntu VM, Eclipse CDT, DOSBox, MyZ80 and ctools. It's just the fastest way to develop C for C128 CP/M. You can adapt this for your own projects that are not C3L related obviously.
+I have optimized the development process by implementing several changes. Firstly, I would like to inform you that we no longer provide support for native hardware and VICE.
+However, if you are determined to use these tools, you can proceed with them at your own discretion.
 
-Inside the myz80 dir you'll find makedisk.sh which will import soucre directly from Eclipse workspace, build C3L library, compile demos, export demos and create a new d71 disk. 
+To enhance efficiency and standardize the development environment, we have adopted the following tools: Ubuntu VM, Eclipse CDT, DOSBox, MyZ80, and ctools.
+This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
+for your personal projects unrelated to C3L.
+
+Within the "myz80" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
+Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
 ### Build [VICE 3.7.1](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
 * `sudo apt install build-essential autoconf git libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full`

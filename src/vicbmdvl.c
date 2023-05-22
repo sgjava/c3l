@@ -5,22 +5,22 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 
 /*
  * Optimized vertical line algorithm uses less calculation than setVicPix.
  */
-void drawVicLineV(screen *scr, ushort x, ushort y, ushort len, uchar color) {
+void drawVicLineV(bitmap *bmp, ushort x, ushort y, ushort len, uchar color) {
 	static uchar bitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
-	ushort pixByte = scr->scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
+	ushort pixByte = bmp->scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
 	uchar vBit = bitTable[x & 0x07];
 	uchar i;
 	/* Plot pixels */
 	for (i = 0; i < len; i++) {
 		if (color) {
-			scr->bmpMem[pixByte] = scr->bmpMem[pixByte] | vBit;
+			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] | vBit;
 		} else {
-			scr->bmpMem[pixByte] = scr->bmpMem[pixByte] & ~vBit;
+			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] & ~vBit;
 		}
 		y += 1;
 		/* Increment based on char boundary */

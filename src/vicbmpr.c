@@ -5,15 +5,15 @@
  */
 
 #include <hitech.h>
-#include <screen.h>
+#include <bitmap.h>
 #include <string.h>
 
 /*
  * Print with foreground/background color.
  */
-void printVicBmp(screen *scr, uchar x, uchar y, char *str) {
-	ushort *bmp16 = (ushort*) scr->bmpMem;
-	ushort *chr16 = (ushort*) scr->bmpChrMem;
+void printVicBmp(bitmap *bmp, uchar x, uchar y, char *str) {
+	ushort *bmp16 = (ushort*) bmp->bmpMem;
+	ushort *chr16 = (ushort*) bmp->bmpChrMem;
 	ushort bmpOfs = (y * 160) + (x * 4);
 	ushort len = strlen(str);
 	ushort i, chrOfs, destOfs;

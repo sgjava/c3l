@@ -4,8 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <bitmap.h>
 #include <hitech.h>
-#include <screen.h>
 #include <string.h>
 #include <vdc.h>
 
@@ -13,9 +13,9 @@
  * Print with color. Optimized by setting VDC address once for each scan line.
  * Right now this is for 640x200 mode which doesn't support color.
  */
-void printVdcBmpCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
-	ushort vdcMem = (ushort) scr->bmpMem;
-	ushort dispOfs = ((y * scr->scrWidth) * 8) + vdcMem + x;
+void printVdcBmpCol(bitmap *bmp, uchar x, uchar y, uchar color, char *str) {
+	ushort vdcMem = (ushort) bmp->bmpMem;
+	ushort dispOfs = ((y * bmp->scrWidth) * 8) + vdcMem + x;
 	ushort len = strlen(str);
 	ushort i, chrOfs;
 	uchar c;
@@ -25,9 +25,9 @@ void printVdcBmpCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
 		outVdc(vdcUpdAddrLo, (uchar) dispOfs);
 		for (i = 0; i < len; i++) {
 			chrOfs = (str[i] << 3) + c;
-			outVdc(vdcCPUData, scr->bmpChrMem[chrOfs]);
+			outVdc(vdcCPUData, bmp->bmpChrMem[chrOfs]);
 		}
 		/* Next scan line */
-		dispOfs += scr->scrWidth;
+		dispOfs += bmp->scrWidth;
 	}
 }

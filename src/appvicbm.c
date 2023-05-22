@@ -4,9 +4,8 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <cia.h>
+#include <bitmap.h>
 #include <hitech.h>
-#include <screen.h>
 #include <sys.h>
 #include <vdc.h>
 #include <vic.h>
@@ -15,24 +14,24 @@
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
  * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
  */
-void initVicBmpMode(screen *scr, uchar bgCol, uchar fgCol, uchar pixCol) {
+void initVicBmpMode(bitmap *bmp, uchar bgCol, uchar fgCol, uchar pixCol) {
 	uchar vicBank;
 	/* Set border and background color */
 	outp(vicBorderCol, fgCol);
 	outp(vicBgCol0, bgCol);
 	/* Clear bitmap */
-	(scr->clearBmpCol)(scr, bgCol);
+	(bmp->clearBmpCol)(bmp, bgCol);
 	/* Clear bitmap */
-	(scr->clearBmp)(scr, 0);
+	(bmp->clearBmp)(bmp, 0);
 	/* Set foreground and black background pixel colors */
-	(scr->clearBmpCol)(scr, pixCol);
+	(bmp->clearBmpCol)(bmp, pixCol);
 	/* Copy VDC alt char set to VIC mem */
-	copyVdcChrMem(scr->bmpChrMem, 0x3000, 256);
+	copyVdcChrMem(bmp->bmpChrMem, 0x3000, 256);
 	/* Set standard bitmap mode using MMU bank 1 */
-	vicBank = (ushort) scr->bmpMem / 16384;
+	vicBank = (ushort) bmp->bmpMem / 16384;
 	setVicBmpMode(1, vicBank,
-			((ushort) scr->bmpColMem - (vicBank * 16384)) / 1024,
-			((ushort) scr->bmpMem - (vicBank * 16384)) / 8192);
+			((ushort) bmp->bmpColMem - (vicBank * 16384)) / 1024,
+			((ushort) bmp->bmpMem - (vicBank * 16384)) / 8192);
 	/* Enable screen */
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }
