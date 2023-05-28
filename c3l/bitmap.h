@@ -30,7 +30,7 @@ typedef void (*printBmpPtr)(bitmap*, uchar, uchar, char*);
 typedef void (*printBmpColPtr)(bitmap*, uchar, uchar, uchar, char*);
 
 /*
- * We treat the screen struct like an object and encapsulate member variables and function pointers that allow polymorphism.
+ * We treat the bitmap struct like an object and encapsulate member variables and function pointers that allow polymorphism.
  */
 typedef struct bitmap {
 	/*

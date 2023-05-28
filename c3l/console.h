@@ -18,7 +18,7 @@
 typedef struct console console;
 
 /*
- * We treat the screen struct like an object and encapsulate member variables and function pointers that allow polymorphism.
+ * We treat the console struct like an object and encapsulate member variables and function pointers that allow polymorphism.
  */
 typedef struct console {
 	/*
