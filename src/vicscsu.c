@@ -19,7 +19,7 @@ void scrollVicUpCol(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2) {
 	} else {
 		ushort colOfs = (y1 * scr->scrWidth) + (ushort) scr->scrColMem + x1;
 		uchar len = x2 - x1 + 1;
-		uchar lines = y2 - y1 + 1;
+		uchar lines = y2 - y1;
 		scrollVicUp(scr, x1, y1, x2, y2);
 		scrollVicUpColAsm(colOfs, len, lines);
 	}

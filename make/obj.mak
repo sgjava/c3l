@@ -19,6 +19,9 @@ ciagkc.c \
 ciagks.c \
 ciaglkc.c \
 ciagrkc.c \
+coninit.c \
+conpr.c \
+conscr.c \
 grbezier.c \
 grcir.c \
 grellip.c \

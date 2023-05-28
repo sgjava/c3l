@@ -18,6 +18,9 @@ ciagkc.obj \
 ciagks.obj \
 ciaglkc.obj \
 ciagrkc.obj \
+coninit.obj \
+conpr.obj \
+conscr.obj \
 grbezier.obj \
 grcir.obj \
 grellip.obj \
@@ -88,6 +91,7 @@ vicscsm.obj \
 vicscsu.obj \
 vicscsuc.obj \
 vicscsuy.obj \
+vicscu.obj \
 vicscuc.obj \
 vicscup.obj \
 vicsmb.obj \

@@ -16,17 +16,9 @@ void scrollVicUp(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2) {
 	if (x2 - x1 + 1 == scr->scrWidth) {
 		scrollVicUpY(scr, y1, y2);
 	} else {
-		register uchar w;
-		uchar i;
-		ushort destLine = (y1 * scr->scrWidth) + x1;
-		ushort sourceLine = destLine + scr->scrWidth;
+		ushort scrOfs = (y1 * scr->scrWidth) + (ushort) scr->scrMem + x1;
 		uchar len = x2 - x1 + 1;
-		for (i = y1; i < y2; i++) {
-			for (w = 0; w < len; w++) {
-				scr->scrMem[destLine + w] = scr->scrMem[sourceLine + w];
-			}
-			destLine += scr->scrWidth;
-			sourceLine = destLine + scr->scrWidth;
-		}
+		uchar lines = y2 - y1;
+		scrollVicUpAsm(scrOfs, len, lines);
 	}
 }

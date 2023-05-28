@@ -15,7 +15,7 @@
 void scrollVicUpYCol(screen *scr, uchar y1, uchar y2) {
 	/* This is the destination color address */
 	ushort colOfs = y1 * scr->scrWidth + (ushort) scr->scrColMem;
-	uchar lines = y2 - y1 + 1;
+	uchar lines = y2 - y1;
 	scrollVicUpY(scr, y1, y2);
 	scrollVicUpColAsm(colOfs, scr->scrWidth, lines);
 }

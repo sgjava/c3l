@@ -100,6 +100,7 @@ extern void printVicColPet(screen *scr, uchar x, uchar y, uchar color,
 		char *str);
 extern void scrollVicUpY(screen *scr, uchar y1, uchar y2);
 extern void scrollVicUpYCol(screen *scr, uchar y1, uchar y2);
+extern void scrollVicUpAsm(ushort start, uchar length, uchar lines);
 extern void scrollVicUpColAsm(ushort start, uchar length, uchar lines);
 extern void scrollVicUp(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2);
 extern void scrollVicUpCol(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2);
