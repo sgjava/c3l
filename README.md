@@ -30,14 +30,14 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-I have optimized the development process by implementing several changes. Firstly, I would like to inform you that we no longer provide support for native hardware and VICE.
+I have optimized the development process by implementing several changes. Firstly, I would like to inform you that I no longer provide support for native hardware and VICE.
 However, if you are determined to use these tools, you can proceed with them at your own discretion.
 
-To enhance efficiency and standardize the development environment, we have adopted the following tools: Ubuntu VM, Eclipse CDT, DOSBox, MyZ80, and ctools.
+To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse CDT, DOSBox, MyZ80, and ctools.
 This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
 for your personal projects unrelated to C3L.
 
-Within the "myz80" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
+Within the "~/eclipse-workspace/c3l" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
 Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
 ### Build [VICE 3.7.1](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
@@ -92,7 +92,7 @@ etc. It's way more advanced than anything on CP/M or DOS to edit a project of th
 
 ## Building
 
-* `cd ~/myz80`
+* `cd ~/eclipse-workspace/c3l/build`
 * `./makedisk.sh`
 COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/c3l.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code.
 
