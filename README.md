@@ -37,7 +37,7 @@ To enhance efficiency and standardize the development environment, I have adopte
 This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
 for your personal projects unrelated to C3L.
 
-Within the "~/eclipse-workspace/c3l" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
+Within the "~/eclipse-workspace/c3l/build" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
 Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
 ### Build [VICE 3.7.1](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
