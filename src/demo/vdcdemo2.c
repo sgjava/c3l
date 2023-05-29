@@ -109,6 +109,9 @@ void run(screen *scr) {
 	fillScrCol(scr);
 }
 
+/*
+ * Create screen struct and run program.
+ */
 main() {
 	/* Create screen struct */
 	screen *scr = (screen*) malloc(sizeof(screen));
