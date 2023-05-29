@@ -9,7 +9,6 @@
 #include <cia.h>
 #include <console.h>
 #include <screen.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <vdc.h>
 
