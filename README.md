@@ -23,7 +23,7 @@ If you have VICE already setup you can run the demo applications using the [disk
 * `x128 -80col`
 * In VICE configure drives
 * Boot boot.d71 as device 8
-* Attach c3l.d71 as device 9
+* Attach demo.d71 as device 9
 * Do a hard reset.
 * `b`:
 * `vicdemo1`
@@ -94,7 +94,7 @@ etc. It's way more advanced than anything on CP/M or DOS to edit a project of th
 
 * `cd ~/eclipse-workspace/c3l/build`
 * `./makedisk.sh`
-COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/c3l.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code.
+COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/demo.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code.
 
 ## Programming considerations
 * No range checks are performed by most functions for performance sake. It is
