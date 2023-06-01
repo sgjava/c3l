@@ -111,6 +111,7 @@ uchar bmpLoc);
 extern void clearVicBmp(bitmap *bmp, uchar c);
 extern void clearVicBmpCol(bitmap *bmp, uchar c);
 extern void setVicPix(bitmap *bmp, ushort x, ushort y, uchar color);
+extern void setVicPixAsm(ushort x, ushort y, uchar color, ushort bmpMem);
 extern void drawVicLineH(bitmap *bmp, ushort x, ushort y, ushort len,
 uchar color);
 extern void drawVicLineV(bitmap *bmp, ushort x, ushort y, ushort len,

@@ -4,5 +4,6 @@ zas -j vdcbmspa.as
 zas -j vicscfc.as
 zas -j vicscuc.as
 zas -j vicscu.as
+zas -j vicbmspa.as
 c < obj.mak
 libr < lib.mak

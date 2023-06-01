@@ -77,6 +77,7 @@ vicbmpc.obj \
 vicbmpr.obj \
 vicbmsbm.obj \
 vicbmsp.obj \
+vicbmspa.obj \
 vicfm.obj \
 vicsccc.obj \
 vicscclr.obj \
