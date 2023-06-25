@@ -11,7 +11,9 @@
  * Initialize console.
  */
 void initCon(console *con, screen *scr) {
+	con->curOn = 0;
 	con->curX = 0;
 	con->curY = 0;
 	con->scr = scr;
+	con->curChar = '_';
 }

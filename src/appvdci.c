@@ -12,7 +12,15 @@
  * Configure screen struct for VDC.
  */
 void initVdcScr(screen *scr, ushort scrMem, ushort chrMem) {
-	/* VDC Screen configuration */
+	static uchar vdcColors[16] = { vdcBlack, vdcWhite, vdcDarkRed, vdcLightCyan,
+	vdcLightPurple, vdcDarkGreen, vdcDarkBlue, vdcLightYellow,
+	vdcDarkPurple, vdcDarkYellow, vdcLightRed, vdcDarkCyan, vdcDarkGray,
+	vdcLightGreen, vdcLightBlue, vdcMedGray };
+	/* Map colors */
+	uchar i, len = sizeof(vdcColors);
+	for (i = 0; i < len; i++) {
+		scr->color[i] = vdcAltChrSet | vdcColors[i];
+	}
 	scr->scrWidth = 80;
 	scr->scrHeight = 25;
 	scr->scrSize = scr->scrWidth * scr->scrHeight;
@@ -26,4 +34,5 @@ void initVdcScr(screen *scr, ushort scrMem, ushort chrMem) {
 	scr->scrollUp = scrollVdcUp;
 	scr->scrollUpCol = scrollVdcUpCol;
 	scr->fillMem = fillVdcMem;
+	scr->copyScrToStr = copyVdcToStr;
 }

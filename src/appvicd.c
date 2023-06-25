@@ -12,10 +12,11 @@
  * Restore screen color, set MMU bank, VIC bank, screen
  * memory and char set memory location for CP/M return.
  */
-void doneVic(uchar bgCol, uchar fgCol) {
-	/* Restore screen/border colors */
-	outp(vicBorderCol, bgCol);
-	outp(vicBgCol0, fgCol);
+void doneVic() {
+	restoreVic();
 	/* CPM default */
-	setVicChrMode(0, 0, 11, 3);
+	setVicMmuBank(0);
+	setVicBank(0);
+	/* ADM-3A clear-home cursor */
+	putchar(0x1a);
 }

@@ -33,10 +33,23 @@ typedef struct console {
 	 * Screen height in characters.
 	 */
 	uchar curY;
+	/*
+	 * Cursor on.
+	 */
+	uchar curOn;
+	/*
+	 * Cursor character.
+	 */
+	uchar curChar;
 };
 
 extern void initCon(console *con, screen *scr);
-extern scrollCon(console *con, char *str);
-extern printCon(console *con, char *str);
+extern void scrollCon(console *con, char *str);
+extern void printCon(console *con, char *str);
+extern void printLineCon(console *con, char *str);
+extern char* readLineCon(console *con, uchar len);
+extern ushort offsetCon(console *con);
+extern void setCurCon(console *con, ushort offset);
+extern void wordWrap(console *con, char *str);
 
 #endif

@@ -14,6 +14,6 @@
  */
 void printVdcCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
 	fillVdcMem((uchar*) (y * scr->scrWidth) + (ushort) scr->scrColMem + x,
-			strlen(str), color);
+			strlen(str), scr->color[color]);
 	printVdc(scr, x, y, str);
 }

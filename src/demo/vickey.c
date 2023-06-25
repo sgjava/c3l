@@ -1,7 +1,7 @@
 /*
  * C128 CP/M C Library C3L
  *
- * 8564/8566 VIC-IIe character ROM demo. PETSCII is used instead of CP/M ASCII default.
+ * C128 keyboard demo.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -11,8 +11,8 @@
 #include <screen.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys.h>
 #include <vic.h>
-
 #include "demo.h"
 
 /*
@@ -37,14 +37,25 @@ void done() {
 /*
  * Run demo.
  */
-void run(console *con) {
-	wordWrap(con, "The U.S. Coast Guard is asking boaters to be on the lookout for a diver who went missing off the southeast Florida coast on Saturday.");
-	waitKey(con->scr);
+void run(console *con, uchar *vicMem) {
+	screen *scr = con->scr;
+	char str[40];
+	(scr->print)(scr, 0, 0, "Low level key scan of standard and      "
+			"extended keyboard. You can also decode  "
+			"unshifted and shifted characters. CIA 1 "
+			"interrupts are disabled, so as not to   "
+			"disrupt the key scan.");
+	sprintf(str, "mem: %04x", vicMem);
+	(scr->print)(scr, 0, 6, str);
+	sprintf(str, "chr: %04x", scr->chrMem);
+	(scr->print)(scr, 0, 7, str);
+	sprintf(str, "scr: %04x", scr->scrMem);
+	(scr->print)(scr, 0, 8, str);
+	waitKey(scr);
+	keyboard(scr);
+	readLine(con);
 }
 
-/*
- * Configure memory to protect VIC, save off screen and background colors and run demo.
- */
 main() {
 	/* Program is small enough to use left over bank 1 memory */
 	uchar *vicMem = allocVicMem(1);
@@ -53,7 +64,7 @@ main() {
 	/* Create console struct */
 	console *con = (console*) malloc(sizeof(console));
 	init(con, scr);
-	run(con);
+	run(con, vicMem);
 	done();
 	/* Free memory */
 	free(vicMem);

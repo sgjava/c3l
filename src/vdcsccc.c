@@ -12,5 +12,5 @@
  * Clear screen color.
  */
 void clearVdcScrCol(screen *scr, uchar c) {
-	fillVdcMem(scr->scrColMem, scr->scrSize, c);
+	fillVdcMem(scr->scrColMem, scr->scrSize, scr->color[c]);
 }

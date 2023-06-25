@@ -14,6 +14,6 @@
  */
 void printVicColPet(screen *scr, uchar x, uchar y, uchar color, char *str) {
 	char *petStr = asciiToPet(str);
-	printVicCol(scr, x, y, color, petStr);
+	printVicCol(scr, x, y, scr->color[color], petStr);
 	free(petStr);
 }

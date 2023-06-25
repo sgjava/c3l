@@ -12,7 +12,7 @@
 /*
  * Scroll and update cursor position based on string length.
  */
-scrollCon(console *con, char *str) {
+void scrollCon(console *con, char *str) {
 	screen *scr = con->scr;
 	ushort scrOfs = con->curY * scr->scrWidth + con->curX;
 	ushort len = strlen(str);

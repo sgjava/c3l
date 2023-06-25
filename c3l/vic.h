@@ -79,8 +79,10 @@
 #define vicMedGray    12
 #define vicLightGreen 13
 #define vicLightBlue  14
-#define vdcLightGray  15
+#define vicLightGray  15
 
+extern void saveVic();
+extern void restoreVic();
 extern uchar* allocVicMem(uchar maxBank);
 extern void setVicMmuBank(uchar mmuRcr);
 extern void setVicBank(uchar vicBank);
@@ -129,6 +131,7 @@ extern void initVicScr(screen *scr, ushort scrMem, ushort chrMem);
 extern void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
 extern void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem);
 extern void initVicBmpMode(bitmap *bmp, uchar bgCol, uchar fgCol, uchar pixCol);
-extern void doneVic(uchar bgCol, uchar fgCol);
+extern void copyVicToStr(screen *scr, ushort offset, char *str, ushort len);
+extern void doneVic();
 
 #endif

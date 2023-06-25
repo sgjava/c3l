@@ -11,5 +11,5 @@
  * Set foreground and background color.
  */
 void setVdcFgBg(uchar f, uchar b) {
-	outVdc(vdcFgBgColor, (f << 4) | b);
+	outVdc(vdcFgBgColor, (f << 4) | (b & 0x0f));
 }

@@ -14,11 +14,12 @@
  */
 void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol) {
 	uchar vicBank;
+	saveVic();
 	/* Black screen and border */
 	outp(vicBorderCol, fgCol);
 	outp(vicBgCol0, bgCol);
-	/* Clear color to fgCol */
-	(scr->clearScrCol)(scr, fgCol);
+	/* Clear color to chrCol */
+	(scr->clearScrCol)(scr, chrCol);
 	/* Clear screen to spaces */
 	(scr->clearScr)(scr, 32);
 	/* Only copy VDC character set if RAM used */

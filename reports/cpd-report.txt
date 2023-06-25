@@ -1,0 +1,1400 @@
+Found a 29 line (185 tokens) duplication in the following files: 
+Starting at line 104 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 116 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 0);
+	}
+}
+
+/*
+ * Draw Bezier curves.
+ */
+void bezier(bitmap *bmp) {
+	uchar i;
+	bannerBmp(bmp, " Bezier curves ");
+	for (i = 0; i < 35; i++) {
+		drawBezier(bmp, i * 5, 10, bmp->bmpWidth - 1, 15 + i * 5,
+				bmp->bmpWidth - 1, 15 + i * 5, 1);
+	}
+	waitKey(bmp);
+	for (i = 0; i < 35; i++) {
+		drawBezier(bmp, i * 5, 10, bmp->bmpWidth - 1, 15 + i * 5,
+				bmp->bmpWidth - 1, 15 + i * 5, 0);
+	}
+}
+
+/*
+ * Draw rectangles.
+ */
+void rectangles(bitmap *bmp) {
+	uchar i;
+	bannerBmp(bmp, " Rectangles ");
+	for (i = 1; i < 30; i++) {
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 1);
+=====================================================================
+Found a 27 line (153 tokens) duplication in the following files: 
+Starting at line 136 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 148 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 0);
+	}
+}
+
+/*
+ * Draw squares.
+ */
+void squares(bitmap *bmp) {
+	uchar i;
+	bannerBmp(bmp, " Squares ");
+	for (i = 0; i < 10; i++) {
+		drawSquare(bmp, i * 8, i * 8, (i * 8) + 8, 1);
+	}
+	waitKey(bmp);
+	for (i = 0; i < 10; i++) {
+		drawSquare(bmp, i * 8, i * 8, (i * 8) + 8, 0);
+	}
+}
+
+/*
+ * Draw ellipses.
+ */
+void ellipses(bitmap *bmp) {
+	ushort i;
+	bannerBmp(bmp, " Ellipses ");
+	for (i = 1; i < 9; i++) {
+		drawEllipse(bmp, 319, 99, i * 39, i * 10, 1);
+=====================================================================
+Found a 18 line (137 tokens) duplication in the following files: 
+Starting at line 16 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmpc.c
+Starting at line 15 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmpr.c
+
+void printVdcBmpCol(bitmap *bmp, uchar x, uchar y, uchar color, char *str) {
+	ushort vdcMem = (ushort) bmp->bmpMem;
+	ushort dispOfs = ((y * bmp->scrWidth) * 8) + vdcMem + x;
+	ushort len = strlen(str);
+	ushort i, chrOfs;
+	uchar c;
+	/* Draw 8 scan lines */
+	for (c = 0; c < 8; c++) {
+		outVdc(vdcUpdAddrHi, (uchar) (dispOfs >> 8));
+		outVdc(vdcUpdAddrLo, (uchar) dispOfs);
+		for (i = 0; i < len; i++) {
+			chrOfs = (str[i] << 3) + c;
+			outVdc(vdcCPUData, bmp->bmpChrMem[chrOfs]);
+		}
+		/* Next scan line */
+		dispOfs += bmp->scrWidth;
+	}
+}
+=====================================================================
+Found a 32 line (104 tokens) duplication in the following files: 
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+
+	initVicScr(scr, 0x3c00, 0x3000);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
+	initCon(con, scr);
+}
+
+/*
+ * Restore VIC back to CP/M defaults.
+ */
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Simple screen line editor.
+ */
+void readLine(console *con) {
+=====================================================================
+Found a 18 line (102 tokens) duplication in the following files: 
+Starting at line 57 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 56 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+				"| Watch how fast you can fill the screen with text. CP/M will never be as fast |");
+	}
+	waitKey(scr);
+	/* Blank out bottom line */
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
+	for (i = 0; i < 24; i++) {
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+	}
+	waitKey(scr);
+}
+
+/*
+ * Color text output.
+ */
+void fillScrCol(screen *scr) {
+	register uchar i;
+	(scr->clearScr)(scr, 32);
+=====================================================================
+Found a 31 line (97 tokens) duplication in the following files: 
+Starting at line 22 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 22 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+	initVicScr(scr, 0x3c00, 0x1800);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
+}
+
+/*
+ * Restore VIC back to CP/M defaults.
+ */
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Run demo.
+ */
+void run(screen *scr, uchar *vicMem) {
+=====================================================================
+Found a 30 line (88 tokens) duplication in the following files: 
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+
+	initCon(con, scr);
+}
+
+/*
+ * Restore VIC back to CP/M defaults.
+ */
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Run demo.
+ */
+void run(console *con) {
+=====================================================================
+Found a 15 line (87 tokens) duplication in the following files: 
+Starting at line 70 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 83 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	for (i = 0; i < 32; i++) {
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 0);
+		drawLine(bmp, bmp->bmpWidth - 1, 0, bmp->bmpWidth - 1 - (i * 20),
+				bmp->bmpHeight - 1, 0);
+	}
+}
+
+/*
+ * Draw horizontal lines.
+ */
+void linesH(bitmap *bmp) {
+	uchar i;
+	bannerBmp(bmp, " Optimized horizontal lines ");
+	/* Use optimized horizontal lines */
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+=====================================================================
+Found a 30 line (86 tokens) duplication in the following files: 
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+	initCon(con, scr);
+}
+
+/*
+ * Restore VIC back to CP/M defaults.
+ */
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Simple screen line editor.
+ */
+void readLine(console *con) {
+=====================================================================
+Found a 31 line (80 tokens) duplication in the following files: 
+Starting at line 22 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 21 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+
+	initCon(con, scr);
+}
+
+/*
+ * Restore VDC registers and CIA for CP/M return.
+ */
+void done() {
+	doneVdc();
+	doneCia();
+}
+
+/*
+ * Wait for Return.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vdcAltChrSet | vdcLightYellow,
+			" Press Return ");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Run demo.
+ */
+void run(console *con) {
+=====================================================================
+Found a 21 line (80 tokens) duplication in the following files: 
+Starting at line 70 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 104 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 178 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	waitKey(scr);
+}
+
+/*
+ * Configure memory to protect VIC, save off screen and background colors and run demo.
+ */
+main() {
+	/* Program is small enough to use left over bank 0 memory */
+	uchar *vicMem = allocVicMem(0);
+	/* Create screen struct */
+	screen *scr = (screen*) malloc(sizeof(screen));
+	/* Save screen/border color */
+	uchar border = inp(vicBorderCol);
+	uchar background = inp(vicBgCol0);
+	init(scr);
+	run(scr, vicMem);
+	done(border, background);
+	/* Free memory */
+	free(vicMem);
+	free(scr);
+}
+=====================================================================
+Found a 7 line (79 tokens) duplication in the following files: 
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/grellip.c
+Starting at line 48 of /home/sgoldsmith/eclipse-workspace/c3l/src/grellip.c
+
+		while (xbb2 <= yaa2) /* draw octant from top to top right */
+		{
+			/* Draw octant */
+			(bmp->setPixel)(bmp, xc + x, yc + y, color);
+			(bmp->setPixel)(bmp, xc + x, yc - y, color);
+			(bmp->setPixel)(bmp, xc - x, yc + y, color);
+			(bmp->setPixel)(bmp, xc - x, yc - y, color);
+=====================================================================
+Found a 8 line (79 tokens) duplication in the following files: 
+Starting at line 13 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcchrm.c
+Starting at line 13 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcmchr.c
+
+void copyVdcChrMem(uchar *mem, ushort vdcMem, ushort chars) {
+	register uchar c;
+	ushort vdcOfs = vdcMem, memOfs = 0, i;
+	for (i = 0; i < chars; i++) {
+		outVdc(vdcUpdAddrHi, (uchar) (vdcOfs >> 8));
+		outVdc(vdcUpdAddrLo, (uchar) vdcOfs);
+		/* Only use 8 bytes of 16 byte character definition */
+		for (c = 0; c < 8; c++) {
+=====================================================================
+Found a 17 line (78 tokens) duplication in the following files: 
+Starting at line 48 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 61 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	printVdcBmp(bmp, 0, 24, " Erasing pixels ");
+}
+
+/*
+ * Print centered text on top line in bitmap.
+ */
+void bannerBmp(bitmap *bmp, char *str) {
+	(bmp->printBmp)(bmp, ((bmp->scrWidth - strlen(str)) >> 1), 0, str);
+}
+
+/*
+ * Draw lines.
+ */
+void lines(bitmap *bmp) {
+	uchar i;
+	bannerBmp(bmp, " Bresenham lines ");
+	for (i = 0; i < 32; i++) {
+=====================================================================
+Found a 14 line (74 tokens) duplication in the following files: 
+Starting at line 119 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 67 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+
+	readLine(con);
+}
+
+main() {
+	/* Program is small enough to use left over bank 0 memory */
+	uchar *vicMem = allocVicMem(0);
+	/* Create screen struct */
+	screen *scr = (screen*) malloc(sizeof(screen));
+	/* Create console struct */
+	console *con = (console*) malloc(sizeof(console));
+	uchar border = inp(vicBorderCol);
+	uchar background = inp(vicBgCol0);
+	init(con, scr);
+	run(con, vicMem);
+=====================================================================
+Found a 13 line (74 tokens) duplication in the following files: 
+Starting at line 88 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 100 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 0);
+	}
+}
+
+/*
+ * Draw vertical lines.
+ */
+void linesV(bitmap *bmp) {
+	uchar i;
+	bannerBmp(bmp, " Optimized vertical lines ");
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 1);
+=====================================================================
+Found a 23 line (73 tokens) duplication in the following files: 
+Starting at line 32 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 32 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 30 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 30 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 44 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Simple screen line editor.
+ */
+void readLine(console *con) {
+=====================================================================
+Found a 7 line (73 tokens) duplication in the following files: 
+Starting at line 64 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 77 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	for (i = 0; i < 32; i++) {
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 1);
+		drawLine(bmp, bmp->bmpWidth - 1, 0, bmp->bmpWidth - 1 - (i * 20),
+				bmp->bmpHeight - 1, 1);
+	}
+	waitKey(bmp);
+	for (i = 0; i < 32; i++) {
+=====================================================================
+Found a 8 line (71 tokens) duplication in the following files: 
+Starting at line 13 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcand.c
+Starting at line 13 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcor.c
+
+void andVdcByte(ushort vdcMem, uchar value) {
+	uchar saveByte;
+	outVdc(vdcUpdAddrHi, (uchar) (vdcMem >> 8));
+	outVdc(vdcUpdAddrLo, (uchar) vdcMem);
+	saveByte = inVdc(vdcCPUData);
+	outVdc(vdcUpdAddrHi, (uchar) (vdcMem >> 8));
+	outVdc(vdcUpdAddrLo, (uchar) vdcMem);
+	outVdc(vdcCPUData, saveByte & value);
+=====================================================================
+Found a 3 line (59 tokens) duplication in the following files: 
+Starting at line 26 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciadec.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciadec.c
+
+			'/' }, { '1', 0x00, 0x00, '2', 0x20, 0x00, 'q', 0x00 }, { 0x00, '8',
+			'5', 0x09, '2', '4', '7', '1' }, { 0x1b, '+', '-', 0x0a, 0x0d, '6',
+			'9', '3' }, { 0x00, '0', '.', 0x05, 0x18, 0x13, 0x04, 0x00 } };
+=====================================================================
+Found a 17 line (56 tokens) duplication in the following files: 
+Starting at line 37 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+			" Press Return ");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Text output without color.
+ */
+void fillScr(screen *scr) {
+	register uchar i;
+	(scr->clearScr)(scr, 32);
+=====================================================================
+Found a 9 line (53 tokens) duplication in the following files: 
+Starting at line 17 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmhl.c
+Starting at line 15 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmdhl.c
+
+	ushort pixByte = vdcMem + (y << 6) + (y << 4) + (x >> 3);
+	uchar firstBits = x % 8;
+	uchar lastBits = (x + len - 1) % 8;
+	ushort fillBytes = (len - lastBits - 1) >> 3;
+	uchar fillByte;
+	ushort i;
+	if (firstBits > 0) {
+		/* Handle left over bits on first byte */
+		if (color) {
+=====================================================================
+Found a 17 line (52 tokens) duplication in the following files: 
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 40 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+
+			" Press Return ");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Run demo.
+ */
+void run(console *con) {
+	uchar i;
+	for (i = 0; i < 40; i++) {
+=====================================================================
+Found a 3 line (50 tokens) duplication in the following files: 
+Starting at line 26 of /home/sgoldsmith/eclipse-workspace/c3l/src/conprl.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
+				scr->scrWidth, 32);
+=====================================================================
+Found a 4 line (50 tokens) duplication in the following files: 
+Starting at line 113 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 118 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 125 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 130 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Bezier curves ");
+	for (i = 0; i < 35; i++) {
+		drawBezier(bmp, i * 5, 10, bmp->bmpWidth - 1, 15 + i * 5,
+				bmp->bmpWidth - 1, 15 + i * 5, 1);
+=====================================================================
+Found a 5 line (50 tokens) duplication in the following files: 
+Starting at line 132 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 144 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 1);
+	}
+	waitKey(bmp);
+	for (i = 1; i < 30; i++) {
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 0);
+=====================================================================
+Found a 8 line (50 tokens) duplication in the following files: 
+Starting at line 57 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 56 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 75 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+				"| Watch how fast you can fill the screen with text. CP/M will never be as fast |");
+	}
+	waitKey(scr);
+	/* Blank out bottom line */
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
+	for (i = 0; i < 24; i++) {
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+=====================================================================
+Found a 7 line (48 tokens) duplication in the following files: 
+Starting at line 18 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmpc.c
+Starting at line 17 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmpr.c
+
+	ushort colOfs = (y * bmp->scrWidth) + x;
+	ushort len = strlen(str);
+	ushort i, chrOfs, destOfs;
+	uchar c;
+	for (i = 0; i < len; i++) {
+		chrOfs = str[i] << 2;
+		destOfs = i << 2;
+=====================================================================
+Found a 6 line (47 tokens) duplication in the following files: 
+Starting at line 16 of /home/sgoldsmith/eclipse-workspace/c3l/src/appvdci.c
+Starting at line 16 of /home/sgoldsmith/eclipse-workspace/c3l/src/appvici.c
+
+	scr->scrWidth = 80;
+	scr->scrHeight = 25;
+	scr->scrSize = scr->scrWidth * scr->scrHeight;
+	scr->chrMem = (uchar*) chrMem;
+	scr->scrMem = (uchar*) scrMem;
+	scr->scrColMem = (uchar*) vdcColMem;
+=====================================================================
+Found a 5 line (46 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmpc.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmpr.c
+
+void printVicBmpCol(bitmap *bmp, uchar x, uchar y, uchar color, char *str) {
+	ushort *bmp16 = (ushort*) bmp->bmpMem;
+	ushort *chr16 = (ushort*) bmp->bmpChrMem;
+	ushort bmpOfs = (y * 160) + (x * 4);
+	ushort colOfs = (y * bmp->scrWidth) + x;
+=====================================================================
+Found a 5 line (44 tokens) duplication in the following files: 
+Starting at line 84 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 96 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 1);
+	}
+	waitKey(bmp);
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+=====================================================================
+Found a 3 line (44 tokens) duplication in the following files: 
+Starting at line 130 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 134 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+
+	bannerBmp(bmp, " Rectangles ");
+	for (i = 1; i < 30; i++) {
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 1);
+=====================================================================
+Found a 3 line (44 tokens) duplication in the following files: 
+Starting at line 142 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 146 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Rectangles ");
+	for (i = 1; i < 30; i++) {
+		drawRect(bmp, i * 2, i * 2, (i * 10) + 20, (i * 5) + 20, 1);
+=====================================================================
+Found a 11 line (43 tokens) duplication in the following files: 
+Starting at line 19 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 31 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+void init(screen *scr) {
+	initCia();
+	/* Use ram at end of bank 0 */
+	initVicScr(scr, 0x3c00, 0x1800);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
+}
+
+/*
+ * Restore VIC back to CP/M defaults.
+ */
+void done(uchar bgCol, uchar fgCol) {
+=====================================================================
+Found a 4 line (42 tokens) duplication in the following files: 
+Starting at line 82 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 87 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+
+	bannerBmp(bmp, " Optimized horizontal lines ");
+	/* Use optimized horizontal lines */
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 1);
+=====================================================================
+Found a 3 line (42 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmhl.c
+Starting at line 13 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmdhl.c
+
+void drawVdcLineH(bitmap *bmp, ushort x, ushort y, ushort len, uchar color) {
+	static uchar fillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
+	ushort vdcMem = (ushort) bmp->bmpMem;
+=====================================================================
+Found a 9 line (40 tokens) duplication in the following files: 
+Starting at line 39 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 52 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	printVdcBmp(bmp, 0, 24, " Press Return ");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+=====================================================================
+Found a 3 line (38 tokens) duplication in the following files: 
+Starting at line 98 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 102 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+
+	bannerBmp(bmp, " Optimized vertical lines ");
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 1);
+=====================================================================
+Found a 5 line (38 tokens) duplication in the following files: 
+Starting at line 100 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 112 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 1);
+	}
+	waitKey(bmp);
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 0);
+=====================================================================
+Found a 5 line (38 tokens) duplication in the following files: 
+Starting at line 52 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 71 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+void fillScr(screen *scr) {
+	register uchar i;
+	(scr->clearScr)(scr, 32);
+	for (i = 0; i < 24; i++) {
+		(scr->print)(scr, 0, i, "Watch how fast you can fill the screen");
+=====================================================================
+Found a 3 line (38 tokens) duplication in the following files: 
+Starting at line 95 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 99 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Optimized horizontal lines ");
+	for (i = 0; i < 159; i++) {
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 1);
+=====================================================================
+Found a 3 line (38 tokens) duplication in the following files: 
+Starting at line 110 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 114 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Optimized vertical lines ");
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 57, 10, i + 57, i + 1, 1);
+=====================================================================
+Found a 3 line (38 tokens) duplication in the following files: 
+Starting at line 24 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmpc.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmpr.c
+Starting at line 19 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcscp.c
+
+		outVdc(vdcUpdAddrHi, (uchar) (dispOfs >> 8));
+		outVdc(vdcUpdAddrLo, (uchar) dispOfs);
+		for (i = 0; i < len; i++) {
+=====================================================================
+Found a 4 line (38 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprbg.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprfg.c
+
+void setVicSprBg(uchar sprNum) {
+	static uchar sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+	/* Sprite priority */
+	outp(vicSprFg, inp(vicSprFg) | sprTable[sprNum]);
+=====================================================================
+Found a 4 line (38 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprdi.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicspren.c
+
+void disableVicSpr(uchar sprNum) {
+	static uchar sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+	/* Sprite disable */
+	outp(vicSprEnable, inp(vicSprEnable) & ~sprTable[sprNum]);
+=====================================================================
+Found a 15 line (36 tokens) duplication in the following files: 
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+
+			" Press Return ");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Run demo.
+ */
+void run(console *con) {
+=====================================================================
+Found a 3 line (36 tokens) duplication in the following files: 
+Starting at line 145 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 149 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 157 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 161 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Squares ");
+	for (i = 0; i < 10; i++) {
+		drawSquare(bmp, i * 8, i * 8, (i * 8) + 8, 1);
+=====================================================================
+Found a 11 line (36 tokens) duplication in the following files: 
+Starting at line 166 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 178 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawEllipse(bmp, 319, 99, i * 39, i * 10, 0);
+	}
+}
+
+/*
+ * Draw circles.
+ */
+void circles(bitmap *bmp) {
+	ushort i;
+	bannerBmp(bmp, " Circles ");
+	for (i = 1; i < 10; i++) {
+=====================================================================
+Found a 11 line (36 tokens) duplication in the following files: 
+Starting at line 45 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 153 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Run demo.
+ */
+void run(screen *scr, uchar *vicMem) {
+	uchar i;
+	char str[40];
+	(scr->print)(scr, 0, 0, "Simple character mode using ROM for the "
+=====================================================================
+Found a 15 line (34 tokens) duplication in the following files: 
+Starting at line 40 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 37 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 40 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 52 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+}
+
+/*
+ * Simple screen line editor.
+ */
+void readLine(console *con) {
+=====================================================================
+Found a 10 line (34 tokens) duplication in the following files: 
+Starting at line 37 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 39 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 36 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 52 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vdcAltChrSet | vdcLightYellow,
+			" Press Return ");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+=====================================================================
+Found a 3 line (34 tokens) duplication in the following files: 
+Starting at line 63 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 69 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+
+	bannerBmp(bmp, " Bresenham lines ");
+	for (i = 0; i < 32; i++) {
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 1);
+=====================================================================
+Found a 3 line (34 tokens) duplication in the following files: 
+Starting at line 76 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 82 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Bresenham lines ");
+	for (i = 0; i < 16; i++) {
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 1);
+=====================================================================
+Found a 5 line (34 tokens) duplication in the following files: 
+Starting at line 20 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdccpym.c
+Starting at line 19 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcfmem.c
+
+	outVdc(vdcBlkCpySrcAddrLo, (uchar) source);
+	if (len > vdcMaxBlock) {
+		blocks = len / vdcMaxBlock;
+		remain = len % vdcMaxBlock;
+		for (i = 1; i <= blocks; i++) {
+=====================================================================
+Found a 6 line (34 tokens) duplication in the following files: 
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmpc.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmpr.c
+
+		bmp->bmpColMem[colOfs + i] = color;
+		for (c = 0; c < 4; c++) {
+			bmp16[bmpOfs + destOfs + c] = chr16[chrOfs + c];
+		}
+	}
+}
+=====================================================================
+Found a 6 line (33 tokens) duplication in the following files: 
+Starting at line 57 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 78 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 56 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 75 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+				"| Watch how fast you can fill the screen with text. CP/M will never be as fast |");
+	}
+	waitKey(scr);
+	/* Blank out bottom line */
+	(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
+			32);
+=====================================================================
+Found a 12 line (33 tokens) duplication in the following files: 
+Starting at line 67 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 70 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 104 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 178 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	waitKey(con->scr);
+
+}
+
+/*
+ * Configure memory to protect VIC, save off screen and background colors and run demo.
+ */
+main() {
+	/* Program is small enough to use left over bank 0 memory */
+	uchar *vicMem = allocVicMem(0);
+	/* Create screen struct */
+	screen *scr = (screen*) malloc(sizeof(screen));
+=====================================================================
+Found a 10 line (33 tokens) duplication in the following files: 
+Starting at line 33 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcbmhl.c
+Starting at line 30 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmdhl.c
+
+		outVdc(vdcUpdAddrLo, (uchar) pixByte);
+	}
+	/* Do this outside loop */
+	if (color) {
+		fillByte = 0xff;
+	} else {
+		fillByte = 0x00;
+	}
+	/* Fill in bytes */
+	for (i = 0; i < fillBytes; i++) {
+=====================================================================
+Found a 9 line (32 tokens) duplication in the following files: 
+Starting at line 40 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 39 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 40 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 38 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 52 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 52 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+	while (getKey(0) != 0xfd)
+		;
+	/* Debounce */
+	while (getKey(0) == 0xfd)
+		;
+=====================================================================
+Found a 8 line (32 tokens) duplication in the following files: 
+Starting at line 119 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 70 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 104 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 178 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	readLine(con);
+}
+
+main() {
+	/* Program is small enough to use left over bank 0 memory */
+	uchar *vicMem = allocVicMem(0);
+	/* Create screen struct */
+	screen *scr = (screen*) malloc(sizeof(screen));
+=====================================================================
+Found a 3 line (32 tokens) duplication in the following files: 
+Starting at line 126 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 67 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 78 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+
+	screen *scr = (screen*) malloc(sizeof(screen));
+	/* Create console struct */
+	console *con = (console*) malloc(sizeof(console));
+=====================================================================
+Found a 3 line (32 tokens) duplication in the following files: 
+Starting at line 65 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 71 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 78 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 84 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawLine(bmp, 0, 0, i * 20, bmp->bmpHeight - 1, 1);
+		drawLine(bmp, bmp->bmpWidth - 1, 0, bmp->bmpWidth - 1 - (i * 20),
+				bmp->bmpHeight - 1, 1);
+=====================================================================
+Found a 3 line (32 tokens) duplication in the following files: 
+Starting at line 160 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 164 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+
+	bannerBmp(bmp, " Ellipses ");
+	for (i = 1; i < 9; i++) {
+		drawEllipse(bmp, 319, 99, i * 39, i * 10, 1);
+=====================================================================
+Found a 5 line (32 tokens) duplication in the following files: 
+Starting at line 162 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 174 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+		drawEllipse(bmp, 319, 99, i * 39, i * 10, 1);
+	}
+	waitKey(bmp);
+	for (i = 1; i < 9; i++) {
+		drawEllipse(bmp, 319, 99, i * 39, i * 10, 0);
+=====================================================================
+Found a 5 line (32 tokens) duplication in the following files: 
+Starting at line 60 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 166 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+			"bank 1.");
+	for (i = 0; i < 255; i++) {
+		scr->scrMem[i + 280] = i;
+	}
+	sprintf(str, "mem: %04x", vicMem);
+=====================================================================
+Found a 3 line (32 tokens) duplication in the following files: 
+Starting at line 172 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 176 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Ellipses ");
+	for (i = 1; i < 9; i++) {
+		drawEllipse(bmp, 159, 99, i * 19, i * 10, 1);
+=====================================================================
+Found a 4 line (32 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprbg.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprdi.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicspren.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprfg.c
+
+void setVicSprBg(uchar sprNum) {
+	static uchar sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+	/* Sprite priority */
+	outp(vicSprFg, inp(vicSprFg) | sprTable[sprNum]);
+=====================================================================
+Found a 4 line (31 tokens) duplication in the following files: 
+Starting at line 22 of /home/sgoldsmith/eclipse-workspace/c3l/src/conrl.c
+Starting at line 28 of /home/sgoldsmith/eclipse-workspace/c3l/src/conrl.c
+
+	printBuf[2] = 0;
+	/* Calculate cursor position for backspace */
+	con->curY = scrOfs / con->scr->scrWidth;
+	con->curX = scrOfs - (con->curY * con->scr->scrWidth);
+=====================================================================
+Found a 9 line (31 tokens) duplication in the following files: 
+Starting at line 32 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 29 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 28 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 32 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 30 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 30 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 44 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, vicYellow, "Press Return");
+=====================================================================
+Found a 4 line (31 tokens) duplication in the following files: 
+Starting at line 18 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdccon.c
+Starting at line 18 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+
+void init(console *con, screen *scr) {
+	initCia();
+	initVdcScr(scr, vdcScrMem, vdcChrMem);
+	initVdcScrMode(scr, vdcBlack, vdcWhite, vdcAltChrSet | vdcWhite);
+=====================================================================
+Found a 3 line (31 tokens) duplication in the following files: 
+Starting at line 130 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 146 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Rectangles ");
+	for (i = 1; i < 30; i++) {
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 1);
+=====================================================================
+Found a 3 line (31 tokens) duplication in the following files: 
+Starting at line 134 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 142 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	waitKey(bmp);
+	for (i = 1; i < 30; i++) {
+		drawRect(bmp, i * 2, i * 2, (i * 20) + 20, (i * 5) + 20, 0);
+=====================================================================
+Found a 4 line (31 tokens) duplication in the following files: 
+Starting at line 51 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 72 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+
+void fillScr(screen *scr) {
+	register uchar i;
+	(scr->clearScr)(scr, 32);
+	(scr->clearScrCol)(scr, vdcAltChrSet | vdcLightGreen);
+=====================================================================
+Found a 3 line (31 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcscsu.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcscsuc.c
+Starting at line 15 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicscsu.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicscup.c
+
+void scrollVdcUp(screen *scr, uchar x1, uchar y1, uchar x2, uchar y2) {
+	/* If line is screen width use optimized function */
+	if (x2 - x1 + 1 == scr->scrWidth) {
+=====================================================================
+Found a 4 line (30 tokens) duplication in the following files: 
+Starting at line 20 of /home/sgoldsmith/eclipse-workspace/c3l/src/appvdcbi.c
+Starting at line 19 of /home/sgoldsmith/eclipse-workspace/c3l/src/appvicbi.c
+
+	bmp->bmpWidth = 640;
+	bmp->bmpHeight = 200;
+	bmp->bmpSize = ((ulong) bmp->bmpWidth * bmp->bmpHeight) / 8;
+	bmp->scrWidth = 80;
+=====================================================================
+Found a 8 line (30 tokens) duplication in the following files: 
+Starting at line 66 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciadec.c
+Starting at line 94 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciadec.c
+
+				i++;
+			}
+			/* Another key pressed besides shift? */
+			if (i < 11) {
+				col = getKeyCol(ciaKeyScan[i]);
+				/* Make sure key code is valid */
+				if (col < 8) {
+					keyCode = shiftKeys[i][col];
+=====================================================================
+Found a 3 line (30 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciagkc.c
+Starting at line 18 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciagks.c
+
+uchar getKeyCol(uchar keyVal) {
+	static uchar keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f };
+	register uchar i = 0;
+=====================================================================
+Found a 5 line (29 tokens) duplication in the following files: 
+Starting at line 20 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 19 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+void init(console *con, screen *scr) {
+	initCia();
+	/* Use ram at end of bank 0 for screen and copy VDC character set just above that */
+	initVicScr(scr, 0x3c00, 0x3000);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
+=====================================================================
+Found a 9 line (29 tokens) duplication in the following files: 
+Starting at line 64 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 87 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 63 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+	}
+	waitKey(scr);
+}
+
+/*
+ * Color text output.
+ */
+void fillScrCol(screen *scr) {
+=====================================================================
+Found a 5 line (29 tokens) duplication in the following files: 
+Starting at line 20 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 19 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 31 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo4.c
+
+void init(console *con, screen *scr) {
+	initCia();
+	/* Use ram at end of bank 0 */
+	initVicScr(scr, 0x3c00, 0x1800);
+	initVicScrMode(scr, vicBlack, vicBlack, vicWhite);
+=====================================================================
+Found a 2 line (28 tokens) duplication in the following files: 
+Starting at line 107 of /home/sgoldsmith/eclipse-workspace/c3l/c3l/bitmap.h
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/grbezier.c
+
+extern void drawBezier(bitmap *bmp, int x0, int y0, int x1, int y1, int x2,
+		int y2, uchar color);
+=====================================================================
+Found a 3 line (28 tokens) duplication in the following files: 
+Starting at line 29 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+Starting at line 63 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 62 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+		for (; y > 0; y--) {
+			(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+		}
+=====================================================================
+Found a 3 line (28 tokens) duplication in the following files: 
+Starting at line 175 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 179 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+
+	bannerBmp(bmp, " Circles ");
+	for (i = 1; i < 10; i++) {
+		drawCircle(bmp, 319, 99, i * 20, 1);
+=====================================================================
+Found a 3 line (28 tokens) duplication in the following files: 
+Starting at line 54 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 54 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+	(scr->clearScrCol)(scr, vdcAltChrSet | vdcLightGreen);
+	for (i = 0; i < 24; i++) {
+		(scr->print)(scr, 0, i,
+=====================================================================
+Found a 3 line (28 tokens) duplication in the following files: 
+Starting at line 187 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+Starting at line 191 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Circles ");
+	for (i = 1; i < 12; i++) {
+		drawCircle(bmp, 159, 99, i * 10, 1);
+=====================================================================
+Found a 3 line (28 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmdhl.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicbmdvl.c
+
+	static uchar fillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
+	ushort pixByte = bmp->scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
+	uchar firstBits = x % 8;
+=====================================================================
+Found a 2 line (27 tokens) duplication in the following files: 
+Starting at line 21 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciadec.c
+Starting at line 33 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciadec.c
+
+	static uchar stdKeys[11][8] = { { 0x7f, 0x0d, 0x04, 0x00, 0x00, 0x00, 0x00,
+			0x18 }, { '3', 'w', 'a', '4', 'z', 's', 'e', 0x00 }, { '5', 'r',
+=====================================================================
+Found a 2 line (27 tokens) duplication in the following files: 
+Starting at line 18 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciagk.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciagkc.c
+Starting at line 18 of /home/sgoldsmith/eclipse-workspace/c3l/src/ciagks.c
+
+uchar getKey(uchar keyRow) {
+	static uchar keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf, 0x7f };
+=====================================================================
+Found a 3 line (27 tokens) duplication in the following files: 
+Starting at line 26 of /home/sgoldsmith/eclipse-workspace/c3l/src/conprl.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+Starting at line 59 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 80 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 58 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 77 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
+				scr->scrWidth, 32);
+=====================================================================
+Found a 2 line (27 tokens) duplication in the following files: 
+Starting at line 84 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 100 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 1);
+=====================================================================
+Found a 2 line (27 tokens) duplication in the following files: 
+Starting at line 88 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 96 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	for (i = 0; i < bmp->bmpHeight - 40; i++) {
+		drawLine(bmp, i, i + 20, bmp->bmpWidth - 1 - i, i + 20, 0);
+=====================================================================
+Found a 2 line (27 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprbg.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprdi.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicspren.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprfg.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vicsprsl.c
+
+void setVicSprBg(uchar sprNum) {
+	static uchar sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+=====================================================================
+Found a 2 line (26 tokens) duplication in the following files: 
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/conpr.c
+Starting at line 33 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+
+	con->curY = scrOfs / scr->scrWidth;
+	con->curX = scrOfs - (con->curY * scr->scrWidth);
+=====================================================================
+Found a 2 line (26 tokens) duplication in the following files: 
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/conprl.c
+Starting at line 29 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+Starting at line 63 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 62 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+	} else {
+		(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+=====================================================================
+Found a 15 line (26 tokens) duplication in the following files: 
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 25 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo1.c
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+Starting at line 24 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	initCon(con, scr);
+}
+
+/*
+ * Restore VIC back to CP/M defaults.
+ */
+void done(uchar bgCol, uchar fgCol) {
+	doneVic(bgCol, fgCol);
+	doneCia();
+}
+
+/*
+ * Wait for Return key to be pressed.
+ */
+void waitKey(screen *scr) {
+=====================================================================
+Found a 3 line (26 tokens) duplication in the following files: 
+Starting at line 115 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 100 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+	sprintf(str, "scr: %04x", scr->scrMem);
+	(scr->print)(scr, 0, 8, str);
+	waitKey(scr);
+=====================================================================
+Found a 3 line (26 tokens) duplication in the following files: 
+Starting at line 98 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 114 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	bannerBmp(bmp, " Optimized vertical lines ");
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 1);
+=====================================================================
+Found a 3 line (26 tokens) duplication in the following files: 
+Starting at line 102 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo1.c
+Starting at line 110 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo3.c
+
+	waitKey(bmp);
+	for (i = 10; i < bmp->bmpHeight - 1; i++) {
+		drawLine(bmp, i + 114, 10, i + 114, i + 1, 0);
+=====================================================================
+Found a 4 line (25 tokens) duplication in the following files: 
+Starting at line 17 of /home/sgoldsmith/eclipse-workspace/c3l/src/appvdcbi.c
+Starting at line 16 of /home/sgoldsmith/eclipse-workspace/c3l/src/appvicbi.c
+
+	bmp->bmpChrMem = (uchar*) ((ushort) chrMem) + 0x0800;
+	bmp->bmpColMem = (uchar*) colMem;
+	bmp->bmpMem = (uchar*) bmpMem;
+	bmp->bmpWidth = 640;
+=====================================================================
+Found a 1 line (25 tokens) duplication in the following files: 
+Starting at line 23 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+Starting at line 30 of /home/sgoldsmith/eclipse-workspace/c3l/src/conscr.c
+Starting at line 64 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vdcdemo2.c
+Starting at line 63 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+        (scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+=====================================================================
+Found a 3 line (25 tokens) duplication in the following files: 
+Starting at line 113 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 98 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/vicdemo2.c
+
+	sprintf(str, "chr: %04x", scr->chrMem);
+	(scr->print)(scr, 0, 7, str);
+	sprintf(str, "scr: %04x", scr->scrMem);
+=====================================================================
+Found a 7 line (25 tokens) duplication in the following files: 
+Starting at line 132 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/keydemo.c
+Starting at line 85 of /home/sgoldsmith/eclipse-workspace/c3l/src/demo/viccon.c
+
+	run(con, vicMem);
+	done(border, background);
+	/* Free memory */
+	free(vicMem);
+	free(scr);
+	free(con);
+}
+=====================================================================
+Found a 3 line (25 tokens) duplication in the following files: 
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcand.c
+Starting at line 17 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcand.c
+Starting at line 14 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcor.c
+Starting at line 17 of /home/sgoldsmith/eclipse-workspace/c3l/src/vdcor.c
+
+	uchar saveByte;
+	outVdc(vdcUpdAddrHi, (uchar) (vdcMem >> 8));
+	outVdc(vdcUpdAddrLo, (uchar) vdcMem);

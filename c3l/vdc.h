@@ -66,7 +66,7 @@
 #define vdcLightPurple 11
 #define vdcDarkYellow  12
 #define vdcLightYellow 13
-#define vdcMediumGray  14
+#define vdcMedGray     14
 #define vdcWhite       15
 
 #define vdcAltChrSet 0x80      /* VDC text mode attribute bits */
@@ -130,6 +130,7 @@ extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem);
 extern void initVdcScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
 extern void initVdcBmp(bitmap *bmp, ushort bmpMem, ushort colMem, uchar *chrMem);
 extern void initVdcBmpMode(bitmap *bmp, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
+extern void copyVdcToStr(screen* scr, ushort offest, char *str, ushort len);
 extern void doneVdc();
 
 #endif

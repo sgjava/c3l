@@ -12,7 +12,14 @@
  * Initialize screen struct for VIC.
  */
 void initVicScr(screen *scr, ushort scrMem, ushort chrMem) {
-	/* VIC Screen configuration */
+	static uchar vicColors[16] = { vicBlack, vicWhite, vicRed, vicCyan,
+	vicPurple, vicGreen, vicBlue, vicYellow, vicOrange, vicBrown, vicLightRed,
+	vicDarkGray, vicMedGray, vicLightGreen, vicLightBlue, vicLightGray };
+	/* Map colors */
+	uchar i, len = sizeof(vicColors);
+	for (i = 0; i < len; i++) {
+		scr->color[i] = vicColors[i];
+	}
 	scr->scrWidth = 40;
 	scr->scrHeight = 25;
 	scr->scrSize = scr->scrWidth * scr->scrHeight;
@@ -34,4 +41,5 @@ void initVicScr(screen *scr, ushort scrMem, ushort chrMem) {
 	scr->scrollUp = scrollVicUp;
 	scr->scrollUpCol = scrollVicUpCol;
 	scr->fillMem = fillVicMem;
+	scr->copyScrToStr = copyVicToStr;
 }

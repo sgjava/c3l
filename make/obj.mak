@@ -20,8 +20,13 @@ ciagks.c \
 ciaglkc.c \
 ciagrkc.c \
 coninit.c \
+conofs.c \
 conpr.c \
+conprl.c \
+conrl.c \
 conscr.c \
+conww.c \
+conxy.c \
 grbezier.c \
 grcir.c \
 grellip.c \
@@ -64,6 +69,7 @@ vdcscp.c \
 vdcscpc.c \
 vdcscsc.c \
 vdcscsdp.c \
+vdcscstr.c \
 vdcscsu.c \
 vdcscsuc.c \
 vdcscsuy.c \
@@ -88,9 +94,9 @@ vicscpc.c \
 vicscpp.c \
 vicscppc.c \
 vicscpr.c \
-vicscrl.c \
 vicscsc.c \
 vicscsm.c \
+vicscstr.c \
 vicscsu.c \
 vicscsuc.c \
 vicscsuy.c \
@@ -102,4 +108,5 @@ vicsprc.c \
 vicsprdi.c \
 vicspren.c \
 vicsprfg.c \
-vicsprsl.c
+vicsprsl.c \
+vicsr.c

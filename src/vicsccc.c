@@ -12,5 +12,5 @@
  * Clear color memory. Color memory is port mapped.
  */
 void clearVicCol(screen *scr, uchar c) {
-	fillVicMemCol((ushort) scr->scrColMem, scr->scrSize, c);
+	fillVicMemCol((ushort) scr->scrColMem, scr->scrSize, scr->color[c]);
 }

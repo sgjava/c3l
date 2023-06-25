@@ -19,8 +19,9 @@ ciagks.obj \
 ciaglkc.obj \
 ciagrkc.obj \
 coninit.obj \
-conpr.obj \
-conscr.obj \
+conrl.obj \
+conww.obj \
+conxy.obj \
 grbezier.obj \
 grcir.obj \
 grellip.obj \
@@ -63,6 +64,7 @@ vdcscp.obj \
 vdcscpc.obj \
 vdcscsc.obj \
 vdcscsdp.obj \
+vdcscstr.obj \
 vdcscsu.obj \
 vdcscsuc.obj \
 vdcscsuy.obj \
@@ -86,9 +88,9 @@ vicsccm.obj \
 vicscpp.obj \
 vicscppc.obj \
 vicscpr.obj \
-vicscrl.obj \
 vicscsc.obj \
 vicscsm.obj \
+vicscstr.obj \
 vicscsu.obj \
 vicscsuc.obj \
 vicscsuy.obj \
@@ -108,4 +110,9 @@ vdccpym.obj \
 vicsb.obj \
 scatop.obj \
 vicscpc.obj \
-vicbmbm.obj
+vicbmbm.obj \
+conofs.obj \
+vicsr.obj \
+conprl.obj \
+conpr.obj \
+conscr.obj
