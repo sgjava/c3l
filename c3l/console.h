@@ -50,6 +50,6 @@ extern void printLineCon(console *con, char *str);
 extern char* readLineCon(console *con, uchar len);
 extern ushort offsetCon(console *con);
 extern void setCurCon(console *con, ushort offset);
-extern void wordWrap(console *con, char *str);
+extern void printWrapCon(console *con, char *str);
 
 #endif

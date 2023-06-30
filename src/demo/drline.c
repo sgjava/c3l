@@ -18,6 +18,8 @@ void readLine(console *con) {
 	(scr->clearScr)(scr, 32);
 	/* Clear color to white */
 	(scr->clearScrCol)(scr, scrWhite);
+	con->curX = 0;
+	con->curY = 0;
 	printLineCon(con, "Type in line and press return:");
 	printLineCon(con, "");
 	str = readLineCon(con, 255);

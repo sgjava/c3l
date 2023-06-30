@@ -8,46 +8,40 @@
 #include <hitech.h>
 #include <string.h>
 
-void wordWrap(console *con, char *str) {
+void printWrapCon(console *con, char *str) {
 	/* Screen width should not exceed buffer size +1 */
 	char buffer[81];
-	ushort i = 0, len = strlen(str);
-	uchar maxLine = con->scr->scrWidth, wordStart = 0, buf = 0,
-			curX = con->curX;
-	while (curX < maxLine && i < len) {
-		while (curX < maxLine && i < len) {
+	ushort i = 0, wordLen, len = strlen(str);
+	int wordStart = -1, wordEnd = -1;
+	uchar maxLine = con->scr->scrWidth - 1, buf = 0;
+	while (i < len) {
+		/* Load word buffer using space delimiter */
+		while (i < len && wordEnd < 0) {
 			/* Find first non space char */
 			if (str[i] != ' ') {
-				if (!wordStart) {
+				if (wordStart < 0) {
 					wordStart = i;
 				}
 				buffer[buf++] = str[i];
-				curX++;
 			} else {
 				/* End of word including space */
-				if (wordStart) {
-					if (curX < maxLine) {
-						buffer[buf++] = str[i];
-						curX++;
-						wordStart = 0;
-					};
-				}
+				if (wordEnd < 0) {
+					buffer[buf++] = str[i];
+					wordEnd = i;
+				};
 			}
 			i++;
 		}
-		if (wordStart && curX == maxLine) {
-			buffer[buf-(i-wordStart+1)] = 0x00;
-			printLineCon(con, buffer);
-			i = wordStart;
-			wordStart = 0;
-			buf = 0;
-			curX = con->curX;
-		} else {
+		if (buf > 0) {
 			buffer[buf] = 0x00;
+			wordLen = strlen(buffer);
+			if (con->curX + wordLen > maxLine) {
+				printLineCon(con, "");
+			}
 			printCon(con, buffer);
-			wordStart = 0;
+			wordStart = -1;
+			wordEnd = -1;
 			buf = 0;
-			curX = con->curX;
 		}
 	}
 }

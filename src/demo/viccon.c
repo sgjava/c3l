@@ -11,6 +11,7 @@
 #include <screen.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys.h>
 #include <vic.h>
 
 #include "demo.h"
@@ -38,8 +39,7 @@ void done() {
  * Run demo.
  */
 void run(console *con) {
-	wordWrap(con, "The U.S. Coast Guard is asking boaters to be on the lookout for a diver who went missing off the southeast Florida coast on Saturday.");
-	waitKey(con->scr);
+	runConDemo(con, 100);
 }
 
 /*

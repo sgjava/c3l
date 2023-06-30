@@ -156,12 +156,15 @@ for an example of using the ROM character set and the ASCII to PETSCII translati
 of printVicPet.
 
 ### Character mode
-I pretty much include everything you need to take control of character mode. I
+I include everything you need to take control of character mode. I
 also included PETSCII print functions, so you can use the ROM character set
 at 0x1800. To keep things consistent I like to use the VDC's character set since
 that's what you use in normal CP/M mode. You have to think a little different
 using C3L since stdout is no longer visible. stdout still goes to the screen in
 VIC bank 0, so that could be used for debugging, etc.
+
+I've included a [concole](https://github.com/sgjava/c3l/blob/main/c3l/console.h) struct 
+to handle common console tasks like output with automatic scrolling and word wrap.
 
 ![VIC Demo 1](images/vicdemo1.png)
 

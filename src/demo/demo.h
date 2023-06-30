@@ -14,5 +14,8 @@
 extern void waitKey(screen *scr);
 extern void readLine(console *con);
 extern void keyboard(screen *scr);
+extern void runKeyDemo(console *con);
+extern char* generateSentence();
+extern void runConDemo(console *con, uchar sentences);
 
 #endif

@@ -37,23 +37,8 @@ void done() {
 /*
  * Run demo.
  */
-void run(console *con, uchar *vicMem) {
-	screen *scr = con->scr;
-	char str[40];
-	(scr->print)(scr, 0, 0, "Low level key scan of standard and      "
-			"extended keyboard. You can also decode  "
-			"unshifted and shifted characters. CIA 1 "
-			"interrupts are disabled, so as not to   "
-			"disrupt the key scan.");
-	sprintf(str, "mem: %04x", vicMem);
-	(scr->print)(scr, 0, 6, str);
-	sprintf(str, "chr: %04x", scr->chrMem);
-	(scr->print)(scr, 0, 7, str);
-	sprintf(str, "scr: %04x", scr->scrMem);
-	(scr->print)(scr, 0, 8, str);
-	waitKey(scr);
-	keyboard(scr);
-	readLine(con);
+void run(console *con) {
+	runKeyDemo(con);
 }
 
 main() {
@@ -64,7 +49,7 @@ main() {
 	/* Create console struct */
 	console *con = (console*) malloc(sizeof(console));
 	init(con, scr);
-	run(con, vicMem);
+	run(con);
 	done();
 	/* Free memory */
 	free(vicMem);

@@ -20,8 +20,8 @@ void keyboard(screen *scr) {
 	(scr->clearScr)(scr, 32);
 	/* Clear color to white */
 	(scr->clearScrCol)(scr, scrWhite);
-	(scr->print)(scr, 4, 0, "Standard and extended key scan");
-	(scr->printCol)(scr, 0, 2, scrLightBlue,
+	(scr->print)(scr, (scr->scrWidth - 30) / 2, 0, "Standard and extended key scan");
+	(scr->printCol)(scr, (scr->scrWidth - 32) / 2, 2, scrLightBlue,
 			" 0  1  2  3  4  5  6  7  8  9 10");
 	(scr->printCol)(scr, 0, 6, scrCyan, "Key pressed:");
 	(scr->printCol)(scr, 0, 24, scrYellow, "Press Return");
@@ -32,7 +32,7 @@ void keyboard(screen *scr) {
 				ciaKeyScan[0], ciaKeyScan[1], ciaKeyScan[2], ciaKeyScan[3],
 				ciaKeyScan[4], ciaKeyScan[5], ciaKeyScan[6], ciaKeyScan[7],
 				ciaKeyScan[8], ciaKeyScan[9], ciaKeyScan[10]);
-		(scr->print)(scr, 0, 4, str);
+		(scr->print)(scr, (scr->scrWidth - 32) / 2, 4, str);
 		free(ciaKeyScan);
 		key = decodeKey();
 		if (key == 0) {
