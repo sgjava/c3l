@@ -14,23 +14,33 @@
  */
 void scrollCon(console *con, char *str) {
 	screen *scr = con->scr;
-	ushort scrOfs = con->curY * scr->scrWidth + con->curX;
+	ushort scrOfs = offsetCon(con);
 	ushort len = strlen(str);
 	/* Do we need to scroll? */
 	if (scrOfs + len > scr->scrSize) {
-        uchar y = (scrOfs + len - scr->scrSize) / scr->scrWidth + 1;
-        /* First scroll, so bottom line can be blanked */
-        (scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
-		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth,
-				32);
-        scrOfs = scrOfs - (y * scr->scrWidth);
-        y -= 1;
-        /* Scroll Y lines */
-		for (; y > 0; y--) {
+		uchar y = (scrOfs + len - scr->scrSize) / scr->scrWidth + 1;
+		/* First scroll, so bottom line can be blanked */
+		if (con->colorOn) {
+			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1,
+					scr->scrHeight - 1);
+		} else {
 			(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 		}
+		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
+				scr->scrWidth, 32);
+		scrOfs = scrOfs - (y * scr->scrWidth);
+		y -= 1;
+		/* Scroll Y lines */
+		for (; y > 0; y--) {
+			if (con->colorOn) {
+				(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1,
+						scr->scrHeight - 1);
+			} else {
+				(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1,
+						scr->scrHeight - 1);
+			}
+		}
 		/* Set new cursor position for print */
-		con->curY = scrOfs / scr->scrWidth;
-		con->curX = scrOfs - (con->curY * scr->scrWidth);
+		setCurCon(con, scrOfs);
 	}
 }

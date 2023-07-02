@@ -41,6 +41,14 @@ typedef struct console {
 	 * Cursor character.
 	 */
 	uchar curChar;
+	/*
+	 * Color on.
+	 */
+	uchar colorOn;
+	/*
+	 * Character color.
+	 */
+	uchar color;
 };
 
 extern void initCon(console *con, screen *scr);
@@ -51,5 +59,6 @@ extern char* readLineCon(console *con, uchar len);
 extern ushort offsetCon(console *con);
 extern void setCurCon(console *con, ushort offset);
 extern void printWrapCon(console *con, char *str);
+extern void clearHomeCon(console *con);
 
 #endif

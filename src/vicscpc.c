@@ -15,6 +15,9 @@
 void printVicCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
 	ushort colOfs = (ushort) scr->scrColMem + (y * scr->scrWidth) + x;
 	ushort len = strlen(str);
-	fillVicMemCol(colOfs, len, scr->color[color]);
-	printVic(scr, x, y, str);
+	/* 0 length not allowed for fillVicMemCol */
+	if (len > 0) {
+		fillVicMemCol(colOfs, len, scr->color[color]);
+		printVic(scr, x, y, str);
+	}
 }

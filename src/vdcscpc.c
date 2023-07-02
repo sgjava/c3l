@@ -13,7 +13,11 @@
  * Print with color.
  */
 void printVdcCol(screen *scr, uchar x, uchar y, uchar color, char *str) {
-	fillVdcMem((uchar*) (y * scr->scrWidth) + (ushort) scr->scrColMem + x,
-			strlen(str), scr->color[color]);
-	printVdc(scr, x, y, str);
+	ushort len = strlen(str);
+	/* No need to print empty string */
+	if (len > 0) {
+		fillVdcMem((uchar*) (y * scr->scrWidth) + (ushort) scr->scrColMem + x,
+				len, scr->color[color]);
+		printVdc(scr, x, y, str);
+	}
 }

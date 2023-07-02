@@ -13,10 +13,11 @@ void printWrapCon(console *con, char *str) {
 	char buffer[81];
 	ushort i = 0, wordLen, len = strlen(str);
 	int wordStart = -1, wordEnd = -1;
-	uchar maxLine = con->scr->scrWidth - 1, buf = 0;
-	while (i < len) {
+	uchar maxLine = con->scr->scrWidth - 1, buf = 0, maxBuf = sizeof(buffer)
+			- 1;
+	while (i < len && buf < maxBuf) {
 		/* Load word buffer using space delimiter */
-		while (i < len && wordEnd < 0) {
+		while (i < len && wordEnd < 0 && buf < maxBuf) {
 			/* Find first non space char */
 			if (str[i] != ' ') {
 				if (wordStart < 0) {

@@ -16,4 +16,6 @@ void initCon(console *con, screen *scr) {
 	con->curY = 0;
 	con->scr = scr;
 	con->curChar = '_';
+	con->colorOn = 0;
+	con->color = scrWhite;
 }

@@ -16,17 +16,24 @@ void printCon(console *con, char *str) {
 	screen *scr = con->scr;
 	ushort scrOfs;
 	scrollCon(con, str);
-	(scr->print)(scr, con->curX, con->curY, str);
+	if (con->colorOn) {
+		(scr->printCol)(scr, con->curX, con->curY, con->color, str);
+	} else {
+		(scr->print)(scr, con->curX, con->curY, str);
+	}
 	/* Calculate new cursor position */
-	scrOfs = con->curY * scr->scrWidth + con->curX + strlen(str);
+	scrOfs = offsetCon(con) + strlen(str);
 	/* Advance cursor */
-	con->curY = scrOfs / scr->scrWidth;
-	con->curX = scrOfs - (con->curY * scr->scrWidth);
+	setCurCon(con, scrOfs);
 	/* Display cursor if enabled */
 	if (con->curOn) {
 		char cursor[2];
 		cursor[0] = con->curChar;
 		cursor[1] = 0x00;
-		(scr->print)(scr, con->curX, con->curY, cursor);
+		if (con->colorOn) {
+			(scr->printCol)(scr, con->curX, con->curY, con->color, cursor);
+		} else {
+			(scr->print)(scr, con->curX, con->curY, cursor);
+		}
 	}
 }

@@ -14,12 +14,7 @@
 void readLine(console *con) {
 	screen *scr = con->scr;
 	char *str;
-	/* Clear screen to spaces */
-	(scr->clearScr)(scr, 32);
-	/* Clear color to white */
-	(scr->clearScrCol)(scr, scrWhite);
-	con->curX = 0;
-	con->curY = 0;
+	clearHomeCon(con);
 	printLineCon(con, "Type in line and press return:");
 	printLineCon(con, "");
 	str = readLineCon(con, 255);

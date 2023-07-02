@@ -18,10 +18,10 @@ ciagkc.obj \
 ciagks.obj \
 ciaglkc.obj \
 ciagrkc.obj \
+conclr.obj \
 coninit.obj \
 conrl.obj \
 conww.obj \
-conxy.obj \
 grbezier.obj \
 grcir.obj \
 grellip.obj \
@@ -111,8 +111,9 @@ vicsb.obj \
 scatop.obj \
 vicscpc.obj \
 vicbmbm.obj \
-conofs.obj \
 vicsr.obj \
 conprl.obj \
 conpr.obj \
-conscr.obj
+conscr.obj \
+conofs.obj \
+conxy.obj 

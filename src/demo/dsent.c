@@ -8,7 +8,9 @@
 #include <stdlib.h>
 #include <sys.h>
 #include <vic.h>
-
+/*
+ * Generate random sentence about birds.
+ */
 char* generateSentence() {
 	static char* articles[] = {"The", "A"};
 	static char* nouns[] = {"blue jay", "cardinal", "eastern phoebe", "grackle", "sandhill crane"};

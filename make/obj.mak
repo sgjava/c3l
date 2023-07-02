@@ -19,6 +19,7 @@ ciagkc.c \
 ciagks.c \
 ciaglkc.c \
 ciagrkc.c \
+conclr.c \
 coninit.c \
 conofs.c \
 conpr.c \
