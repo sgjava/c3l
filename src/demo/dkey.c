@@ -20,7 +20,8 @@ void keyboard(screen *scr) {
 	(scr->clearScr)(scr, 32);
 	/* Clear color to white */
 	(scr->clearScrCol)(scr, scrWhite);
-	(scr->print)(scr, (scr->scrWidth - 30) / 2, 0, "Standard and extended key scan");
+	(scr->print)(scr, (scr->scrWidth - 30) / 2, 0,
+			"Standard and extended key scan");
 	(scr->printCol)(scr, (scr->scrWidth - 32) / 2, 2, scrLightBlue,
 			" 0  1  2  3  4  5  6  7  8  9 10");
 	(scr->printCol)(scr, 0, 6, scrCyan, "Key pressed:");

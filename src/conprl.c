@@ -24,7 +24,8 @@ void printLineCon(console *con, char *str) {
 		con->curY++;
 	} else {
 		if (con->colorOn) {
-			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
+			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1,
+					scr->scrHeight - 1);
 		} else {
 			(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 		}

@@ -18,7 +18,7 @@
  */
 void runConDemo(console *con, uchar sentences) {
 	static uchar colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
-			scrRed, scrLightRed, };
+	scrRed, scrLightRed, };
 	uchar i;
 	char *str;
 	screen *scr = con->scr;

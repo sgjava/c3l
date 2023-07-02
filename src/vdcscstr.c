@@ -11,7 +11,7 @@
 /*
  * Copy VDC memory to C string.
  */
-void copyVdcToStr(screen* scr, ushort offest, char *str, ushort len) {
+void copyVdcToStr(screen *scr, ushort offest, char *str, ushort len) {
 	ushort vdcOfs = (ushort) scr->scrMem + offest, i;
 	outVdc(vdcUpdAddrHi, (char) (vdcOfs >> 8));
 	outVdc(vdcUpdAddrLo, (char) vdcOfs);
