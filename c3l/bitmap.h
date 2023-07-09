@@ -13,6 +13,24 @@
 
 #include "hitech.h"
 
+/* Generic color mapping */
+#define bmpBlack       0
+#define bmpWhite       1
+#define bmpRed         2
+#define bmpCyan        3
+#define bmpPurple      4
+#define bmpGreen       5
+#define bmpBlue        6
+#define bmpYellow      7
+#define bmpOrange      8
+#define bmpBrown       9
+#define bmpLightRed   10
+#define bmpDarkGray   11
+#define bmpMedGray    12
+#define bmpLightGreen 13
+#define bmpLightBlue  14
+#define bmpLightGray  15
+
 /*
  * Forward reference for function pointer typedefs.
  */
@@ -33,6 +51,10 @@ typedef void (*printBmpColPtr)(bitmap*, uchar, uchar, uchar, char*);
  * We treat the bitmap struct like an object and encapsulate member variables and function pointers that allow polymorphism.
  */
 typedef struct bitmap {
+	/*
+	 * Color mapping
+	 */
+	uchar color[16];
 	/*
 	 * Screen width in characters.
 	 */
@@ -108,7 +130,7 @@ extern void drawBezier(bitmap *bmp, int x0, int y0, int x1, int y1, int x2,
 		int y2, uchar color);
 extern void drawEllipse(bitmap *bmp, int xc, int yc, int a, int b, uchar color);
 extern void drawCircle(bitmap *bmp, int xc, int yc, int a, uchar color);
-extern void drawRect(bitmap *bmp, int x0, int y0, int x1, int y1, uchar color);
+extern void drawRect(bitmap *bmp, int x, int y, int w, int h, uchar color);
 extern void drawSquare(bitmap *bmp, int x, int y, int len, uchar color);
 
 #endif

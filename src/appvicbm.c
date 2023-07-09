@@ -16,15 +16,16 @@
  */
 void initVicBmpMode(bitmap *bmp, uchar bgCol, uchar fgCol, uchar pixCol) {
 	uchar vicBank;
+	saveVic();
 	/* Set border and background color */
-	outp(vicBorderCol, fgCol);
-	outp(vicBgCol0, bgCol);
+	outp(vicBorderCol, bmp->color[fgCol]);
+	outp(vicBgCol0, bmp->color[bgCol]);
 	/* Clear bitmap */
-	(bmp->clearBmpCol)(bmp, bgCol);
+	(bmp->clearBmpCol)(bmp, bmp->color[bgCol]);
 	/* Clear bitmap */
 	(bmp->clearBmp)(bmp, 0);
-	/* Set foreground and black background pixel colors */
-	(bmp->clearBmpCol)(bmp, pixCol);
+	/* Set foreground and background pixel colors */
+	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol] << 4) | (bgCol & 0x0f));
 	/* Copy VDC alt char set to VIC mem */
 	copyVdcChrMem(bmp->bmpChrMem, 0x3000, 256);
 	/* Set standard bitmap mode using MMU bank 1 */

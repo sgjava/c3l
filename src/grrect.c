@@ -10,13 +10,13 @@
 /*
  * Draw rectangle using line drawing.
  */
-void drawRect(bitmap *bmp, int x0, int y0, int x1, int y1, uchar color) {
+void drawRect(bitmap *bmp, int x, int y, int w, int h, uchar color) {
 	/* Top */
-	drawLine(bmp, x0, y0, x1, y0, color);
+	drawLine(bmp, x, y, x + w - 1, y, color);
 	/* Left */
-	drawLine(bmp, x0, y0, x0, y1, color);
+	drawLine(bmp, x, y + 1, x, y + h - 1, color);
 	/* Right */
-	drawLine(bmp, x1, y0, x1, y1, color);
+	drawLine(bmp, x + w -1, y + 1, x + w - 1, y + h - 1, color);
 	/* Bottom */
-	drawLine(bmp, x0, y1, x1, y1, color);
+	drawLine(bmp, x, y + h - 1, x + w - 1, y + h - 1, color);
 }

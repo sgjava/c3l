@@ -81,8 +81,6 @@
 #define vicLightBlue  14
 #define vicLightGray  15
 
-extern void saveVic();
-extern void restoreVic();
 extern uchar* allocVicMem(uchar maxBank);
 extern void setVicMmuBank(uchar mmuRcr);
 extern void setVicBank(uchar vicBank);

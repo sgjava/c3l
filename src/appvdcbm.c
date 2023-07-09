@@ -21,8 +21,8 @@ void initVdcBmpMode(bitmap *bmp, uchar *chrMem, uchar bgCol, uchar fgCol,
 	/* Copy VDC char sets to mem bufer */
 	copyVdcChrMem(chrMem, 0x2000, 512);
 	/* Set bitmap mode */
-	setVdcFgBg(fgCol, bgCol);
+	setVdcFgBg(bmp->color[pixCol], bmp->color[bgCol]);
 	setVdcAttrsOff();
 	setVdcBmpMode((ushort) bmp->bmpMem, (ushort) bmp->bmpColMem);
-	(bmp->clearBmp)(bmp, pixCol);
+	(bmp->clearBmp)(bmp, 0);
 }

@@ -12,6 +12,15 @@
  * Initialize screen struct for VIC.
  */
 void initVdcBmp(bitmap *bmp, ushort bmpMem, ushort colMem, uchar *chrMem) {
+	static uchar vdcColors[16] = { vdcBlack, vdcWhite, vdcDarkRed, vdcLightCyan,
+	vdcLightPurple, vdcDarkGreen, vdcDarkBlue, vdcLightYellow,
+	vdcDarkPurple, vdcDarkYellow, vdcLightRed, vdcDarkCyan, vdcDarkGray,
+	vdcLightGreen, vdcLightBlue, vdcMedGray };
+	/* Map colors */
+	uchar i, len = sizeof(vdcColors);
+	for (i = 0; i < len; i++) {
+		bmp->color[i] = vdcColors[i];
+	}
 	/* VDC Screen configuration */
 	/* Use the alternate character set 0x0800 offset */
 	bmp->bmpChrMem = (uchar*) ((ushort) chrMem) + 0x0800;

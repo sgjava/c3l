@@ -21,7 +21,6 @@ void runConDemo(console *con, uchar sentences) {
 	scrRed, scrLightRed, };
 	uchar i;
 	char *str;
-	screen *scr = con->scr;
 	printWrapCon(con,
 			"Here we use the console functions without color which are faster.");
 	waitKey(con->scr);

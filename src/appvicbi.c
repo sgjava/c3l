@@ -12,6 +12,14 @@
  * Initialize screen struct for VIC.
  */
 void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem) {
+	static uchar vicColors[16] = { vicBlack, vicWhite, vicRed, vicCyan,
+	vicPurple, vicGreen, vicBlue, vicYellow, vicOrange, vicBrown, vicLightRed,
+	vicDarkGray, vicMedGray, vicLightGreen, vicLightBlue, vicLightGray };
+	/* Map colors */
+	uchar i, len = sizeof(vicColors);
+	for (i = 0; i < len; i++) {
+		bmp->color[i] = vicColors[i];
+	}
 	/* VIC bitmap configuration */
 	bmp->bmpChrMem = (uchar*) chrMem;
 	bmp->bmpColMem = (uchar*) colMem;
@@ -22,6 +30,7 @@ void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem) {
 	bmp->scrWidth = 40;
 	bmp->scrHeight = 25;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
+	/* Based on NTSC */
 	bmp->aspectRatio = 2;
 	bmp->clearBmp = clearVicBmp;
 	bmp->clearBmpCol = clearVicBmpCol;
@@ -29,4 +38,5 @@ void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem) {
 	bmp->drawLineH = drawVicLineH;
 	bmp->drawLineV = drawVicLineV;
 	bmp->printBmp = printVicBmp;
+	bmp->printBmpCol = printVicBmpCol;
 }

@@ -14,8 +14,8 @@ void drawVicLineH(bitmap *bmp, ushort x, ushort y, ushort len, uchar color) {
 	static uchar fillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
 	ushort pixByte = bmp->scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
 	uchar firstBits = x % 8;
-	uchar lastBits = (x + len - 1) % 8;
-	ushort fillBytes = (len - lastBits - 1) >> 3;
+	uchar lastBits = (x + len) % 8;
+	ushort fillBytes;
 	uchar fillByte;
 	ushort i;
 	if (firstBits > 0) {
@@ -35,10 +35,14 @@ void drawVicLineH(bitmap *bmp, ushort x, ushort y, ushort len, uchar color) {
 	} else {
 		fillByte = 0x00;
 	}
-	/* Fill in bytes */
-	for (i = 0; i < fillBytes; i++) {
-		bmp->bmpMem[pixByte] = fillByte;
-		pixByte += 8;
+	/* We only use byte fill if length > 7 pixels */
+	if (len > 7) {
+		fillBytes = (len - lastBits) >> 3;
+		/* Fill in bytes */
+		for (i = 0; i < fillBytes; i++) {
+			bmp->bmpMem[pixByte] = fillByte;
+			pixByte += 8;
+		}
 	}
 	/* Handle left over bits on last byte */
 	if (lastBits > 0) {
