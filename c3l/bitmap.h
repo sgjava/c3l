@@ -92,9 +92,13 @@ typedef struct bitmap {
 	 */
 	uchar *bmpChrMem;
 	/*
-	 * Aspect ratio used by circle and square functions.
+	 * Aspect ratio multiplier used by circle and square functions.
 	 */
-	uchar aspectRatio;
+	uchar aspectRatioMul;
+	/*
+	 * Aspect ratio divisor used by circle and square functions.
+	 */
+	uchar aspectRatioDiv;
 	/*
 	 * Set pixel.
 	 */

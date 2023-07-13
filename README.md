@@ -8,15 +8,14 @@ structures, respectively. By employing these structures, developers can utilize 
 need for customized code in their programs.
 
 A noteworthy advantage of this approach is the ability to dynamically set the target display (VIC, VDC, or virtual screen) during runtime. Initialization
-involves simply specifying the desired display chip or utilizing both simultaneously. Notably, the VIC offers a feature where the PETSCII character
+involves simply specifying the desired display chip or utilizing both simultaneously. The VIC offers a feature where the PETSCII character
 ROM can be utilized without any translation concerns. In the event of switching to the ASCII character set (the default for CP/M), only a single,
 straightforward change is required. Additionally, the library encompasses CIA (Complex Interface Adapter) and SID (Sound Interface Device) functions to provide
 comprehensive functionality.
 
 Initially conceived as a pure C library, C3L has incorporated Z80 assembler code in specific areas where performance issues arise, such as accessing VIC color memory
-through Z80 IN/OUT instructions. Furthermore, efforts are underway to achieve parity between VIC and VDC by eliminating chip-specific code from the existing demos.
-This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase. While this may seem straightforward
-on the surface, the inclusion of text and bitmap modes introduces additional complexity that must be carefully addressed.
+through Z80 IN/OUT instructions. VIC and VDC parity has been reached for high performance text and bit mapped graphics eliminating chip-specific code.
+This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase.
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
@@ -87,8 +86,7 @@ B0 is used for source and binaries (COM files).
 Install [Eclipse](https://www.eclipse.org/downloads).
 
 You can use the installer to install C/C++ package with JRE already built in. Or you can install JDK and Eclipse. Just make sure you install CDT from the Eclipse Marketplace. Use the default `~/eclipse-workspace` for your workspace since everything is configured to work off that path.
-While you cannot build the project in Eclipse it does syntax checking, refactoring, 
-etc. It's way more advanced than anything on CP/M or DOS to edit a project of this size.
+While you cannot build the project in Eclipse it does syntax checking, refactoring, etc. It's way more advanced than anything on CP/M or DOS to edit a project of this size.
 
 ## Building
 

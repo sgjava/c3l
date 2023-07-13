@@ -11,8 +11,7 @@
  * Draw square using rectangle with aspect ratio adjustment.
  */
 void drawSquare(bitmap *bmp, int x, int y, int len, uchar color) {
-	/* Square approximation based on 1:0.75 aspect ratio */
-	int yLen = (len / bmp->aspectRatio)
-			+ ((len / bmp->aspectRatio) / bmp->aspectRatio);
+	/* Square approximation based on aspect ratio */
+	int yLen = ((len * bmp->aspectRatioMul) / bmp->aspectRatioDiv);
 	drawRect(bmp, x, y, len - 1, yLen - 1, color);
 }

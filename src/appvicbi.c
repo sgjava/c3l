@@ -31,7 +31,8 @@ void initVicBmp(bitmap *bmp, ushort bmpMem, ushort colMem, ushort chrMem) {
 	bmp->scrHeight = 25;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
 	/* Based on NTSC */
-	bmp->aspectRatio = 2;
+	bmp->aspectRatioMul = 3;
+	bmp->aspectRatioDiv = 4;
 	bmp->clearBmp = clearVicBmp;
 	bmp->clearBmpCol = clearVicBmpCol;
 	bmp->setPixel = setVicPix;

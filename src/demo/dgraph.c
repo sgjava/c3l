@@ -80,7 +80,7 @@ void bezier(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
 	drawBox(bmp, x, y, w, h, "Bezier");
 	for (i = 0; i < count; i++) {
-		drawBezier(bmp, (i * 2) + x + 2, y + 2, x + (w / 2), (i * 3) + y, x + w - 2,
+		drawBezier(bmp, (i * 2) + x + 3, y + 3, x + (w / 2), (i * 3) + y, x + w - 3,
 				(i * 4) + y, 1);
 	}
 }
@@ -109,7 +109,7 @@ void squares(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	ushort x0, y0, len;
 	drawBox(bmp, x, y, w, h, "Squares");
 	for (i = 0; i < count; i++) {
-		len = rand() % (h - 12) + 5;
+		len = rand() % 20 + 10;
 		x0 = rand() % (w - len - 2) + x + 2;
 		y0 = rand() % (h - len - 2) + y + 2;
 		drawSquare(bmp, x0, y0, len, 1);
@@ -124,11 +124,26 @@ void ellipses(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	ushort x0, y0, a, b;
 	drawBox(bmp, x, y, w, h, "Ellipses");
 	for (i = 0; i < count; i++) {
-		a = rand() % (w / 2 - 25) + 5;
+		a = rand() % (w / 5) + (w / 5) - 4;
 		b = rand() % (h / 2 - 20) + 5;
-		x0 = rand() % (w / 2) + x + 20;
+		x0 = rand() % (w / 4) + (w / 3) + x + 7;
 		y0 = rand() % (h / 2) + y + 15;
 		drawEllipse(bmp, x0, y0, a, b, 1);
+	}
+}
+
+/*
+ * Draw circles.
+ */
+void circles(bitmap *bmp, int x, int y, int w, int h, uchar count) {
+	uchar i;
+	ushort x0, y0, len;
+	drawBox(bmp, x, y, w, h, "Circles");
+	for (i = 0; i < count; i++) {
+		len = rand() % (h / 5) + 10;
+		x0 = rand() % (w / 3) + (w / 3) + x + 5;
+		y0 = rand() % (h / 2) + y + 15;
+		drawCircle(bmp, x0, y0, len, 1);
 	}
 }
 
@@ -148,9 +163,10 @@ void runGraphDemo(bitmap *bmp) {
 	y = ySize + 17;
 	bezier(bmp, x, y, xSize, ySize, 14);
 	rectangles(bmp, x += xSize + 8, y, xSize, ySize, 10);
-	squares(bmp, x += xSize + 8, y, xSize, ySize, 50);
+	squares(bmp, x += xSize + 8, y, xSize, ySize, 10);
 	x = 0;
 	y += ySize + 9;
-	ellipses(bmp, x += xSize + 8, y, xSize, ySize, 50);
+	ellipses(bmp, x, y, xSize, ySize, 10);
+	circles(bmp, x += xSize + 8, y, xSize, ySize, 10);
 	bitmapWaitKey(bmp);
 }

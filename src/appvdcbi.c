@@ -32,7 +32,9 @@ void initVdcBmp(bitmap *bmp, ushort bmpMem, ushort colMem, uchar *chrMem) {
 	bmp->scrWidth = 80;
 	bmp->scrHeight = 25;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
-	bmp->aspectRatio = 3;
+	/* Based on NTSC */
+	bmp->aspectRatioMul = 1;
+	bmp->aspectRatioDiv = 2;
 	bmp->clearBmp = clearVdcBmp;
 	bmp->clearBmpCol = clearVdcBmpCol;
 	bmp->setPixel = setVdcPix;

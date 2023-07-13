@@ -129,7 +129,7 @@ extern void printVdcBmpCol(bitmap *bmp, uchar x, uchar y, uchar color,
 extern void initVdcScr(screen *scr, ushort scrMem, ushort chrMem);
 extern void initVdcScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol);
 extern void initVdcBmp(bitmap *bmp, ushort bmpMem, ushort colMem, uchar *chrMem);
-extern void initVdcBmpMode(bitmap *bmp, uchar *chrMem, uchar bgCol, uchar fgCol, uchar pixCol);
+extern void initVdcBmpMode(bitmap *bmp, uchar *chrMem, uchar bgCol, uchar fgCol);
 extern void copyVdcToStr(screen* scr, ushort offest, char *str, ushort len);
 extern void doneVdc();
 

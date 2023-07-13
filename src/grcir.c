@@ -11,8 +11,7 @@
  * Draw circle using ellipse with aspect ratio adjustment.
  */
 void drawCircle(bitmap *bmp, int xc, int yc, int a, uchar color) {
-	/* Circle approximation based on 1:0.75 aspect ratio */
-	drawEllipse(bmp, xc, yc, a,
-			(a / bmp->aspectRatio)
-					+ ((a / bmp->aspectRatio) / bmp->aspectRatio), color);
+	/* Circle approximation based on aspect ratio */
+	int b = ((a * bmp->aspectRatioMul) / bmp->aspectRatioDiv);
+	drawEllipse(bmp, xc, yc, a, b, color);
 }

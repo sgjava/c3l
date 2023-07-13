@@ -20,7 +20,7 @@
 void init(bitmap *bmp, uchar *chr) {
 	initCia();
 	initVdcBmp(bmp, vdcScrMem, vdcColMem, chr);
-	initVdcBmpMode(bmp, chr, bmpBlack, bmpBlack, bmpWhite);
+	initVdcBmpMode(bmp, chr, bmpBlack, bmpWhite);
 }
 
 /*
