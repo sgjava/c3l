@@ -11,9 +11,7 @@
 #include <screen.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys.h>
 #include <vic.h>
-
 #include "demo.h"
 
 /*
@@ -43,7 +41,7 @@ void run(console *con) {
 }
 
 /*
- * Configure memory to protect VIC, save off screen and background colors and run demo.
+ * Configure memory to protect VIC and run demo.
  */
 main() {
 	/* Program is small enough to use left over bank 1 memory */

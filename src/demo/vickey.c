@@ -11,7 +11,6 @@
 #include <screen.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys.h>
 #include <vic.h>
 #include "demo.h"
 
@@ -41,6 +40,9 @@ void run(console *con) {
 	runKeyDemo(con);
 }
 
+/*
+ * Configure memory to protect VIC and run demo.
+ */
 main() {
 	/* Program is small enough to use left over bank 1 memory */
 	uchar *vicMem = allocVicMem(1);
