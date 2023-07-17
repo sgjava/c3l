@@ -5,8 +5,8 @@
  */
 
 #include <console.h>
-#include <hitech.h>
 #include <screen.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys.h>
 #include <vic.h>
@@ -20,16 +20,13 @@ void runConDemo(console *con, uchar sentences) {
 	static uchar colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
 	scrRed, scrLightRed, };
 	uchar i;
-	char *str;
 	printWrapCon(con,
 			"Here we use the console functions without color which are faster.");
 	waitKey(con->scr);
 	clearHomeCon(con);
 	srand(inp(vicRaster));
 	for (i = 0; i < sentences; i++) {
-		str = generateSentence();
-		printWrapCon(con, str);
-		free(str);
+		printWrapCon(con, "This is no color output.");
 		if (con->curX != 0) {
 			printCon(con, " ");
 		}
@@ -45,9 +42,7 @@ void runConDemo(console *con, uchar sentences) {
 	con->colorOn = 1;
 	for (i = 0; i < sentences; i++) {
 		con->color = colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
-		str = generateSentence();
-		printWrapCon(con, str);
-		free(str);
+		printWrapCon(con, "This is color output.");
 		if (con->curX != 0) {
 			printCon(con, " ");
 		}

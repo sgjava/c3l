@@ -1,7 +1,7 @@
 /*
  * C128 CP/M C Library C3L
  *
- * 8564/8566 VIC-IIe character ROM demo. PETSCII is used instead of CP/M ASCII default.
+ * C128 keyboard demo.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vic.h>
+
 #include "demo.h"
 
 /*

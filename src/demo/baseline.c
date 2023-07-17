@@ -48,5 +48,5 @@ main() {
     outp(0xd506, inp(0xd506) & 0xbf);
     /* ROM/RAM */
     forceMap[0] = 0x7f;
-    setVicBank(bank);
+    setVicBank(0);
 }
