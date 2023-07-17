@@ -1,7 +1,7 @@
 /*
  * C128 CP/M C Library C3L
  *
- * C128 keyboard demo.
+ * C128 console demo.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
