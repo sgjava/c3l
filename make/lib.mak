@@ -116,4 +116,6 @@ conprl.obj \
 conpr.obj \
 conscr.obj \
 conofs.obj \
-conxy.obj 
+conxy.obj \
+vicmmu.obj
+
