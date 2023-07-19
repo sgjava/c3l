@@ -14,7 +14,7 @@ _vicMmuBank:
         pop     de              ;VIC bank 0 (0x00) or 1 (0x40)
         push    de
         push    hl
-        ld		hl,0ff00h       ;C128 configuration register
+        ld      hl,0ff00h       ;C128 configuration register
         ld      a,7eh           ;MMU I/O bit to allow Z80 IN/OUT to work
         ld      (hl),a          ;Do it
         ld      bc,0d506h       ;MMU RAM configuration register
