@@ -19,22 +19,22 @@ defw    0
 psect   text
 
 _fillVicMemCol:
-        pop     hl              ;return address
-        ld      (return),hl     ;save return address      
-        pop     bc              ;address
-        pop     de              ;length
-        pop     hl              ;color
-        ld      a,l             ;a reg holds color
+        pop     hl              ; Return address
+        ld      (return),hl     ; Save return address      
+        pop     bc              ; Address
+        pop     de              ; Length
+        pop     hl              ; Color
+        ld      a,l             ; a reg holds color
         push    hl
         push    de
         push    bc
-        ld      hl,(return)     ;get saved return address        
+        ld      hl,(return)     ; Get saved return address        
         push    hl
         ld      l,a      
 1:        
-        out     (c),l           ;set color memory
-        inc     bc              ;set for next address
-        dec     de              ;length -= 1
+        out     (c),l           ; Set color memory
+        inc     bc              ; Set for next address
+        dec     de              ; Length -= 1
 		ld		a,d
 		or		e        
         jr      nz,1b 

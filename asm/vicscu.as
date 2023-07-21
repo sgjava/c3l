@@ -10,25 +10,25 @@ global  _scrollVicUpAsm
 
 psect   data
 
-;return address
+; Return address
 
 return:
 
 defw    0
 
-;line length
+; Line length
 
 length:
 
 defw    0
 
-;lines
+; Lines
 
 lines:
 
 defw    0
 
-;dest line
+; Dest line
 
 dest:
 
@@ -37,25 +37,25 @@ defw    0
 psect   text
 
 _scrollVicUpAsm:
-        pop     hl              ;return address
-        ld      (return),hl     ;save return address
-        pop     bc              ;dest address
-        ld      (dest),bc       ;save dest address
-        pop     hl              ;line length
-        ld      (length),hl     ;save line length             
-        pop     de              ;lines
-        ld      (lines),de      ;save lines        
+        pop     hl              ; Return address
+        ld      (return),hl     ; Save return address
+        pop     bc              ; Dest address
+        ld      (dest),bc       ; Save dest address
+        pop     hl              ; Line length
+        ld      (length),hl     ; Save line length             
+        pop     de              ; Lines
+        ld      (lines),de      ; Save lines        
         push    de
         push    hl
         push    bc
-        ld      hl,(return)     ;get saved return address        
+        ld      hl,(return)     ; Get saved return address        
         push    hl
-        ld      hl,(lines)      ;prime lines     
+        ld      hl,(lines)      ; Prime lines     
 1:
         ld      (lines),hl
-        ld      hl,(dest)       ;hl is source
+        ld      hl,(dest)       ; hl is source
         ld      bc,40
-        add     hl,bc           ;hl = hl+bc
+        add     hl,bc           ; hl = hl+bc
         ld      de,(dest)
         ld      bc,(length)
         ld      a,(hl)
@@ -66,10 +66,10 @@ _scrollVicUpAsm:
         ldir
         ld      hl,(dest)
         ld      bc,40
-        add     hl,bc           ;hl = hl_bc
-        ld      (dest),hl       ;save dest
+        add     hl,bc           ; hl = hl_bc
+        ld      (dest),hl       ; Save dest
         ld      hl,(lines)
-        dec     l               ;l = l-1
-        jr   	nz,1b           ;until 0          
+        dec     l               ; l = l-1
+        jr   	nz,1b           ; Until 0          
         ret
         

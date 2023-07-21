@@ -10,19 +10,19 @@ global  _setVdcPixAsm
 
 psect   data
 
-;fast pixel look up using x mod 8 as index into bit table
+; Fast pixel look up using x mod 8 as index into bit table
 
 setBitTable:
 
 defb    -128, 64, 32, 16, 8, 4, 2, 1
 
-;fast pixel look up using x mod 8 as index into bit table
+; Fast pixel look up using x mod 8 as index into bit table
 
 clearBitTable:
 
 defb    127, -65, -33, -17, -9, -5, -3, -2
 
-;fast y * 80 look up using y as index into table
+; Fast y * 80 look up using y as index into table
 
 yTable:
 
@@ -47,19 +47,19 @@ defw    13600, 13680, 13760, 13840, 13920, 14000, 14080, 14160, 14240, 14320
 defw    14400, 14480, 14560, 14640, 14720, 14800, 14880, 14960, 15040, 15120
 defw    15200, 15280, 15360, 15440, 15520, 15600, 15680, 15760, 15840, 15920
 
-;return address
+; Return address
 
 return:
 
 defw    0
 
-;Bitmap memory
+; Bitmap memory
 
 bmpMem:
 
 defw    0
 
-;color
+; Color
 
 color:
 
@@ -69,121 +69,97 @@ defw    0
 psect   text
 _setVdcPixAsm:
 
-        pop     hl              ;return address
-        ld      (return),hl     ;save return address      
-        pop     bc              ;x
-        pop     de              ;y
-        pop     hl              ;color
-        ld      (color),hl      ;save color
-        pop     hl              ;bitmap address
-        ld      (bmpMem),hl     ;save bitmap address          
+        pop     hl              ; Return address
+        ld      (return),hl     ; Save return address      
+        pop     bc              ; x value
+        pop     de              ; y value
+        pop     hl              ; Color value
+        ld      (color),hl      ; Save color
+        pop     hl              ; Bitmap address
+        ld      (bmpMem),hl     ; Save bitmap address          
         push    hl
-        ld      hl,(color)      ;get saved color        
+        ld      hl,(color)      ; Get saved color        
         push    hl                   
         push    de
         push    bc
-        ld      hl,(return)     ;get saved return address        
+        ld      hl,(return)     ; Get saved return address        
         push    hl
-
-                                ;calc y * 80 using lookup table
-        ld      hl,yTable       ;load lookup table address into hl
-        add     hl,de           ;hl = hl + de
-        add     hl,de           ;hl = hl + de
-        ld      a,(hl)          ;a = table value low byte
-        inc     hl              ;hl = hl + 1
-        ld      h,(hl)          ;h = table value high byte 
-        ld      l,a             ;l = table value low byte
-        
-        ld      a,c             ;a = x low byte
-        and     07h             ;a = x mod 8       
-
-        srl     b               ;bc = x / 8
+        ld      hl,yTable       ; Load lookup table address into hl
+        add     hl,de           ; hl = hl + de
+        add     hl,de           ; hl = hl + de
+        ld      a,(hl)          ; a = table value low byte
+        inc     hl              ; hl = hl + 1
+        ld      h,(hl)          ; h = table value high byte 
+        ld      l,a             ; l = table value low byte       
+        ld      a,c             ; a = x low byte
+        and     07h             ; a = x mod 8
+        srl     b               ; bc = x / 8
         rr      c
         srl     b
         rr      c
         srl     b
         rr      c
-
-        add     hl,bc            ;hl = (y * 80) + (x / 8)
-        ld      de,(bmpMem)      ;de = bitmap offset
-        add     hl,de            ;hl = (y * 80) + (x / 8) + bit map offset
-        
-        ex      de,hl            ;swap de and hl
-        ld      b,0              ;bc = x mod 8
+        add     hl,bc            ; hl = (y * 80) + (x / 8)
+        ld      de,(bmpMem)      ; de = bitmap offset
+        add     hl,de            ; hl = (y * 80) + (x / 8) + bit map offset        
+        ex      de,hl            ; Swap de and hl
+        ld      b,0              ; bc = x mod 8
         ld      c,a
-        ld      a,(color)        ;get color
+        ld      a,(color)        ; Get color
         cp      0
-        jr      z,1f             ;zero color means clear pixel  
-
-        ld      hl,setBitTable   ;load bit table address into hl
-        add     hl,bc            ;hl = bit table addr + (x mod 8)
-        ld      a,(hl)           ;a = bit to set from bit table 
-        ex      de,hl            ;swap de and hl
-
-        ld      bc,0d600h        ;prime pump with vdc status register        
-        
-        ld      d,18             ;set vdc update addr
+        jr      z,1f             ; Zero color means clear pixel
+        ld      hl,setBitTable   ; Load bit table address into hl
+        add     hl,bc            ; hl = bit table addr + (x mod 8)
+        ld      a,(hl)           ; a = bit to set from bit table 
+        ex      de,hl            ; Swap de and hl
+        ld      bc,0d600h        ; Prime pump with VDC status register                
+        ld      d,18             ; Set VDC update addr
         ld      e,h
         call    vdcSet
-
         ld      d,19
         ld      e,l
         call    vdcSet
-
-        ld      d,31             ;get current byte
+        ld      d,31             ;Get current byte
         call    vdcGet
-
-        or      e                ;a = current byte or with bit table bit
-
-        ld      d,18             ;set vdc update addr
+        or      e                ; a = current byte or with bit table bit
+        ld      d,18             ; Set VDC update addr
         ld      e,h
         call    vdcSet
-
         ld      d,19
         ld      e,l
         call    vdcSet
-
-        ld      d,31             ;set pixel
+        ld      d,31             ; Set pixel
         ld      e,a
         call    vdcSet
-
-        ret
-        
+        ret        
 1:
-        ld      hl,clearBitTable ;load bit table address into hl
-        add     hl,bc            ;hl = bit table addr + (x mod 8)
-        ld      a,(hl)           ;a = bit to set from bit table 
-        ex      de,hl            ;swap de and hl
-        ld      bc,0d600h        ;prime pump with vdc status register        
-        
-        ld      d,18             ;set vdc update addr
+        ld      hl,clearBitTable ; Load bit table address into hl
+        add     hl,bc            ; hl = bit table addr + (x mod 8)
+        ld      a,(hl)           ; a = bit to set from bit table 
+        ex      de,hl            ; Swap de and hl
+        ld      bc,0d600h        ; Prime pump with VDC status register                
+        ld      d,18             ; Set VDC update addr
         ld      e,h
         call    vdcSet
-
         ld      d,19
         ld      e,l
         call    vdcSet
-
-        ld      d,31             ;get current byte
+        ld      d,31             ; Get current byte
         call    vdcGet
-
-        and      e               ;a = current byte or with bit table bit
-
-        ld      d,18             ;set vdc update addr
+        and      e               ; a = current byte or with bit table bit
+        ld      d,18             ; Set VDC update addr
         ld      e,h
         call    vdcSet
 
         ld      d,19
         ld      e,l
         call    vdcSet
-
-        ld      d,31             ;set pixel
+        ld      d,31             ; Set pixel
         ld      e,a
         call    vdcSet
-
         ret
 
-;set vdc reg, d = reg, e = val
+; Set VDC register: d = reg, e = val
 
 vdcSet:
         out     (c),d
@@ -196,7 +172,7 @@ vdcSet:
         dec     c
         ret
 
-;get vdc reg, d = reg, e = val
+;Get VDC register: d = reg, e = val
 
 vdcGet:
         out     (c),d

@@ -10,19 +10,19 @@ global  _setVicPixAsm
 
 psect   data
 
-;fast pixel look up using x mod 8 as index into bit table
+; Fast pixel look up using x mod 8 as index into bit table
 
 setBitTable:
 
 defb    -128, 64, 32, 16, 8, 4, 2, 1
 
-;fast pixel look up using x mod 8 as index into bit table
+; Fast pixel look up using x mod 8 as index into bit table
 
 clearBitTable:
 
 defb    127, -65, -33, -17, -9, -5, -3, -2
 
-;fast y * 40 look up using y as index into table
+; Fast y * 40 look up using y as index into table
 
 yTable:
 
@@ -47,31 +47,31 @@ defw    6800, 6840, 6880, 6920, 6960, 7000, 7040, 7080, 7120, 7160
 defw    7200, 7240, 7280, 7320, 7360, 7400, 7440, 7480, 7520, 7560
 defw    7600, 7640, 7680, 7720, 7760, 7800, 7840, 7880, 7920, 7960
 
-;return address
+; Return address
 
 return:
 
 defw    0
 
-;Bitmap memory
+; Bitmap memory
 
 bmpMem:
 
 defw    0
 
-;x
+; x
 
 x:
 
 defw    0
 
-;y
+; y
 
 y:
 
 defw    0
 
-;color
+; Color
 
 color:
 
@@ -80,71 +80,69 @@ defw    0
 psect   text
 _setVicPixAsm:
 
-        pop     hl              ;return address
-        ld      (return),hl     ;save return address      
-        pop     bc              ;x
-        ld      (x),bc          ;save x
-        pop     de              ;y
-        ld      (y),de          ;save y
-        pop     hl              ;color
-        ld      (color),hl      ;save color
-        pop     hl              ;bitmap address
-        ld      (bmpMem),hl     ;save bitmap address          
+        pop     hl               ; Return address
+        ld      (return),hl      ; Save return address      
+        pop     bc               ; x
+        ld      (x),bc           ; Save x
+        pop     de               ; y
+        ld      (y),de           ; Save y
+        pop     hl               ; Color
+        ld      (color),hl       ; Save color
+        pop     hl               ; Bitmap address
+        ld      (bmpMem),hl      ; Save bitmap address          
         push    hl
-        ld      hl,(color)      ;get saved color        
+        ld      hl,(color)       ; Get saved color        
         push    hl                   
         push    de
         push    bc
-        ld      hl,(return)     ;get saved return address        
+        ld      hl,(return)      ; Get saved return address        
         push    hl
 
-        ld      a,e             ;y low byte (e should be 0x00)
-        and     0f8h            ;y & 0xf8
-        ld      e,a             ;save in e         
-        ld      hl,yTable       ;load lookup table address into hl
-        add     hl,de           ;hl = hl + de
-        add     hl,de           ;hl = hl + de        
-        ld      a,(hl)          ;a = table value low byte
-        inc     hl              ;hl = hl + 1
-        ld      h,(hl)          ;h = table value high byte 
-        ld      l,a             ;l = table value low byte
+        ld      a,e              ; y low byte (d should be 0x00)
+        and     0f8h             ; y & 0xf8
+        ld      e,a              ; Save in e         
+        ld      hl,yTable        ; Load lookup table address into hl
+        add     hl,de            ; hl = hl + de
+        add     hl,de            ; hl = hl + de        
+        ld      a,(hl)           ; a = table value low byte
+        inc     hl               ; hl = hl + 1
+        ld      h,(hl)           ; h = table value high byte 
+        ld      l,a              ; l = table value low byte
         ld      a,c
         and     0f8h
-        ld      c,a             ;x low & 0xf8 (no need to and high byte with 0x01)
+        ld      c,a              ; x low & 0xf8 (no need to and high byte with 0x01)
         add     hl,bc
         ld      de,(y)        
-        ld      a,e             ;a = y low byte
-        and     07h             ;a = y & 0x07
+        ld      a,e              ; a = y low byte
+        and     07h              ; a = y & 0x07
         ld      e,a
         add     hl,de
-
-        ld      de,(bmpMem)      ;de = bitmap offset
-        add     hl,de            ;hl = (y & 0xf8) + (x & 0x1f8) + (y & 0x07) + bit map offset
-        ex      de,hl            ;swap de and hl
+        ld      de,(bmpMem)      ; de = bitmap offset
+        add     hl,de            ; hl = (y & 0xf8) + (x & 0x1f8) + (y & 0x07) + bit map offset
+        ex      de,hl            ; Swap de and hl
         ld      a,(x)
-        and     07h              ;a = x mod 8              
-        ld      b,0              ;b = x mod 8 high byte
-        ld      c,a              ;c = x mod 8 low byte    
-        ld      a,(color)        ;get color
+        and     07h              ; a = x mod 8              
+        ld      b,0              ; b = x mod 8 high byte
+        ld      c,a              ; c = x mod 8 low byte    
+        ld      a,(color)        ; Get color
         cp      0
-        jr      z,1f             ;zero color means clear pixel  
+        jr      z,1f             ; Zero color means clear pixel  
         
-        ld      hl,setBitTable   ;load bit table address into hl
-        add     hl,bc            ;hl = bit table addr + (x mod 8)
-        ld      a,(hl)           ;a = bit to set from bit table 
-        ex      de,hl            ;swap de and hl
-        ld      e,(hl)           ;get bitmap byte
-        or      e                ;a = current byte or with bit table bit
+        ld      hl,setBitTable   ; Load bit table address into hl
+        add     hl,bc            ; hl = bit table addr + (x mod 8)
+        ld      a,(hl)           ; a = bit to set from bit table 
+        ex      de,hl            ; Swap de and hl
+        ld      e,(hl)           ; Get bitmap byte
+        or      e                ; a = current byte or with bit table bit
         ld      (hl),a
-        ret
-        
+        ret        
 1:
-        ld      hl,clearBitTable ;load bit table address into hl
-        add     hl,bc            ;hl = bit table addr + (x mod 8)
-        ld      a,(hl)           ;a = bit to set from bit table 
-        ex      de,hl            ;swap de and hl
-        ld      e,(hl)           ;get bitmap byte
-        and     e                ;a = current byte or with bit table bit
+        ld      hl,clearBitTable ; Load bit table address into hl
+        add     hl,bc            ; hl = bit table addr + (x mod 8)
+        ld      a,(hl)           ; a = bit to set from bit table 
+        ex      de,hl            ; Swap de and hl
+        ld      e,(hl)           ; Get bitmap byte
+        and     e                ; a = current byte or with bit table bit
         ld      (hl),a
         ret
         

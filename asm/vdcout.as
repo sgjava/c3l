@@ -10,20 +10,20 @@ global  _outVdc
 psect   text
 
 _outVdc:
-        pop     hl              ;return address
-        pop     bc              ;vdc register to write
-        pop     de              ;data
+        pop     hl              ; Return address
+        pop     bc              ; VDC register to write
+        pop     de              ; Data
         push    de
         push    bc
         push    hl
         ld      a,c
-        ld      bc,0d600h       ;vdc status port
-        out     (c),a           ;set reg to read
+        ld      bc,0d600h       ; VDC status port
+        out     (c),a           ; Set reg to read
 1:
-        in      a,(c)           ;repeat
-        and     80h             ;  test bit 7
-        jr      z,1b            ;until bit 7 high
-        inc     c               ;vdc data register
-        out     (c),e           ;set data
+        in      a,(c)           ; Repeat
+        and     80h             ;   Test bit 7
+        jr      z,1b            ; Until bit 7 high
+        inc     c               ; VDC data register
+        out     (c),e           ; Set data
         ret
        

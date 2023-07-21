@@ -10,17 +10,17 @@ global  _inVdc
 psect   text
 
 _inVdc:
-        pop     de              ;return address
-        pop     hl              ;vdc register to set
+        pop     de              ; Return address
+        pop     hl              ; VDC register to set
         push    hl
         push    de
         ld      a,l
-        ld      bc,0d600h       ;vdc status port
-        out     (c),a           ;set reg to read
+        ld      bc,0d600h       ; VDC status port
+        out     (c),a           ; Set reg to read
 1:
-        in      a,(c)           ;repeat
-        and     80h             ; test bit 7
-        jr      z,1b            ;until bit 7 high
-        inc     c               ;vdc data register
-        in      l,(c)           ;get data
+        in      a,(c)           ; Repeat
+        and     80h             ;   Test bit 7
+        jr      z,1b            ; Until bit 7 high
+        inc     c               ; VDC data register
+        in      l,(c)           ; Get data
         ret
