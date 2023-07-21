@@ -32,7 +32,7 @@ void bitmapWaitKey(bitmap *bmp) {
 void drawBox(bitmap *bmp, int x, int y, int w, int h, char *str) {
 	/* Bitmap printing uses same coordinates as character mode */
 	(bmp->printBmp)(bmp, x / 8, (y - 8) / 8, str);
-	drawRect(bmp, x, y, w, h, 1);
+	drawRect(bmp, x, y, w, h, bmpWhite);
 }
 
 /*
@@ -43,7 +43,7 @@ void lines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	drawBox(bmp, x, y, w, h, "Bresenham");
 	for (i = 0; i < count; i++) {
 		drawLine(bmp, x + 2, rand() % (h - 4) + y + 2, x + w - 3,
-				rand() % (h - 4) + y + 2, 1);
+				rand() % (h - 4) + y + 2, bmpWhite);
 	}
 }
 
@@ -56,7 +56,7 @@ void horzLines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	drawBox(bmp, x, y, w, h, "Horz lines");
 	for (i = 0; i < count; i++) {
 		y0 = rand() % (h - 4) + y + 2;
-		drawLine(bmp, x + 2, y0, x + w - 3, y0, 1);
+		drawLine(bmp, x + 2, y0, x + w - 3, y0, bmpWhite);
 	}
 }
 
@@ -69,7 +69,7 @@ void vertLines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	drawBox(bmp, x, y, w, h, "Vert lines");
 	for (i = 0; i < count; i++) {
 		x0 = rand() % (w - 4) + x + 2;
-		drawLine(bmp, x0, y + 2, x0, y + h - 3, 1);
+		drawLine(bmp, x0, y + 2, x0, y + h - 3, bmpWhite);
 	}
 }
 
@@ -81,7 +81,7 @@ void bezier(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	drawBox(bmp, x, y, w, h, "Bezier");
 	for (i = 0; i < count; i++) {
 		drawBezier(bmp, (i * 2) + x + 3, y + 3, x + (w / 2), (i * 3) + y, x + w - 3,
-				(i * 4) + y, 1);
+				(i * 4) + y, bmpWhite);
 	}
 }
 
@@ -97,7 +97,7 @@ void rectangles(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 		h0 = rand() % (h - 10) + 5;
 		x0 = rand() % (w - w0 - 3) + x + 2;
 		y0 = rand() % (h - h0 - 3) + y + 2;
-		drawRect(bmp, x0, y0, w0, h0, 1);
+		drawRect(bmp, x0, y0, w0, h0, bmpWhite);
 	}
 }
 
@@ -112,7 +112,7 @@ void squares(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 		len = rand() % 20 + 10;
 		x0 = rand() % (w - len - 2) + x + 2;
 		y0 = rand() % (h - len - 2) + y + 2;
-		drawSquare(bmp, x0, y0, len, 1);
+		drawSquare(bmp, x0, y0, len, bmpWhite);
 	}
 }
 
@@ -128,7 +128,7 @@ void ellipses(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 		b = rand() % (h / 2 - 20) + 5;
 		x0 = rand() % (w / 4) + (w / 3) + x + 7;
 		y0 = rand() % (h / 2) + y + 15;
-		drawEllipse(bmp, x0, y0, a, b, 1);
+		drawEllipse(bmp, x0, y0, a, b, bmpWhite);
 	}
 }
 
@@ -143,7 +143,7 @@ void circles(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 		len = rand() % (h / 5) + 10;
 		x0 = rand() % (w / 3) + (w / 3) + x + 5;
 		y0 = rand() % (h / 2) + y + 15;
-		drawCircle(bmp, x0, y0, len, 1);
+		drawCircle(bmp, x0, y0, len, bmpWhite);
 	}
 }
 

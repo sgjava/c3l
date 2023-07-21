@@ -21,8 +21,7 @@ void init(screen *scr) {
 	initCia();
 	/* Use ram at end of bank 0 */
 	initVicScr(scr, 0x3c00, 0x1800);
-	initVicScrMode(scr, scr->color[scrBlack], scr->color[scrBlack],
-			scr->color[scrWhite]);
+	initVicScrMode(scr, scrBlack, scrBlack, scrWhite);
 }
 
 /*
@@ -73,7 +72,7 @@ void bounceSpr(screen *scr) {
 	ushort x = 24;
 	int xDir = 1, yDir = 1;
 	configSpr(scr, x, y);
-	(scr->printCol)(scr, 0, scr->scrHeight - 1, scr->color[scrYellow], "Press Return");
+	(scr->printCol)(scr, 0, scr->scrHeight - 1, scrYellow, "Press Return");
 	setSidVol(15, 0);
 	/* Bounce sprite until return pressed */
 	while (getKey(0) != 0xfd) {
@@ -143,11 +142,11 @@ void run(screen *scr, uchar *vicMem) {
 		scr->scrMem[i + 280] = i;
 	}
 	sprintf(str, "mem:    %04x", vicMem);
-	(scr->printCol)(scr, 0, 15, scr->color[scrLightBlue], str);
+	(scr->printCol)(scr, 0, 15, scrLightBlue, str);
 	sprintf(str, "chr:    %04x", scr->chrMem);
-	(scr->printCol)(scr, 0, 16, scr->color[scrLightBlue], str);
+	(scr->printCol)(scr, 0, 16, scrLightBlue, str);
 	sprintf(str, "scr:    %04x", scr->scrMem);
-	(scr->printCol)(scr, 0, 17, scr->color[scrLightBlue], str);
+	(scr->printCol)(scr, 0, 17, scrLightBlue, str);
 	/* Use VIC raster to seed random numbers */
 	srand(inp(vicRaster));
 	bounceSpr(scr);

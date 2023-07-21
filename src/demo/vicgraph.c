@@ -21,7 +21,7 @@
 void init(bitmap *bmp) {
 	initCia();
 	initVicBmp(bmp, 0x6000, 0x4800, 0x4000);
-	initVicBmpMode(bmp, bmp->color[bmpBlack], bmp->color[bmpBlack], bmp->color[bmpWhite]);
+	initVicBmpMode(bmp, bmpBlack, bmpBlack, bmpWhite);
 }
 
 /*

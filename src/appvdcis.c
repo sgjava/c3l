@@ -16,5 +16,5 @@ void initVdcScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol) {
 	setVdcCursor(0, 0, vdcCurNone);
 	(scr->clearScrCol)(scr, chrCol);
 	(scr->clearScr)(scr, 32);
-	setVdcFgBg(fgCol, bgCol);
+	setVdcFgBg(scr->color[fgCol], scr->color[bgCol]);
 }

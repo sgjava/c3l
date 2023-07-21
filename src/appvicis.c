@@ -16,8 +16,8 @@ void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol) {
 	uchar vicBank;
 	saveVic();
 	/* Black screen and border */
-	outp(vicBorderCol, fgCol);
-	outp(vicBgCol0, bgCol);
+	outp(vicBorderCol, scr->color[fgCol]);
+	outp(vicBgCol0, scr->color[bgCol]);
 	/* Clear color to chrCol */
 	(scr->clearScrCol)(scr, chrCol);
 	/* Clear screen to spaces */
@@ -31,8 +31,6 @@ void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol) {
 	vicBank = (ushort) scr->scrMem / 16384;
 	setVicChrMode(1, vicBank, ((ushort) scr->scrMem - (vicBank * 16384)) / 1024,
 			((ushort) scr->chrMem - (vicBank * 16384)) / 2048);
-	/* Clear color */
-	(scr->clearScrCol)(scr, chrCol);
 	/* Enable screen */
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }

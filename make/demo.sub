@@ -10,3 +10,4 @@ c -o -x -i0:b: vdccon.c 0:b:libdemo.lib 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: vicgraph.c 0:b:libdemo.lib 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: vdcgraph.c 0:b:libdemo.lib 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: vicspr.c 0:b:libc3l.lib 0:a:libc.lib
+c -o -x -i0:b: dualcon.c 0:b:libdemo.lib 0:b:libc3l.lib 0:a:libc.lib

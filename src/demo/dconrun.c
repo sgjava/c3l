@@ -14,7 +14,7 @@
 
 void randSentence(console *con, uchar sentences, uchar color) {
 	static uchar colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
-	scrRed, scrLightRed, };
+	scrRed, scrLightRed};
 	uchar i;
 	char *str;
 	if (color) {

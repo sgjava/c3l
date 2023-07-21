@@ -25,7 +25,7 @@ void initVicBmpMode(bitmap *bmp, uchar bgCol, uchar fgCol, uchar pixCol) {
 	/* Clear bitmap */
 	(bmp->clearBmp)(bmp, 0);
 	/* Set foreground and background pixel colors */
-	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol] << 4) | (bgCol & 0x0f));
+	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol] << 4) | (bmp->color[bgCol] & 0x0f));
 	/* Copy VDC alt char set to VIC mem */
 	copyVdcChrMem(bmp->bmpChrMem, 0x3000, 256);
 	/* Set standard bitmap mode using MMU bank 1 */

@@ -12,5 +12,5 @@
  */
 void setVicPix(bitmap *bmp, ushort x, ushort y, uchar color) {
 	/* Call assembler code */
-	setVicPixAsm(x, y, color, (ushort) bmp->bmpMem);
+	setVicPixAsm(x, y, bmp->color[color], (ushort) bmp->bmpMem);
 }

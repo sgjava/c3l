@@ -13,5 +13,5 @@
  */
 void setVdcPix(bitmap *bmp, ushort x, ushort y, uchar color) {
 	/* Call assembler code */
-	setVdcPixAsm(x, y, color, (ushort) bmp->bmpMem);
+	setVdcPixAsm(x, y, bmp->color[color], (ushort) bmp->bmpMem);
 }

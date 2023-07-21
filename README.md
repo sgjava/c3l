@@ -1,6 +1,5 @@
 ![C3L is the Commodore 128 CP/M C Library](images/title.png)
 
-
 C3L (C128 CP/M C library) is an API based on the C89 standard, designed to facilitate access to C128 specific features within the CP/M environment.
 The library provides an abstraction layer for VDC (Video Display Controller) and VIC (Video Interface Chip) common data and functions, which are
 encapsulated in the [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) and [bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h)
@@ -14,7 +13,7 @@ straightforward change is required. Additionally, the library encompasses CIA (C
 comprehensive functionality.
 
 Initially conceived as a pure C library, C3L has incorporated Z80 assembler code in specific areas where performance issues arise, such as accessing VIC color memory
-through Z80 IN/OUT instructions. VIC and VDC parity has been reached for high performance text and bit mapped graphics eliminating chip-specific code.
+through Z80 IN/OUT instructions. VIC and VDC parity has been achived for high performance text and bit mapped graphics eliminating chip-specific code.
 This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase.
 
 ## Running demos
@@ -25,7 +24,7 @@ If you have VICE already setup you can run the demo applications using the [disk
 * Attach demo.d71 as device 9
 * Do a hard reset.
 * `b`:
-* `vicdemo1`
+* `dualcon`
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
