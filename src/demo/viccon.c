@@ -22,7 +22,8 @@ void init(console *con, screen *scr) {
 	initCia();
 	/* Use ram at end of bank 1 for screen and copy VDC character set just above that */
 	initVicScr(scr, 0x7c00, 0x7000);
-	initVicScrMode(scr, scrBlack, scrBlack, scrWhite);
+	initVicScrMode(scr, scr->color[scrBlack], scr->color[scrBlack],
+			scr->color[scrWhite]);
 	initCon(con, scr);
 }
 

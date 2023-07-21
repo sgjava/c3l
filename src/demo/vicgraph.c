@@ -6,13 +6,13 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
+#include <bitmap.h>
 #include <cia.h>
 #include <hitech.h>
-#include <bitmap.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys.h>
 #include <vic.h>
+
+#include "demo.h"
 
 /*
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
@@ -21,7 +21,7 @@
 void init(bitmap *bmp) {
 	initCia();
 	initVicBmp(bmp, 0x6000, 0x4800, 0x4000);
-	initVicBmpMode(bmp, bmpBlack, bmpBlack, bmpWhite);
+	initVicBmpMode(bmp, bmp->color[bmpBlack], bmp->color[bmpBlack], bmp->color[bmpWhite]);
 }
 
 /*
