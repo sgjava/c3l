@@ -2,8 +2,12 @@
 
 C3L (C128 CP/M C library) is an API based on the C89 standard, designed to facilitate access to C128 specific features within the CP/M environment.
 The library provides an abstraction layer for VDC (Video Display Controller) and VIC (Video Interface Chip) common data and functions, which are
-encapsulated in the [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) and [bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h)
-structures, respectively. By employing these structures, developers can utilize unified functions for both text and graphics, thereby reducing the
+encapsulated as follows:
+* [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) maps text functions 
+to VDC and VIC.
+* [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) maps console type functions to VDC and VIC. 
+* [bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h) maps bitmap functions.
+By employing these structures, developers can utilize unified functions for both text and graphics, thereby reducing the
 need for customized code in their programs.
 
 A noteworthy advantage of this approach is the ability to dynamically set the target display (VIC, VDC, or virtual screen) during runtime. Initialization
@@ -38,7 +42,7 @@ for your personal projects unrelated to C3L.
 Within the "~/eclipse-workspace/c3l/build" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
 Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
-### Build [VICE 3.7.1](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
+### Build [VICE](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
 * `sudo apt install build-essential autoconf git libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full`
 * `cd`
 * `git clone --depth 1 https://github.com/VICE-Team/svn-mirror`
@@ -104,9 +108,43 @@ can search the library twice, e.g. for the standard library add a -LC to the end
 of the C command line, or -LF for the floating library.  If you have specified
 the library by name simply repeat its name.
 
+## High performance printing
+
+![VIC](images/viccon.png) ![VDC](images/vdccon.png)
+
+[screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) provides an 
+abstraction that blows the doors off standard CP/M since it doesn't rely on MMU bank 
+switching. If you do not use color printing it's even faster. A common color scheme 
+is used and mapped by the various functions. This allows portability between VIC and 
+VDC. Of course all of these settings are mutable at runtime.
+
+If you app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) 
+It operates like a normal console keeping track of the cursor and scrolling. There 
+is also a print function that allows word wrapping.
+
+## High performance bitmap graphics
+
+![VIC](images/vicgraph.png) ![VDC](images/vdcgraph.png)
+
+[bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h) provides an 
+abstraction for common graphice functions.
+
+#### Features
+* Set and clear pixel functions
+* Fast color and bitmap clearing
+* All drawing functions can set or clear pixels
+* Optimized line drawing uses accelerated horizontal and vertical line functions
+before using Bresenham's algorithm
+* Rectangle uses optimized horizontal and vertical line functions
+* Square (aspect ratio correct)
+* Bézier curve
+* Ellipse
+* Circle (aspect ratio correct)
+* Use existing character set to print to bitmap
+
 ## 8564/8566 VIC-IIe
 
-![VIC](images/vic.png)
+![VIC](images/vicspr.png)
 
 ### Features
 * Easy to configure VIC mode and memory layout
@@ -137,18 +175,11 @@ you have a large program. Remember to free() memory allocated by allocVicMem()
 when you are done with the VIC.
 
 ### Return to CP/M mode
-You should return to CP/M like nothing happened to the VIC. Color memory is restored
-when you exit back to CP/M, so no code is required for that. To restore VIC for CP/M
-use:
-
-```
-/* CPM default */
-setVicChrMode(0, 0, 11, 3);
-```
+You should return to CP/M like nothing happened to the VIC.
 
 ### Limitations
 As I mentioned above 0x1000 is always read by the VIC as character ROM. Your
-program will still use this memory normally. See [vicdemo1](https://github.com/sgjava/c3l/blob/main/src/demo/vicdemo1.c)
+program will still use this memory normally. See [vicspr](https://github.com/sgjava/c3l/blob/main/src/demo/vicspr.c)
 for an example of using the ROM character set and the ASCII to PETSCII translation
 of printVicPet.
 
@@ -159,11 +190,6 @@ at 0x1800. To keep things consistent I like to use the VDC's character set since
 that's what you use in normal CP/M mode. You have to think a little different
 using C3L since stdout is no longer visible. stdout still goes to the screen in
 VIC bank 0, so that could be used for debugging, etc.
-
-I've included a [concole](https://github.com/sgjava/c3l/blob/main/c3l/console.h) struct 
-to handle common console tasks like output with automatic scrolling and word wrap.
-
-![VIC Demo 1](images/vicdemo1.png)
 
 #### Features
 * Use ROM character set at 0x1800 for the smallest memory footprint
@@ -244,8 +270,6 @@ from the keyboard to be displayed and saved. Debounce logic makes sure the input
 is smooth while still allowing for auto repeat. Only Backspace is allowed to
 edit the line. Insert and delete can be added later. 
 
-![Key Demo](images/keydemo.png)
-
 ### Features
 * Read single row for performance
 * Read all standard and extended rows at once
@@ -271,9 +295,3 @@ gives you more detailed information on how to program the DS12C887.
 * Read and write data register.
 * Get time in hh:mm:ss format.
 * Get date in mm/dd/yyyy format.
-
-Under VICE Settings, I/O extensions, DS12C887 Real Time Clock click Enable
-DS12C887 Real Time Clock, Start with running oscillator, Enable RTC Saving.
-Make sure to save your configuration.
-
-![VIC Demo 2](images/vicdemo2.png)
