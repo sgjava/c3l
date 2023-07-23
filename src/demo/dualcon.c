@@ -108,6 +108,7 @@ main() {
 	done();
 	free(vicScr);
 	free(vicCon);
+	free(vicMem);
 	free(vdcScr);
 	free(vdcCon);
 }
