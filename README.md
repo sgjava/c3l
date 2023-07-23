@@ -110,7 +110,7 @@ the library by name simply repeat its name.
 
 ## High performance printing
 
-![VIC](images/viccon.png) ![VDC](images/vdccon.png)
+![VIC](images/viccon.png "VIC") ![VDC](images/vdccon.png "VDC")
 
 [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) provides an 
 abstraction that blows the doors off standard CP/M since it doesn't rely on MMU bank 
