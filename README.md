@@ -13,7 +13,8 @@ Initially conceived as a pure C library, C3L has incorporated Z80 assembler code
 through Z80 IN/OUT instructions. VIC and VDC parity has been achived for high performance text and bit mapped graphics eliminating chip-specific code.
 This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase.
 
-Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon to C printf (using 80 character line):
+Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon to C printf (using 80 character line 
+for 23 lines):
 * VIC printf 15224 ms, 0661 ms per line
 * VDC printf 10420 ms, 0453 ms per line
 * VDC printCon 0842 ms, 0036 ms per line
