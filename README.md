@@ -21,7 +21,7 @@ for 23 lines):
 * VIC printCon 0434 ms, 0037 ms per line
 
 So from this you can see VDC printCon is 12 times faster and VIC printCon is 18 times faster than 
-standard CP/M. This doesn't include scrolling screen. See [textperf](https://github.com/sgjava/c3l/blob/main/c3l/src/demo/textperf.c)
+standard CP/M. This doesn't include scrolling screen. See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c)
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
