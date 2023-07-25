@@ -1,7 +1,6 @@
 r b:libc3l.lib \
 appciad.obj \
 appciai.obj \
-appciati.obj \
 appvdcbi.obj \
 appvdcbm.obj \
 appvdcd.obj \
@@ -117,5 +116,5 @@ conpr.obj \
 conscr.obj \
 conofs.obj \
 conxy.obj \
-vicmmu.obj
-
+vicmmu.obj \
+appciati.obj

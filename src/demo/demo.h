@@ -11,8 +11,6 @@
 
 #include <bitmap.h>
 #include <console.h>
-#include <screen.h>
-#include <stdio.h>
 
 extern void waitKey(screen *scr);
 extern void readLine(console *con);

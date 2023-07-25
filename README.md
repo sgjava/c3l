@@ -1,14 +1,7 @@
 ![C3L is the Commodore 128 CP/M C Library](images/title.png)
 
 C3L (C128 CP/M C library) is an API based on the C89 standard, designed to facilitate access to C128 specific features within the CP/M environment.
-The library provides an abstraction layer for VDC (Video Display Controller) and VIC (Video Interface Chip) common data and functions, which are
-encapsulated as follows:
-* [screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) maps text functions 
-to VDC and VIC.
-* [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) maps console type functions to VDC and VIC. 
-* [bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h) maps bitmap functions.
-By employing these structures, developers can utilize unified functions for both text and graphics, thereby reducing the
-need for customized code in their programs.
+The library provides an abstraction layer for VDC (Video Display Controller) and VIC (Video Interface Chip) common data and functions. 
 
 A noteworthy advantage of this approach is the ability to dynamically set the target display (VIC, VDC, or virtual screen) during runtime. Initialization
 involves simply specifying the desired display chip or utilizing both simultaneously. The VIC offers a feature where the PETSCII character
@@ -19,6 +12,14 @@ comprehensive functionality.
 Initially conceived as a pure C library, C3L has incorporated Z80 assembler code in specific areas where performance issues arise, such as accessing VIC color memory
 through Z80 IN/OUT instructions. VIC and VDC parity has been achived for high performance text and bit mapped graphics eliminating chip-specific code.
 This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase.
+
+Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon to C printf (using 80 character line):
+* VIC printf 15224 ms, 0661 ms per line
+* VDC printf 10420 ms, 0453 ms per line
+* VDC printCon 0842 ms, 0036 ms per line
+* VIC printCon 0434 ms, 0037 ms per line
+So from this you can see VDC printCon is 12 times faster and VIC printCon is 18 times faster than 
+standard CP/M. This doesn't include scrolling screen. See [textperf](https://github.com/sgjava/c3l/blob/main/c3l/src/demo/textperf.c)
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
