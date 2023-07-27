@@ -21,7 +21,7 @@ and to C printf (using 80 character line for 23 lines):
 <tr><td>
 
 
-| VIC function    | MS per line |
+| Function        | MS per line |
 | :---            |        ---: |
 | printf          | 661         |
 | scroll          | 100         |
@@ -32,7 +32,7 @@ and to C printf (using 80 character line for 23 lines):
 
 </td><td>
 
-| VDC function   | MS per line |
+| Function        | MS per line |
 | :---            |        ---: |
 | printf          | 453         |
 | scroll          | 26          |
