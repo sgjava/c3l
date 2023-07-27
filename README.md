@@ -44,7 +44,7 @@ and to C printf (using 80 character line for 23 lines):
 </td></tr> </table>
 
 So from this you can see VDC printCon is 12 times faster and VIC printCon is 18 times faster than 
-standard CP/M output (C printf). See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c)
+standard CP/M output (C printf). See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c).
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
