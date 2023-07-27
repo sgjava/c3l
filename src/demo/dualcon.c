@@ -48,6 +48,8 @@ void done() {
  */
 void run(console *vicCon, console *vdcCon) {
 	runDualDemo(vicCon, vdcCon);
+	clearHomeCon(vicCon);
+	clearHomeCon(vdcCon);
 }
 
 main() {

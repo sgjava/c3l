@@ -13,15 +13,29 @@ Initially conceived as a pure C library, C3L has incorporated Z80 assembler code
 through Z80 IN/OUT instructions. VIC and VDC parity has been achived for high performance text and bit mapped graphics eliminating chip-specific code.
 This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase.
 
-Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon to C printf (using 80 character line 
-for 23 lines):
-* VIC printf 15224 ms, 0661 ms per line
-* VDC printf 10420 ms, 0453 ms per line
-* VDC printCon 0842 ms, 0036 ms per line
-* VIC printCon 0434 ms, 0037 ms per line
+Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon 
+and to C printf (using 80 character line for 23 lines):
+
+| VIC function   | MS per line |
+| :---           |        ---: |
+| printf         | 661         |
+| scroll         | 100         |
+| printCon       | 37          |
+| scrollCon      | 29          |
+| printCon color | 43          |
+| scrollCon      | 81          |
+
+| VDC function   | MS per line |
+| :---           |        ---: |
+| printf         | 453         |
+| scroll         | 26          |
+| printCon       | 36          |
+| scrollCon      | 13          |
+| printCon color | 40          |
+| scrollCon      | 18          |
 
 So from this you can see VDC printCon is 12 times faster and VIC printCon is 18 times faster than 
-standard CP/M. This doesn't include scrolling screen. See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c)
+standard CP/M output (C printf). See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c)
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
@@ -32,7 +46,7 @@ If you have VICE already setup you can run the demo applications using the [disk
 * Do a hard reset.
 * `b`:
 * `dualcon`
-* To list all the demos just `dir *.com`
+* To list all the demos just `dir b:*.com`
 
 ## Set up development environment
 I have optimized the development process by implementing several changes. Firstly, I would like to inform you that I no longer provide support for native hardware and VICE.
@@ -111,7 +125,7 @@ can search the library twice, e.g. for the standard library add a -LC to the end
 of the C command line, or -LF for the floating library.  If you have specified
 the library by name simply repeat its name.
 
-## High performance printing
+## High performance character mode
 
 ![VIC](images/viccon.png "VIC") ![VDC](images/vdccon.png "VDC")
 
@@ -121,13 +135,29 @@ switching. If you do not use color printing it's even faster. A common color sch
 is used and mapped by the various functions. This allows portability between VIC and 
 VDC. Of course all of these settings are mutable at runtime.
 
+#### Features
+* Use ROM character set at 0x1800 for the smallest memory footprint (VIC)
+* Fast print uses existing background color
+* Fast color printing too
+* PETSCII print functions convert from ASCII strings to PETSCII
+* Custom character sets (can be copied from VDC or loaded from disk)
+* Scroll any area of screen
+
 If you app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) 
 It operates like a normal console keeping track of the cursor and scrolling. There 
 is also a print function that allows word wrapping.
 
+#### Features
+* Basic cursor (defaults to off)
+* Fast print uses existing background color
+* Fast color printing too
+* Fast word wrap printing
+* Custom character sets (can be copied from VDC or loaded from disk)
+* Scroll any area of screen
+
 ## High performance bitmap graphics
 
-![VIC](images/vicgraph.png) ![VDC](images/vdcgraph.png)
+![VIC](images/vicgraph.png "VIC") ![VDC](images/vdcgraph.png "VDC")
 
 [bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h) provides an 
 abstraction for common graphice functions.
@@ -194,14 +224,6 @@ that's what you use in normal CP/M mode. You have to think a little different
 using C3L since stdout is no longer visible. stdout still goes to the screen in
 VIC bank 0, so that could be used for debugging, etc.
 
-#### Features
-* Use ROM character set at 0x1800 for the smallest memory footprint
-* Fast print uses existing background color
-* Fast color printing too
-* PETSCII print functions convert from ASCII strings to PETSCII
-* Custom character sets (can be copied from VDC or loaded from disk)
-* Scroll any area of screen
-
 ### Bitmap graphics
 I put some thought in how to share the same graphics functions across the VIC
 and VDC (DRY principle). In an OOP language like Java you'd just use an
@@ -210,36 +232,20 @@ go with function pointers. This basically allows runtime polymorphism, thus I
 can set the pixel routines, etc. at runtime and share the graphics functions.
 
 I took a fresh look at implementing lines, rectangles, ellipses and circles.
-setVicPix sets a pixel and clearVicPix clears a pixels. I added a parameter to
-the graphics function to tell it to set or clear pixels. This is pretty cool,
+setVicPix sets a pixel and clearVicPix clears a pixels. I added color to
+the graphics function to tell it to set or clear pixels (for monochrome). This is pretty cool,
 since you can easily erase parts of your drawing using the same parameters except
-the last one called setPix. Set it to 1 to set and 0 to clear pixels.
+the last one called setPix. Set color to 1 to set and 0 to clear pixels.
 
-I optimized drawVicLine by detecting horizontal and vertical lines. drawVicLineH
+I optimized drawLine by detecting horizontal and vertical lines. drawLineH
 can draw horizontal lines about 15x faster than Bresenham's algorithm based on
 the bitmap memory layout and not having to read/write the pixel byte 8 times like
-setVicPix and clearVicPix. drawVicLineV is optimized also, but not nearly as much
-as drawVicLineH. You can still call drawVicLineH and drawVicLineV directly as
-needed.
+setPix and clearPix. drawLineV is optimized also, but not nearly as much
+as drawLineH. You can still call drawLineH and drawLineV directly as needed.
 
 Enough bitmap graphic basics are provided to build applications that can graph
 data, build out game screens, annotate with text that can have unique foreground
 and background colors, etc.
-
-![VIC Demo 3](images/vicdemo3.png)
-
-#### Features
-* Set and clear pixel functions
-* Fast color and bitmap clearing
-* All drawing functions can set or clear pixels
-* Optimized line drawing uses accelerated horizontal and vertical line functions
-before using Bresenham's algorithm
-* Rectangle uses optimized horizontal and vertical line functions
-* Square
-* Bézier curve
-* Ellipse
-* Circle 
-* Use existing character set to print to bitmap
 
 ## 6581/8580 SID
 All the required functions are there to drive the SID.
@@ -267,7 +273,7 @@ time sensitive applications. In order to read standard and extended rows require
 18 out and 16 in operations. getKey only requires 2 out and 1 in operations. Plus
 you do not need to decode the row saving that time as well.
 
-[readVicLine](https://github.com/sgjava/c3l/blob/main/src/vicscrl.c)
+[readLineCon](https://github.com/sgjava/c3l/blob/main/src/conrl.c)
 is a simple line editor that takes advantage of screen memory to allow input
 from the keyboard to be displayed and saved. Debounce logic makes sure the input
 is smooth while still allowing for auto repeat. Only Backspace is allowed to
@@ -277,7 +283,7 @@ edit the line. Insert and delete can be added later.
 * Read single row for performance
 * Read all standard and extended rows at once
 * Decode key press as ASCII including shifted characters
-* Simple line editor for VIC
+* Simple line editor
 * CP/M key scan routine disabled for performance
 
 ### Limitations
