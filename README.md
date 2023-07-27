@@ -16,6 +16,9 @@ This will enable developers to write programs capable of utilizing either chip w
 Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon 
 and to C printf (using 80 character line for 23 lines):
 
+<table>
+<tr><th>VIC</th><th>VDC</th></tr>
+<tr><td>
 | VIC function    | MS per line |
 | :---            |        ---: |
 | printf          | 661         |
@@ -24,7 +27,7 @@ and to C printf (using 80 character line for 23 lines):
 | scrollCon       | 29          |
 | printCon color  | 43          |
 | scrollCon color | 81          |
-
+</td><td>
 | VDC function   | MS per line |
 | :---            |        ---: |
 | printf          | 453         |
@@ -33,6 +36,7 @@ and to C printf (using 80 character line for 23 lines):
 | scrollCon       | 13          |
 | printCon color  | 40          |
 | scrollCon color | 18          |
+</td></tr> </table>
 
 So from this you can see VDC printCon is 12 times faster and VIC printCon is 18 times faster than 
 standard CP/M output (C printf). See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c)
