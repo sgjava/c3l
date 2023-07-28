@@ -56,8 +56,8 @@ void run(console *vicCon, console *vdcCon, ushort cpmPrintMs, ushort cpmScrollMs
 }
 
 main() {
-	ushort cpmMs = cpmPrint(LINES);
-	ushort cpmScrollMs = cpmScroll(LINES);
+	ushort cpmMs = cpmPrint("01234567890123456789012345678901234567890123456789012345678901234567890123456789", 23);
+	ushort cpmScrollMs = cpmScroll(23);
 	/* Program is small enough to use left over bank 1 memory */
 	uchar *vicMem = allocVicMem(1);
 	/* Create screen structs */
