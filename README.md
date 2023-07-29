@@ -161,8 +161,7 @@ is also a print function that allows word wrapping.
 * Fast print uses existing background color
 * Fast color printing too
 * Fast word wrap printing
-* Custom character sets (can be copied from VDC or loaded from disk)
-* Scroll any area of screen
+* Automatic scrolling
 
 ## High performance bitmap graphics
 
