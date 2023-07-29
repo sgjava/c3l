@@ -55,7 +55,7 @@ If you have VICE already setup you can run the demo applications using the [disk
 * Do a hard reset.
 * `b`:
 * `dualcon`
-* To list all the demos just `dir b:*.com`
+* To list all the demos just `dir *.com`
 
 ## Set up development environment
 I have optimized the development process by implementing several changes. Firstly, I would like to inform you that I no longer provide support for native hardware and VICE.
@@ -152,7 +152,7 @@ VDC. Of course all of these settings are mutable at runtime.
 * Custom character sets (can be copied from VDC or loaded from disk)
 * Scroll any area of screen
 
-If you app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) 
+If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) 
 It operates like a normal console keeping track of the cursor and scrolling. There 
 is also a print function that allows word wrapping.
 
