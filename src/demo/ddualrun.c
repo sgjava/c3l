@@ -52,7 +52,7 @@ uchar color) {
 }
 
 /*
- * Generate random sentences on both VIC and VDC,
+ * Display color mappings VIC and VDC,
  */
 void dualColors(console *vicCon, console *vdcCon) {
 	static char *colorNames[16][1] = { { "scrBlack" }, { "scrWhite" }, { "scrRed" }, {
