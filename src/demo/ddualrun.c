@@ -13,9 +13,10 @@
 /*
  * Generate random sentences on both VIC and VDC,
  */
-void dualRandSentence(console *vicCon, console *vdcCon, uchar sentences, uchar color) {
+void dualRandSentence(console *vicCon, console *vdcCon, uchar sentences,
+uchar color) {
 	static uchar colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
-	scrRed, scrLightRed};
+	scrRed, scrLightRed };
 	uchar i;
 	char *str;
 	if (color) {
@@ -28,8 +29,10 @@ void dualRandSentence(console *vicCon, console *vdcCon, uchar sentences, uchar c
 	srand(inp(vicRaster));
 	for (i = 0; i < sentences; i++) {
 		if (color) {
-			vicCon->color = colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
-			vdcCon->color = colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
+			vicCon->color =
+					colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
+			vdcCon->color =
+					colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
 		}
 		str = generateSentence();
 		printWrapCon(vicCon, str);
@@ -48,6 +51,25 @@ void dualRandSentence(console *vicCon, console *vdcCon, uchar sentences, uchar c
 	printLineCon(vdcCon, "");
 }
 
+/*
+ * Generate random sentences on both VIC and VDC,
+ */
+void dualColors(console *vicCon, console *vdcCon) {
+	static char *colorNames[16][1] = { { "scrBlack" }, { "scrWhite" }, { "scrRed" }, {
+			"scrCyan" }, { "scrPurple" }, { "scrGreen" }, { "scrBlue" }, {
+			"scrYellow" }, { "scrOrange" }, { "scrBrown" }, { "scrLightRed" }, {
+			"scrDarkGray" }, { "scrMedGray" }, { "scrLightGreen" }, {
+			"scrLightBlue" }, { "scrLightGray" }};
+	uchar i;
+	vicCon->colorOn = 1;
+	vdcCon->colorOn = 1;
+	for (i = 0; i < 16; i++) {
+		vicCon->color = i;
+		printLineCon(vicCon, colorNames[i][0]);
+		vdcCon->color = i;
+		printLineCon(vdcCon, colorNames[i][0]);
+	}
+}
 
 /*
  * Run demo.
@@ -55,5 +77,9 @@ void dualRandSentence(console *vicCon, console *vdcCon, uchar sentences, uchar c
 void runDualDemo(console *vicCon, console *vdcCon) {
 	dualRandSentence(vicCon, vdcCon, 100, 0);
 	dualRandSentence(vicCon, vdcCon, 100, 1);
+	waitKey(vicCon->scr);
+	clearHomeCon(vicCon);
+	clearHomeCon(vdcCon);
+	dualColors(vicCon, vdcCon);
 	waitKey(vicCon->scr);
 }
