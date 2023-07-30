@@ -21,25 +21,25 @@ and to C printf (using 80 character line for 23 lines):
 <tr><td>
 
 
-| Function        | MS per line |
-| :---            |        ---: |
-| printf          | 661         |
-| scroll          | 100         |
-| printCon        | 37          |
-| scrollCon       | 29          |
-| printCon color  | 43          |
-| scrollCon color | 81          |
+| Function        | MS per line | CPS   |
+| :---            |        ---: | ---:  |
+| printf          | 661         | 121   |
+| scroll          | 100         | 9600  |
+| printCon        | 37          | 2162  |
+| scrollCon       | 29          | 33103 |
+| printCon color  | 43          | 1860  |
+| scrollCon color | 81          | 11851 |
 
 </td><td>
 
-| Function        | MS per line |
-| :---            |        ---: |
-| printf          | 453         |
-| scroll          | 26          |
-| printCon        | 36          |
-| scrollCon       | 13          |
-| printCon color  | 40          |
-| scrollCon color | 18          |
+| Function        | MS per line | CPS    |
+| :---            |        ---: | ---:   |
+| printf          | 453         | 176    |
+| scroll          | 26          | 73846  |
+| printCon        | 36          | 2222   |
+| scrollCon       | 13          | 147692 |
+| printCon color  | 40          | 2000   |
+| scrollCon color | 18          | 106666 |
 
 </td></tr> </table>
 
