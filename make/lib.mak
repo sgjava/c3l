@@ -117,4 +117,5 @@ conscr.obj \
 conofs.obj \
 conxy.obj \
 vicmmu.obj \
-appciati.obj
+appciati.obj \
+pcm4.obj
