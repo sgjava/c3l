@@ -41,7 +41,7 @@ void setCiaTod(uchar hour, uchar min, uchar sec, uchar tenth) {
 }
 
 /*
- * Convert bcd byte to 2 char base 10.
+ * Convert bcd byte to 2 char base 10 string.
  */
 void todToChar(uchar bcd, char *str) {
 	str[0] = (bcd >> 4) + 48;
@@ -49,14 +49,14 @@ void todToChar(uchar bcd, char *str) {
 }
 
 /*
- Display current time in SS:TT format using CIA 2's TOD clock.
+ Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
-	char todStr[6];
+	char todStr[5];
 	todToChar(inp(cia2TodSec), &todStr[0]);
-	todStr[2] = ':';
-	todToChar(inp(cia2TodTen), &todStr[3]);
-	todStr[5] = '\0';
+	todToChar(inp(cia2TodTen), &todStr[2]);
+	todStr[2] = '.';
+	todStr[4] = '\0';
 	printf("%s\n", todStr);
 }
 
@@ -85,7 +85,7 @@ void swapNibbles(uchar *buffer, ushort len) {
 }
 
 /*
- Clear ICR and start timer A in continuous mode using Hz value.
+ Start timer A in continuous mode using Hz value.
  */
 void startTimer(ushort hz) {
 	/* ciaMs is ~1 KHz */
@@ -114,12 +114,12 @@ void play(uchar *buffer, ushort len, ushort hz) {
 /*
  Load file into buffer.
  */
-void load(char *fileName, ulong fileSize, uchar *buffer) {
+void load(uchar *buffer, ulong len, char *fileName) {
 	FILE *rawFile;
 	if ((rawFile = fopen(fileName, "rb")) != NULL) {
-		printf("\nReading %s, %d bytes, ", fileName, fileSize);
+		printf("\nReading %s, %d bytes, ", fileName, len);
 		setCiaTod(0, 0, 0, 0);
-		fread(buffer, sizeof(uchar), fileSize, rawFile);
+		fread(buffer, sizeof(uchar), len, rawFile);
 		fclose(rawFile);
 		dispTime();
 	} else
@@ -148,8 +148,8 @@ main(int argc, char *argv[]) {
 				/* Allocate buffer */
 				buffer = (uchar*) malloc(fileSize);
 				if (buffer != NULL) {
-					load(argv[1], fileSize, buffer);
-					if (strcmp(argv[3], "sn") == 0) {
+					load(buffer, fileSize, argv[1]);
+					if (strcmp(argv[3], "SN") == 0) {
 						swapNibbles(buffer, fileSize);
 					}
 					initCia();
