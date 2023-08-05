@@ -14,7 +14,7 @@ through Z80 IN/OUT instructions. VIC and VDC parity has been achived for high pe
 This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase.
 
 Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon 
-and to C printf (using 80 character line for 23 lines):
+to C printf (using 80 character line for 23 lines):
 
 <table>
 <tr><th>VIC</th><th>VDC</th></tr>
