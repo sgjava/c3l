@@ -264,6 +264,18 @@ All the required functions are there to drive the SID.
 * Set envelopes
 * Set attack/release cycles
 * Set pulse wave
+* Play 4 bit raw PCM files
+
+How to create you own 4 bit PCM files. After installing programs download an mp3 from Youtube video, 
+convert 10 seconds of mp3 to 8 bit PCM snd file, move to CP/M disk image and finally convert to 4 bit raw.
+* `sudo apt install yt-dlp sox libsox-fmt-mp3`
+* `yt-dlp -f 'ba' -x --audio-format mp3 https://www.youtube.com/watch?v=J6jplPkbe8g -o '%(id)s.%(ext)s'`
+* `sox J6jplPkbe8g.mp3 --bits 8 -r 8000 -c 1 neil.snd trim 17 8`
+* `ctools ~/eclipse-workspace/c3l/disks/demo.d71 p neil.snd`
+* `convpcm neil.snd neil.raw`
+* `playpcm4 neil.raw 8000`
+You can load around a 44K raw file, so keep that in mind. It also makes sense to support 1 and 2 bit raw
+files as well, so keep an eye out for that.
 
 ## Keyboard scan and decode
 The 8502 is responsible for most of the low-level I/O functions in CP/M mode and

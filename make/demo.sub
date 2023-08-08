@@ -13,3 +13,4 @@ c -o -x -i0:b: vicspr.c 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: dualcon.c 0:b:libdemo.lib 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: textperf.c 0:b:libdemo.lib 0:b:libc3l.lib 0:a:libc.lib
 c -o -x -i0:b: playpcm4.c 0:b:libc3l.lib 0:a:libc.lib
+c -o -x -i0:b: convpcm.c 0:b:libc3l.lib 0:a:libc.lib

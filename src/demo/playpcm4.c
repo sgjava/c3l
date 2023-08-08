@@ -41,23 +41,17 @@ void setCiaTod(uchar hour, uchar min, uchar sec, uchar tenth) {
 }
 
 /*
- * Convert bcd byte to 2 char base 10 string.
+ * Convert bcd byte to base 10 byte.
  */
-void todToChar(uchar bcd, char *str) {
-	str[0] = (bcd >> 4) + 48;
-	str[1] = (bcd & 0x0f) + 48;
+uchar bcdToByte(uchar bcd) {
+	return ((bcd >> 4) * 10) + (bcd & 0x0f);
 }
 
 /*
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
-	char todStr[5];
-	todToChar(inp(cia2TodSec), &todStr[0]);
-	todToChar(inp(cia2TodTen), &todStr[2]);
-	todStr[2] = '.';
-	todStr[4] = '\0';
-	printf("%s\n", todStr);
+	printf("%d.%d secs\n", bcdToByte(inp(cia2TodSec)), bcdToByte(inp(cia2TodTen)));
 }
 
 /*
@@ -89,7 +83,7 @@ void swapNibbles(uchar *buffer, ushort len) {
  */
 void startTimer(ushort hz) {
 	/* ciaMs is ~1 KHz */
-	ushort timerA = ciaMs / (hz / 1000);
+	ushort timerA = ciaTimerFreq / hz;
 	/* CIA 2 Timer A lo */
 	outp(cia2TimerALo, (uchar) timerA);
 	/* CIA 2 Timer A hi */
@@ -117,7 +111,7 @@ void play(uchar *buffer, ushort len, ushort hz) {
 void load(uchar *buffer, ulong len, char *fileName) {
 	FILE *rawFile;
 	if ((rawFile = fopen(fileName, "rb")) != NULL) {
-		printf("\nReading %s, %d bytes, ", fileName, len);
+		printf("\nReading %s, %u bytes, ", fileName, len);
 		setCiaTod(0, 0, 0, 0);
 		fread(buffer, sizeof(uchar), len, rawFile);
 		fclose(rawFile);
@@ -131,7 +125,7 @@ void load(uchar *buffer, ulong len, char *fileName) {
  */
 main(int argc, char *argv[]) {
 	uchar *buffer;
-	ushort minHz = 3999, maxHz = 15001, hz, maxFileSize = 32768;
+	ushort minHz = 3999, maxHz = 15001, hz, maxFileSize = 45056;
 	ulong fileSize;
 	/* Make sure we have 3 or more params */
 	if (argc > 2) {

@@ -36,6 +36,10 @@ _playPcm4Sid:
         bit     0,a             ;
         jr      z,rep3          ; Until interrupt flag set
         ld      a,(hl)          ; a = sample byte
+        nop                     ; Delay to mimic rrca above
+        nop
+        nop
+        nop
         and     0fh             ; a = a and 15
         ld      bc,0d418h       ; bc = SID volume address
         out     (c),a           ; Set volume
