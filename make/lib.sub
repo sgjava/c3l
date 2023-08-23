@@ -7,5 +7,6 @@ zas -j vicscu.as
 zas -j vicbmspa.as
 zas -j vicmmu.as
 zas -j pcm4.as
+zas -j pcm1.as
 c < obj.mak
 libr < lib.mak
