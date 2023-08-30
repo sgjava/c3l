@@ -119,4 +119,5 @@ conxy.obj \
 vicmmu.obj \
 appciati.obj \
 pcm4.obj \
-pcm1.obj
+pcm1.obj \
+pcm2.obj

@@ -3,10 +3,10 @@
 ;
 ; Assembled with HI-TECH C 3.09 (CP/M-80) ZAS.
 ;
-; Play 1 bit pulse wave encoded data using SID master volume.
+; Play 2 bit pulse wave encoded data using SID master volume.
 ;
 
-global  _playPcm1Sid
+global  _playPcm2Sid
 psect   data
 
 ; Return address
@@ -15,7 +15,7 @@ return:
 
 defw    0
 
-; Sample amplitude can be 1 - 15
+; Sample amplitude can be 1-3.
 
 amp:
 
@@ -27,7 +27,7 @@ defw    0
 
 psect   text
 
-_playPcm1Sid:
+_playPcm2Sid:
         pop     hl              ; Return address
         ld      (return),hl     ; Save return address
         pop     bc              ; Sample start address
@@ -45,18 +45,22 @@ _playPcm1Sid:
         ld      ix,(start)                   
         rep1:                   ; Repeat
         ld      d,(ix+0)        ; d = Sample byte
-        ld      e,08h           ; e = 8 bits to count
-        rep2:              
+        ld      e,04h           ; e = 4 bit pairs to count
+        rep2:                   ; Repeat
         ld      bc,0dd0dh       ; bc = CIA 2 ICR
         rep3:                   ; Repeat
         in      a,(c)           ; a = CIA 2 ICR value
-        bit     0,a             ;
-        jr      z,rep3          ; Until interrupt flag set
-        ld      a,00h           ; a = volume for 0 bits
-        rlc     d               ; Set sample bit
-        jr      nc,endif1       ; if carry=1 then
-        ld      a,(amp)         ; a = volume for 1 bits
-        endif1:
+        bit     0,a             ; a = 0
+        jr      z,rep3          ; Until interrupt flag set        
+        ld      bc,(amp)        ; bc = amp        
+        ld      a,00h           ; a = 0
+        rlc     d               ; Get first sample bit
+        rla                     ; Shift carry bit to a
+        rlc     d               ; Get second sample bit
+        rep4:                   ; Repeat
+        rla                     ; Shift carry bit to a
+        dec     c               ; c = c-1
+        jr      nz,rep4         ; Until c = 0        
         ld      bc,0d418h       ; bc = SID volume address
         out     (c),a           ; Set volume
         dec     e               ; e = e-1

@@ -51,10 +51,26 @@ ushort convert8to4(uchar *buffer, ushort bufSize) {
 }
 
 /*
+ Convert 8 bit raw data to 2 bit raw data.
+ */
+ushort convert8to2(uchar *buffer, ushort bufSize) {
+	ushort i, s;
+	uchar sample;
+	for (i = 0, s = 0; i < bufSize; i += 4, ++s) {
+		sample = ((buffer[i] >> 6) & 0x03) | ((buffer[i + 1] >> 4) & 0x0c)
+				| ((buffer[i + 2] >> 2) & 0x30) | (buffer[i + 3] & 0xc0);
+		buffer[s] = sample;
+	}
+	/* Four 2-bit samples in a byte */
+	return bufSize / 4;
+}
+
+/*
  Convert 8 bit raw data to 1 bit raw data.
  */
 ushort convert8to1(uchar *buffer, ushort bufSize) {
-	static uchar bitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
+	static uchar bitTable[8] =
+			{ 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
 	uchar sample;
 	ushort i, b;
 	for (i = 0; i < bufSize; i += 8) {
@@ -102,6 +118,9 @@ uchar bits) {
 						case 1:
 							bytesWrite = convert8to1(buffer, bytesRead);
 							break;
+						case 2:
+							bytesWrite = convert8to2(buffer, bytesRead);
+							break;
 						case 4:
 							bytesWrite = convert8to4(buffer, bytesRead);
 							break;
@@ -144,11 +163,17 @@ main(int argc, char *argv[]) {
 			bdos(45, 0x0FE);
 			/* Convert bits param to unsigned char */
 			sscanf(argv[3], "%d", &bits);
-			/* Convert raw file */
-			convert(argv[1], argv[2], buffer, BUF_SIZE, bits);
-			/* Dispose buffer */
-			free(buffer);
+			/* Check bits valid value */
+			if (bits == 4 || bits == 2 || bits == 1) {
+				/* Convert raw file */
+				convert(argv[1], argv[2], buffer, BUF_SIZE, bits);
+				/* Dispose buffer */
+				free(buffer);
+			} else {
+				puts("\nBits value must 4, 2 or 1.");
+			}
 		}
-	} else
+	} else {
 		dispHelp();
+	}
 }

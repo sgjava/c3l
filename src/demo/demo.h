@@ -28,4 +28,5 @@ extern void setCiaTod(uchar hour, uchar min, uchar sec, uchar tenth);
 extern void startTimer(ushort hz);
 extern void playPcm4Sid(uchar *buffer, ushort len);
 extern void playPcm1Sid(uchar *buffer, ushort len, uchar vol);
+extern void playPcm2Sid(uchar *buffer, ushort len, uchar vol);
 #endif

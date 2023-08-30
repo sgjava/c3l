@@ -1,7 +1,7 @@
 /*
  * C128 CP/M C Library C3L
  *
- * Play 4 bit PCM files with nibble swapping feature.
+ * Play 4, 2 and 1 bit PCM files with nibble swapping feature.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -30,8 +30,8 @@ void dispHelp() {
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
-	printf("%d.%d secs\n", bcdToByte(inp(cia2TodSec)),
-			bcdToByte(inp(cia2TodTen)));
+	printf("%d.%d secs\n", bcdToByte(inp(cia2TodSec) & 0x7f),
+			bcdToByte(inp(cia2TodTen) & 0x0f));
 }
 
 /*
@@ -71,6 +71,11 @@ void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 	switch (bits) {
 	case 1:
 		playPcm1Sid(buffer, len, 15);
+		break;
+	case 2:
+		playPcm2Sid(buffer, len, 1);
+		playPcm2Sid(buffer, len, 2);
+		playPcm2Sid(buffer, len, 3);
 		break;
 	case 4:
 		playPcm4Sid(buffer, len);
