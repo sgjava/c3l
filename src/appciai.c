@@ -12,14 +12,14 @@
  */
 void initCia() {
 	/* Clear all CIA 1 IRQ enable bits */
-	outp(cia1Icr, ciaClearIcr);
+	outp(cia1+ciaIcr, ciaClearIcr);
 	/* Clear CIA 1 ICR status */
-	inp(cia1Icr);
+	inp(cia1+ciaIcr);
 	/* Clear all CIA 2 IRQ enable bits */
-	outp(cia2Icr, ciaClearIcr);
+	outp(cia2+ciaIcr, ciaClearIcr);
 	/* Clear CIA 2 ICR status */
-	inp(cia2Icr);
+	inp(cia2+ciaIcr);
 	/* Set CIA 1 DDRs for keyboard scan */
-	outp(cia1DdrA, 0xff);
-	outp(cia1DdrB, 0x00);
+	outp(cia1+ciaDdrA, 0xff);
+	outp(cia2+ciaDdrB, 0x00);
 }

@@ -30,8 +30,8 @@ void dispHelp() {
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
-	printf("%d.%d secs\n", bcdToByte(inp(cia2TodSec) & 0x7f),
-			bcdToByte(inp(cia2TodTen) & 0x0f));
+	printf("%d.%d secs\n", bcdToByte(inp(cia2+ciaTodSec) & 0x7f),
+			bcdToByte(inp(cia2+ciaTodTen) & 0x0f));
 }
 
 /*
@@ -83,7 +83,7 @@ void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 	}
 	dispTime();
 	/* Stop CIA 2 timer A */
-	outp(cia2CtrlRegA, ciaStopTimer);
+	outp(cia2+ciaCtrlRegA, ciaStopTimer);
 }
 
 /*

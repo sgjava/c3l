@@ -22,14 +22,14 @@ uchar* getKeys() {
 	outp(vicExtKey, 0xff);
 	/* Scan standard keys */
 	for (i = 0; i < 8; i++) {
-		outp(cia1DataA, keyCol[i]);
-		ciaKeyScan[i] = inp(cia1DataB);
+		outp(cia1+ciaDataA, keyCol[i]);
+		ciaKeyScan[i] = inp(cia1+ciaDataB);
 	}
-	outp(cia1DataA, 0xff);
+	outp(cia1+ciaDataA, 0xff);
 	/* Scan extended keys */
 	for (i = 0; i < 3; i++) {
 		outp(vicExtKey, keyCol[i]);
-		ciaKeyScan[i + 8] = inp(cia1DataB);
+		ciaKeyScan[i + 8] = inp(cia1+ciaDataB);
 	}
 	return ciaKeyScan;
 }

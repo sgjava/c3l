@@ -34,8 +34,8 @@ void dispHelp() {
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
-	printf(", %d mins, %d.%d secs\n", bcdToByte(inp(cia2TodMin)),
-			bcdToByte(inp(cia2TodSec)), bcdToByte(inp(cia2TodTen)));
+	printf(", %d mins, %d.%d secs\n", bcdToByte(inp(cia2+ciaTodMin)),
+			bcdToByte(inp(cia2+ciaTodSec)), bcdToByte(inp(cia2+ciaTodTen)));
 }
 
 /*

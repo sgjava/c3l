@@ -20,15 +20,15 @@ uchar bcdToByte(uchar bcd) {
  */
 void setCiaTod(uchar hour, uchar min, uchar sec, uchar tenth) {
 	/* Bit 7 = 0 sets TOD clock */
-	outp(cia2CtrlRegB, inp(cia2CtrlRegB) & 0x7f);
+	outp(cia2+ciaCtrlRegB, inp(cia2+ciaCtrlRegB) & 0x7f);
 	/* CIA 2 TOD hour */
-	outp(cia2TodHrs, hour);
+	outp(cia2+ciaTodHrs, hour);
 	/* CIA 2 TOD minute */
-	outp(cia2TodMin, min);
+	outp(cia2+ciaTodMin, min);
 	/* CIA 2 TOD second */
-	outp(cia2TodSec, sec);
+	outp(cia2+ciaTodSec, sec);
 	/* CIA 2 TOD tenth second */
-	outp(cia2TodTen, tenth);
+	outp(cia2+ciaTodTen, tenth);
 }
 
 /*
@@ -37,9 +37,9 @@ void setCiaTod(uchar hour, uchar min, uchar sec, uchar tenth) {
 void startTimer(ushort hz) {
 	ushort timerA = ciaTimerFreq / hz;
 	/* CIA 2 Timer A lo */
-	outp(cia2TimerALo, (uchar) timerA);
+	outp(cia2+ciaTimerALo, (uchar) timerA);
 	/* CIA 2 Timer A hi */
-	outp(cia2TimerAHi, (uchar) (timerA >> 8));
+	outp(cia2+ciaTimerAHi, (uchar) (timerA >> 8));
 	/* Start CIA 2 Timer A */
-	outp(cia2CtrlRegA, ciaCpuCont);
+	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 }

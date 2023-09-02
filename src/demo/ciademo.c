@@ -17,10 +17,10 @@ main() {
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
 	initCiaTimer(ciaMs, 0xffff);
 	printf("Start timer\n");
-	outp(cia2CtrlRegA, ciaCpuCont);
+	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	printf("Stop timer\n");
-	outp(cia2CtrlRegA, ciaStopTimer);
-	timerVal = 0xffff - (inp(cia2TimerBHi) * 256 + inp(cia2TimerBLo));
+	outp(cia2+ciaCtrlRegA, ciaStopTimer);
+	timerVal = 0xffff - (inp(cia2+ciaTimerBHi) * 256 + inp(cia2+ciaTimerBLo));
 	printf("Milliseconds elapsed: %u\n", timerVal);
 	doneCia();
 }

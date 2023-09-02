@@ -45,15 +45,15 @@ char* readLineCon(console *con, uchar len) {
 	/* Timer A counts milliseconds 48 times or ~1/20 second */
 	initCiaTimer(ciaMs, 48);
 	/* Start timer in continuous mode */
-	outp(cia2CtrlRegA, ciaCpuCont);
+	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	do {
 		keyVal = decodeKey();
 		/* Debounce if current key equals last key */
 		if (keyVal == lastKeyVal) {
 			i = 0;
 			do {
-				/* Wait for underflow of cia2TimerBHi */
-				while ((inp(cia2Icr) & 0x02) == 0x00)
+				/* Wait for underflow of ciaTimerBHi */
+				while ((inp(cia2+ciaIcr) & 0x02) == 0x00)
 					;
 				keyVal = decodeKey();
 				i++;
@@ -78,7 +78,7 @@ char* readLineCon(console *con, uchar len) {
 		}
 	} while (keyVal != 0x0d);
 	/* Stop timer */
-	outp(cia2CtrlRegA, ciaStopTimer);
+	outp(cia2+ciaCtrlRegA, ciaStopTimer);
 	/* Figure out string length based on current screen offset */
 	str = (char*) malloc(strLen + 1);
 	/* Screen to string */

@@ -21,13 +21,13 @@ uchar getKey(uchar keyRow) {
 	/* Standard keys? */
 	if (keyRow < 8) {
 		outp(vicExtKey, 0xff);
-		outp(cia1DataA, keyCol[keyRow]);
-		keyCode = inp(cia1DataB);
+		outp(cia1+ciaDataA, keyCol[keyRow]);
+		keyCode = inp(cia1+ciaDataB);
 	} else {
 		/* Extended keys */
-		outp(cia1DataA, 0xff);
+		outp(cia1+ciaDataA, 0xff);
 		outp(vicExtKey, keyCol[keyRow - 8]);
-		keyCode = inp(cia1DataB);
+		keyCode = inp(cia1+ciaDataB);
 	}
 	return keyCode;
 }

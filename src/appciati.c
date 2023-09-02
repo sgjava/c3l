@@ -13,13 +13,13 @@
  */
 void initCiaTimer(ushort timerA, ushort timerB) {
 	/* CIA 2 Timer A lo */
-	outp(cia2TimerALo, (uchar) timerA);
+	outp(cia2+ciaTimerALo, (uchar) timerA);
 	/* CIA 2 Timer A hi */
-	outp(cia2TimerAHi, (uchar) (timerA >> 8));
+	outp(cia2+ciaTimerAHi, (uchar) (timerA >> 8));
 	/* CIA 2 Timer B lo */
-	outp(cia2TimerBLo, (uchar) timerB);
+	outp(cia2+ciaTimerBLo, (uchar) timerB);
 	/* CIA 2 Timer B hi */
-	outp(cia2TimerBHi, (uchar) (timerB >> 8));
+	outp(cia2+ciaTimerBHi, (uchar) (timerB >> 8));
 	/* Link time to count and enable timer */
-	outp(cia2CtrlRegB, ciaCountA);
+	outp(cia2+ciaCtrlRegB, ciaCountA);
 }

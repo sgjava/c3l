@@ -12,10 +12,10 @@
  * Set VIC bank to 0 - 3.
  */
 void setVicBank(uchar vicBank) {
-	uchar saveDdr = inp(cia2DdrA);
+	uchar saveDdr = inp(cia2+ciaDdrA);
 	/* Set DDR port A to write */
-	outp(cia2DdrA, inp(cia2DdrA) | 0x03);
+	outp(cia2+ciaDdrA, inp(cia2+ciaDdrA) | 0x03);
 	/* Set VIC to bank 0-3 */
-	outp(cia2DataA, (inp(cia2DataA) & 0xfc) | (3 - vicBank));
-	outp(cia2DdrA, saveDdr);
+	outp(cia2+ciaDataA, (inp(cia2+ciaDataA) & 0xfc) | (3 - vicBank));
+	outp(cia2+ciaDdrA, saveDdr);
 }

@@ -12,5 +12,5 @@
  */
 void doneCia() {
 	/* Enable CIA 1 IRQ */
-	outp(cia1Icr, ciaEnableIrq);
+	outp(cia1+ciaIcr, ciaEnableIrq);
 }
