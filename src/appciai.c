@@ -21,5 +21,5 @@ void initCia() {
 	inp(cia2+ciaIcr);
 	/* Set CIA 1 DDRs for keyboard scan */
 	outp(cia1+ciaDdrA, 0xff);
-	outp(cia2+ciaDdrB, 0x00);
+	outp(cia1+ciaDdrB, 0x00);
 }
