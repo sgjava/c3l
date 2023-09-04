@@ -9,7 +9,6 @@
 #include <cia.h>
 #include <hitech.h>
 #include <sys.h>
-#include <vic.h>
 
 /*
  * Get standard or extended key code for single row. 0xff is returned if no key

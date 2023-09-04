@@ -58,7 +58,6 @@
 #define vicSpr5Col     0xd02c /* Sprite 5 color register */
 #define vicSpr6Col     0xd02d /* Sprite 6 color register */
 #define vicSpr7Col     0xd02e /* Sprite 7 color register */
-#define vicExtKey      0xd02f /* Extended keyboard scan register */
 #define vicPcrcr       0xd030 /* Processor clock rate control register */
 
 #define vicColMem 0xd800  /* VIC I/O mapped color memory */

@@ -29,6 +29,8 @@
 #define ciaCtrlRegA  0x0e     /* Control register A */
 #define ciaCtrlRegB  0x0f     /* Control register B */
 
+#define vicExtKey    0xd02f   /* Extended keyboard scan register on the VIC */
+
 #define ciaTimerFreq 1022730L /* CIA timer freq */
 #define ciaEnableIrq 0x82     /* Enable cia irq */
 #define ciaClearIcr  0x7f     /* Clear all cia irq enable bits */

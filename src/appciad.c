@@ -8,7 +8,7 @@
 #include <sys.h>
 
 /*
- * Enable CIA 2 interrupts.
+ * Enable CIA 1 interrupts.
  */
 void doneCia() {
 	/* Enable CIA 1 IRQ */

@@ -73,8 +73,6 @@ void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 		playPcm1Sid(buffer, len, 15);
 		break;
 	case 2:
-		playPcm2Sid(buffer, len, 1);
-		playPcm2Sid(buffer, len, 2);
 		playPcm2Sid(buffer, len, 3);
 		break;
 	case 4:

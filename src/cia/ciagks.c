@@ -10,7 +10,6 @@
 #include <hitech.h>
 #include <stdlib.h>
 #include <sys.h>
-#include <vic.h>
 
 /*
  * Get all standard and extended key rows.
