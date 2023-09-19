@@ -42,5 +42,4 @@ vicsprsl.obj \
 vicsb.obj \
 vicscpc.obj \
 vicbmbm.obj \
-vicsr.obj \
-vicmmu.obj
+vicsr.obj

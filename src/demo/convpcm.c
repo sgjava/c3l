@@ -31,6 +31,13 @@ void dispHelp() {
 }
 
 /*
+ * Convert bcd byte to base 10 byte.
+ */
+uchar bcdToByte(uchar bcd) {
+	return ((bcd >> 4) * 10) + (bcd & 0x0f);
+}
+
+/*
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
@@ -109,7 +116,7 @@ uchar bits) {
 					printf(
 							"Converting %s, %ld bytes, ..........\b\b\b\b\b\b\b\b\b\b",
 							inFileName, statRec.st_size);
-					setCiaTod(0, 0, 0, 0);
+					setCiaTod(cia2, 0, 0, 0, 0);
 					do {
 						bytesRead = fread(buffer, sizeof(uchar), bufSize,
 								inFile);

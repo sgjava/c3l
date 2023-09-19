@@ -5,17 +5,19 @@
  */
 
 #include <hitech.h>
-#include <mmu.h>
 #include <sys.h>
+#include <mmu.h>
 
 /*
  * Set VIC to MMU bank 0 or 1.
  */
 void setVicMmuBank(uchar mmuRcr) {
+	outp(0x0ff00, 0x7e);
 	/* If bank 1 then set bit 6 of RCR */
 	if (mmuRcr) {
-		vicMmuBank(0x40);
+		outp(mmuRamCfg, inp(mmuRamCfg) | 0x40);
 	} else {
-		vicMmuBank(0x00);
+		outp(mmuRamCfg, inp(mmuRamCfg) & 0xbf);
 	}
+	outp(0x0ff00, 0x7f);
 }

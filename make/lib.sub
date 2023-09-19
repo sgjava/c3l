@@ -5,7 +5,6 @@ zas -j vicscfc.as
 zas -j vicscuc.as
 zas -j vicscu.as
 zas -j vicbmspa.as
-zas -j vicmmu.as
 zas -j pcm4.as
 zas -j pcm1.as
 zas -j pcm2.as

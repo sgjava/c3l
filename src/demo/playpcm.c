@@ -27,6 +27,13 @@ void dispHelp() {
 }
 
 /*
+ * Convert bcd byte to base 10 byte.
+ */
+uchar bcdToByte(uchar bcd) {
+	return ((bcd >> 4) * 10) + (bcd & 0x0f);
+}
+
+/*
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
@@ -52,7 +59,7 @@ ulong getFileSize(char *fileName) {
 void swapNibbles(uchar *buffer, ushort len) {
 	ushort i;
 	printf("Swapping nibbles, ");
-	setCiaTod(0, 0, 0, 0);
+	setCiaTod(cia2, 0, 0, 0, 0);
 	for (i = 0; i < len; i++) {
 		buffer[i] = (buffer[i] << 4) | (buffer[i] >> 4);
 	}
@@ -64,9 +71,9 @@ void swapNibbles(uchar *buffer, ushort len) {
  */
 void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 	/* Start HZ timer */
-	startTimer(hz);
+	startTimer(cia2, hz);
 	printf("Playing, ");
-	setCiaTod(0, 0, 0, 0);
+	setCiaTod(cia2, 0, 0, 0, 0);
 	/* Play sample */
 	switch (bits) {
 	case 1:
@@ -91,7 +98,7 @@ void load(uchar *buffer, ulong len, char *fileName) {
 	FILE *rawFile;
 	if ((rawFile = fopen(fileName, "rb")) != NULL) {
 		printf("\nReading %s, %u bytes, ", fileName, len);
-		setCiaTod(0, 0, 0, 0);
+		setCiaTod(cia2, 0, 0, 0, 0);
 		fread(buffer, sizeof(uchar), len, rawFile);
 		fclose(rawFile);
 		dispTime();

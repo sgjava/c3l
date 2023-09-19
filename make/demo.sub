@@ -1,5 +1,5 @@
-c -c -o -x -i0:b: dwait.c drline.c dkey.c dkeyrun.c dsent.c dconrun.c dgraph.c ddualrun.c dtextrun.c dcia.c
-libr r b:libdemo.lib dcia.obj dgraph.obj dtextrun.obj ddualrun.obj dconrun.obj dkeyrun.obj dwait.obj drline.obj dkey.obj dsent.obj
+c -c -o -x -i0:b: dwait.c drline.c dkey.c dkeyrun.c dsent.c dconrun.c dgraph.c ddualrun.c dtextrun.c
+libr r b:libdemo.lib dgraph.obj dtextrun.obj ddualrun.obj dconrun.obj dkeyrun.obj dwait.obj drline.obj dkey.obj dsent.obj
 c -o -x -i0:b: baseline.c
 c -o -x -i0:b: ciademo.c 0:b:libcia.lib
 c -o -x -i0:b: rtcdemo.c 0:b:librtc.lib
@@ -9,8 +9,8 @@ c -o -x -i0:b: viccon.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvic.lib 0:b:libvdc.
 c -o -x -i0:b: vdccon.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib
 c -o -x -i0:b: vicgraph.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvic.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib
 c -o -x -i0:b: vdcgraph.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib
-c -o -x -i0:b: vicspr.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvic.lib 0:b:libvdc.lib 0:b:libsid.lib 0:b:libc3l.lib
 c -o -x -i0:b: dualcon.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvic.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib
 c -o -x -i0:b: textperf.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvic.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib
 c -o -x -i0:b: convpcm.c 0:b:libcia.lib 0:b:libdemo.lib 0:b:libc3l.lib
 c -o -x -i0:b: playpcm.c 0:b:libcia.lib 0:b:libdemo.lib 0:b:libsid.lib 0:b:libc3l.lib
+c -o -x -i0:b: vicspr.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libsid.lib 0:b:libvic.lib 0:b:libvdc.lib 0:b:libc3l.lib

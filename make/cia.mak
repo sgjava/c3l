@@ -7,4 +7,6 @@ ciagkc.obj \
 ciagks.obj \
 ciaglkc.obj \
 ciagrkc.obj \
+ciastod.obj \
+ciasta.obj \
 appciati.obj
