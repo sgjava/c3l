@@ -26,7 +26,7 @@ ushort cpmPrint(char *str, ushort lines) {
 	/* ADM-3A clear-home cursor */
 	putchar(0x1a);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printf(str);
@@ -41,7 +41,7 @@ ushort cpmPrint(char *str, ushort lines) {
 ushort cpmScroll(ushort lines) {
 	ushort i;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printf("\n");
@@ -57,7 +57,7 @@ ushort vdcPrint(console *con, char *str, ushort lines) {
 	ushort i;
 	clearHomeCon(con);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printCon(con, str);
@@ -72,7 +72,7 @@ ushort vdcPrint(console *con, char *str, ushort lines) {
 ushort vdcScroll(console *con, ushort lines) {
 	ushort i;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printLineCon(con, "");
@@ -88,7 +88,7 @@ ushort vicPrint(console *con, char *str, ushort lines) {
 	ushort i;
 	clearHomeCon(con);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printCon(con, str);
@@ -103,7 +103,7 @@ ushort vicPrint(console *con, char *str, ushort lines) {
 ushort vicScroll(console *con, ushort lines) {
 	ushort i;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printLineCon(con, "");
@@ -121,7 +121,7 @@ ushort vdcColor(console *con, char *str, ushort lines) {
 	con->color = scrLightGreen;
 	clearHomeCon(con);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printCon(con, str);
@@ -139,7 +139,7 @@ ushort vdcColorScroll(console *con, ushort lines) {
 	con->colorOn = 1;
 	con->color = scrLightGreen;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printLineCon(con, "");
@@ -158,7 +158,7 @@ ushort vicColor(console *con, char *str, ushort lines) {
 	con->color = scrLightGreen;
 	clearHomeCon(con);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printCon(con, str);
@@ -176,7 +176,7 @@ ushort vicColorScroll(console *con, ushort lines) {
 	con->colorOn = 1;
 	con->color = scrLightGreen;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(ciaMs, 0xffff);
+	initCiaTimer(cia2, ciaMs, 0xffff);
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	for (i = 0; i < lines; i++) {
 		printLineCon(con, "");

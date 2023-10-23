@@ -63,7 +63,7 @@ extern void getKeys(uchar* ciaKeyScan);
 extern uchar decodeKey();
 extern void initCia();
 extern void doneCia();
-extern void initCiaTimer(ushort timerA, ushort timerB);
+extern void initCiaTimer(ushort cia, ushort timerA, ushort timerB);
 extern void setCiaTod(ushort cia, uchar hour, uchar min, uchar sec, uchar tenth);
 extern void startTimer(ushort cia, ushort hz);
 
