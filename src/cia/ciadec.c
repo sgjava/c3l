@@ -42,8 +42,8 @@ uchar decodeKey() {
 	register uchar i = 0;
 	uchar keyCode = 0x00;
 	uchar lsCol, rsCol, col;
-	uchar *ciaKeyScan;
-	ciaKeyScan = getKeys();
+	uchar *ciaKeyScan = (uchar*) malloc(11);
+	getKeys(ciaKeyScan);
 	/* Shift row pressed? */
 	if ((ciaKeyScan[1] != 0xff) || (ciaKeyScan[6] != 0xff)) {
 		lsCol = getLsKeyCol(ciaKeyScan[1]);

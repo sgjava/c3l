@@ -13,6 +13,9 @@
  */
 char* getRtcDate() {
 	char *curDate = (char*) malloc(11);
+	/* Check if RTC is available for access */
+	while (getRtcReg(rtcRegA) & 0x80)
+		;
 	sprintf(curDate, "%02d/%02d/20%02d", getRtcReg(rtcMonth), getRtcReg(rtcDay),
 			getRtcReg(rtcYear));
 	return curDate;

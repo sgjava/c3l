@@ -6,6 +6,7 @@
 
 #include <hitech.h>
 #include <sys.h>
+#include <vic.h>
 
 /*
  * VIC registers to save and restore.
@@ -25,7 +26,7 @@ uchar vicRegs[sizeof(vicSavedRegs) - 1];
 void saveVic() {
 	uchar i;
 	for (i = 0; i < sizeof(vicRegs); i++) {
-		vicRegs[i] = inp(0xd000 + vicSavedRegs[i]);
+		vicRegs[i] = inp(vicSpr0X + vicSavedRegs[i]);
 	}
 }
 
@@ -35,6 +36,6 @@ void saveVic() {
 void restoreVic() {
 	uchar i;
 	for (i = 0; i < sizeof(vicRegs); i++) {
-		outp(0xd000 + vicSavedRegs[i], vicRegs[i]);
+		outp(vicSpr0X + vicSavedRegs[i], vicRegs[i]);
 	}
 }

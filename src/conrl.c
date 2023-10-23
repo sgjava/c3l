@@ -79,7 +79,6 @@ char* readLineCon(console *con, uchar len) {
 	} while (keyVal != 0x0d);
 	/* Stop timer */
 	outp(cia2+ciaCtrlRegA, ciaStopTimer);
-	/* Figure out string length based on current screen offset */
 	str = (char*) malloc(strLen + 1);
 	/* Screen to string */
 	(scr->copyScrToStr)(scr, (con->curY * scr->scrWidth) + con->curX - strLen,

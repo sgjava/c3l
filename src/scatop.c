@@ -11,17 +11,12 @@
 /*
  * Convert string from ASCII to PETSCII.
  */
-char* asciiToPet(char *str) {
+void asciiToPet(char *str) {
 	ushort len = strlen(str);
-	char *petStr = (char*) malloc(len + 1);
 	ushort i;
 	for (i = 0; i < len; i++) {
 		if ((str[i] > 96) && (str[i] <= 127)) {
-			petStr[i] = str[i] - 96;
-		} else {
-			petStr[i] = str[i];
+			str[i] = str[i] - 96;
 		}
 	}
-	petStr[len] = 0;
-	return petStr;
 }

@@ -13,7 +13,13 @@
  */
 char* getRtcTime() {
 	char *curTime = (char*) malloc(9);
-	sprintf(curTime, "%02d:%02d:%02d", getRtcReg(rtcHours),
-			getRtcReg(rtcMinutes), getRtcReg(rtcSeconds));
+	uchar seconds, minutes, hour;
+	/* Check if RTC is available for access */
+	while (getRtcReg(rtcRegA) & 0x80)
+		;
+	seconds = getRtcReg(rtcSeconds);
+	minutes = getRtcReg(rtcMinutes);
+	hour = getRtcReg(rtcHours);
+	sprintf(curTime, "%02d:%02d:%02d", hour, minutes, seconds);
 	return curTime;
 }

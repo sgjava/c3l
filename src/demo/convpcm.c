@@ -41,6 +41,8 @@ uchar bcdToByte(uchar bcd) {
  Display current time in SS.S format using CIA 2's TOD clock.
  */
 void dispTime() {
+	/* Reading TOD clock hours stops updating time */
+	inp(cia2+ciaTodHrs);
 	printf(", %d mins, %d.%d secs\n", bcdToByte(inp(cia2+ciaTodMin)),
 			bcdToByte(inp(cia2+ciaTodSec)), bcdToByte(inp(cia2+ciaTodTen)));
 }

@@ -118,6 +118,6 @@ typedef struct screen {
 	copyScrToStrPtr copyScrToStr;
 };
 
-extern char* asciiToPet(char *str);
+extern void asciiToPet(char *str);
 
 #endif

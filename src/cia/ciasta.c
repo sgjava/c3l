@@ -11,7 +11,7 @@
 #include <sys.h>
 
 /*
- Start CIA 2 timer A in continuous mode using Hz value.
+ Start CIA timer A in continuous mode using Hz value.
  */
 void startTimer(ushort cia, ushort hz) {
 	ushort timerA = ciaTimerFreq / hz;

@@ -5,7 +5,6 @@
  */
 
 #include <cia.h>
-#include <hitech.h>
 #include <screen.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,7 +14,8 @@
  */
 void keyboard(screen *scr) {
 	char str[40];
-	uchar *ciaKeyScan, exitKey, key;
+	uchar exitKey, key;
+	uchar *ciaKeyScan = (uchar*) malloc(11);
 	/* Clear screen to spaces */
 	(scr->clearScr)(scr, 32);
 	/* Clear color to white */
@@ -27,14 +27,13 @@ void keyboard(screen *scr) {
 	(scr->printCol)(scr, 0, 6, scrCyan, "Key pressed:");
 	(scr->printCol)(scr, 0, 24, scrYellow, "Press Return");
 	do {
-		ciaKeyScan = getKeys();
+		getKeys(ciaKeyScan);
 		exitKey = ciaKeyScan[0];
 		sprintf(str, "%02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x",
 				ciaKeyScan[0], ciaKeyScan[1], ciaKeyScan[2], ciaKeyScan[3],
 				ciaKeyScan[4], ciaKeyScan[5], ciaKeyScan[6], ciaKeyScan[7],
 				ciaKeyScan[8], ciaKeyScan[9], ciaKeyScan[10]);
 		(scr->print)(scr, (scr->scrWidth - 32) / 2, 4, str);
-		free(ciaKeyScan);
 		key = decodeKey();
 		if (key == 0) {
 			key = 32;
@@ -42,4 +41,5 @@ void keyboard(screen *scr) {
 		sprintf(str, "%c", key);
 		(scr->print)(scr, 13, 6, str);
 	} while (exitKey != 0xfd);
+	free(ciaKeyScan);
 }

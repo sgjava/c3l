@@ -53,13 +53,13 @@
 #define ciaPotsPort1 0x40     /* 4066 analog switch settings for CIA 1 */
 #define ciaPotsPort2 0x80
 
-#define ciaMs 912             /* ~1 millisecond using CIA microsecond timer */
+#define ciaMs 1022            /* ~1 millisecond using CIA microsecond timer */
 
 extern uchar getKeyCol(uchar keyVal);
 extern uchar getLsKeyCol(uchar keyVal);
 extern uchar getRsKeyCol(uchar keyVal);
 extern uchar getKey(uchar keyRow);
-extern uchar* getKeys();
+extern void getKeys(uchar* ciaKeyScan);
 extern uchar decodeKey();
 extern void initCia();
 extern void doneCia();
