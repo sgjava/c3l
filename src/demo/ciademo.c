@@ -45,7 +45,7 @@ main() {
 	printf("Empty loop elapsed time test.\n");
 	initCia();
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
-	initCiaTimer(cia2, ciaMs, 0xffff);
+	startTimerAB(cia2, ciaMs, 0xffff);
 	tens = inp(cia1 + ciaTodTen);
 	/* Wait for tenth of a second to change */
 	while (inp(cia1 + ciaTodTen) == tens)

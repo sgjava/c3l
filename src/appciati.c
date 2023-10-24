@@ -11,7 +11,7 @@
 /*
  * Set CIA count down timers. Timer B counts timer A.
  */
-void initCiaTimer(ushort cia, ushort timerA, ushort timerB) {
+void startTimerAB(ushort cia, ushort timerA, ushort timerB) {
 	/* CIA Timer A lo */
 	outp(cia + ciaTimerALo, (uchar) timerA);
 	/* CIA Timer A hi */

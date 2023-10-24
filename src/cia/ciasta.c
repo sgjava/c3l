@@ -13,7 +13,7 @@
 /*
  Start CIA timer A in continuous mode using Hz value.
  */
-void startTimer(ushort cia, ushort hz) {
+void startTimerA(ushort cia, ushort hz) {
 	ushort timerA = ciaTimerFreq / hz;
 	/* CIA Timer A lo */
 	outp(cia+ciaTimerALo, (uchar) timerA);

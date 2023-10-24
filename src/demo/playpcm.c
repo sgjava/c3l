@@ -73,7 +73,7 @@ void swapNibbles(uchar *buffer, ushort len) {
  */
 void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 	/* Start HZ timer */
-	startTimer(cia2, hz);
+	startTimerA(cia2, hz);
 	printf("Playing, ");
 	setCiaTod(cia2, 0, 0, 0, 0);
 	/* Play sample */
