@@ -31,23 +31,6 @@ void dispHelp() {
 }
 
 /*
- * Convert bcd byte to base 10 byte.
- */
-uchar bcdToByte(uchar bcd) {
-	return ((bcd >> 4) * 10) + (bcd & 0x0f);
-}
-
-/*
- Display current time in SS.S format using CIA 2's TOD clock.
- */
-void dispTime() {
-	/* Reading TOD clock hours stops updating time */
-	inp(cia2+ciaTodHrs);
-	printf(", %d mins, %d.%d secs\n", bcdToByte(inp(cia2+ciaTodMin)),
-			bcdToByte(inp(cia2+ciaTodSec)), bcdToByte(inp(cia2+ciaTodTen)));
-}
-
-/*
  Convert 8 bit raw data to 4 bit raw data.
  */
 ushort convert8to4(uchar *buffer, ushort bufSize) {
@@ -101,10 +84,11 @@ ushort convert8to1(uchar *buffer, ushort bufSize) {
  */
 void convert(char *inFileName, char *outFileName, uchar *buffer, ushort bufSize,
 uchar bits) {
+	uchar tens;
 	FILE *inFile, *outFile;
 	struct stat statRec;
 	ushort bytesRead, bytesWrite;
-	ulong cnvBytes, cnvStep, cnvNext;
+	ulong cnvBytes, cnvStep, cnvNext, startCia, endCia;
 	printf("\n");
 	/* Check bits valid value */
 	if (bits == 4 || bits == 2 || bits == 1) {
@@ -118,7 +102,11 @@ uchar bits) {
 					printf(
 							"Converting %s, %ld bytes, ..........\b\b\b\b\b\b\b\b\b\b",
 							inFileName, statRec.st_size);
-					setCiaTod(cia2, 0, 0, 0, 0);
+					tens = inp(cia1 + ciaTodTen);
+					/* Wait for tenth of a second to change */
+					while (inp(cia1 + ciaTodTen) == tens)
+						;
+					startCia = todToMs(cia1);
 					do {
 						bytesRead = fread(buffer, sizeof(uchar), bufSize,
 								inFile);
@@ -142,7 +130,8 @@ uchar bits) {
 						}
 					} while (bytesRead == bufSize);
 					fclose(outFile);
-					dispTime();
+					endCia = todToMs(cia1);
+					printf(", %u ms\n", endCia - startCia);
 				} else {
 					puts("\nUnable to open output file.");
 				}

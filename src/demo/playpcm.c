@@ -27,23 +27,6 @@ void dispHelp() {
 }
 
 /*
- * Convert bcd byte to base 10 byte.
- */
-uchar bcdToByte(uchar bcd) {
-	return ((bcd >> 4) * 10) + (bcd & 0x0f);
-}
-
-/*
- Display current time in SS.S format using CIA 2's TOD clock.
- */
-void dispTime() {
-	/* Reading TOD clock hours stops updating time */
-	inp(cia2+ciaTodHrs);
-	printf("%d.%d secs\n", bcdToByte(inp(cia2+ciaTodSec) & 0x7f),
-			bcdToByte(inp(cia2+ciaTodTen) & 0x0f));
-}
-
-/*
  Return file size or 0 for error.
  */
 ulong getFileSize(char *fileName) {
@@ -59,23 +42,36 @@ ulong getFileSize(char *fileName) {
  Swap nibbles in buffer for inverted RAWs.
  */
 void swapNibbles(uchar *buffer, ushort len) {
+	uchar tens;
+	ulong startCia, endCia;
 	ushort i;
 	printf("Swapping nibbles, ");
-	setCiaTod(cia2, 0, 0, 0, 0);
+	tens = inp(cia1 + ciaTodTen);
+	/* Wait for tenth of a second to change */
+	while (inp(cia1 + ciaTodTen) == tens)
+		;
+	startCia = todToMs(cia1);
 	for (i = 0; i < len; i++) {
 		buffer[i] = (buffer[i] << 4) | (buffer[i] >> 4);
 	}
-	dispTime();
+	endCia = todToMs(cia1);
+	printf("%u ms\n", endCia - startCia);
 }
 
 /*
  Play sample from buffer.
  */
 void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
+	uchar tens;
+	ulong startCia, endCia;
 	/* Start HZ timer */
 	startTimerA(cia2, hz);
 	printf("Playing, ");
-	setCiaTod(cia2, 0, 0, 0, 0);
+	tens = inp(cia1 + ciaTodTen);
+	/* Wait for tenth of a second to change */
+	while (inp(cia1 + ciaTodTen) == tens)
+		;
+	startCia = todToMs(cia1);
 	/* Play sample */
 	switch (bits) {
 	case 1:
@@ -88,22 +84,30 @@ void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 		playPcm4Sid(buffer, len);
 		break;
 	}
-	dispTime();
+	endCia = todToMs(cia1);
 	/* Stop CIA 2 timer A */
 	outp(cia2+ciaCtrlRegA, ciaStopTimer);
+	printf("%u ms\n", endCia - startCia);
 }
 
 /*
  Load file into buffer.
  */
 void load(uchar *buffer, ulong len, char *fileName) {
+	uchar tens;
+	ulong startCia, endCia;
 	FILE *rawFile;
 	if ((rawFile = fopen(fileName, "rb")) != NULL) {
 		printf("\nReading %s, %u bytes, ", fileName, len);
-		setCiaTod(cia2, 0, 0, 0, 0);
+		tens = inp(cia1 + ciaTodTen);
+		/* Wait for tenth of a second to change */
+		while (inp(cia1 + ciaTodTen) == tens)
+			;
+		startCia = todToMs(cia1);
 		fread(buffer, sizeof(uchar), len, rawFile);
 		fclose(rawFile);
-		dispTime();
+		endCia = todToMs(cia1);
+		printf("%u ms\n", endCia - startCia);
 	} else
 		puts("\nUnable to open file.");
 }
