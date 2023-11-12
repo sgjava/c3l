@@ -5,9 +5,8 @@
  */
 
 #include <cia.h>
-#include <screen.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <hitech.h>
+#include <sys.h>
 
 /*
  * Convert bcd byte to base 10 byte.
