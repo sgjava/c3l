@@ -19,4 +19,5 @@ conpr.obj \
 conscr.obj \
 conofs.obj \
 conxy.obj \
-scatop.obj
+scatop.obj \
+vicint.obj

@@ -8,6 +8,7 @@ zas -j vicbmspa.as
 zas -j pcm4.as
 zas -j pcm1.as
 zas -j pcm2.as
+zas -j vicint.as
 c < obj.mak
 libr < cia.mak
 libr < sid.mak
