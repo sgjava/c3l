@@ -1,7 +1,7 @@
 /*
  * C128 CP/M C Library C3L
  *
- * Interrupt replacement demo.
+ * Interrupt replacement demo. This will make VIC border color cycle.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -41,44 +41,46 @@ void setInt(ushort address) {
  * Use this to find the Z80 signature for custom interrupt code.
  */
 ushort findBytes(uchar bytes[], uchar *mem, ushort len, uchar size) {
-    ushort i;
-    for (i = 0; i <= len - size; i++) {
-        if (memcmp(&mem[i], bytes, size) == 0) {
-        	/* Match found starting at index i */
-            return i;
-        }
-    }
-    /* No match found */
-    return len;
+	ushort i;
+	for (i = 0; i <= len - size; i++) {
+		if (memcmp(&mem[i], bytes, size) == 0) {
+			/* Match found starting at index i */
+			return i;
+		}
+	}
+	/* No match found */
+	return len;
 }
 
 main() {
 	/* Main interrupt vector is at 0xfdfd which contains a jmp opcode */
 	ushort *intVec = (ushort*) 0xfdfe, i, found, address = intVec[0];
 	/* Use pointer at 0xfdfe to locate interrupt code */
-	uchar *intVecByte = (uchar*) intVec[0], *memStart = (uchar*) 0x0100,
-			*memEnd = (uchar*) malloc(1);
-	/* This is the z80 signature used to find the custom interrupt code */
+	uchar *memStart = (uchar*) 0x0100, *memEnd = (uchar*) malloc(1);
+	/* This is the z80 signature used to find the custom interrupt code for vicInt */
 	static uchar target[] = { 0xf5, 0xc5, 0x01, 0x0d, 0xdc };
 	/* Only needed this to get end of program memory address */
 	free(memEnd);
-	printf("CIA 1 Ctrl Reg A %02x, b %02x\n", inp(cia1 + ciaCtrlRegA), inp(cia1 + ciaCtrlRegB));
-	printf("CIA 1 Timer A %02x%02x, b %02x%02x\n", inp(cia1 + ciaTimerAHi), inp(cia1 + ciaTimerBLo), inp(cia1 + ciaTimerAHi), inp(cia1 + ciaTimerBLo));
+	printf("CIA 1 Ctrl Reg A %02x, B %02x\n", inp(cia1 + ciaCtrlRegA),
+			inp(cia1 + ciaCtrlRegB));
+	printf("CIA 1 Timer A %02x%02x, B %02x%02x\n", inp(cia1 + ciaTimerAHi),
+			inp(cia1 + ciaTimerBLo), inp(cia1 + ciaTimerAHi),
+			inp(cia1 + ciaTimerBLo));
 	printf("Program start %04x, end %04x, interrupt vector %04x\n", memStart,
 			memEnd, address);
-	for (i = 0; i < 100; ++i) {
-		printf("%02x ", intVecByte[i]);
-	}
 	/* Find custom interrupt code in program */
-	found = findBytes(target, memStart, memEnd-memStart, sizeof (target))-7;
+	found = findBytes(target, memStart, memEnd - memStart, sizeof(target));
 	printf("\n\nFound target at offset %04x\n", found);
-	for (i = 0; i < 100; ++i) {
-		printf("%02x ", memStart[found+i]);
+	for (i = 0; i < 19; ++i) {
+		printf("%02x ", memStart[found + i]);
 	}
 	/* Enable screen */
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
-	setInt(found+0x0100);
+	/* New interrupt routine */
+	setInt(found + 0x0100);
+	/* Do something while interrupt is running */
 	for (i = 0; i < 30000; ++i) {
 	}
+	/* Old interrupt routine */
 	setInt(address);
 }

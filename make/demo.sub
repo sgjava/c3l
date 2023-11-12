@@ -1,8 +1,9 @@
+zas -j vicint.as
 c -c -o -x -i0:b: dwait.c drline.c dkey.c dkeyrun.c dsent.c dconrun.c dgraph.c ddualrun.c dtextrun.c dcia.c
-libr r b:libdemo.lib dgraph.obj dtextrun.obj ddualrun.obj dconrun.obj dkeyrun.obj dwait.obj drline.obj dkey.obj dsent.obj dcia.obj
-c -o -x -i0:b: inttest.c 0:b:libc3l.lib
+libr < demo.mak
+c -o -x -i0:b: inttest.c 0:b:libdemo.lib
 c -o -x -i0:b: baseline.c
-c -o -x -i0:b: ciademo.c 0:b:libcia.lib 0:b:libdemo.lib
+c -o -x -i0:b: ciademo.c 0:b:libdemo.lib 0:b:libcia.lib
 c -o -x -i0:b: rtcdemo.c 0:b:librtc.lib
 c -o -x -i0:b: vickey.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvic.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib
 c -o -x -i0:b: vdckey.c 0:b:libc3l.lib 0:b:libcia.lib 0:b:libvdc.lib 0:b:libdemo.lib 0:b:libc3l.lib 0:b:libcia.lib

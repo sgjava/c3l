@@ -23,8 +23,6 @@ stack_end:                     ; End of stack
 psect   text
 
 _vicInt:
-        ld      (save_sp),sp    ; Save SP
-        ld      sp,stack_end
         push    af
         push    bc
         ld      bc,0dc0dh
@@ -35,8 +33,6 @@ _vicInt:
         out     (c),a           ; Set new color
 	    pop     bc
 	    pop     af
-	    done:
-	    ld      sp,(save_sp)    ; Restore SP
         ei
         ret
        
