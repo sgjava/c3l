@@ -21,9 +21,9 @@
  Display program help.
  */
 void dispHelp() {
-	puts("\nplaypcm4 {U:D:}filespec hertz bits {sn}");
-	puts("playpcm4 filename.raw 8000 4 sn (swap nibbles before playing)");
-	puts("playpcm4 filename.raw 15000 1 (no nibble swap)");
+	puts("\nplaypcm {U:D:}filespec hertz bits {sn}");
+	puts("playpcm filename.raw 8000 4 sn (swap nibbles before playing)");
+	puts("playpcm filename.raw 15000 1 (no nibble swap)");
 }
 
 /*
