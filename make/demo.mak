@@ -9,4 +9,5 @@ drline.obj \
 dkey.obj \
 dsent.obj \
 dcia.obj \
-vicint.obj
+vicint.obj \
+vicras.obj

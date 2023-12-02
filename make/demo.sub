@@ -1,7 +1,9 @@
 zas -j vicint.as
+zas -j vicras.as
 c -c -o -x -i0:b: dwait.c drline.c dkey.c dkeyrun.c dsent.c dconrun.c dgraph.c ddualrun.c dtextrun.c dcia.c
 libr < demo.mak
-c -o -x -i0:b: inttest.c 0:b:libdemo.lib
+c -o -x -i0:b: ciaint.c 0:b:libdemo.lib 0:b:libcia.lib
+c -o -x -i0:b: vicrint.c 0:b:libdemo.lib 0:b:libcia.lib 0:b:libvic.lib
 c -o -x -i0:b: baseline.c
 c -o -x -i0:b: ciademo.c 0:b:libdemo.lib 0:b:libcia.lib
 c -o -x -i0:b: rtcdemo.c 0:b:librtc.lib

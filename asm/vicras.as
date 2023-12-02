@@ -5,24 +5,23 @@
 ;
 ; Interrupt code to be called by 0xfdfd vector. Do not call this function directly.
 ;
-; See https://github.com/csoren/c128cpm/blob/bf6a9c4498afe5ef50dce6ee124b65a02b75c117/cpm/cxintr.asm
-;
 
-global  _vicInt
+global  _vicRas
 
 psect   data
 
 psect   text
 
-_vicInt:
+_vicRas:
         push    af              ; Only pushing 4 bytes on the stack, so no creating new SP
         push    bc
-        ld      bc,0dc0dh
-        in      a,(c)           ; Clear CIA 1 ICR status        
         ld      bc,0d020h       ; VIC border color
         in      a,(c)           ; Get current color              
         inc     a               ; Add one
-        out     (c),a           ; Set new color
+        out     (c),a           ; Set new color        
+        ld      bc,0d019h
+        ld      a,0ffh
+        out     (c),a           ; Ack raster interrupt        
 	    pop     bc
 	    pop     af
         ei
