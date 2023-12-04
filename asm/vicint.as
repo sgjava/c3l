@@ -10,8 +10,6 @@
 
 global  _vicInt
 
-psect   data
-
 psect   text
 
 _vicInt:
