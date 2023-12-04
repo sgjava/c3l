@@ -60,8 +60,8 @@ _vicRas:
         ld      bc,0d019h
         ld      a,0ffh
         out     (c),a           ; Ack raster interrupt        
-	    pop     bc
-	    pop     af
+        pop     bc
+        pop     af
         ei
         ret        
 1:        
@@ -79,8 +79,8 @@ _vicRas:
         ld      bc,0d019h
         ld      a,0ffh
         out     (c),a           ; Ack raster interrupt        
-	    pop     bc
-	    pop     af
+        pop     bc
+        pop     af
         ei
         ret
        
