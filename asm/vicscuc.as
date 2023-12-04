@@ -64,12 +64,12 @@ _scrollVicUpColAsm:
         ld      bc,(source)     ; bc = source
         ld      hl,buffer       ; hl = buffer address
 2:
-		in		a,(c)           ; Get color byte
-		ld      (hl),a          ; Save in buffer
-	    inc     hl              ; hl = hl+1
-	    inc     bc              ; bc = bc+1
+        in      a,(c)           ; Get color byte
+        ld      (hl),a          ; Save in buffer
+        inc     hl              ; hl = hl+1
+        inc     bc              ; bc = bc+1
         dec     d               ; d = d-1
-        jr 		nz,2b           ; Until 0
+        jr      nz,2b           ; Until 0
         ld      hl,(length)     ; hl = length
         ld      d,l             ; d = l
         ld      bc,(dest)       ; bc = dest
@@ -77,8 +77,8 @@ _scrollVicUpColAsm:
 3:
         ld      a,(hl)          ; a = buffer byte
         out     (c),a           ; set color byte                
-	    inc     hl              ; hl = hl+1
-	    inc     bc              ; bc = bc+1
+        inc     hl              ; hl = hl+1
+        inc     bc              ; bc = bc+1
         dec     d               ; d = d-1
         jr 		nz,3b           ; Until 0
         ld      hl,(length)     ; hl = length

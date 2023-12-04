@@ -35,8 +35,8 @@ _fillVicMemCol:
         out     (c),l           ; Set color memory
         inc     bc              ; Set for next address
         dec     de              ; Length -= 1
-		ld		a,d
-		or		e        
+        ld      a,d
+        or      e        
         jr      nz,1b 
         ret
        
