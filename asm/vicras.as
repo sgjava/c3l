@@ -11,13 +11,13 @@ global  _vicRas
 
 psect   data
 
-; Border color stripe
+; Border color
 
 border:
 
 defw    0
 
-; Save current border color
+; Raster color stripe
 
 stripe:
 
