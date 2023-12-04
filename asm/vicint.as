@@ -29,8 +29,8 @@ _vicInt:
         in      a,(c)           ; Get current color              
         inc     a               ; Add one
         out     (c),a           ; Set new color
-	    pop     bc
-	    pop     af
+        pop     bc
+        pop     af
         ei
         ret
        
