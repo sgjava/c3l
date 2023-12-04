@@ -33,15 +33,6 @@ ushort findBytes(uchar bytes[], uchar *mem, ushort len, uchar size) {
 }
 
 /*
- * Do not call this function from C. This function is used to include our Z80
- * assembler code which is located with findBytes.
- */
-void doNotCall() {
-	vicInt();
-	vicRas();
-}
-
-/*
  * Set CIA 1 interrupt address.
  */
 void setCiaInt(ushort address) {
@@ -81,16 +72,19 @@ void ciaInt(uchar *memEnd) {
 		saveBorder = inp(vicBorderCol);
 		/* Enable screen */
 		outp(vicCtrlReg1, ((saveCtrlReg | 0x10) & 0x7f));
+		/* This is added here just to link in IRQ code */
+		vicInt();
 		/* New interrupt routine */
 		setCiaInt(found);
 		/* Do something while interrupt is active */
 		for (i = 0; i < 30000; ++i) {
 		}
+		/* Old interrupt routine */
+		setCiaInt(address);
 		outp(vicBorderCol, saveBorder);
 		/* Disable screen */
 		outp(vicCtrlReg1, saveCtrlReg);
 		/* Old interrupt routine */
-		setCiaInt(address);
 	} else {
 		printf("\nTarget not found\n");
 	}
@@ -104,14 +98,7 @@ void setVicInt(ushort address) {
 #asm
 	di
 #endasm
-	/* Clear all CIA 1 IRQ enable bits */
-	outp(cia1+ciaIcr, ciaClearIcr);
-	/* Clear CIA 1 ICR status */
-	inp(cia1+ciaIcr);
-	/* Clear all CIA 2 IRQ enable bits */
-	outp(cia2+ciaIcr, ciaClearIcr);
-	/* Clear CIA 2 ICR status */
-	inp(cia2+ciaIcr);
+	initCia();
 	intVec[0] = address;
 	/* Raster interrupt line */
 	outp(vicRaster, 151);
@@ -149,9 +136,14 @@ void disableVicInt(ushort address) {
  */
 void rasInt(uchar *memEnd) {
 	ushort *intVec = (ushort*) 0xfdfe, address = intVec[0], i, found;
-	uchar *memStart = (uchar*) 0x0100, saveCtrlReg, saveBorder;
+	uchar *memStart = (uchar*) 0x0100, saveCtrlReg, saveBorder, tens, color = 0,
+			len;
+	static uchar colors[] = { vicLightGreen, vicGreen, vicLightGreen,
+			vicLightBlue, vicBlue, vicLightBlue, vicLightRed, vicRed,
+			vicLightRed };
 	/* This is the z80 signature used to find the custom interrupt code for vicRas */
-	static uchar target[] = { 0xf5, 0xc5, 0x01, 0x12, 0xd0, 0xed, 0x78, 0xfe, 0x97 };
+	static uchar target[] = { 0xf5, 0xc5, 0x01, 0x12, 0xd0, 0xed, 0x78, 0xfe,
+			0x8d };
 	/* Find custom interrupt code in program */
 	found = findBytes(target, memStart, memEnd - memStart, sizeof(target))
 			+ (ushort) memStart;
@@ -161,15 +153,26 @@ void rasInt(uchar *memEnd) {
 		for (i = 0; i < 19; ++i) {
 			printf("%02x ", memStart[found - (ushort) memStart + i]);
 		}
-		/* setVicMmuBank(1); */
+		/* Set border and stripe color for IRQ service routine */
+		vicRas(vicBlack, vicGreen);
 		saveCtrlReg = inp(vicCtrlReg1);
 		saveBorder = inp(vicBorderCol);
 		/* Enable screen */
 		outp(vicCtrlReg1, ((inp(vicCtrlReg1) | 0x10) & 0x7f));
 		/* New interrupt routine */
 		setVicInt(found);
+		len = (sizeof(colors) / sizeof(colors[0]));
 		/* Do something while interrupt is running */
-		for (i = 0; i < 30000; ++i) {
+		for (i = 0; i < 100; ++i) {
+			tens = inp(cia1 + ciaTodTen);
+			/* Wait for tenth of a second to change */
+			while (inp(cia1 + ciaTodTen) == tens)
+				;
+			/* Be careful here as IRQ can happen while this is running */
+			vicRas(vicBlack, colors[color]);
+			if (color++ > len) {
+				color = 0;
+			}
 		}
 		/* Disable raster interrupt */
 		disableVicInt(address);
@@ -185,6 +188,6 @@ main() {
 	/* Only needed this to get end of program memory address */
 	uchar *memEnd = (uchar*) malloc(1);
 	free(memEnd);
-	ciaInt(memEnd-1);
-	rasInt(memEnd-1);
+	ciaInt(memEnd - 1);
+	rasInt(memEnd - 1);
 }

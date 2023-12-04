@@ -12,7 +12,15 @@ global  _vicInt
 
 psect   text
 
+; This code can be called from C, but it doesn't do anything.
+
 _vicInt:
+        pop     hl              ; Return address
+        push    hl
+        ret
+
+; This is the IRQ service routine which is looked up in the C code
+
         push    af              ; Only pushing 4 bytes on the stack, so no creating new SP
         push    bc
         ld      bc,0dc0dh
