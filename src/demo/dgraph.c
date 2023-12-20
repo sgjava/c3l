@@ -6,7 +6,6 @@
 
 #include <bitmap.h>
 #include <cia.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <sys.h>
 #include <vic.h>
@@ -52,7 +51,7 @@ void lines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
  */
 void horzLines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
-	ushort y0;
+	int y0;
 	drawBox(bmp, x, y, w, h, "Horz lines");
 	for (i = 0; i < count; i++) {
 		y0 = rand() % (h - 4) + y + 2;
@@ -65,7 +64,7 @@ void horzLines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
  */
 void vertLines(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
-	ushort x0;
+	int x0;
 	drawBox(bmp, x, y, w, h, "Vert lines");
 	for (i = 0; i < count; i++) {
 		x0 = rand() % (w - 4) + x + 2;
@@ -90,7 +89,7 @@ void bezier(bitmap *bmp, int x, int y, int w, int h, uchar count) {
  */
 void rectangles(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
-	ushort x0, y0, w0, h0;
+	int x0, y0, w0, h0;
 	drawBox(bmp, x, y, w, h, "Rectangles");
 	for (i = 0; i < count; i++) {
 		w0 = rand() % (w - 10) + 5;
@@ -106,7 +105,7 @@ void rectangles(bitmap *bmp, int x, int y, int w, int h, uchar count) {
  */
 void squares(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
-	ushort x0, y0, len;
+	int x0, y0, len;
 	drawBox(bmp, x, y, w, h, "Squares");
 	for (i = 0; i < count; i++) {
 		len = rand() % 20 + 10;
@@ -121,7 +120,7 @@ void squares(bitmap *bmp, int x, int y, int w, int h, uchar count) {
  */
 void ellipses(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
-	ushort x0, y0, a, b;
+	int x0, y0, a, b;
 	drawBox(bmp, x, y, w, h, "Ellipses");
 	for (i = 0; i < count; i++) {
 		a = rand() % (w / 5) + (w / 5) - 4;
@@ -137,7 +136,7 @@ void ellipses(bitmap *bmp, int x, int y, int w, int h, uchar count) {
  */
 void circles(bitmap *bmp, int x, int y, int w, int h, uchar count) {
 	uchar i;
-	ushort x0, y0, len;
+	int x0, y0, len;
 	drawBox(bmp, x, y, w, h, "Circles");
 	for (i = 0; i < count; i++) {
 		len = rand() % (h / 5) + 10;

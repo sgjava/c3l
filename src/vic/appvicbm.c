@@ -21,8 +21,6 @@ void initVicBmpMode(bitmap *bmp, uchar bgCol, uchar fgCol, uchar pixCol) {
 	outp(vicBorderCol, bmp->color[fgCol]);
 	outp(vicBgCol0, bmp->color[bgCol]);
 	/* Clear bitmap */
-	(bmp->clearBmpCol)(bmp, bmp->color[bgCol]);
-	/* Clear bitmap */
 	(bmp->clearBmp)(bmp, 0);
 	/* Set foreground and background pixel colors */
 	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol] << 4) | (bmp->color[bgCol] & 0x0f));

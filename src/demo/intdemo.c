@@ -190,4 +190,5 @@ main() {
 	free(memEnd);
 	ciaInt(memEnd - 1);
 	rasInt(memEnd - 1);
+	doneCia();
 }

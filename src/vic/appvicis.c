@@ -33,5 +33,5 @@ void initVicScrMode(screen *scr, uchar bgCol, uchar fgCol, uchar chrCol) {
 	setVicChrMode(1, vicBank, ((ushort) scr->scrMem - (vicBank * 16384)) / 1024,
 			((ushort) scr->chrMem - (vicBank * 16384)) / 2048);
 	/* Enable screen */
-	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
+	outp(vicCtrlReg1, ((inp(vicCtrlReg1) | 0x10) & 0x7f));
 }

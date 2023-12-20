@@ -1,5 +1,6 @@
 r b:libdemo.lib \
 dgraph.obj \
+dgraphi.obj \
 dtextrun.obj \
 ddualrun.obj \
 dconrun.obj \
@@ -10,4 +11,5 @@ dkey.obj \
 dsent.obj \
 dcia.obj \
 vicint.obj \
-vicras.obj
+vicras.obj \
+vicspscr.obj

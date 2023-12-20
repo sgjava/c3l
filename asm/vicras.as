@@ -3,7 +3,7 @@
 ;
 ; Assembled with HI-TECH C 3.09 (CP/M-80) ZAS.
 ;
-; This function can be called by C to sev border and stripe values. Interrupt
+; This function can be called by C to save border and stripe values. Interrupt
 ; code to be called by 0xfdfd vector.
 ;
 

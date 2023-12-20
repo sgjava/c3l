@@ -70,7 +70,7 @@ Within the "~/eclipse-workspace/c3l/build" directory, you will find a file calle
 Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
 ### Build [VICE](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
-* `sudo apt install build-essential autoconf git libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full`
+* `sudo apt install build-essential autoconf git libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev`
 * `cd`
 * `git clone --depth 1 https://github.com/VICE-Team/svn-mirror`
 * `cd svn-mirror/vice`

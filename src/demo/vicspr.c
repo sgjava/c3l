@@ -132,7 +132,7 @@ void bounceSpr(screen *scr) {
  */
 void run(screen *scr, uchar *vicMem) {
 	uchar i;
-	char str[40];
+	char str[41];
 	/* Note the use of printVicPet that converts ASCII to PETSCII */
 	(scr->print)(scr, 0, 0, "Using ROM character set and one screen  "
 			"at the end of VIC bank 0. Sprite is     "
