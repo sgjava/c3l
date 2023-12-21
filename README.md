@@ -69,13 +69,21 @@ for your personal projects unrelated to C3L.
 Within the "~/eclipse-workspace/c3l/build" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
 Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
+### Build [FFMPEG](https://ffmpeg.org) on Ubuntu 22.04 x86_64 (used for VICE video recording, but may get replaced with ZMBV in future versions).
+* `sudo apt install git curl build-essential`
+* `cd`
+* `git clone --depth 1 https://github.com/markus-perl/ffmpeg-build-script.git`
+* `cd ffmpeg-build-script`
+* `nano build-ffmpeg` and change to `FFMPEG_VERSION=4.4`
+* `./build-ffmpeg --enable-gpl-and-non-free --build`
+
 ### Build [VICE](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
-* `sudo apt install build-essential autoconf git libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev`
+* `sudo apt install autoconf libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev`
 * `cd`
 * `git clone --depth 1 https://github.com/VICE-Team/svn-mirror`
 * `cd svn-mirror/vice`
 * `./autogen.sh`
-* `./configure`
+* `PKG_CONFIG_PATH="/home/username/ffmpeg-build-script/workspace/lib/pkgconfig" ./configure --enable-ffmpeg --enable-gtk3ui` change username in path
 * `make -j$(getconf _NPROCESSORS_ONLN)`
 * `sudo make install`
 * `x128 -80col`
