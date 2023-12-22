@@ -18,7 +18,8 @@
 /*
  * Set VIC raster interrupt address.
  */
-void setVicInt(uchar ras1, uchar ras2, screen *scr, bitmap *bmp) {
+void setVicInt(uchar ras1, uchar mode1, uchar ras2, uchar mode2, screen *scr,
+		bitmap *bmp) {
 	uchar scrMcr, bmpMcr, bmpColMcr, chrMcr, vicBank = (ushort) scr->scrMem
 			/ 16384;
 	/* From VIC perspective this is only relevant for text mode, but bitmap print routines use same character set */
@@ -29,9 +30,15 @@ void setVicInt(uchar ras1, uchar ras2, screen *scr, bitmap *bmp) {
 	bmpMcr = (((ushort) bmp->bmpMem - (vicBank * 16384)) / 8192) << 3;
 	/* Setting for screen memory control register (used for bitmap color) */
 	bmpColMcr = (((ushort) bmp->bmpColMem - (vicBank * 16384)) / 1024) << 4;
-	/* Bitmap on top and text on bottom, memory control register and mode bytes packed into ushort */
-	vicSplitScr(ras1, (((bmpMcr | bmpColMcr)) << 8) | 0x3b, ras2,
-			(((scrMcr | chrMcr)) << 8) | 0x1b);
+	if (mode1 == 0x3b) {
+		/* Bitmap on top and text on bottom, memory control register and mode bytes packed into ushort */
+		vicSplitScr(ras1, (((bmpMcr | bmpColMcr)) << 8) | mode1, ras2,
+				(((scrMcr | chrMcr)) << 8) | mode2);
+	} else {
+		/* Text on top and bitmap on bottom, memory control register and mode bytes packed into ushort */
+		vicSplitScr(ras1, (((scrMcr | chrMcr)) << 8) | mode1, ras2,
+				(((bmpMcr | bmpColMcr)) << 8) | mode2);
+	}
 }
 
 /*
@@ -247,7 +254,7 @@ void runGraphDemoI(console *con, bitmap *bmp, ushort code) {
 	ushort x = 0, y = 8;
 	uchar tens, i;
 	con->curY = con->scr->scrHeight - 1;
-	setVicInt(0, y + ySize + 50, con->scr, bmp);
+	setVicInt(0, 0x3b, y + ySize + 50, 0x1b, con->scr, bmp);
 	/* New interrupt routine */
 	enableVicInt(code);
 	srand(inp(vicRaster));
@@ -256,26 +263,27 @@ void runGraphDemoI(console *con, bitmap *bmp, ushort code) {
 	vertLinesI(con, bmp, x += xSize + 8, y, xSize, ySize, 10);
 	x = 0;
 	y = ySize + 17;
-	setVicInt(0, y + ySize + 50, con->scr, bmp);
+	setVicInt(0, 0x3b, y + ySize + 50, 0x1b, con->scr, bmp);
 	bezierI(con, bmp, x, y, xSize, ySize, 14);
 	rectanglesI(con, bmp, x += xSize + 8, y, xSize, ySize, 10);
 	squaresI(con, bmp, x += xSize + 8, y, xSize, ySize, 10);
+	setVicInt(0, 0x1b, y + ySize + 50, 0x3b, con->scr, bmp);
 	x = 0;
 	y += ySize + 9;
-	setVicInt(0, y + ySize + 50, con->scr, bmp);
 	ellipsesI(con, bmp, x, y, xSize, ySize, 10);
 	circlesI(con, bmp, x += xSize + 8, y, xSize, ySize, 10);
+	setVicInt(0, 0x3b, 241, 0x1b, con->scr, bmp);
 	/* Show how we can easily move raster split */
 	for (i = 241; i > 42; i -= 8) {
 		tens = inp(cia1 + ciaTodTen);
-		setVicInt(0, i, con->scr, bmp);
+		setVicInt(0, 0x3b, i, 0x1b, con->scr, bmp);
 		/* Wait for tenth of a second to change */
 		while (inp(cia1 + ciaTodTen) == tens)
 			;
 	}
 	for (i = 41; i < 242; i += 8) {
 		tens = inp(cia1 + ciaTodTen);
-		setVicInt(0, i, con->scr, bmp);
+		setVicInt(0, 0x3b, i, 0x1b, con->scr, bmp);
 		/* Wait for tenth of a second to change */
 		while (inp(cia1 + ciaTodTen) == tens)
 			;
