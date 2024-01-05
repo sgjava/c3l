@@ -25,6 +25,8 @@ void keyboard(screen *scr) {
 	(scr->printCol)(scr, (scr->scrWidth - 32) / 2, 2, scrLightBlue,
 			" 0  1  2  3  4  5  6  7  8  9 10");
 	(scr->printCol)(scr, 0, 6, scrCyan, "Key pressed:");
+	(scr->printCol)(scr, 0, 7, scrCyan, "Joystick 1:");
+	(scr->printCol)(scr, 0, 8, scrCyan, "Joystick 2:");
 	(scr->printCol)(scr, 0, 24, scrYellow, "Press Return");
 	do {
 		getKeys(ciaKeyScan);
@@ -40,6 +42,10 @@ void keyboard(screen *scr) {
 		}
 		sprintf(str, "%c", key);
 		(scr->print)(scr, 13, 6, str);
+		sprintf(str, "%02x", getJoystick1());
+		(scr->print)(scr, 13, 7, str);
+		sprintf(str, "%02x", getJoystick2());
+		(scr->print)(scr, 13, 8, str);
 	} while (exitKey != 0xfd);
 	free(ciaKeyScan);
 }

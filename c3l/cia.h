@@ -66,5 +66,7 @@ extern void doneCia();
 extern void startTimerAB(ushort cia, ushort timerA, ushort timerB);
 extern void setCiaTod(ushort cia, uchar hour, uchar min, uchar sec, uchar tenth);
 extern void startTimerA(ushort cia, ushort hz);
+extern uchar getJoystick1();
+extern uchar getJoystick2();
 
 #endif

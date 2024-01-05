@@ -19,6 +19,8 @@ ciagkc.c \
 ciagks.c \
 ciaglkc.c \
 ciagrkc.c \
+ciajoy1.c \
+ciajoy2.c \
 ciastod.c \
 ciasta.c \
 conclr.c \
