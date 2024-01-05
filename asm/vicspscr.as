@@ -4,14 +4,13 @@
 ; Assembled with HI-TECH C 3.09 (CP/M-80) ZAS.
 ;
 ; C callable function used to set variables used by IRQ service.
-; Bitmap is on top and text is on bottom.
+; Bitmap can be on top or bottom.
 ;
-; For some reason the following hang the code (so push and pop are used):
+; For some reason the following hangs the code (so more expensive push and pop are used):
 ;
 ; ex af,af'
 ; exx
 ;
-
 
 global  _vicSplitScr
 
@@ -48,12 +47,6 @@ defw    0
 ; Control register in low byte and memory register in high byte for mode 2
 
 ctrlReg2:
-
-defw    0
-
-; No flicker delay
-
-delay:
 
 defw    0
 
