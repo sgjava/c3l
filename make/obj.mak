@@ -48,6 +48,7 @@ sidatt.c \
 sidclr.c \
 sidenv.c \
 sidfreq.c \
+sidmouse.c \
 sidpots.c \
 sidpw.c \
 sidrel.c \

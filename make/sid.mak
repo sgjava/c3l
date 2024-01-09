@@ -9,4 +9,5 @@ sidvol.obj \
 pcm4.obj \
 pcm1.obj \
 pcm2.obj \
-sidpots.obj
+sidpots.obj \
+sidmouse.obj

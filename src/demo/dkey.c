@@ -16,7 +16,7 @@
  */
 void keyboard(screen *scr) {
 	char str[40];
-	uchar exitKey, key, x1, y1, x2, y2;
+	uchar exitKey, key, x1, y1, x2, y2, mx1, my1, mx2, my2;
 	uchar *ciaKeyScan = (uchar*) malloc(11);
 	/* Clear screen to spaces */
 	(scr->clearScr)(scr, 32);
@@ -51,9 +51,10 @@ void keyboard(screen *scr) {
 		sprintf(str, "%02x", getJoystick2());
 		(scr->print)(scr, 13, 8, str);
 		readSidPots(&x1, &y1, &x2, &y2);
-		sprintf(str, "%02x, %02x", (x1 & 0x7f) >> 1, (y1 & 0x7f) >> 1);
+		readMouseSid(&mx1, &my1, &mx2, &my2);
+		sprintf(str, "%02x, %02x %02x, %02x", x1, y1, mx1, my1);
 		(scr->print)(scr, 13, 9, str);
-		sprintf(str, "%02x, %02x", (x2 & 0x7f) >> 1, (y2 & 0x7f) >> 1);
+		sprintf(str, "%02x, %02x %02x, %02x", x2, y2, mx2, my2);
 		(scr->print)(scr, 13, 10, str);
 	} while (exitKey != 0xfd);
 	free(ciaKeyScan);

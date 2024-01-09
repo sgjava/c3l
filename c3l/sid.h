@@ -48,5 +48,6 @@ extern void setSidFreq(ushort voice, ushort freq);
 extern void setSidAtt(ushort voice, uchar waveform);
 extern void setSidPulWav(ushort voice, ushort width);
 extern void readSidPots(uchar *x1, uchar *y1, uchar *x2, uchar *y2);
+extern void readMouseSid(uchar *x1, uchar *y1, uchar *x2, uchar *y2);
 
 #endif
