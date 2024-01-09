@@ -64,8 +64,8 @@ void swapNibbles(uchar *buffer, ushort len) {
 void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 	uchar tens;
 	ulong startCia, endCia;
-	/* Start HZ timer */
-	startTimerA(cia2, hz);
+	/* Start HZ timer in continuous mode */
+	startTimerA(cia2, hz, ciaCpuCont);
 	printf("Playing, ");
 	tens = inp(cia1 + ciaTodTen);
 	/* Wait for tenth of a second to change */

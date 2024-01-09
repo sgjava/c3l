@@ -11,14 +11,14 @@
 #include <sys.h>
 
 /*
- Start CIA timer A in continuous mode using Hz value.
+ Start CIA timer A using Hz value and latch for mode.
  */
-void startTimerA(ushort cia, ushort hz) {
+void startTimerA(ushort cia, ushort hz, uchar latch) {
 	ushort timerA = ciaTimerFreq / hz;
 	/* CIA Timer A lo */
 	outp(cia+ciaTimerALo, (uchar) timerA);
 	/* CIA Timer A hi */
 	outp(cia+ciaTimerAHi, (uchar) (timerA >> 8));
 	/* Start CIA Timer A */
-	outp(cia+ciaCtrlRegA, ciaCpuCont);
+	outp(cia+ciaCtrlRegA, latch);
 }

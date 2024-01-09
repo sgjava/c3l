@@ -6,15 +6,17 @@
 
 #include <cia.h>
 #include <screen.h>
+#include <sid.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 /*
  * Display low level key scan and decoded key.
+ * Also display joysticks and paddles.
  */
 void keyboard(screen *scr) {
 	char str[40];
-	uchar exitKey, key;
+	uchar exitKey, key, x1, y1, x2, y2;
 	uchar *ciaKeyScan = (uchar*) malloc(11);
 	/* Clear screen to spaces */
 	(scr->clearScr)(scr, 32);
@@ -27,6 +29,8 @@ void keyboard(screen *scr) {
 	(scr->printCol)(scr, 0, 6, scrCyan, "Key pressed:");
 	(scr->printCol)(scr, 0, 7, scrCyan, "Joystick 1:");
 	(scr->printCol)(scr, 0, 8, scrCyan, "Joystick 2:");
+	(scr->printCol)(scr, 0, 9, scrCyan, "Paddle 1:");
+	(scr->printCol)(scr, 0, 10, scrCyan, "Paddle 2:");
 	(scr->printCol)(scr, 0, 24, scrYellow, "Press Return");
 	do {
 		getKeys(ciaKeyScan);
@@ -46,6 +50,11 @@ void keyboard(screen *scr) {
 		(scr->print)(scr, 13, 7, str);
 		sprintf(str, "%02x", getJoystick2());
 		(scr->print)(scr, 13, 8, str);
+		readSidPots(&x1, &y1, &x2, &y2);
+		sprintf(str, "%02x, %02x", (x1 & 0x7f) >> 1, (y1 & 0x7f) >> 1);
+		(scr->print)(scr, 13, 9, str);
+		sprintf(str, "%02x, %02x", (x2 & 0x7f) >> 1, (y2 & 0x7f) >> 1);
+		(scr->print)(scr, 13, 10, str);
 	} while (exitKey != 0xfd);
 	free(ciaKeyScan);
 }

@@ -34,6 +34,7 @@
 #define ciaTimerFreq 1022730L /* CIA timer freq */
 #define ciaEnableIrq 0x82     /* Enable cia irq */
 #define ciaClearIcr  0x7f     /* Clear all cia irq enable bits */
+#define ciaPots      0xc0     /* Set bits 6 and 7 to output */
 #define ciaCpuCont   0x11     /* Load latch, start timer, count cpu cycles continuous */
 #define ciaCpuOne    0x19     /* Load latch, start timer, count cpu cycles one shot */
 #define ciaCountA    0x51     /* Load latch, start timer, count timer A */
@@ -65,7 +66,7 @@ extern void initCia();
 extern void doneCia();
 extern void startTimerAB(ushort cia, ushort timerA, ushort timerB);
 extern void setCiaTod(ushort cia, uchar hour, uchar min, uchar sec, uchar tenth);
-extern void startTimerA(ushort cia, ushort hz);
+extern void startTimerA(ushort cia, ushort hz, uchar latch);
 extern uchar getJoystick1();
 extern uchar getJoystick2();
 

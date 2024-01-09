@@ -18,7 +18,9 @@ void runKeyDemo(console *con) {
 	printWrapCon(con,
 			"Low level key scan of standard and extended keyboard. You can also "
 					"decode unshifted and shifted characters. CIA 1 interrupts are "
-					"disabled, so as not to disrupt the key scan.");
+					"disabled, so as not to disrupt the key scan. Joysticks and paddles "
+					"are also decoded.");
+	printLineCon(con, "");
 	printLineCon(con, "");
 	printLineCon(con, "");
 	sprintf(str, "Chr mem: %04x", scr->chrMem);
