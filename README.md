@@ -130,8 +130,8 @@ While you cannot build the project in Eclipse it does syntax checking, refactori
 
 * `cd ~/eclipse-workspace/c3l/build`
 * `./makedisk.sh`
-COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/demo.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code. Before running `./makedisk.sh` you can rename build-demo.sub to build.sub to build just demos without building library.
-Just remember to rename original build.sub to something else first. I configured the libray build to stash the last libraries built in B1:, so they are not erased.
+COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/demo.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code. Before running `./makedisk.sh` you can rename [build-demo.sub](https://github.com/sgjava/c3l/blob/main/build/build-demo.sub) to build.sub to build just demos without building library.
+Just remember to rename original [build.sub](https://github.com/sgjava/c3l/blob/main/build/build.sub) to something else first. I configured the libray build to stash the last libraries built in B1:, so they are not erased.
 
 ## Programming considerations
 * No range checks are performed by most functions for performance sake. It is
