@@ -195,7 +195,7 @@ before using Bresenham's algorithm
 
 ## 8564/8566 VIC-IIe
 
-![VIC](images/vicspr.png)
+![VIC](images/vicspr.png) ![Split](images/vicsplit.png)
 
 ### Features
 * Easy to configure VIC mode and memory layout
