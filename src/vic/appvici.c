@@ -29,7 +29,8 @@ void initVicScr(screen *scr, ushort scrMem, ushort chrMem) {
 	scr->clearScr = clearVicScr;
 	scr->clearScrCol = clearVicCol;
 	/* Assign print functions based on character set address */
-	if (chrMem == 0x1000 || chrMem == 0x1800) {
+	if (chrMem == 0x1000 || chrMem == 0x1800 || chrMem == 0x9000
+			|| chrMem == 0x9800) {
 		/* ROM */
 		scr->print = printVicPet;
 		scr->printCol = printVicColPet;

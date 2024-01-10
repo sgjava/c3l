@@ -238,10 +238,11 @@ of printVicPet.
 ### Character mode
 I include everything you need to take control of character mode. I
 also included PETSCII print functions, so you can use the ROM character set
-at 0x1800. To keep things consistent I like to use the VDC's character set since
-that's what you use in normal CP/M mode. You have to think a little different
-using C3L since stdout is no longer visible. stdout still goes to the screen in
-VIC bank 0, so that could be used for debugging, etc.
+at 0x1000-0x1fff or 0x9000-0x9fff (VIC bank 0 and 2). To keep things consistent
+I like to use the VDC's character set since that's what you use in normal CP/M
+mode. You have to think a little different using C3L since stdout is no longer
+visible. stdout still goes to the screen in VIC bank 0, so that could be used
+for debugging, etc.
 
 ### Bitmap graphics
 I put some thought in how to share the same graphics functions across the VIC
