@@ -201,6 +201,7 @@ before using Bresenham's algorithm
 * Easy to configure VIC mode and memory layout
 * Character and bitmap mode options galore
 * Sprites
+* Split screen using raster IRQ
 
 ### VIC memory management in CP/M
 By default CP/M uses the VIC in MMU bank 0. This makes it difficult to access
