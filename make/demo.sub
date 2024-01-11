@@ -4,13 +4,12 @@ zas -j vicspscr.as
 c -c -o -x -i0:b: dwait.c drline.c dkey.c dkeyrun.c dsent.c dconrun.c dgraph.c dgraphi.c ddualrun.c dtextrun.c dcia.c
 libr < demo.mak
 copy *.lib b1: /e
-c -o -x -i0:b: vicdev.c 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib 1:b:libcia.lib
-c -o -x -i0:b: vdcdev.c 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib 1:b:libcia.lib
-c -o -x -i0:b: vicbank.c 1:b:libdemo.lib 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libc3l.lib
-c -o -x -i0:b: vicsplit.c 1:b:libc3l.lib 1:b:libdemo.lib 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libc3l.lib
 c -o -x -i0:b: baseline.c
 c -o -x -i0:b: ciademo.c 1:b:libdemo.lib 1:b:libcia.lib
 c -o -x -i0:b: rtcdemo.c 1:b:librtc.lib
+c -o -x -i0:b: vicdev.c 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib 1:b:libcia.lib
+c -o -x -i0:b: vdcdev.c 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib 1:b:libcia.lib
+c -o -x -i0:b: vicsplit.c 1:b:libc3l.lib 1:b:libdemo.lib 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libc3l.lib
 c -o -x -i0:b: viccon.c 1:b:libc3l.lib 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libc3l.lib 1:b:libcia.lib
 c -o -x -i0:b: vdccon.c 1:b:libc3l.lib 1:b:libcia.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libc3l.lib 1:b:libcia.lib
 c -o -x -i0:b: vicgraph.c 1:b:libc3l.lib 1:b:libcia.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libdemo.lib 1:b:libc3l.lib 1:b:libcia.lib
