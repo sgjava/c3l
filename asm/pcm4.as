@@ -16,6 +16,11 @@ _playPcm4Sid:
         push    de
         push    hl
         push    bc
+        ld      a,d             ; Handle d having zero value
+        or      d
+        jr      nz,if1          ; d != 0?
+        inc     d               ; d = d+1
+        if1:         
         rep1:                   ; Repeat
         ld      bc,0dd0dh       ; bc = CIA 2 ICR
         rep2:                   ; Repeat

@@ -42,6 +42,11 @@ _playPcm1Sid:
         push    hl
         push    ix              ; Preserve ix        
         ex      de,hl           ; Swap de and hl (sample length)
+        ld      a,h             ; Handle h having zero value
+        or      h
+        jr      nz,if1          ; h != 0?
+        inc     h               ; h = h+1
+        if1: 
         ld      ix,(start)                   
         rep1:                   ; Repeat
         ld      d,(ix+0)        ; d = Sample byte
