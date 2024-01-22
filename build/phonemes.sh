@@ -4,6 +4,9 @@
 # Temp dir for downloads, etc.
 tmpdir="$HOME/temp"
 
+# Remove temp dir
+rm -rf "$tmpdir"
+
 mkdir "$tmpdir"
 cd "$tmpdir"
 
@@ -16,8 +19,23 @@ wget -q --directory-prefix=$tmpdir "$url"
 # Unzip files
 unzip phonemes_v3.zip
 
-# Remove old version
+# Clean up to make 39 ARPAbet phonemes
 rm -f V-old.wav 
+rm -f AX.wav
+rm -f DX.wav
+mv _H.wav HH.wav
+rm -f IX.wav
+rm -f LX.wav
+mv J.wav JH.wav
+mv  NX.wav NG.wav
+rm -f OH.wav
+rm -f RX.wav
+rm -f UL.wav
+rm -f UM.wav
+rm -f UN.wav
+rm -f UX.wav
+rm -f WH.wav
+rm -f YX.wav
 
 # Convert 16 bit 22050 Hz wav files to 8 bit 8000 Hz snd (raw PCM) files.
 for filename in *.wav; do
@@ -25,16 +43,15 @@ for filename in *.wav; do
     name=$(basename "$filename" .wav)
     ffmpeg -hide_banner -loglevel error -i "$filename" -f u8 -ac 1 -ar 8000 -acodec pcm_u8 "$name.SND"
     # Create submit file that converts 8 bit snd file to 1 bit raw file 
-    echo "convpcm $name.SND $name.RAW 1\r" >> convert.sub
+    echo "convpcm $name.SND $name.RAW 4\r" >> convert.sub
     # Get snd file size
     filesize=$(stat --format=%s "$name.SND")
     # Calculate 1 bit raw file size   
-    echo "$name.RAW,$((filesize/8))\r" >> fileinfo.txt    
+    echo "$name.RAW $((filesize/2))\r" >> fileinfo.txt    
 done
 
 # Add script to erase all snd files once converted
-echo "b:\r" >> convert.sub
-echo "era b:*.SND\r" >> convert.sub
+echo "era *.SND\r" >> convert.sub
 echo "<Y" >> convert.sub
 
 # Remove existing disk image
@@ -47,8 +64,6 @@ cformat -2 ~/eclipse-workspace/c3l/disks/talk.d71
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p *.SND
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/PLAYPCM.COM
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/CONVPCM.COM
+ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/VOICE.COM
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p convert.sub
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p fileinfo.txt
-
-# Remove temp dir
-rm -rf "$tmpdir"
