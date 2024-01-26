@@ -26,7 +26,7 @@ extern ushort cpmPrint(char *str, ushort lines);
 extern ushort cpmScroll(ushort lines);
 extern void playPcm4Sid(uchar *buffer, ushort len);
 extern void playPcm1Sid(uchar *buffer, ushort len, uchar vol);
-extern void playPcm2Sid(uchar *buffer, ushort len, uchar vol);
+extern void playPcm2Sid(uchar *buffer, ushort len);
 extern ulong todToMs(ushort cia);
 extern uchar bcdToByte(uchar bcd);
 

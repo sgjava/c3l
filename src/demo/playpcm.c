@@ -23,7 +23,7 @@
 void dispHelp() {
 	puts("\nplaypcm {U:D:}filespec hertz bits {sn}");
 	puts("playpcm filename.raw 8000 4 sn (swap nibbles before playing)");
-	puts("playpcm filename.raw 15000 1 (no nibble swap)");
+	puts("playpcm filename.raw 16000 1 (no nibble swap)");
 }
 
 /*
@@ -78,7 +78,7 @@ void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 		playPcm1Sid(buffer, len, 15);
 		break;
 	case 2:
-		playPcm2Sid(buffer, len, 3);
+		playPcm2Sid(buffer, len);
 		break;
 	case 4:
 		playPcm4Sid(buffer, len);
@@ -117,7 +117,7 @@ void load(uchar *buffer, ulong len, char *fileName) {
  */
 main(int argc, char *argv[]) {
 	uchar *buffer, bits;
-	ushort minHz = 3999, maxHz = 15001, maxFileSize = 45056, hz;
+	ushort minHz = 4001, maxHz = 19001, maxFileSize = 45056, hz;
 	ulong fileSize;
 	/* Make sure we have 4 or more params */
 	if (argc > 3) {
@@ -159,7 +159,7 @@ main(int argc, char *argv[]) {
 				puts("\nBits value must 4, 2 or 1.");
 			}
 		} else {
-			puts("\nHz value must be >= 4000 and <= 15000.");
+			puts("\nHz value must be >= 4000 and <= 19000.");
 		}
 	} else {
 		dispHelp();

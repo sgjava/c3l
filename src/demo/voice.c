@@ -38,7 +38,7 @@ void play(uchar *buffer, ushort len, uchar bits) {
 		playPcm1Sid(buffer, len, 15);
 		break;
 	case 2:
-		playPcm2Sid(buffer, len, 3);
+		playPcm2Sid(buffer, len);
 		break;
 	case 4:
 		playPcm4Sid(buffer, len);
@@ -169,7 +169,7 @@ void playStr(char *word, char *str, arpabetName name, ushort arpabetLen[],
 	for (i = 0; i < phonemes; ++i) {
 		/* Handle phoneme not found */
 		if (arpabetPos[i] > -1) {
-			play(arpabetBuf[arpabetPos[i]], arpabetLen[arpabetPos[i]], 4);
+			play(arpabetBuf[arpabetPos[i]], arpabetLen[arpabetPos[i]], 1);
 		}
 	}
 	delayTens(1);
@@ -189,7 +189,7 @@ main(int argc, char *argv[]) {
 		if (load(argv[1], name, arpabetLen, arpabetBuf)) {
 			initCia();
 			/* Start HZ timer in continuous mode */
-			startTimerA(cia2, 8000, ciaCpuCont);
+			startTimerA(cia2, 18000, ciaCpuCont);
 			printf("\n\nLOGON: Joshua");
 			delayTens(10);
 			playStr("\n\nGREETINGS" ,"G R IY T IH NG Z", name, arpabetLen, arpabetBuf);

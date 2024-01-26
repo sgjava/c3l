@@ -37,17 +37,17 @@ rm -f UX.wav
 rm -f WH.wav
 rm -f YX.wav
 
-# Convert 16 bit 22050 Hz wav files to 8 bit 8000 Hz snd (raw PCM) files.
+# Convert 16 bit 22050 Hz wav files to 8 bit 15000 Hz snd (raw PCM) files.
 for filename in *.wav; do
     [ -e "$filename" ] || continue
     name=$(basename "$filename" .wav)
-    ffmpeg -hide_banner -loglevel error -i "$filename" -f u8 -ac 1 -ar 8000 -acodec pcm_u8 "$name.SND"
+    ffmpeg -hide_banner -loglevel error -i "$filename" -f u8 -ac 1 -ar 18000 -acodec pcm_u8 "$name.SND"
     # Create submit file that converts 8 bit snd file to 1 bit raw file 
-    echo "convpcm $name.SND $name.RAW 4\r" >> convert.sub
+    echo "convpcm $name.SND $name.RAW 1\r" >> convert.sub
     # Get snd file size
     filesize=$(stat --format=%s "$name.SND")
     # Calculate 1 bit raw file size   
-    echo "$name.RAW $((filesize/2))\r" >> fileinfo.txt    
+    echo "$name.RAW $((filesize/8))\r" >> fileinfo.txt    
 done
 
 # Add script to erase all snd files once converted
