@@ -5,6 +5,9 @@
 ;
 ; Play 4 bit pulse wave encoded data using SID master volume.
 ;
+; Minimum playback rate 4 KHz
+; Maximum playback rate ~19 KHz
+;
 
 global  _playPcm4Sid
 psect   text

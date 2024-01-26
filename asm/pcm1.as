@@ -5,6 +5,9 @@
 ;
 ; Play 1 bit pulse wave encoded data using SID master volume.
 ;
+; Minimum playback rate 4 KHz
+; Maximum playback rate ~18 KHz
+;
 
 global  _playPcm1Sid
 psect   data
@@ -46,7 +49,7 @@ _playPcm1Sid:
         or      h
         jr      nz,if1          ; h != 0?
         inc     h               ; h = h+1
-        if1: 
+        if1:        
         ld      ix,(start)                   
         rep1:                   ; Repeat
         ld      d,(ix+0)        ; d = Sample byte
