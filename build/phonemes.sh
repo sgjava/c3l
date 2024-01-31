@@ -64,6 +64,7 @@ cformat -2 ~/eclipse-workspace/c3l/disks/talk.d71
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p *.SND
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/PLAYPCM.COM
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/CONVPCM.COM
+ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/COMPILE.COM
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p ~/myz80/tmp/VOICE.COM
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p convert.sub
 ctools ~/eclipse-workspace/c3l/disks/talk.d71 p fileinfo.txt

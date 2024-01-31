@@ -30,4 +30,38 @@ extern void playPcm2Sid(uchar *buffer, ushort len);
 extern ulong todToMs(ushort cia);
 extern uchar bcdToByte(uchar bcd);
 
+/*
+ * Official ARPAbet has 39 phonemes
+ */
+#define PHONEMES 39
+
+typedef char arpabetName[PHONEMES][3];
+
+/*
+ * Forward reference.
+ */
+typedef struct phonemes phonemes;
+
+/*
+ * Output file header.
+ */
+typedef struct phonemes {
+	/*
+	 * Play back Hz.
+	 */
+	ushort hz;
+	/*
+	 * Sample width in bits.
+	 */
+	uchar bits;
+	/*
+	 * ARPAbet name
+	 */
+	arpabetName name;
+	/*
+	 * Phoneme length.
+	 */
+	ushort arpabetLen[PHONEMES];
+};
+
 #endif

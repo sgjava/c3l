@@ -9,6 +9,7 @@ ciaglkc.obj \
 ciagrkc.obj \
 ciastod.obj \
 ciasta.obj \
-appciati.obj \
+ciatib.obj \
+ciatiab.obj \
 ciajoy1.obj \
 ciajoy2.obj

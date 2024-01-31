@@ -64,9 +64,10 @@ extern void getKeys(uchar* ciaKeyScan);
 extern uchar decodeKey();
 extern void initCia();
 extern void doneCia();
-extern void startTimerAB(ushort cia, ushort timerA, ushort timerB);
+extern void startTimerAB(ushort cia, ushort timerA, ushort timerB, uchar latch);
 extern void setCiaTod(ushort cia, uchar hour, uchar min, uchar sec, uchar tenth);
 extern void startTimerA(ushort cia, ushort hz, uchar latch);
+extern void startTimerB(ushort cia, ushort hz, uchar latch);
 extern uchar getJoystick1();
 extern uchar getJoystick2();
 

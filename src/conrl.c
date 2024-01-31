@@ -43,7 +43,7 @@ char* readLineCon(console *con, uchar len) {
 	printBuf[0] = con->curChar;
 	(scr->print)(scr, con->curX, con->curY, printBuf);
 	/* Timer A counts milliseconds 48 times or ~1/20 second */
-	startTimerAB(cia2, ciaMs, 48);
+	startTimerAB(cia2, ciaMs, 48, ciaCountA);
 	/* Start timer in continuous mode */
 	outp(cia2+ciaCtrlRegA, ciaCpuCont);
 	do {

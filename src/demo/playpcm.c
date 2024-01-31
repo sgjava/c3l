@@ -93,7 +93,7 @@ void play(uchar *buffer, ushort len, ushort hz, uchar bits) {
 /*
  Load file into buffer.
  */
-void load(uchar *buffer, ulong len, char *fileName) {
+void loadAll(uchar *buffer, ulong len, char *fileName) {
 	uchar tens;
 	ulong startCia, endCia;
 	FILE *rawFile;
@@ -138,7 +138,7 @@ main(int argc, char *argv[]) {
 					/* Allocate buffer */
 					buffer = (uchar*) malloc(fileSize);
 					if (buffer != NULL) {
-						load(buffer, fileSize, argv[1]);
+						loadAll(buffer, fileSize, argv[1]);
 						/* Swap nibbles if requested */
 						if (strcmp(argv[4], "SN") == 0 && bits == 4) {
 							swapNibbles(buffer, fileSize);
@@ -150,6 +150,7 @@ main(int argc, char *argv[]) {
 					} else {
 						puts("\nUnable to allocate memory.");
 					}
+					free(buffer);
 				} else if (fileSize > 0) {
 					puts("\nFile too large.");
 				} else {

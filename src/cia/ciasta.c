@@ -1,7 +1,7 @@
 /*
  * C128 6526 CIA functions.
  *
- * Set CIA TOD clock.
+ * Start CIA timer A.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */

@@ -152,7 +152,7 @@ uchar bits) {
  */
 main(int argc, char *argv[]) {
 	uchar *buffer, bits;
-	/* Make sure we have 4 or more params */
+	/* Make sure we have 4 params */
 	if (argc == 4) {
 		/* Alloc conversion buffer */
 		buffer = (uchar*) malloc(BUF_SIZE);
@@ -165,11 +165,11 @@ main(int argc, char *argv[]) {
 			if (bits == 4 || bits == 2 || bits == 1) {
 				/* Convert raw file */
 				convert(argv[1], argv[2], buffer, BUF_SIZE, bits);
-				/* Dispose buffer */
-				free(buffer);
 			} else {
 				puts("\nBits value must 4, 2 or 1.");
 			}
+			/* Dispose buffer */
+			free(buffer);
 		}
 	} else {
 		dispHelp();

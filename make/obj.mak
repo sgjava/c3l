@@ -1,7 +1,8 @@
 -c -o -x -i0:b: \
 appciad.c \
 appciai.c \
-appciati.c \
+ciatib.c \
+ciatiab.c \
 appvdcbi.c \
 appvdcbm.c \
 appvdcd.c \

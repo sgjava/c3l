@@ -16,16 +16,27 @@
 
 #include "demo.h"
 
-/* Official ARPAbet has 39 phonemes */
-#define PHONEMES 39
-
-typedef char arpabetName[PHONEMES][3];
-
 /*
  Display program help.
  */
 void dispHelp() {
 	puts("voice {U:D:}filespec");
+}
+
+/*
+ Millisecond delay using CIA 2 timer B.
+ */
+void delay(uchar ms) {
+	register uchar i;
+	/* Start HZ timer in continuous mode */
+	startTimerB(cia2, 4000, ciaCpuCont);
+	for (i = 0; i < 4; ++i) {
+		/* Wait for ICR to go high */
+		while ((inp(cia2 + ciaIcr) | 0x02) == 0)
+			;
+	}
+	/* Stop timer B */
+	outp(cia2 + ciaCtrlRegB, ciaStopTimer);
 }
 
 /*
@@ -47,65 +58,34 @@ void play(uchar *buffer, ushort len, uchar bits) {
 }
 
 /*
- Load file into buffer.
+ * Read all phonemes from file to buffers.
  */
-void loadPhoneme(uchar *buffer, ulong len, char *fileName) {
-	uchar tens;
+ushort readPhonemes(char *fileName, phonemes *p, uchar *arpabetBuf[]) {
+	uchar i, tens;
 	ulong startCia, endCia;
-	FILE *rawFile;
-	if ((rawFile = fopen(fileName, "rb")) != NULL) {
-		printf("\nReading %s, %u bytes, ", fileName, len);
+	ushort totalSize = 0;
+	FILE *file;
+	if ((file = fopen(fileName, "rb")) != NULL) {
 		tens = inp(cia1 + ciaTodTen);
 		/* Wait for tenth of a second to change */
 		while (inp(cia1 + ciaTodTen) == tens)
 			;
 		startCia = todToMs(cia1);
-		fread(buffer, sizeof(uchar), len, rawFile);
-		fclose(rawFile);
-		endCia = todToMs(cia1);
-		printf("%u ms", endCia - startCia);
-	} else {
-		puts("\nUnable to open file.");
-	}
-}
-
-/*
- Load files into buffers.
- */
-int load(char *fileName, arpabetName name, ushort arpabetLen[],
-uchar *arpabetBuf[]) {
-	FILE *file;
-	ushort len, totalSize = 0;
-	int i = 0;
-	char buffer[100], rawFileName[7];
-	if ((file = fopen(fileName, "r")) != NULL) {
-		while (fgets(buffer, sizeof(buffer), file) != NULL) {
-			if (sscanf(buffer, "%s %d", &rawFileName, &len) == 2) {
-				name[i][0] = rawFileName[0];
-				/* See if file name is 2 chars */
-				if (strlen(rawFileName) == 6) {
-					name[i][1] = rawFileName[1];
-					name[i][2] = '\0';
-				} else {
-					/* Only 1 char file name */
-					name[i][1] = '\0';
-				}
-				arpabetLen[i] = len;
-				arpabetBuf[i] = (uchar*) malloc(len);
-				loadPhoneme(arpabetBuf[i], len, rawFileName);
-				i++;
-				totalSize += len;
-			} else {
-				printf("Error parsing input string\n");
-			}
+		/* Read header */
+		fread(p, sizeof(uchar), sizeof(phonemes), file);
+		printf("\n\Header Hz %d, bits %d\n", p->hz, p->bits);
+		for (i = 0; i < PHONEMES; ++i) {
+			printf("\nReading %s, %u bytes", p->name[i], p->arpabetLen[i]);
+			arpabetBuf[i] = (uchar*) malloc(p->arpabetLen[i]);
+			fread(arpabetBuf[i], sizeof(uchar), p->arpabetLen[i], file);
+			totalSize += p->arpabetLen[i];
 		}
 		fclose(file);
-		printf("\n\n%d files loaded, %d total bytes", i, totalSize);
-		return 1;
-	} else {
-		puts("\nUnable to open file.");
-		return 0;
+		endCia = todToMs(cia1);
+		printf("\n\n%d buffers read, %u total bytes, %u ms", i, totalSize,
+				endCia - startCia);
 	}
+	return totalSize;
 }
 
 /*
@@ -144,103 +124,56 @@ int phonemeToPos(char *str, arpabetName name, int arpabetPos[]) {
 }
 
 /*
- * ~100 ms resolution delay.
- */
-void delayTens(uchar delay) {
-	uchar tens;
-	while (delay-- > 0) {
-		tens = inp(cia1 + ciaTodTen);
-		/* Wait for tenth of a second to change */
-		while (inp(cia1 + ciaTodTen) == tens)
-			;
-	}
-}
-
-/*
  * Play encoded string.
  */
-void playStr(char *word, char *str, arpabetName name, ushort arpabetLen[],
-		uchar *arpabetBuf[]) {
-	int phonemes, i;
+void playStr(char *word, char *str, phonemes *p, uchar *arpabetBuf[]) {
+	int ph, i;
 	int arpabetPos[100];
 	/* Lookup position of individual phonemes */
-	phonemes = phonemeToPos(str, name, arpabetPos);
+	ph = phonemeToPos(str, p->name, arpabetPos);
 	printf(word);
-	for (i = 0; i < phonemes; ++i) {
+	for (i = 0; i < ph; ++i) {
 		/* Handle phoneme not found */
 		if (arpabetPos[i] > -1) {
-			play(arpabetBuf[arpabetPos[i]], arpabetLen[arpabetPos[i]], 1);
+			play(arpabetBuf[arpabetPos[i]], p->arpabetLen[arpabetPos[i]],
+					p->bits);
+			delay(50);
 		}
 	}
-	delayTens(1);
 }
 
 /*
  * Main function.
  */
 main(int argc, char *argv[]) {
-	arpabetName name;
-	ushort arpabetLen[PHONEMES];
+	uchar i;
+	phonemes *p;
 	uchar *arpabetBuf[PHONEMES];
 	/* Make sure we have 2 or more params */
 	if (argc > 1) {
 		/* BDOS return and display error */
 		bdos(45, 0x0fe);
-		if (load(argv[1], name, arpabetLen, arpabetBuf)) {
+		p = (phonemes*) malloc(sizeof(phonemes));
+		if (readPhonemes(argv[1], p, arpabetBuf) > 0) {
 			initCia();
 			/* Start HZ timer in continuous mode */
-			startTimerA(cia2, 18000, ciaCpuCont);
-			printf("\n\nLOGON: Joshua");
-			delayTens(10);
-			playStr("\n\nGREETINGS" ,"G R IY T IH NG Z", name, arpabetLen, arpabetBuf);
-			playStr(" PROFESSOR" ,"P R AH F EH S ER", name, arpabetLen, arpabetBuf);
-			playStr(" FALKEN." ,"F AE L K IH N", name, arpabetLen, arpabetBuf);
-			printf("\n\nHello.");
-			delayTens(10);
-			playStr("\n\nHOW" ,"HH AW", name, arpabetLen, arpabetBuf);
-			playStr(" ARE" ,"AA R", name, arpabetLen, arpabetBuf);
-			playStr(" YOU" ,"Y UW", name, arpabetLen, arpabetBuf);
-			playStr(" FEELING" ,"F IY L IH NG", name, arpabetLen, arpabetBuf);
-			playStr(" TODAY?" ,"T AH D EY", name, arpabetLen, arpabetBuf);
-			printf("\n\nI'm fine. How are you?");
-			delayTens(10);
-			playStr("\n\nEXCELLENT." ,"EH K S AH L AH N T", name, arpabetLen, arpabetBuf);
-			playStr(" IT'S" ,"IH T S", name, arpabetLen, arpabetBuf);
-			playStr(" BEEN" ,"B IH N", name, arpabetLen, arpabetBuf);
-			playStr(" A" ,"AH", name, arpabetLen, arpabetBuf);
-			playStr(" LONG" ,"L AO NG", name, arpabetLen, arpabetBuf);
-			playStr(" TIME." ,"T AY M", name, arpabetLen, arpabetBuf);
-			playStr(" CAN" ,"K AE N", name, arpabetLen, arpabetBuf);
-			playStr(" YOU" ,"Y UW", name, arpabetLen, arpabetBuf);
-			playStr(" EXPLAIN" ,"IH K S P L EY N", name, arpabetLen, arpabetBuf);
-			playStr(" THE" ,"DH AH", name, arpabetLen, arpabetBuf);
-			playStr(" REMOVAL" ,"R IH M UW V AH L", name, arpabetLen, arpabetBuf);
-			playStr(" OF" ,"AH V", name, arpabetLen, arpabetBuf);
-			playStr(" YOUR" ,"Y AO R", name, arpabetLen, arpabetBuf);
-			playStr(" USER" ,"Y UW Z ER", name, arpabetLen, arpabetBuf);
-			playStr(" ACCOUNT" ,"AH K AW N T", name, arpabetLen, arpabetBuf);
-			playStr(" ON" ,"AA N", name, arpabetLen, arpabetBuf);
-			playStr(" 6/23/73?" ,"JH UW N", name, arpabetLen, arpabetBuf);
-			playStr("" ,"T W EH N T IY", name, arpabetLen, arpabetBuf);
-			playStr("" ,"TH ER D", name, arpabetLen, arpabetBuf);
-			playStr("" ,"N AY N T IY N", name, arpabetLen, arpabetBuf);
-			playStr("" ,"S EH V AH N T IY", name, arpabetLen, arpabetBuf);
-			playStr("" ,"TH R IY", name, arpabetLen, arpabetBuf);
-			printf("\n\nPeople sometimes make mistakes.");
-			delayTens(10);
-			playStr("\n\nYES" ,"Y EH S", name, arpabetLen, arpabetBuf);
-			playStr(" THEY" ,"DH EY", name, arpabetLen, arpabetBuf);
-			playStr(" DO." ,"D UW", name, arpabetLen, arpabetBuf);
-			delayTens(5);
-			playStr(" SHALL" ,"SH AE L", name, arpabetLen, arpabetBuf);
-			playStr(" WE" ,"W IY", name, arpabetLen, arpabetBuf);
-			playStr(" PLAY" ,"P L EY", name, arpabetLen, arpabetBuf);
-			playStr(" A" ,"AH", name, arpabetLen, arpabetBuf);
-			playStr(" GAME?" ,"G EY M", name, arpabetLen, arpabetBuf);
+			startTimerA(cia2, p->hz, ciaCpuCont);
+			playStr("\n\nHOW", "HH AW", p, arpabetBuf);
+			playStr(" ARE", "AA R", p, arpabetBuf);
+			playStr(" YOU", "Y UW", p, arpabetBuf);
+			playStr(" FEELING", "F IY L IH NG", p, arpabetBuf);
+			playStr(" TODAY?", "T AH D EY", p, arpabetBuf);
 			/* Stop CIA 2 timer A */
 			outp(cia2 + ciaCtrlRegA, ciaStopTimer);
 			doneCia();
+			/* Free buffers */
+			for (i = 0; i < PHONEMES; ++i) {
+				free(arpabetBuf[i]);
+			}
+		} else {
+			printf("\nNo bytes read");
 		}
+		free(p);
 	} else {
 		dispHelp();
 	}

@@ -11,7 +11,7 @@
 /*
  * Set CIA count down timers. Timer B counts timer A.
  */
-void startTimerAB(ushort cia, ushort timerA, ushort timerB) {
+void startTimerAB(ushort cia, ushort timerA, ushort timerB, uchar latch) {
 	/* CIA Timer A lo */
 	outp(cia + ciaTimerALo, (uchar) timerA);
 	/* CIA Timer A hi */
@@ -21,5 +21,5 @@ void startTimerAB(ushort cia, ushort timerA, ushort timerB) {
 	/* CIA Timer B hi */
 	outp(cia + ciaTimerBHi, (uchar) (timerB >> 8));
 	/* Link time to count and enable timer */
-	outp(cia + ciaCtrlRegB, ciaCountA);
+	outp(cia + ciaCtrlRegB, latch);
 }
