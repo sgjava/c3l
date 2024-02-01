@@ -1,0 +1,4 @@
+c -o -x -i0:b: voice.c 1:b:libcia.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib
+c -o -x -i0:b: compile.c 1:b:libcia.lib 1:b:libdemo.lib 1:b:libc3l.lib
+c -o -x -i0:b: convpcm.c 1:b:libcia.lib 1:b:libdemo.lib 1:b:libc3l.lib
+c -o -x -i0:b: playpcm.c 1:b:libcia.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib

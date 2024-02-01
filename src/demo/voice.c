@@ -26,11 +26,11 @@ void dispHelp() {
 /*
  Millisecond delay using CIA 2 timer B.
  */
-void delay(uchar ms) {
-	register uchar i;
+void delay(ushort ms) {
+	register ushort i;
 	/* Start HZ timer in continuous mode */
-	startTimerB(cia2, 4000, ciaCpuCont);
-	for (i = 0; i < 4; ++i) {
+	startTimerB(cia2, ciaMs, ciaCpuCont);
+	for (i = 0; i < ms; ++i) {
 		/* Wait for ICR to go high */
 		while ((inp(cia2 + ciaIcr) | 0x02) == 0)
 			;
@@ -137,9 +137,10 @@ void playStr(char *word, char *str, phonemes *p, uchar *arpabetBuf[]) {
 		if (arpabetPos[i] > -1) {
 			play(arpabetBuf[arpabetPos[i]], p->arpabetLen[arpabetPos[i]],
 					p->bits);
-			delay(50);
+			delay(20);
 		}
 	}
+	delay(100);
 }
 
 /*
