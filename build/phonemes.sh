@@ -37,7 +37,7 @@ rm -f UX.wav
 rm -f WH.wav
 rm -f YX.wav
 
-# Convert 16 bit 22050 Hz wav files to 8 bit 15000 Hz snd (raw PCM) files.
+# Convert 16 bit 22050 Hz wav files to 4 bit 8000 Hz snd (raw PCM) files.
 for filename in *.wav; do
     [ -e "$filename" ] || continue
     name=$(basename "$filename" .wav)
@@ -46,7 +46,7 @@ for filename in *.wav; do
     echo "convpcm $name.SND $name.RAW 4\r" >> convert.sub
     # Get snd file size
     filesize=$(stat --format=%s "$name.SND")
-    # Calculate 1 bit raw file size   
+    # Calculate 4 bit raw file size   
     echo "$name.RAW $((filesize/2))\r" >> fileinfo.txt    
 done
 
