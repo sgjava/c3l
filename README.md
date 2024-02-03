@@ -1,51 +1,21 @@
 ![C3L is the Commodore 128 CP/M C Library](images/title.png)
 
-C3L (C128 CP/M C library) is an API based on the C89 standard, designed to facilitate access to C128 specific features within the CP/M environment.
-The library provides an abstraction layer for VDC (Video Display Controller) and VIC (Video Interface Chip) common data and functions. 
+C3L, which stands for Commodore 128 CP/M C Library, is a contemporary API built upon the ANSI C standard. It is specifically crafted to streamline the utilization of C128 distinctive features within the CP/M environment.
 
-A noteworthy advantage of this approach is the ability to dynamically set the target display (VIC, VDC, or virtual screen) during runtime. Initialization
-involves simply specifying the desired display chip or utilizing both simultaneously. The VIC offers a feature where the PETSCII character
-ROM can be utilized without any translation concerns. In the event of switching to the ASCII character set (the default for CP/M), only a single,
-straightforward change is required. Additionally, the library encompasses CIA (Complex Interface Adapter) and SID (Sound Interface Device) functions to provide
-comprehensive functionality.
-
-Initially conceived as a pure C library, C3L has incorporated Z80 assembler code in specific areas where performance issues arise, such as accessing VIC color memory
-through Z80 IN/OUT instructions. VIC and VDC parity has been achived for high performance text and bit mapped graphics eliminating chip-specific code.
-This will enable developers to write programs capable of utilizing either chip without necessitating modifications to the codebase. I have segmented the code into
-logical libraries, so there is no need to recompile the entire codebase.
-
-Comparing the [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h) printCon 
-to C printf (using 80 character line for 23 lines):
-
-<table>
-<tr><th>VIC</th><th>VDC</th></tr>
-<tr><td>
-
-
-| Function        | MS per line | CPS   |
-| :---            |        ---: | ---:  |
-| printf          | 661         | 121   |
-| scroll          | 100         | 9600  |
-| printCon        | 37          | 2162  |
-| scrollCon       | 29          | 33103 |
-| printCon color  | 43          | 1860  |
-| scrollCon color | 81          | 11851 |
-
-</td><td>
-
-| Function        | MS per line | CPS    |
-| :---            |        ---: | ---:   |
-| printf          | 453         | 176    |
-| scroll          | 26          | 73846  |
-| printCon        | 36          | 2222   |
-| scrollCon       | 13          | 147692 |
-| printCon color  | 40          | 2000   |
-| scrollCon color | 18          | 106666 |
-
-</td></tr> </table>
-
-So from this you can see VDC printCon is 12 times faster and VIC printCon is 18 times faster than 
-standard CP/M output (C printf). See [textperf.c](https://github.com/sgjava/c3l/blob/main/src/demo/textperf.c).
+## Features snapshot
+* Utilize modern Integrated Development Environments (IDEs) to develop code and identify syntax errors prior to compilation.
+* Code organization into functional libraries eliminates the need for recompiling the entire codebase.
+* High-performance abstraction layer for VDC and VIC text and bitmap modes, enabling the creation of dual monitor mixed-mode applications effortlessly.
+* VDC printCon boasts 12 times faster speed, while VIC printCon achieves an 18 times improvement compared to standard CP/M output (C printf).
+* VIC split-screen modes implementation using raster interrupt.
+* VIC sprites are fully supported.
+* Voice synthesis employing ARPAbet phonemes, with the flexibility to compile your customized voice library.
+* Play 1, 2, and 4-bit RAW audio through the SID.
+* SID functions provided for simplified sound programming.
+* CIA precision timing and TOD clock functions.
+* Enhanced keyboard input surpassing C128 CP/M standards, resolving any peculiar shift key issues.
+* Seamless access to joysticks, paddles, and the 1351 mouse.
+* All code tested on real hardware (special thanks to Donavon Szydlowski).
 
 ## Running demos
 If you have VICE already setup you can run the demo applications using the [disk images](https://github.com/sgjava/c3l/tree/master/disks).
@@ -59,15 +29,13 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-I have optimized the development process by implementing several changes. Firstly, I would like to inform you that I no longer provide support for native hardware and VICE.
-However, if you are determined to use these tools, you can proceed with them at your own discretion.
+I have optimized the development process by implementing several changes. Firstly, I would like to inform you that I no longer provide support for native hardware and VICE. However, if you are determined to use these tools, you can proceed with them at your own discretion.
 
 To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse CDT, DOSBox, MyZ80, and ctools.
 This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
 for your personal projects unrelated to C3L.
 
-Within the "~/eclipse-workspace/c3l/build" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace.
-Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
+Within the "~/eclipse-workspace/c3l/build" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace. Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
 
 ### Build [FFMPEG](https://ffmpeg.org) on Ubuntu 22.04 x86_64 (used for VICE video recording, but may get replaced with ZMBV in future versions).
 * `sudo apt install git curl build-essential`
@@ -118,8 +86,7 @@ mounted to `~/eclipse-workspace/c3l`.
     exit
 ### Install MyZ80
 
-Just extract [myz80.zip](https://github.com/sgjava/c3l/tree/master/myz80) to your user's home dir. This is preconfigured with ZPM 3 and Hi-Tech C on A0. ~/myz80/PROFILE.SUB is the file auto submitted when the OS starts. You can modify this and import to A0 if needed. I left Drives C0 and D0 empty, so you can do what you want there. Drive 
-B0 is used for source and binaries (COM files).
+Just extract [myz80.zip](https://github.com/sgjava/c3l/tree/master/myz80) to your user's home dir. This is preconfigured with ZPM 3 and Hi-Tech C on A0. ~/myz80/PROFILE.SUB is the file auto submitted when the OS starts. You can modify this and import to A0 if needed. I left Drives C0 and D0 empty, so you can do what you want there. Drive B0 is used for source and binaries (COM files).
 
 Install [Eclipse](https://www.eclipse.org/downloads).
 
@@ -130,10 +97,11 @@ While you cannot build the project in Eclipse it does syntax checking, refactori
 
 * `cd ~/eclipse-workspace/c3l/build`
 * `./makedisk.sh`
-COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/demo.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code. Before running `./makedisk.sh` you can rename [build-demo.sub](https://github.com/sgjava/c3l/blob/main/build/build-demo.sub) to build.sub to build just demos without building library.
+COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/demo.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code. Before running `./makedisk.sh` you can rename [build-demo.sub](https://github.com/sgjava/c3l/blob/main/build/build-demo.sub) to build.sub to build just demos without building the entire library.
 Just remember to rename original [build.sub](https://github.com/sgjava/c3l/blob/main/build/build.sub) to something else first. I configured the libray build to stash the last libraries built in B1:, so they are not erased.
 
 ## Programming considerations
+
 * No range checks are performed by most functions for performance sake. It is
 incumbent upon the programmer to handle range checks. If you go out of range
 and corrupt the program or OS memory it will most likely lock the machine.
@@ -219,6 +187,7 @@ allocVicMem(0). With this configuration your program can reside from
 0x100-0x2fff (almost 8K) and VIC memory is used starting at 0x3000 for character
 set and 0x3800 for first screen. 0x1000-0x1fff is viewed by the VIC as
 character ROM, but your program can use this memory, so it's not wasted.
+0x9000-0x9fff in bank 2 is also considered character ROM.
 
 allocVicMem() reserves a contiguous block of memory, thus allocVicMem(1) reserves
 VIC bank 0 and VIC bank 1. VIC bank 3 is in the gray area since some of it is
@@ -230,7 +199,7 @@ when you are done with the VIC.
 You should return to CP/M like nothing happened to the VIC.
 
 ### Limitations
-As I mentioned above 0x1000 is always read by the VIC as character ROM. Your
+As I mentioned above 0x1000-0x1fff and 0x9000-0x9fff is always read by the VIC as character ROM. Your
 program will still use this memory normally. See [vicspr](https://github.com/sgjava/c3l/blob/main/src/demo/vicspr.c)
 for an example of using the ROM character set and the ASCII to PETSCII translation
 of printVicPet.
@@ -276,7 +245,8 @@ All the required functions are there to drive the SID.
 * Set envelopes
 * Set attack/release cycles
 * Set pulse wave
-* Play 4 bit raw PCM files
+* Play 1, 2 and 4 bit raw PCM files
+* Voice synthesis employing ARPAbet phonemes
 
 How to create you own 4 bit PCM files. After installing programs download an mp3 from Youtube video, 
 convert 10 seconds of mp3 to 8 bit PCM snd file, move to CP/M disk image and finally convert to 4 bit raw.
@@ -288,6 +258,18 @@ convert 10 seconds of mp3 to 8 bit PCM snd file, move to CP/M disk image and fin
 * `playpcm4 neil.raw 8000`
 You can load around a 44K raw file, so keep that in mind. It also makes sense to support 1 and 2 bit raw
 files as well, so keep an eye out for that.
+
+How ARPAbet is build. [phonemes.sh](https://github.com/sgjava/c3l/blob/main/build/phonemes.sh) does most
+of the dirty work. It downloads the phonemes from the [TeensyTalk](https://github.com/radiohound/TeensyTalk)
+project.
+* Build C3L project (or at least demos).
+*Edit [this](https://github.com/sgjava/c3l/blob/68c98bd71da2024b41db7ee9f0f27aeb2c3c336f/build/phonemes.sh#L41)
+block of code to change sample rate and size.
+* talk.d71 disk is created with .snd files.
+* Boot CP/M and mount talk.d71.
+* Run convert.sub to convert .snd to .raw files.
+* Compile to library with `compile fileinfo.txt 8000 4 test4.pho`.
+* test4.pho is the 8 KHz 4 bit ARPAbet phoneme library.
 
 ## Keyboard scan and decode
 The 8502 is responsible for most of the low-level I/O functions in CP/M mode and
