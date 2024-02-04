@@ -5,6 +5,7 @@ c -c -o -x -i0:b: dwait.c drline.c dkey.c dkeyrun.c dsent.c dconrun.c dgraph.c d
 libr < demo.mak
 copy *.lib b1: /e
 c -o -x -i0:b: baseline.c
+c -o -x -lf -i0:b: testtrig.c 
 c -o -x -i0:b: ciademo.c 1:b:libdemo.lib 1:b:libcia.lib
 c -o -x -i0:b: rtcdemo.c 1:b:librtc.lib
 c -o -x -i0:b: voice.c 1:b:libcia.lib 1:b:libdemo.lib 1:b:libsid.lib 1:b:libc3l.lib
