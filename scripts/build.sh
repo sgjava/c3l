@@ -10,6 +10,11 @@
 # sgjava@gmail.com
 #
 
+# Need to explicitly set these
+export PATH="${PATH}:${HOME}/z88dk/bin"
+export ZCCCFG="${HOME}/z88dk/lib/config"
+eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+
 # Project root (assumes starting in scripts dir)
 cd ../
 # Clean project
@@ -21,8 +26,6 @@ make lib
 # Create demo.lib
 make demo
 
-# Need to explicitly set this
-export ZCCCFG="$HOME/z88dk/lib/config"
 # Add app dir
 mkdir ./build/app
 

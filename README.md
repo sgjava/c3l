@@ -28,7 +28,7 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse Z88DK, and ctools.
+To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse, Z88DK, VICE and ctools.
 This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
 for your personal projects unrelated to C3L.
 
@@ -62,12 +62,19 @@ them, and ultimately creates new d71 disks.
 * `make install`
 * `sudo cp ../bin/* /usr/local/bin/.`
 
-### Install Z88DK
-
-TODO
+### Build Z88DK
+* `cd`
+* `sudo apt install build-essential bison flex libxml2-dev subversion zlib1g-dev m4 ragel re2c dos2unix texinfo texi2html gdb curl perl cpanminus ccache libboost-all-dev libmodern-perl-perl libyaml-perl liblocal-lib-perl libcapture-tiny-perl libpath-tiny-perl libtext-table-perl libdata-hexdump-perl libregexp-common-perl libclone-perl libfile-slurp-perl pkg-config libgmp3-dev`
+* `cpanm --local-lib=~/perl5 App::Prove CPU::Z80::Assembler Data::Dump Data::HexDump File::Path List::Uniq Modern::Perl Object::Tiny::RW Regexp::Common Test::Harness Text::Diff Text::Table YAML::Tiny`
+* `eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)`
+* `git clone  --recursive  https://github.com/z88dk/z88dk.git`
+* `cd z88dk`
+* `export BUILD_SDCC=1`
+* `export BUILD_SDCC_HTTP=1`
+* `chmod 777 build.sh`
+* `./build.sh`
 
 ## Building
-
 * `cd ~/eclipse-workspace/c3l/scripts`
 * `./build.sh`
 
@@ -76,12 +83,6 @@ TODO
 * No range checks are performed by most functions for performance sake. It is
 incumbent upon the programmer to handle range checks. If you go out of range
 and corrupt the program or OS memory it will most likely lock the machine.
-* If the linker gives an "Undefined symbol" message for some symbol which you know
-nothing about, it is possible that it is a library routine which was not found
-during the library search due to incorrect library ordering.  In this case you
-can search the library twice, e.g. for the standard library add a -LC to the end
-of the C command line, or -LF for the floating library.  If you have specified
-the library by name simply repeat its name.
 
 ## High performance character mode
 
