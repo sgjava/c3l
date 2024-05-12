@@ -11,7 +11,7 @@
 #
 
 # Need to explicitly set these
-export PATH="${PATH}:${HOME}/z88dk/bin"
+export PATH="${PATH}:${HOME}/z88dk/bin:${HOME}/ctools/bin"
 export ZCCCFG="${HOME}/z88dk/lib/config"
 eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
 
