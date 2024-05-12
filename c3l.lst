@@ -1,0 +1,8 @@
+build/cia/*
+build/rtc/*
+build/sid/*
+build/vdc/*
+build/vic/*
+build/common/*
+build/console/*
+build/graphics/*

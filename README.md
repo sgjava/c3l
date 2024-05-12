@@ -4,7 +4,6 @@ C3L, which stands for Commodore 128 CP/M C Library, is a contemporary API built 
 
 ## Features snapshot
 * Utilize modern Integrated Development Environments (IDEs) to develop code and identify syntax errors prior to compilation.
-* Code organization into functional libraries eliminates the need for recompiling the entire codebase.
 * High-performance abstraction layer for VDC and VIC text and bitmap modes, enabling the creation of dual monitor mixed-mode applications effortlessly.
 * VDC printCon boasts 12 times faster speed, while VIC printCon achieves an 18 times improvement compared to standard CP/M output (C printf).
 * VIC split-screen modes implementation using raster interrupt.
@@ -29,13 +28,12 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-I have optimized the development process by implementing several changes. Firstly, I would like to inform you that I no longer provide support for native hardware and VICE. However, if you are determined to use these tools, you can proceed with them at your own discretion.
-
-To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse CDT, DOSBox, MyZ80, and ctools.
+To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse Z88DK, and ctools.
 This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
 for your personal projects unrelated to C3L.
 
-Within the "~/eclipse-workspace/c3l/build" directory, you will find a file called "makedisk.sh." This script serves the purpose of importing source code directly from the Eclipse workspace. Additionally, it builds the C3L library, compiles demos, exports them, and ultimately creates a new d71 disk.
+Within the "~/eclipse-workspace/c3l/scripts" directory, you will find a file called "build.sh." This script builds the C3L library, compiles demos, exports
+them, and ultimately creates new d71 disks.
 
 ### Build [FFMPEG](https://ffmpeg.org) on Ubuntu 22.04 x86_64 (used for VICE video recording, but may get replaced with ZMBV in future versions).
 * `sudo apt install git curl build-essential`
@@ -64,41 +62,14 @@ Within the "~/eclipse-workspace/c3l/build" directory, you will find a file calle
 * `make install`
 * `sudo cp ../bin/* /usr/local/bin/.`
 
-### Install DOSBox
-This is needed to run MyZ80. In essance you are running a Ubuntu VM that is running a DOS emulator that is running a Z80 emulator.
-Talk about a Russian doll, but it works nicely. C: is mounted to `~/myz80` and D: is 
-mounted to `~/eclipse-workspace/c3l`.
-* `sudo apt install dosbox`
-* Run DOSBox and close it to create configuration file.
-    * `dosbox`
-* `nano ~/.dosbox/dosbox*.conf`
-    * [sdl] section change
-    `usescancodes=false`
-    * [cpu] section change
-    `cycles=max`
-    * [autoexec] section add    
-    ```
-    mount c ~/myz80
-    del c:\tmp\*.*
-    mount d ~/eclipse-workspace/c3l
-    c:
-    myz80
-    exit
-### Install MyZ80
+### Install Z88DK
 
-Just extract [myz80.zip](https://github.com/sgjava/c3l/tree/master/myz80) to your user's home dir. This is preconfigured with ZPM 3 and Hi-Tech C on A0. ~/myz80/PROFILE.SUB is the file auto submitted when the OS starts. You can modify this and import to A0 if needed. I left Drives C0 and D0 empty, so you can do what you want there. Drive B0 is used for source and binaries (COM files).
-
-Install [Eclipse](https://www.eclipse.org/downloads).
-
-You can use the installer to install C/C++ package with JRE already built in. Or you can install JDK and Eclipse. Just make sure you install CDT from the Eclipse Marketplace. Use the default `~/eclipse-workspace` for your workspace since everything is configured to work off that path.
-While you cannot build the project in Eclipse it does syntax checking, refactoring, etc. It's way more advanced than anything on CP/M or DOS to edit a project of this size.
+TODO
 
 ## Building
 
-* `cd ~/eclipse-workspace/c3l/build`
-* `./makedisk.sh`
-COM files are exported to `~/myz80/tmp` and disk image is created at `~/eclipse-workspace/c3l/disks/demo.d71`. If a COM file is 0 bytes that means there was a build error for that program. If all programs are 0 length then you probably broke the library code. Before running `./makedisk.sh` you can rename [build-demo.sub](https://github.com/sgjava/c3l/blob/main/build/build-demo.sub) to build.sub to build just demos without building the entire library.
-Just remember to rename original [build.sub](https://github.com/sgjava/c3l/blob/main/build/build.sub) to something else first. I configured the libray build to stash the last libraries built in B1:, so they are not erased.
+* `cd ~/eclipse-workspace/c3l/scripts`
+* `./build.sh`
 
 ## Programming considerations
 

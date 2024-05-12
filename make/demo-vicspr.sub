@@ -1,1 +1,0 @@
-c -o -x -i0:b: vicspr.c 1:b:libc3l.lib 1:b:libcia.lib 1:b:libsid.lib 1:b:libvic.lib 1:b:libvdc.lib 1:b:libc3l.lib
