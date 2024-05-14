@@ -45,7 +45,8 @@ them, and ultimately creates new d71 disks.
 * `sudo cp ~/ffmpeg-build-script/workspace/bin/* /usr/local/bin/.`
 
 ### Build [VICE](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
-* `sudo apt install autoconf libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev`
+* `sudo apt install autoconf libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev libevdev-dev`
+    * If apt hangs on ubuntu `Pregenerating ConTeXt MarkIV format. This may take some time...` press Enter until it resumes again
 * `cd`
 * `git clone --depth 1 https://github.com/VICE-Team/svn-mirror`
 * `cd svn-mirror/vice`
