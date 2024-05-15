@@ -25,5 +25,6 @@ extern void __LIB__ runDualDemo(console *vicCon, console *vdcCon);
 extern void __LIB__ runTextDemo(console *vicCon, console *vdcCon, unsigned int cpmPrintMs, unsigned int cpmScrollMs, unsigned int lines);
 extern unsigned int __LIB__ cpmPrint(char *str, unsigned int lines);
 extern unsigned int __LIB__ cpmScroll(unsigned int lines);
+extern void __LIB__ runTextDemo(console *vicCon, console *vdcCon, unsigned int cpmPrintMs, unsigned int cpmScrollMs, unsigned int lines) ;
 
 #endif

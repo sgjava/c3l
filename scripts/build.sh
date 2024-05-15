@@ -49,6 +49,7 @@ zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicspl
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicdev.com ./src/app/vicdev.c -L./build/lib -lc3l -ldemo
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vdcdev.com ./src/app/vdcdev.c -L./build/lib -lc3l -ldemo
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicspr.com ./src/app/vicspr.c -L./build/lib -lc3l
+zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/textperf.com ./src/app/textperf.c -L./build/lib -lc3l -ldemo
 
 # Remove curent demo disk image
 rm -f ./disks/demo.d71
