@@ -77,15 +77,15 @@ them, and ultimately creates new d71 disks.
 * `./build.sh`
 
 ## Building
-###For command line
+For command line
 * `cd`
 * `git clone https://github.com/sgjava/c3l.git`
 * `cd ~/c3l/scripts`
 
-###For Eclipse File, Import..., Git, Projects from Git, Clone URL, https://github.com/sgjava/c3l.git
+For Eclipse File, Import..., Git, Projects from Git, Clone URL, https://github.com/sgjava/c3l.git
 * `cd ~/eclipse-workspace/c3l/scripts`
 
-###Then
+Then
 * `./build.sh`
 
 ## Programming considerations
