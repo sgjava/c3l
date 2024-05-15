@@ -160,22 +160,14 @@ banks like CP/M does, but this is very inefficient. Plus there is very little
 free RAM in bank 0 that you could leverage. For C3L programs MMU bank 1 is
 used and your program manages the VIC's memory.
 
-You can use [allocVicMem()](https://github.com/sgjava/c3l/blob/main/src/vicam.c)
-function to handle reserving memory for the VIC and
-protect it from the running program. There are several configurations you can
+There are several configurations you can
 use based on program size and VIC features you want to use. The simplest
-configuration is to have your program and VIC memory in VIC bank 0 with
-allocVicMem(0). With this configuration your program can reside from
+configuration is to have your program and VIC memory in VIC bank 0.
+With this configuration your program can reside from
 0x100-0x2fff (almost 8K) and VIC memory is used starting at 0x3000 for character
 set and 0x3800 for first screen. 0x1000-0x1fff is viewed by the VIC as
 character ROM, but your program can use this memory, so it's not wasted.
 0x9000-0x9fff in bank 2 is also considered character ROM.
-
-allocVicMem() reserves a contiguous block of memory, thus allocVicMem(1) reserves
-VIC bank 0 and VIC bank 1. VIC bank 3 is in the gray area since some of it is
-reserved for CP/M. It's a good idea to allocate memory in bank 3 manually if
-you have a large program. Remember to free() memory allocated by allocVicMem()
-when you are done with the VIC.
 
 ### Return to CP/M mode
 You should return to CP/M like nothing happened to the VIC.
