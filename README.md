@@ -98,7 +98,7 @@ and corrupt the program or OS memory it will most likely lock the machine.
 
 ![VIC](images/viccon.png "VIC") ![VDC](images/vdccon.png "VDC")
 
-[Screen](https://github.com/sgjava/c3l/blob/main/c3l/screen.h) provides an 
+[Screen](https://github.com/sgjava/c3l/blob/main/include/screen.h) provides an 
 abstraction that blows the doors off standard CP/M since it doesn't rely on MMU bank 
 switching. If you do not use color printing it's even faster. A common color scheme 
 is used and mapped by the various functions. This allows portability between VIC and 
@@ -112,7 +112,7 @@ VDC. Of course all of these settings are mutable at runtime.
 * Custom character sets (can be copied from VDC or loaded from disk)
 * Scroll any area of screen
 
-If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/c3l/console.h).
+If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/include/console.h).
 It operates like a normal console keeping track of the cursor and scrolling. There 
 is also a print function that allows word wrapping.
 
@@ -127,7 +127,7 @@ is also a print function that allows word wrapping.
 
 ![VIC](images/vicgraph.png "VIC") ![VDC](images/vdcgraph.png "VDC")
 
-[bitmap](https://github.com/sgjava/c3l/blob/main/c3l/bitmap.h) provides an 
+[Bitmap](https://github.com/sgjava/c3l/blob/main/include/bitmap.h) provides an 
 abstraction for common graphice functions.
 
 #### Features
