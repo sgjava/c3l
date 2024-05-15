@@ -112,11 +112,7 @@ VDC. Of course all of these settings are mutable at runtime.
 * Custom character sets (can be copied from VDC or loaded from disk)
 * Scroll any area of screen
 
-<<<<<<< HEAD
-If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/include/console.h).
-=======
 If your app requires more of a console abstraction then use [console](hhttps://github.com/sgjava/c3l/blob/main/include/console.h).
->>>>>>> branch 'main' of git@github.com:sgjava/c3l.git
 It operates like a normal console keeping track of the cursor and scrolling. There 
 is also a print function that allows word wrapping.
 
@@ -131,11 +127,7 @@ is also a print function that allows word wrapping.
 
 ![VIC](images/vicgraph.png "VIC") ![VDC](images/vdcgraph.png "VDC")
 
-<<<<<<< HEAD
 [Bitmap](https://github.com/sgjava/c3l/blob/main/include/bitmap.h) provides an 
-=======
-[bitmap](https://github.com/sgjava/c3l/blob/main/include/bitmap.h) provides an 
->>>>>>> branch 'main' of git@github.com:sgjava/c3l.git
 abstraction for common graphice functions.
 
 #### Features
