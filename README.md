@@ -28,11 +28,9 @@ If you have VICE already setup you can run the demo applications using the [disk
 * To list all the demos just `dir *.com`
 
 ## Set up development environment
-To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse, Z88DK, VICE and ctools.
-This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework
-for your personal projects unrelated to C3L.
+To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse, Z88DK, VICE and ctools. This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework for your personal projects unrelated to C3L.
 
-Within the "~/eclipse-workspace/c3l/scripts" directory, you will find a file called "build.sh." This script builds the C3L library, compiles demos, exports
+Within the "c3l/scripts" directory, you will find a file called "build.sh." This script builds the C3L library, compiles demos, exports
 them, and ultimately creates new d71 disks.
 
 ### Build [FFMPEG](https://ffmpeg.org) on Ubuntu 22.04 x86_64 (used for VICE video recording, but may get replaced with ZMBV in future versions).
@@ -79,12 +77,20 @@ them, and ultimately creates new d71 disks.
 * `./build.sh`
 
 ## Building
+###For command line
+* `cd`
+* `git clone https://github.com/sgjava/c3l.git`
+* `cd ~/c3l/scripts`
+
+###For Eclipse File, Import..., Git, Projects from Git, Clone URL, https://github.com/sgjava/c3l.git
 * `cd ~/eclipse-workspace/c3l/scripts`
+
+###Then
 * `./build.sh`
 
 ## Programming considerations
 
-* No range checks are performed by most functions for performance sake. It is
+No range checks are performed by most functions for performance sake. It is
 incumbent upon the programmer to handle range checks. If you go out of range
 and corrupt the program or OS memory it will most likely lock the machine.
 
