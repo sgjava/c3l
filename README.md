@@ -76,13 +76,21 @@ them, and ultimately creates new d71 disks.
 * `chmod 777 build.sh`
 * `./build.sh`
 
+### Build cc1541
+We'll use this to copy files to/from non-CP/M disk images.
+* `cd`
+* `git clone https://bitbucket.org/ptv_claus/cc1541.git`
+* `cd cc1541`
+* `make all`
+* `sudo cp cc1541 /usr/bin/.`
+
 ## Building C3L project
-For command line
+For command line.
 * `cd`
 * `git clone https://github.com/sgjava/c3l.git`
 * `cd ~/c3l/scripts`
 
-For Eclipse File, Import..., Git, Projects from Git, Clone URL, https://github.com/sgjava/c3l.git
+For Eclipse File, Import..., Git, Projects from Git, Clone URL, https://github.com/sgjava/c3l.git.
 * `cd ~/eclipse-workspace/c3l/scripts`
 
 Then
@@ -194,9 +202,12 @@ character ROM, but your program can use this memory, so it's not wasted.
 0x9000-0x9fff in bank 2 is also considered character ROM.
 
 ### How to rip sprites and create loadable libraries
-To make life simple I'll show one way to rip sprites from C64 games.
+To make life simple I'll show one way to rip sprites from C64 games. In this example we'll use
+Action Replay v6 cartridge and Wizard of Wor disk. The sprite demo expects 12 sprites in the
+following sequence. Three sprites for left, right, up and down or 12 sprites total. This is how
+we will save them off and build a single sprite library file.
 * `sudo apt install cc1541`
-* `cd ~/eclipse-workspace/c3l/resources`
+* `cd ~/eclipse-workspace/c3l/resources/sprites`
 * `cc1541 sprites.d64`
 * `x64`
     * Preferences, settings, Peripheral devices, Drive, Drive 9, CBM 1541-II, Close

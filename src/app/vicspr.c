@@ -1,7 +1,9 @@
 /*
  * C128 CP/M C Library C3L
  *
- * 8564/8566 VIC-IIe sprite demo.
+ * 8564/8566 VIC-IIe sprite demo. I used Wizard of Wor sprites
+ * that are composed of 4 directions and 3 sequences per
+ * direction. This gives you 12 sprites total per character.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -71,13 +73,13 @@ void loadSprites(unsigned char *buffer, unsigned int len, char *fileName) {
  * Load sprites, initialize key scan and screen.
  */
 void init(screen *scr, char *fileName, unsigned char sprites) {
-	/* Use ram at end of bank 1 for character set screen just above that */
+	// Use ram at end of bank 1 for character set screen just above that
 	initVicScr(scr, 0x7400, 0x7800);
 	initVicScrMode(scr, scrBlack, scrBlue, scrWhite);
-	/* Calculate sprite offset by number of sprites before screen memory */
+	// Calculate sprite offset by number of sprites before screen memory
 	loadSprites((unsigned char*) ((unsigned int) scr->scrMem) - (sprites * 64),
 			sprites * 64, fileName);
-	/* CP/M file access will enable CIA IRQ, so we init CIA after load */
+	// CP/M file access will enable CIA IRQ, so we init CIA after load
 	initCia();
 }
 
@@ -139,26 +141,30 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
 			// Sprite to background collision register
 			sprBgCol = inp(vicSprFgColl);
 			for (i = 0; i < MAX_SPRITES; i++) {
-				/* Check X max and min */
+				//Check X max and min
 				if (sprites[i].x > 321 || rand() % 200 < 1) {
+					// Left
 					sprites[i].xDir = -1;
 					sprites[i].yDir = 0;
 					sprites[i].seq[0] = 9;
 					sprites[i].seq[1] = 10;
 					sprites[i].seq[2] = 11;
 				} else if (sprites[i].x < 24 || rand() % 200 < 1) {
+					// Right
 					sprites[i].xDir = 1;
 					sprites[i].yDir = 0;
 					sprites[i].seq[0] = 0;
 					sprites[i].seq[1] = 1;
 					sprites[i].seq[2] = 2;
 				} else if (sprites[i].y > 229 || rand() % 200 < 1) {
+					// Up
 					sprites[i].xDir = 0;
 					sprites[i].yDir = -1;
 					sprites[i].seq[0] = 6;
 					sprites[i].seq[1] = 7;
 					sprites[i].seq[2] = 8;
 				} else if (sprites[i].y < 51 || rand() % 200 < 1) {
+					// Down
 					sprites[i].xDir = 0;
 					sprites[i].yDir = 1;
 					sprites[i].seq[0] = 3;
