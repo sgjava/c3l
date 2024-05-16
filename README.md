@@ -33,7 +33,7 @@ To enhance efficiency and standardize the development environment, I have adopte
 Within the "c3l/scripts" directory, you will find a file called "build.sh." This script builds the C3L library, compiles demos, exports
 them, and ultimately creates new d71 disks.
 
-### Build [FFMPEG](https://ffmpeg.org) on Ubuntu 22.04 x86_64 (used for VICE video recording, but may get replaced with ZMBV in future versions).
+#### Build [FFMPEG](https://ffmpeg.org) on Ubuntu 22.04 x86_64 (used for VICE video recording, but may get replaced with ZMBV in future versions).
 * `sudo apt install git curl build-essential`
 * `cd`
 * `mkdir .local/bin`
@@ -43,7 +43,7 @@ them, and ultimately creates new d71 disks.
 * `./build-ffmpeg --enable-gpl-and-non-free --build`
 * `sudo cp ~/ffmpeg-build-script/workspace/bin/* /usr/local/bin/.`
 
-### Build [VICE](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
+#### Build [VICE](http://vice-emu.sourceforge.net) on Ubuntu 22.04 x86_64.
 * `sudo apt install autoconf libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev libevdev-dev`
     * On `This may take some time...` prompts press Enter once and wait
 * `cd`
@@ -76,7 +76,7 @@ them, and ultimately creates new d71 disks.
 * `chmod 777 build.sh`
 * `./build.sh`
 
-## Building
+## Building C3L project
 For command line
 * `cd`
 * `git clone https://github.com/sgjava/c3l.git`
@@ -93,6 +93,23 @@ Then
 No range checks are performed by most functions for performance sake. It is
 incumbent upon the programmer to handle range checks. If you go out of range
 and corrupt the program or OS memory it will most likely lock the machine.
+
+Manage stack and heap sizes yourself instead of using any automatic methods.
+
+Set stack size:
+
+```
+#pragma output CRT_STACK_SIZE = 1024
+```
+
+Only set heap if you need to reserve memory for TPA uses like VIC memory mapping:
+
+```
+// Protect VIC memory < 0x8000
+#pragma output CRT_HEAP_ADDRESS = 0x8000
+```
+
+See [Classic Pragmas](https://github.com/z88dk/z88dk/wiki/Classic--Pragmas)
 
 ## High performance character mode
 
