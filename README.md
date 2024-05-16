@@ -193,6 +193,30 @@ set and 0x3800 for first screen. 0x1000-0x1fff is viewed by the VIC as
 character ROM, but your program can use this memory, so it's not wasted.
 0x9000-0x9fff in bank 2 is also considered character ROM.
 
+### How to rip sprites and create loadable libraries
+To make life simple I'll show one way to rip sprites from C64 games.
+* `sudo apt install cc1541`
+* `cd ~/eclipse-workspace/c3l/resources`
+* `cc1541 sprites.d64`
+* `x64`
+    * Preferences, settings, Peripheral devices, Drive, Drive 9, CBM 1541-II, Close
+    * File, Attach cartridge image..., action_replay_6.crt, press F3
+    * File, Attach disk image..., Deive #8, wow.d64
+    * File, Attach disk image..., Deive #9, sprites.d64
+    * load "*",8,1
+    * run
+    * Alt+Z
+    * V to view sprites
+    * Use < and > to navigate
+    * S to save (make sure you use device 9 which is your sprite disk)
+    * A to continue
+    * Enter name
+    * Press space
+* Continue until you save all the sprites you want to make a library with 
+    
+    
+
+
 ### Return to CP/M mode
 You should return to CP/M like nothing happened to the VIC.
 
