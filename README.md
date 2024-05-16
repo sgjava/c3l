@@ -223,7 +223,7 @@ we will save them off and build a single sprite library file.
     * Enter name
     * Press space
 * Continue until you save all the sprites you want to make a library with
-* `cd ~/eclipse-workspace/c3l/scripts'
+* `cd ~/eclipse-workspace/c3l/scripts`
 * `./sprites` to build sprite libraries
     
     
