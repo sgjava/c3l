@@ -155,9 +155,9 @@ is also a print function that allows word wrapping.
 abstraction for common graphic functions.
 
 #### Features
-* Set and clear pixel functions
+* Set pixel function allowing pixel color (for monochrome 1 to set and 0 to clear)
 * Fast color and bitmap clearing
-* All drawing functions can set or clear pixels
+* All drawing functions can use pixel color
 * Optimized line drawing uses accelerated horizontal and vertical line functions
 before using Bresenham's algorithm
 * Rectangle uses optimized horizontal and vertical line functions
