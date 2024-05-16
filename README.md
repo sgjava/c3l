@@ -134,7 +134,7 @@ character and color scroll at same time to reduce this at the cost of performanc
 * Custom character sets (can be copied from VDC or loaded from disk)
 * Scroll any area of screen
 
-## Bacis console
+## Basic console
 
 If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/include/console.h).
 It operates like a normal console keeping track of the cursor and scrolling. There 
