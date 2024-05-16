@@ -121,6 +121,11 @@ switching. If you do not use color printing it's even faster. A common color sch
 is used and mapped by the various functions. This allows portability between VIC and 
 VDC. Of course all of these settings are mutable at runtime.
 
+If you see a color flicker in color scroll it's due to scrolling character and color memory
+separate from each other. i.e. all characters are scrolled then all colors. This allows you
+not to use the color scroll and improve performance. Later, it might make sense to do
+character and color scroll at same time to reduce this at the cost of performance.
+
 #### Features
 * Use ROM character set at 0x1800 for the smallest memory footprint (VIC)
 * Fast print uses existing background color
@@ -129,7 +134,9 @@ VDC. Of course all of these settings are mutable at runtime.
 * Custom character sets (can be copied from VDC or loaded from disk)
 * Scroll any area of screen
 
-If your app requires more of a console abstraction then use [console](hhttps://github.com/sgjava/c3l/blob/main/include/console.h).
+## Bacis console
+
+If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/include/console.h).
 It operates like a normal console keeping track of the cursor and scrolling. There 
 is also a print function that allows word wrapping.
 
@@ -145,7 +152,7 @@ is also a print function that allows word wrapping.
 ![VIC](images/vicgraph.png "VIC") ![VDC](images/vdcgraph.png "VDC")
 
 [Bitmap](https://github.com/sgjava/c3l/blob/main/include/bitmap.h) provides an 
-abstraction for common graphice functions.
+abstraction for common graphic functions.
 
 #### Features
 * Set and clear pixel functions
@@ -190,7 +197,7 @@ character ROM, but your program can use this memory, so it's not wasted.
 You should return to CP/M like nothing happened to the VIC.
 
 ### Limitations
-As I mentioned above 0x1000-0x1fff and 0x9000-0x9fff is always read by the VIC as character ROM. Your
+As I mentioned above 0x1000-0x1fff and 0x9000-0x9fff are always read by the VIC as character ROM. Your
 program will still use this memory normally. See [vicspr](https://github.com/sgjava/c3l/blob/main/src/demo/vicspr.c)
 for an example of using the ROM character set and the ASCII to PETSCII translation
 of printVicPet.
@@ -212,15 +219,16 @@ go with function pointers. This basically allows runtime polymorphism, thus I
 can set the pixel routines, etc. at runtime and share the graphics functions.
 
 I took a fresh look at implementing lines, rectangles, ellipses and circles.
-setVicPix sets a pixel and clearVicPix clears a pixels. I added color to
-the graphics function to tell it to set or clear pixels (for monochrome). This is pretty cool,
-since you can easily erase parts of your drawing using the same parameters except
-the last one called setPix. Set color to 1 to set and 0 to clear pixels.
+setPixel sets a pixel. I added color to the function to make it set or clear pixels
+(for monochrome). This is pretty cool, since you can easily erase parts of your
+drawing using the same parameters except color. Set color to 1 to set and 0 to
+clear pixels. As I add new color modes the color argument will be able to
+handle it.
 
 I optimized drawLine by detecting horizontal and vertical lines. drawLineH
 can draw horizontal lines about 15x faster than Bresenham's algorithm based on
 the bitmap memory layout and not having to read/write the pixel byte 8 times like
-setPix and clearPix. drawLineV is optimized also, but not nearly as much
+setPixel. drawLineV is optimized also, but not nearly as much
 as drawLineH. You can still call drawLineH and drawLineV directly as needed.
 
 Enough bitmap graphic basics are provided to build applications that can graph
