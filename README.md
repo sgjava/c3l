@@ -206,7 +206,6 @@ To make life simple I'll show one way to rip sprites from C64 games. In this exa
 Action Replay v6 cartridge and Wizard of Wor disk. The sprite demo expects 12 sprites in the
 following sequence. Three sprites for left, right, up and down or 12 sprites total. This is how
 we will save them off and build a single sprite library file.
-* `sudo apt install cc1541`
 * `cd ~/eclipse-workspace/c3l/resources/sprites`
 * `cc1541 sprites.d64`
 * `x64`
@@ -223,7 +222,9 @@ we will save them off and build a single sprite library file.
     * A to continue
     * Enter name
     * Press space
-* Continue until you save all the sprites you want to make a library with 
+* Continue until you save all the sprites you want to make a library with
+* `cd ~/eclipse-workspace/c3l/scripts'
+* `./sprites` to build sprite libraries
     
     
 
