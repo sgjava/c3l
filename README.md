@@ -210,9 +210,9 @@ we will save them off and build a single sprite library file.
 * `cc1541 sprites.d64`
 * `x64`
     * Preferences, settings, Peripheral devices, Drive, Drive 9, CBM 1541-II, Close
-    * File, Attach cartridge image..., action_replay_6.crt, press F3
     * File, Attach disk image..., Deive #8, wow.d64
     * File, Attach disk image..., Deive #9, sprites.d64
+    * File, Attach cartridge image..., action_replay_6.crt, press F3
     * load "*",8,1
     * run
     * Alt+Z
