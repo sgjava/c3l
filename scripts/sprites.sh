@@ -1,16 +1,27 @@
 #!/bin/sh
-# Concatnate sprite files extraxted with action replay 6
+# Concatnate sprite files extraxted with action replay 6.
+#
+# Since sprites are save off with first two byte as load address we trim that off.
+#
 
 # Save current dir
 cwd=$(pwd)
 
 cd ../resources/sprites
 
-for file in bw01.prg bw02.prg bw03.prg bw04.prg bw05.prg bw06.prg bw07.prg bw08.prg bw09.prg bw10.prg bw11.prg bw12.prg; do
-    dd if="$file" bs=1 skip=2 >> burwor.spr
+# Burwor library
+rm -f burwor.spr
+for file in bw12.prg bw11.prg bw10.prg bw09.prg bw08.prg bw07.prg bw06.prg bw05.prg bw04.prg bw03.prg bw02.prg bw01.prg; do
+ 	dd if="$file" bs=1 skip=2 >> burwor.spr
 done
 
-cd "$cwd"
+# Garwor library
+rm -f garwor.spr
+for file in gw12.prg gw11.prg gw10.prg gw09.prg gw08.prg gw07.prg gw06.prg gw05.prg gw04.prg gw03.prg gw02.prg gw01.prg; do
+    dd if="$file" bs=1 skip=2 >> garwor.spr
+done
 
-# Populate disk image with sprite file.
-ctools ../disks/demo.d71 p ../resources/burwor.spr
+# Copy sprite libraries to resources
+cp *.spr ../../resources/.
+
+cd "$cwd"

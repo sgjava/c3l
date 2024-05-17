@@ -60,7 +60,7 @@ ctools ./disks/demo.d71 p ./build/app/*.com
 # Copy resource files to demo disk
 ctools ./disks/demo.d71 p ./resources/test.sub
 ctools ./disks/demo.d71 p ./resources/default.chr
-ctools ./disks/demo.d71 p ./resources/burwor.spr
+ctools ./disks/demo.d71 p ./resources/*.spr
 
 # Remove curent playpcm disk image
 rm -f ./disks/playpcm.d71

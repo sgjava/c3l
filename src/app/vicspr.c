@@ -146,16 +146,16 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
 					// Left
 					sprites[i].xDir = -1;
 					sprites[i].yDir = 0;
-					sprites[i].seq[0] = 9;
-					sprites[i].seq[1] = 10;
-					sprites[i].seq[2] = 11;
+					sprites[i].seq[0] = 0;
+					sprites[i].seq[1] = 1;
+					sprites[i].seq[2] = 2;
 				} else if (sprites[i].x < 24 || rand() % 200 < 1) {
 					// Right
 					sprites[i].xDir = 1;
 					sprites[i].yDir = 0;
-					sprites[i].seq[0] = 0;
-					sprites[i].seq[1] = 1;
-					sprites[i].seq[2] = 2;
+					sprites[i].seq[0] = 3;
+					sprites[i].seq[1] = 4;
+					sprites[i].seq[2] = 5;
 				} else if (sprites[i].y > 229 || rand() % 200 < 1) {
 					// Up
 					sprites[i].xDir = 0;
@@ -167,9 +167,9 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
 					// Down
 					sprites[i].xDir = 0;
 					sprites[i].yDir = 1;
-					sprites[i].seq[0] = 3;
-					sprites[i].seq[1] = 4;
-					sprites[i].seq[2] = 5;
+					sprites[i].seq[0] = 9;
+					sprites[i].seq[1] = 10;
+					sprites[i].seq[2] = 11;
 				}
 				sprites[i].curSeq += 1;
 				// Check current sequence
@@ -235,7 +235,7 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 		sprites[i].y = 200;
 		sprites[i].color = scrLightBlue;
 		sprites[i].updateColor = 0;
-		sprites[i].xDir = 1;
+		sprites[i].xDir = -1;
 		sprites[i].yDir = 0;
 		// Set sprite pointer
 		sprPtr[i] = sprDef[sprites[i].seq[sprites[i].curSeq]];
@@ -273,7 +273,7 @@ void run(screen *scr) {
 main() {
 	/* Create screen struct */
 	screen *scr = (screen*) malloc(sizeof(screen));
-	init(scr, "burwor.spr", LOAD_SPRITES);
+	init(scr, "garwor.spr", LOAD_SPRITES);
 	run(scr);
 	done();
 	/* Free memory */
