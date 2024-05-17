@@ -273,7 +273,7 @@ void run(screen *scr) {
 main() {
 	/* Create screen struct */
 	screen *scr = (screen*) malloc(sizeof(screen));
-	init(scr, "garwor.spr", LOAD_SPRITES);
+	init(scr, "thorwor.spr", LOAD_SPRITES);
 	run(scr);
 	done();
 	/* Free memory */

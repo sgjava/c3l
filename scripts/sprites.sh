@@ -21,6 +21,12 @@ for file in gw12.prg gw11.prg gw10.prg gw09.prg gw08.prg gw07.prg gw06.prg gw05.
     dd if="$file" bs=1 skip=2 >> garwor.spr
 done
 
+# Thorwor library
+rm -f thorwor.spr
+for file in tw12.prg tw11.prg tw10.prg tw09.prg tw08.prg tw07.prg tw06.prg tw05.prg tw04.prg tw03.prg tw02.prg tw01.prg; do
+    dd if="$file" bs=1 skip=2 >> thorwor.spr
+done
+
 # Copy sprite libraries to resources
 cp *.spr ../../resources/.
 
