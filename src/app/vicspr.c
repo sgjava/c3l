@@ -125,51 +125,71 @@ void moveSpr(screen *scr, unsigned char *sprPtr, sprite sprites[]) {
 }
 
 /*
+ * Collision detection.
+ */
+void collSpr(sprite sprites[]) {
+	unsigned char i, sprCol, sprBgCol;
+	static unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+	// Sprite to sprite collision register
+	sprCol = inp(vicSprColl);
+	// Sprite to background collision register
+	sprBgCol = inp(vicSprFgColl);
+	for (i = 0; i < MAX_SPRITES; i++) {
+		// See if there was a sprite to sprite collision
+		if (sprCol & sprTable[i]) {
+			// Set sprite color
+			sprites[i].color = scrRed;
+			sprites[i].updateColor = 1;
+			// See if there was a sprite to background collision
+		} else if (sprBgCol & sprTable[i]) {
+			// Set sprite color
+			sprites[i].color = scrLightRed;
+			sprites[i].updateColor = 1;
+		} else if (sprites[i].color != scrLightBlue) {
+			sprites[i].color = scrLightBlue;
+			sprites[i].updateColor = 1;
+		}
+	}
+}
+
+/*
+ * Set sprite struct members.
+ */
+void setSpr(sprite *spr, int xDir, int yDir, unsigned char *seq) {
+	spr->xDir = xDir;
+	spr->yDir = yDir;
+	spr->seq[0] = seq[0];
+	spr->seq[1] = seq[1];
+	spr->seq[2] = seq[2];
+}
+
+/*
  * Pre-calculate movements and store in sprite struct.
  */
 void calcMoveSpr(screen *scr, sprite sprites[]) {
-	unsigned char i, sprCol, sprBgCol, delay = 1, *sprPtr = scr->scrMem
+	unsigned char i, delay = 1, *sprPtr = scr->scrMem
 			+ vicSprMemOfs;
-	unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
+	// Sprite sequences
+	unsigned char seq[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 	setSidVol(15, 0);
 	// Move sprites until return pressed
 	while (getKey(0) != 0xfd) {
 		// Pre-calculate movements
 		if (delay-- == 0) {
-			// Sprite to sprite collision register
-			sprCol = inp(vicSprColl);
-			// Sprite to background collision register
-			sprBgCol = inp(vicSprFgColl);
 			for (i = 0; i < MAX_SPRITES; i++) {
 				//Check X max and min
 				if (sprites[i].x > 321 || rand() % 200 < 1) {
 					// Left
-					sprites[i].xDir = -1;
-					sprites[i].yDir = 0;
-					sprites[i].seq[0] = 0;
-					sprites[i].seq[1] = 1;
-					sprites[i].seq[2] = 2;
+					setSpr(&sprites[i], -1, 0, &seq[0]);
 				} else if (sprites[i].x < 24 || rand() % 200 < 1) {
 					// Right
-					sprites[i].xDir = 1;
-					sprites[i].yDir = 0;
-					sprites[i].seq[0] = 3;
-					sprites[i].seq[1] = 4;
-					sprites[i].seq[2] = 5;
+					setSpr(&sprites[i], 1, 0, &seq[3]);
 				} else if (sprites[i].y > 229 || rand() % 200 < 1) {
 					// Up
-					sprites[i].xDir = 0;
-					sprites[i].yDir = -1;
-					sprites[i].seq[0] = 6;
-					sprites[i].seq[1] = 7;
-					sprites[i].seq[2] = 8;
+					setSpr(&sprites[i], 0, -1, &seq[6]);
 				} else if (sprites[i].y < 51 || rand() % 200 < 1) {
 					// Down
-					sprites[i].xDir = 0;
-					sprites[i].yDir = 1;
-					sprites[i].seq[0] = 9;
-					sprites[i].seq[1] = 10;
-					sprites[i].seq[2] = 11;
+					setSpr(&sprites[i], 0, 1, &seq[9]);
 				}
 				sprites[i].curSeq += 1;
 				// Check current sequence
@@ -179,23 +199,12 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
 				// Calc sprite x,y based on dir
 				sprites[i].x += sprites[i].xDir;
 				sprites[i].y += sprites[i].yDir;
-				// See if there was a sprite to sprite collision
-				if (sprCol & sprTable[i]) {
-					// Set sprite color
-					sprites[i].color = scrRed;
-					sprites[i].updateColor = 1;
-					// See if there was a sprite to background collision
-				} else if (sprBgCol & sprTable[i]) {
-					// Set sprite color
-					sprites[i].color = scrLightRed;
-					sprites[i].updateColor = 1;
-				} else if (sprites[i].color != scrLightBlue) {
-					sprites[i].color = scrLightBlue;
-					sprites[i].updateColor = 1;
-				}
 			}
+			// Collision detection
+			collSpr(sprites);
 			// Move all sprites
 			moveSpr(scr, sprPtr, sprites);
+			// How many vblank cycles to wait
 			delay = 5;
 		} else {
 			/* Raster off screen? */
