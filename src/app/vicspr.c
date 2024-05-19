@@ -225,6 +225,7 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
 void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 	unsigned char i, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr =
 			scr->scrMem + vicSprMemOfs;
+	unsigned char seq[] = { 0, 1, 2 };
 	// Seed random number generator with VIC raster value
 	srand(inp(vicRaster));
 	// Configure all sprite definition offsets
@@ -237,15 +238,11 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 		// Configure sprite
 		sprites[i].def = sprDef;
 		sprites[i].curSeq = rand() % 3;
-		sprites[i].seq[0] = 0;
-		sprites[i].seq[1] = 1;
-		sprites[i].seq[2] = 2;
 		sprites[i].x = (i * 26) + 24;
 		sprites[i].y = 200;
 		sprites[i].color = scrLightBlue;
 		sprites[i].updateColor = 0;
-		sprites[i].xDir = -1;
-		sprites[i].yDir = 0;
+		setSpr(&sprites[i], -1, 0, &seq[0]);
 		// Set sprite pointer
 		sprPtr[i] = sprDef[sprites[i].seq[sprites[i].curSeq]];
 		// Set sprite location
