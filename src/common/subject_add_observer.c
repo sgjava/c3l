@@ -12,14 +12,14 @@
 /*
  * Add an observer to the subject.
  */
-void subjectAddObserver(subject* self, observer* o) {
+void subjectAddObserver(subject* s, observer* o) {
 	// If array is full
-    if (self->observer_count >= self->observer_capacity) {
+    if (s->count >= s->capacity) {
     	// Double the capacity
-        self->observer_capacity *= 2;
+        s->capacity *= 2;
         // Reallocate memory
-        self->observers = (observer**)realloc(self->observers, self->observer_capacity * sizeof(observer*));
+        s->observers = (observer**)realloc(s->observers, s->capacity * sizeof(observer*));
     }
     // Add the new observer
-    self->observers[self->observer_count++] = o;
+    s->observers[s->count++] = o;
 }

@@ -12,9 +12,9 @@
 /*
  * Notify all observers of a change.
  */
-void subjectNotify(subject* self, void* data) {
-    for (int i = 0; i < self->observer_count; ++i) {
+void subjectNotify(subject* s) {
+    for (int i = 0; i < s->count; ++i) {
     	// Call update on each observer
-        self->observers[i]->update(self->observers[i], data);
+        s->observers[i]->update(s->observers[i]);
     }
 }

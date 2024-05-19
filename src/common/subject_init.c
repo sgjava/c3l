@@ -12,11 +12,11 @@
 /*
  * Initialize the subject.
  */
-void subjectInit(subject* self) {
+void subjectInit(subject* s) {
 	// No observers initially
-    self->observer_count = 0;
+    s->count = 0;
     // Set initial capacity
-    self->observer_capacity = 4;
+    s->capacity = 4;
     // Allocate memory
-    self->observers = (observer**)malloc(self->observer_capacity * sizeof(observer*));
+    s->observers = (observer**)malloc(s->capacity * sizeof(observer*));
 }

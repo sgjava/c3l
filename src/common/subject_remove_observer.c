@@ -12,14 +12,14 @@
 /*
  * Remove an observer from the subject.
  */
-void subjectRemoveObserver(subject* self, observer* o) {
+void subjectRemoveObserver(subject* s, observer* o) {
 	// Find the observer
-    for (int i = 0; i < self->observer_count; ++i) {
-        if (self->observers[i] == o) {
+    for (int i = 0; i < s->count; ++i) {
+        if (s->observers[i] == o) {
         	// Shift remaining observers
-            memmove(&self->observers[i], &self->observers[i + 1], (self->observer_count - i - 1) * sizeof(observer*));
+            memmove(&s->observers[i], &s->observers[i + 1], (s->count - i - 1) * sizeof(observer*));
             // Decrease count
-            self->observer_count--;
+            s->count--;
             break;
         }
     }
