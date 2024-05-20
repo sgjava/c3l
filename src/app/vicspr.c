@@ -21,9 +21,19 @@
 #pragma output CRT_HEAP_ADDRESS = 0x8000
 
 /*
+ * Sprite libraries to load.
+ */
+#define LIB_SPRITES 5
+
+/*
  * Sprite definitions to load.
  */
 #define LOAD_SPRITES 12
+
+/*
+ * Total number of sprites loaded.
+ */
+#define TOTAL_SPRITES (LIB_SPRITES * LOAD_SPRITES)
 
 /*
  * Total physical sprites.
@@ -56,12 +66,17 @@ typedef struct sprite {
 };
 
 /*
+ * Sprite libraries.
+ */
+char fileNames[LIB_SPRITES][13] = { "burwor.spr", "garwor.spr", "thorwor.spr", "worrior.spr", "wow.spr" };
+
+/*
  Load sprite into buffer.
  */
 void loadSprites(unsigned char *buffer, unsigned int len, char *fileName) {
 	FILE *file;
 	if ((file = fopen(fileName, "rb")) != NULL) {
-		printf("\nReading %s, %u bytes", fileName, len);
+		printf("\nLoading %s, %u bytes to address 0x%04x", fileName, len, buffer);
 		fread(buffer, sizeof(unsigned char), len, file);
 		fclose(file);
 	} else {
@@ -72,13 +87,16 @@ void loadSprites(unsigned char *buffer, unsigned int len, char *fileName) {
 /*
  * Load sprites, initialize key scan and screen.
  */
-void init(screen *scr, char *fileName, unsigned char sprites) {
+void init(screen *scr) {
+	unsigned char i;
+	unsigned int libSize = LOAD_SPRITES * 64, sprMem = ((unsigned int) scr->scrMem) - (libSize * LIB_SPRITES);
 	// Use ram at end of bank 1 for character set screen just above that
 	initVicScr(scr, 0x7400, 0x7800);
 	initVicScrMode(scr, scrBlack, scrBlue, scrWhite);
 	// Calculate sprite offset by number of sprites before screen memory
-	loadSprites((unsigned char*) ((unsigned int) scr->scrMem) - (sprites * 64),
-			sprites * 64, fileName);
+	for (i = 0; i < LIB_SPRITES; i++) {
+		loadSprites((unsigned char*) (sprMem + (i * libSize)), libSize, fileNames[i]);
+	}
 	// CP/M file access will enable CIA IRQ, so we init CIA after load
 	initCia();
 }
@@ -167,8 +185,7 @@ void setSpr(sprite *spr, int xDir, int yDir, unsigned char *seq) {
  * Pre-calculate movements and store in sprite struct.
  */
 void calcMoveSpr(screen *scr, sprite sprites[]) {
-	unsigned char i, delay = 1, *sprPtr = scr->scrMem
-			+ vicSprMemOfs;
+	unsigned char i, delay = 1, *sprPtr = scr->scrMem + vicSprMemOfs;
 	// Sprite sequences
 	unsigned char seq[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 	setSidVol(15, 0);
@@ -223,20 +240,18 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
  * Initialize sprite pointers and struct array.
  */
 void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
-	unsigned char i, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr =
-			scr->scrMem + vicSprMemOfs;
+	unsigned char i, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr = scr->scrMem + vicSprMemOfs;
 	unsigned char seq[] = { 0, 1, 2 };
 	// Seed random number generator with VIC raster value
 	srand(inp(vicRaster));
 	// Configure all sprite definition offsets
-	for (i = 0; i < LOAD_SPRITES; i++) {
-		sprDef[i] = (((unsigned int) scr->scrMem) - (vicBank * 16384)
-				- ((i + 1) * 64)) / 64;
+	for (i = 0; i < TOTAL_SPRITES; i++) {
+		sprDef[i] = (((unsigned int) scr->scrMem) - (vicBank * 16384) - ((i + 1) * 64)) / 64;
 	}
 	// Configure all sprites
 	for (i = 0; i < MAX_SPRITES; ++i) {
 		// Configure sprite
-		sprites[i].def = sprDef;
+		sprites[i].def = &sprDef[(rand() % 5) * 12];
 		sprites[i].curSeq = rand() % 3;
 		sprites[i].x = (i * 26) + 24;
 		sprites[i].y = 200;
@@ -260,7 +275,7 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 void run(screen *scr) {
 	unsigned char i;
 	char str[41];
-	unsigned char sprDef[LOAD_SPRITES];
+	unsigned char sprDef[TOTAL_SPRITES];
 	sprite sprites[MAX_SPRITES];
 	(scr->print)(scr, 0, 0, "Using RAM character set and one screen  "
 			"at the end of VIC bank 1. Sprites are   "
@@ -279,7 +294,7 @@ void run(screen *scr) {
 main() {
 	/* Create screen struct */
 	screen *scr = (screen*) malloc(sizeof(screen));
-	init(scr, "thorwor.spr", LOAD_SPRITES);
+	init(scr);
 	run(scr);
 	done();
 	/* Free memory */

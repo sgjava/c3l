@@ -1,7 +1,7 @@
 #!/bin/sh
 # Concatnate sprite files extraxted with action replay 6.
 #
-# Since sprites are save off with first two byte as load address we trim that off.
+# Since sprites are saved off with first two byte as load address we trim that off.
 #
 
 # Save current dir
@@ -25,6 +25,18 @@ done
 rm -f thorwor.spr
 for file in tw12.prg tw11.prg tw10.prg tw09.prg tw08.prg tw07.prg tw06.prg tw05.prg tw04.prg tw03.prg tw02.prg tw01.prg; do
     dd if="$file" bs=1 skip=2 >> thorwor.spr
+done
+
+# Worrior library
+rm -f worrior.spr
+for file in w12.prg w11.prg w10.prg w09.prg w08.prg w07.prg w06.prg w05.prg w04.prg w03.prg w02.prg w01.prg; do
+    dd if="$file" bs=1 skip=2 >> worrior.spr
+done
+
+# Wizard of Wor library
+rm -f wow.spr
+for file in wow12.prg wow11.prg wow10.prg wow09.prg wow08.prg wow07.prg wow06.prg wow05.prg wow04.prg wow03.prg wow02.prg wow01.prg; do
+    dd if="$file" bs=1 skip=2 >> wow.spr
 done
 
 # Copy sprite libraries to resources
