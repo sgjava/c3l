@@ -54,21 +54,27 @@ typedef struct sprite sprite;
  * Sprite struct.
  */
 typedef struct sprite {
+	// Definitions array
 	unsigned char *def;
+	// X position
 	unsigned int x;
+	// Y position
 	unsigned char y;
+	// Default color
+	unsigned char defColor;
+	// Current color
 	unsigned char color;
+	// Update color flag
 	unsigned char updateColor;
+	// X direction
 	int xDir;
+	// Y direction
 	int yDir;
+	// Current sequence
 	unsigned char curSeq;
+	// Sequence array
 	unsigned char seq[SEQ_SPRITES];
 };
-
-/*
- * Sprite libraries.
- */
-char fileNames[LIB_SPRITES][13] = { "burwor.spr", "garwor.spr", "thorwor.spr", "worrior.spr", "wow.spr" };
 
 /*
  Load sprite into buffer.
@@ -89,11 +95,14 @@ void loadSprites(unsigned char *buffer, unsigned int len, char *fileName) {
  */
 void init(screen *scr) {
 	unsigned char i;
-	unsigned int libSize = LOAD_SPRITES * 64, sprMem = ((unsigned int) scr->scrMem) - (libSize * LIB_SPRITES);
+	unsigned int libSize = LOAD_SPRITES * 64, sprMem;
+	char fileNames[LIB_SPRITES][13] = { "burwor.spr", "garwor.spr", "thorwor.spr", "worrior.spr", "wow.spr" };
 	// Use ram at end of bank 1 for character set screen just above that
 	initVicScr(scr, 0x7400, 0x7800);
 	initVicScrMode(scr, scrBlack, scrBlue, scrWhite);
 	// Calculate sprite offset by number of sprites before screen memory
+	sprMem = ((unsigned int) scr->scrMem) - (libSize * LIB_SPRITES);
+	// Load sprite libraries
 	for (i = 0; i < LIB_SPRITES; i++) {
 		loadSprites((unsigned char*) (sprMem + (i * libSize)), libSize, fileNames[i]);
 	}
@@ -163,8 +172,8 @@ void collSpr(sprite sprites[]) {
 			// Set sprite color
 			sprites[i].color = scrLightRed;
 			sprites[i].updateColor = 1;
-		} else if (sprites[i].color != scrLightBlue) {
-			sprites[i].color = scrLightBlue;
+		} else if (sprites[i].color != sprites[i].defColor) {
+			sprites[i].color = sprites[i].defColor;
 			sprites[i].updateColor = 1;
 		}
 	}
@@ -241,7 +250,8 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
  */
 void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 	unsigned char i, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr = scr->scrMem + vicSprMemOfs;
-	unsigned char seq[] = { 0, 1, 2 };
+	unsigned char def, seq[] = { 0, 1, 2 };
+	unsigned char sprColor[5] = { scrCyan, scrYellow, scrGreen, scrPurple, scrLightBlue };
 	// Seed random number generator with VIC raster value
 	srand(inp(vicRaster));
 	// Configure all sprite definition offsets
@@ -251,11 +261,13 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 	// Configure all sprites
 	for (i = 0; i < MAX_SPRITES; ++i) {
 		// Configure sprite
-		sprites[i].def = &sprDef[(rand() % 5) * 12];
+		def = rand() % 5;
+		sprites[i].def = &sprDef[def * 12];
+		sprites[i].defColor = sprColor[def];
 		sprites[i].curSeq = rand() % 3;
 		sprites[i].x = (i * 26) + 24;
 		sprites[i].y = 200;
-		sprites[i].color = scrLightBlue;
+		sprites[i].color = sprites[i].defColor;
 		sprites[i].updateColor = 0;
 		setSpr(&sprites[i], -1, 0, &seq[0]);
 		// Set sprite pointer
