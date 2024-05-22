@@ -226,18 +226,13 @@ we will save them off and build a single sprite library file.
 * `cc1541 -X "*" sprites.d64` 
 * `cd ~/eclipse-workspace/c3l/scripts`
 * `./sprites` to build sprite libraries
-    
-    
-
-
+ 
 ### Return to CP/M mode
 You should return to CP/M like nothing happened to the VIC.
 
 ### Limitations
 As I mentioned above 0x1000-0x1fff and 0x9000-0x9fff are always read by the VIC as character ROM. Your
-program will still use this memory normally. See [vicspr](https://github.com/sgjava/c3l/blob/main/src/demo/vicspr.c)
-for an example of using the ROM character set and the ASCII to PETSCII translation
-of printVicPet.
+program will still use this memory normally.
 
 ### Character mode
 I include everything you need to take control of character mode. I
@@ -292,8 +287,7 @@ convert 10 seconds of mp3 to 8 bit PCM snd file, move to CP/M disk image and fin
 * `ctools ~/eclipse-workspace/c3l/disks/demo.d71 p neil.snd`
 * `convpcm neil.snd neil.raw`
 * `playpcm4 neil.raw 8000`
-You can load around a 44K raw file, so keep that in mind. It also makes sense to support 1 and 2 bit raw
-files as well, so keep an eye out for that.
+You can load around a 44K raw file, so keep that in mind.
 
 How ARPAbet is build. [phonemes.sh](https://github.com/sgjava/c3l/blob/main/build/phonemes.sh) does most
 of the dirty work. It downloads the phonemes from the [TeensyTalk](https://github.com/radiohound/TeensyTalk)
