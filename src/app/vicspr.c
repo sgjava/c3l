@@ -1,9 +1,9 @@
 /*
  * C128 CP/M C Library C3L
  *
- * 8564/8566 VIC-IIe sprite demo. I used Wizard of Wor sprites
- * that are composed of 4 directions and 3 sequences per
- * direction. This gives you 12 sprites total per character.
+ * 8564/8566 VIC-IIe sprite demo. I used Wizard of Wor sprites that are composed of 4 directions and 3 sequences per direction.
+ * This gives you 12 sprites total per character. Collisions are detected between sprites and characters. Sprite to sprite collisions
+ * also queue a stateful sound engine (up to 3 sounds at one time).
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -46,6 +46,19 @@
 #define SEQ_SPRITES 3
 
 /*
+ * Number of voices.
+ */
+#define SID_VOICES 3
+
+/*
+ * SID state while playing sound.
+ */
+#define SID_INIT 0
+#define SID_SUSTAIN 1
+#define SID_RELEASE 2
+#define SID_DONE 3
+
+/*
  * Forward reference.
  */
 typedef struct sprite sprite;
@@ -74,6 +87,31 @@ typedef struct sprite {
 	unsigned char curSeq;
 	// Sequence array
 	unsigned char seq[SEQ_SPRITES];
+};
+
+/*
+ * Forward reference.
+ */
+typedef struct sound sound;
+
+/*
+ * SID sound.
+ */
+typedef struct sound {
+	unsigned int voice;
+	unsigned char attack;
+	unsigned char decay;
+	unsigned char sustain;
+	unsigned char release;
+	unsigned int freq;
+	// Attack and release waveform
+	unsigned char waveform;
+	// If called 1/60 of a second is 16.66 ms
+	unsigned int sustainDelay;
+	// If called 1/60 of a second is 16.66 ms
+	unsigned int releaseDelay;
+	// SID state in life cycle
+	unsigned char state;
 };
 
 /*
@@ -121,16 +159,6 @@ void done() {
 }
 
 /*
- * Sound effect.
- */
-void sound() {
-	setSidEnv(sidVoice1, 0, 0, 15, 9);
-	setSidFreq(sidVoice1, 200);
-	setSidAtt(sidVoice1, sidNoi);
-	setSidRel(sidVoice1, sidNoi);
-}
-
-/*
  * Move and animate sprites.
  */
 void moveSpr(screen *scr, unsigned char *sprPtr, sprite sprites[]) {
@@ -152,26 +180,99 @@ void moveSpr(screen *scr, unsigned char *sprPtr, sprite sprites[]) {
 }
 
 /*
- * Collision detection.
+ * Stateful sound effect. Called ~ 1/60 a second for NTSC.
  */
-void collSpr(sprite sprites[]) {
-	unsigned char i, sprCol, sprBgCol;
+void playSound(sound s[]) {
+	unsigned char i;
+	// Cycle through all 3 voices
+	for (i = 0; i < SID_VOICES; ++i) {
+		// Check state
+		switch (s[i].state) {
+		case SID_INIT:
+			// Start ADS
+			setSidEnv(s[i].voice, s[i].attack, s[i].decay, s[i].sustain, s[i].release);
+			setSidFreq(s[i].voice, s[i].freq);
+			setSidAtt(s[i].voice, s[i].waveform);
+			s[i].state = SID_SUSTAIN;
+			break;
+		case SID_SUSTAIN:
+			// Sustain based on delay value
+			if (!s[i].sustainDelay--) {
+				// Start release
+				setSidRel(s[i].voice, s[i].waveform);
+				s[i].state = SID_RELEASE;
+			}
+			break;
+		case SID_RELEASE:
+			// Release delay
+			if (!s[i].releaseDelay--) {
+				// End release and silence voice
+				setSidFreq(s[i].voice, 0);
+				s[i].state = SID_DONE;
+			}
+			break;
+		default:
+			s[i].state = SID_DONE;
+		}
+	}
+}
+
+/*
+ * Set sound effect.
+ */
+void setSound(sound s[]) {
+	unsigned char i = 0;
+	static unsigned int voice[] = { sidVoice1, sidVoice2, sidVoice3 };
+	// Find free voice
+	while (i < SID_VOICES && s[i].state != SID_DONE) {
+		i++;
+	}
+	// If there's a free voice, use it
+	if (i < SID_VOICES) {
+		s[i].state = SID_INIT;
+		s[i].voice = voice[i];
+		s[i].attack = 0;
+		s[i].decay = 0;
+		s[i].sustain = 15;
+		s[i].release = 11;
+		s[i].freq = 200;
+		s[i].waveform = sidNoi;
+		s[i].sustainDelay = 1;
+		s[i].releaseDelay = 150;
+	}
+}
+
+/*
+ * Collision detection and sound effect.
+ */
+void collSpr(sprite sprites[], sound sounds[]) {
+	unsigned char i, sprCol, sprBgCol, coll;
 	static unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 	// Sprite to sprite collision register
 	sprCol = inp(vicSprColl);
 	// Sprite to background collision register
 	sprBgCol = inp(vicSprFgColl);
+	coll = 0;
 	for (i = 0; i < MAX_SPRITES; i++) {
 		// See if there was a sprite to sprite collision
 		if (sprCol & sprTable[i]) {
-			// Set sprite color
-			sprites[i].color = scrRed;
-			sprites[i].updateColor = 1;
+			// Set sprite color if not already set
+			if (sprites[i].color == sprites[i].defColor) {
+				sprites[i].color = scrRed;
+				sprites[i].updateColor = 1;
+				// Set sound one once per iteration
+				if (!coll) {
+					setSound(sounds);
+					coll = 1;
+				}
+			}
 			// See if there was a sprite to background collision
 		} else if (sprBgCol & sprTable[i]) {
-			// Set sprite color
-			sprites[i].color = scrLightRed;
-			sprites[i].updateColor = 1;
+			// Set sprite color if not already set
+			if (sprites[i].color == sprites[i].defColor) {
+				sprites[i].color = scrLightRed;
+				sprites[i].updateColor = 1;
+			}
 		} else if (sprites[i].color != sprites[i].defColor) {
 			sprites[i].color = sprites[i].defColor;
 			sprites[i].updateColor = 1;
@@ -193,7 +294,7 @@ void setSpr(sprite *spr, int xDir, int yDir, unsigned char *seq) {
 /*
  * Pre-calculate movements and store in sprite struct.
  */
-void calcMoveSpr(screen *scr, sprite sprites[]) {
+void calcMoveSpr(screen *scr, sprite sprites[], sound sounds[]) {
 	unsigned char i, delay = 1, *sprPtr = scr->scrMem + vicSprMemOfs;
 	// Sprite sequences
 	unsigned char seq[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
@@ -227,12 +328,14 @@ void calcMoveSpr(screen *scr, sprite sprites[]) {
 				sprites[i].y += sprites[i].yDir;
 			}
 			// Collision detection
-			collSpr(sprites);
+			collSpr(sprites, sounds);
 			// Move all sprites
 			moveSpr(scr, sprPtr, sprites);
 			// How many vblank cycles to wait
-			delay = 5;
+			delay = 4;
+			playSound(sounds);
 		} else {
+			playSound(sounds);
 			/* Raster off screen? */
 			while (inp(vicRaster) != 0xff)
 				;
@@ -282,6 +385,16 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 }
 
 /*
+ * Initialize sound.
+ */
+void initSound(sound sounds[]) {
+	unsigned char i;
+	for (i = 0; i < SID_VOICES; ++i) {
+		sounds[i].state = SID_DONE;
+	}
+}
+
+/*
  * Run demo.
  */
 void run(screen *scr) {
@@ -289,6 +402,7 @@ void run(screen *scr) {
 	char str[41];
 	unsigned char sprDef[TOTAL_SPRITES];
 	sprite sprites[MAX_SPRITES];
+	sound sounds[SID_VOICES];
 	(scr->print)(scr, 0, 0, "Using RAM character set and one screen  "
 			"at the end of VIC bank 1. Sprites are   "
 			"located above screen. Collision         "
@@ -299,8 +413,9 @@ void run(screen *scr) {
 	(scr->printCol)(scr, 0, 6, scrLightGreen, str);
 	// Use VIC raster to seed random numbers
 	srand(inp(vicRaster));
+	initSound(sounds);
 	initSpr(scr, sprDef, sprites);
-	calcMoveSpr(scr, sprites);
+	calcMoveSpr(scr, sprites, sounds);
 }
 
 main() {
