@@ -10,7 +10,7 @@
 /*
  * Configure screen struct for VDC and clear screen.
  */
-void initVdcScrMode(screen *scr, unsigned char bgCol, unsigned char fgCol, unsigned char chrCol) {
+void initVdcScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol) {
 	saveVdc();
 	setVdcCursor(0, 0, vdcCurNone);
 	(scr->clearScrCol)(scr, chrCol);

@@ -9,7 +9,7 @@
 /*
  * Set cursor's top and bottom scan lines and mode.
  */
-void setVdcCursor(unsigned char top, unsigned char bottom, unsigned char mode) {
+void setVdcCursor(const unsigned char top, const unsigned char bottom, const unsigned char mode) {
 	outVdc(vdcCurStScanLine, (top | (mode << 5)));
 	outVdc(vdcCurEndScanLine, bottom);
 }

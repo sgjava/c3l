@@ -74,17 +74,17 @@ typedef struct phonemes {
 };
 
 extern void __LIB__ clearSid();
-extern void __LIB__ setSidVol(unsigned char amp, unsigned char filter);
-extern void __LIB__ setSidEnv(unsigned int voice, unsigned char attack, unsigned char decay, unsigned char sustain,
-unsigned char release);
-extern void __LIB__ setSidRel(unsigned int voice, unsigned char waveform);
-extern void __LIB__ setSidFreq(unsigned int voice, unsigned int freq);
-extern void __LIB__ setSidAtt(unsigned int voice, unsigned char waveform);
-extern void __LIB__ setSidPulWav(unsigned int voice, unsigned int width);
-extern void __LIB__ readSidPots(unsigned char *x1, unsigned char *y1, unsigned char *x2, unsigned char *y2);
-extern void __LIB__ readSidMouse(unsigned char *x1, unsigned char *y1, unsigned char *x2, unsigned char *y2);
-extern void __LIB__ playPcm1Sid(unsigned char *buffer, unsigned int len, unsigned char vol) __smallc;
-extern void __LIB__ playPcm2Sid(unsigned char *buffer, unsigned int len) __smallc;
-extern void __LIB__ playPcm4Sid(unsigned char *buffer, unsigned int len) __smallc;
+extern void __LIB__ setSidVol(const unsigned char amp, const unsigned char filter);
+extern void __LIB__ setSidEnv(const unsigned int voice, const unsigned char attack, const unsigned char decay, const unsigned char sustain,
+		const unsigned char release);
+extern void __LIB__ setSidRel(const unsigned int voice, const unsigned char waveform);
+extern void __LIB__ setSidFreq(const unsigned int voice, const unsigned int freq);
+extern void __LIB__ setSidAtt(const unsigned int voice, const unsigned char waveform);
+extern void __LIB__ setSidPulWav(const unsigned int voice, const unsigned int width);
+extern void __LIB__ readSidPots(const unsigned char *x1, const unsigned char *y1, const unsigned char *x2, const unsigned char *y2);
+extern void __LIB__ readSidMouse(const unsigned char *x1, const unsigned char *y1, const unsigned char *x2, const unsigned char *y2);
+extern void __LIB__ playPcm1Sid(const unsigned char *buffer, const unsigned int len, const unsigned char vol) __smallc;
+extern void __LIB__ playPcm2Sid(const unsigned char *buffer, const unsigned int len) __smallc;
+extern void __LIB__ playPcm4Sid(const unsigned char *buffer, const unsigned int len) __smallc;
 
 #endif

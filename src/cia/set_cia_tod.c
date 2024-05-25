@@ -12,8 +12,8 @@
 /*
  Set CIA 2 TOD clock.
  */
-void setCiaTod(unsigned int cia, unsigned char hour, unsigned char min,
-		unsigned char sec, unsigned char tenth) {
+void setCiaTod(const unsigned int cia, const unsigned char hour, const unsigned char min, const unsigned char sec,
+		const unsigned char tenth) {
 	// CIA TOD hour
 	outp(cia+ciaTodHrs, hour);
 	// CIA TOD minute

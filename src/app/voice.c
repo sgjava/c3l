@@ -25,7 +25,7 @@ void dispHelp() {
 /*
  Millisecond delay using CIA 2 timer B.
  */
-void delay(unsigned int ms) {
+void delay(const unsigned int ms) {
 	register unsigned int i;
 	/* Start HZ timer in continuous mode */
 	startTimerB(cia2, ciaMs, ciaCpuCont);
@@ -41,7 +41,7 @@ void delay(unsigned int ms) {
 /*
  Play sample from buffer.
  */
-void play(unsigned char *buffer, unsigned int len, unsigned char bits) {
+void play(const unsigned char *buffer, const unsigned int len, const unsigned char bits) {
 	/* Play sample */
 	switch (bits) {
 	case 1:
@@ -59,7 +59,7 @@ void play(unsigned char *buffer, unsigned int len, unsigned char bits) {
 /*
  * Read all phonemes from file to buffers.
  */
-unsigned int readPhonemes(char *fileName, phonemes *p, unsigned char *arpabetBuf[]) {
+unsigned int readPhonemes(const char *fileName, const phonemes *p, const unsigned char *arpabetBuf[]) {
 	unsigned char i;
 	unsigned int totalSize = 0;
 	FILE *file;
@@ -82,7 +82,7 @@ unsigned int readPhonemes(char *fileName, phonemes *p, unsigned char *arpabetBuf
 /*
  * Find phoneme position in array. Return position or -1 if not found.
  */
-int phonemeLookup(char *phoneme, arpabetName name) {
+int phonemeLookup(const char *phoneme, const arpabetName name) {
 	int i;
 	/* Iterate through the array to find the position of the string */
 	for (i = 0; i < PHONEMES; ++i) {
@@ -99,7 +99,7 @@ int phonemeLookup(char *phoneme, arpabetName name) {
 /*
  * Find phonemes in string delimited by space. Return array length.
  */
-int phonemeToPos(char *str, arpabetName name, int arpabetPos[]) {
+int phonemeToPos(const char *str, const arpabetName name, const int arpabetPos[]) {
 	char phoneme[3];
 	int i = 0, p, c = 0, len = strlen(str);
 	while (i < len) {
@@ -117,7 +117,7 @@ int phonemeToPos(char *str, arpabetName name, int arpabetPos[]) {
 /*
  * Play encoded string.
  */
-void playStr(char *word, char *str, phonemes *p, unsigned char *arpabetBuf[]) {
+void playStr(const char *word, const char *str, const phonemes *p, const unsigned char *arpabetBuf[]) {
 	int ph, i;
 	int arpabetPos[100];
 	/* Lookup position of individual phonemes */

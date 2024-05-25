@@ -39,18 +39,18 @@ typedef struct screen screen;
 /*
  * General function pointers.
  */
-typedef void (*fillMemPtr)(unsigned char*, unsigned int, unsigned char);
+typedef void (*fillMemPtr)(const unsigned char*, const unsigned int, const unsigned char);
 
 /*
  * Text function pointers.
  */
-typedef void (*clearScrPtr)(screen*, unsigned char);
-typedef void (*clearScrColPtr)(screen*, unsigned char);
-typedef void (*printPtr)(screen*, unsigned char, unsigned char, char*);
-typedef void (*printColPtr)(screen*, unsigned char, unsigned char, unsigned char, char*);
-typedef void (*scrollUpPtr)(screen*, unsigned char, unsigned char, unsigned char, unsigned char);
-typedef void (*scrollUpColPtr)(screen*, unsigned char, unsigned char, unsigned char, unsigned char);
-typedef void (*copyScrToStrPtr)(screen*, unsigned int, char*, unsigned int);
+typedef void (*clearScrPtr)(const screen*, const unsigned char);
+typedef void (*clearScrColPtr)(const screen*, const unsigned char);
+typedef void (*printPtr)(const screen*, const unsigned char, const unsigned char, const char*);
+typedef void (*printColPtr)(const screen*, const unsigned char, const unsigned char, const unsigned char, const char*);
+typedef void (*scrollUpPtr)(const screen*, const unsigned char, const unsigned char, const unsigned char, const unsigned char);
+typedef void (*scrollUpColPtr)(const screen*, const unsigned char, const unsigned char, const unsigned char, const unsigned char);
+typedef void (*copyScrToStrPtr)(const screen*, const unsigned int, const char*, const unsigned int);
 
 /*
  * We treat the screen struct like an object and encapsulate member variables and function pointers that allow polymorphism.
@@ -118,6 +118,6 @@ typedef struct screen {
 	copyScrToStrPtr copyScrToStr;
 };
 
-extern void __LIB__ asciiToPet(char *str);
+extern void __LIB__ asciiToPet(const char *str);
 
 #endif

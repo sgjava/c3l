@@ -21,7 +21,7 @@ unsigned int elapsedMs() {
 /*
  * CP/M print speed.
  */
-unsigned int cpmPrint(char *str, unsigned int lines) {
+unsigned int cpmPrint(const char *str, const unsigned int lines) {
 	unsigned int i;
 	/* ADM-3A clear-home cursor */
 	putchar(0x1a);
@@ -38,7 +38,7 @@ unsigned int cpmPrint(char *str, unsigned int lines) {
 /*
  * CP/M print speed.
  */
-unsigned int cpmScroll(unsigned int lines) {
+unsigned int cpmScroll(const unsigned int lines) {
 	unsigned int i;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
 	startTimerAB(cia2, ciaMs, 0xffff, ciaCountA);
@@ -53,7 +53,7 @@ unsigned int cpmScroll(unsigned int lines) {
 /*
  * VDC print speed.
  */
-unsigned int vdcPrint(console *con, char *str, unsigned int lines) {
+unsigned int vdcPrint(const console *con, const char *str, const unsigned int lines) {
 	unsigned int i;
 	clearHomeCon(con);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
@@ -69,7 +69,7 @@ unsigned int vdcPrint(console *con, char *str, unsigned int lines) {
 /*
  * VDC scroll speed.
  */
-unsigned int vdcScroll(console *con, unsigned int lines) {
+unsigned int vdcScroll(const console *con, const unsigned int lines) {
 	unsigned int i;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
 	startTimerAB(cia2, ciaMs, 0xffff, ciaCountA);
@@ -84,7 +84,7 @@ unsigned int vdcScroll(console *con, unsigned int lines) {
 /*
  * VIC print speed.
  */
-unsigned int vicPrint(console *con, char *str, unsigned int lines) {
+unsigned int vicPrint(const console *con, const char *str, const unsigned int lines) {
 	unsigned int i;
 	clearHomeCon(con);
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
@@ -100,7 +100,7 @@ unsigned int vicPrint(console *con, char *str, unsigned int lines) {
 /*
  * VIC scroll speed.
  */
-unsigned int vicScroll(console *con, unsigned int lines) {
+unsigned int vicScroll(const console *con, const unsigned int lines) {
 	unsigned int i;
 	/* Timer A counts milliseconds up to 65535 times or ~65 seconds */
 	startTimerAB(cia2, ciaMs, 0xffff, ciaCountA);
@@ -115,7 +115,7 @@ unsigned int vicScroll(console *con, unsigned int lines) {
 /*
  * VDC color print speed.
  */
-unsigned int vdcColor(console *con, char *str, unsigned int lines) {
+unsigned int vdcColor(const console *con, const char *str, const unsigned int lines) {
 	unsigned int i;
 	con->colorOn = 1;
 	con->color = scrLightGreen;
@@ -134,7 +134,7 @@ unsigned int vdcColor(console *con, char *str, unsigned int lines) {
 /*
  * VDC color scroll speed.
  */
-unsigned int vdcColorScroll(console *con, unsigned int lines) {
+unsigned int vdcColorScroll(const console *con, const unsigned int lines) {
 	unsigned int i;
 	con->colorOn = 1;
 	con->color = scrLightGreen;
@@ -152,7 +152,7 @@ unsigned int vdcColorScroll(console *con, unsigned int lines) {
 /*
  * VIC color print speed.
  */
-unsigned int vicColor(console *con, char *str, unsigned int lines) {
+unsigned int vicColor(const console *con, const char *str, const unsigned int lines) {
 	unsigned int i;
 	con->colorOn = 1;
 	con->color = scrLightGreen;
@@ -171,7 +171,7 @@ unsigned int vicColor(console *con, char *str, unsigned int lines) {
 /*
  * VIC color scroll speed.
  */
-unsigned int vicColorScroll(console *con, unsigned int lines) {
+unsigned int vicColorScroll(const console *con, const unsigned int lines) {
 	unsigned int i;
 	con->colorOn = 1;
 	con->color = scrLightGreen;
@@ -189,8 +189,8 @@ unsigned int vicColorScroll(console *con, unsigned int lines) {
 /*
  * Run demo.
  */
-void runTextDemo(console *vicCon, console *vdcCon, unsigned int cpmPrintMs,
-		unsigned int cpmScrollMs, unsigned int lines) {
+void runTextDemo(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs,
+		const unsigned int cpmScrollMs, const unsigned int lines) {
 	static char *LINE_80 =
 			"01234567890123456789012345678901234567890123456789012345678901234567890123456789";
 	static char *LINE_40 = "0123456789012345678901234567890123456789";

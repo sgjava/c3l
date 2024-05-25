@@ -10,7 +10,7 @@
 /*
  * Set ecm, bmm and mcm to 0 (off) or 1 (on).
  */
-void setVicMode(unsigned char ecm, unsigned char bmm, unsigned char mcm) {
+void setVicMode(const unsigned char ecm, const unsigned char bmm, const unsigned char mcm) {
 	/* Set enhanced color and char/bitmap mode */
 	outp(vicCtrlReg1,
 			(inp(vicCtrlReg1) & 0x9f) | ((ecm * 0x40) + (bmm * 0x20)));

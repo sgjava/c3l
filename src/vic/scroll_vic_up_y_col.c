@@ -10,7 +10,7 @@
 /*
  * Scroll line color up given y1 and y2 lines in current page.
  */
-void scrollVicUpYCol(screen *scr, unsigned char y1, unsigned char y2) {
+void scrollVicUpYCol(const screen *scr, const unsigned char y1, const unsigned char y2) {
 	/* This is the destination color address */
 	unsigned int colOfs = y1 * scr->scrWidth + (unsigned int) scr->scrColMem;
 	unsigned char lines = y2 - y1;

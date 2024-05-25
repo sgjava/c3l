@@ -12,7 +12,7 @@
 /*
  * Add an observer to the subject.
  */
-void subjectAddObserver(subject* s, observer* o) {
+void subjectAddObserver(const subject* s, const observer* o) {
 	// If array is full
     if (s->count >= s->capacity) {
     	// Double the capacity

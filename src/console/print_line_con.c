@@ -11,7 +11,7 @@
 /*
  * Print to console and set cursor to next line.
  */
-void printLineCon(console *con, char *str) {
+void printLineCon(const console *con, const char *str) {
 	screen *scr = con->scr;
 	printCon(con, str);
 	/* Remove cursor if enabled */
@@ -23,12 +23,10 @@ void printLineCon(console *con, char *str) {
 		con->curY++;
 	} else {
 		if (con->colorOn) {
-			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1,
-					scr->scrHeight - 1);
+			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 		} else {
 			(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 		}
-		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
-				scr->scrWidth, 32);
+		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth, 32);
 	}
 }

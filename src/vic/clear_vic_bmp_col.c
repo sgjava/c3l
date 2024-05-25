@@ -10,6 +10,6 @@
 /*
  * Clear bitmap color memory.
  */
-void clearVicBmpCol(bitmap *bmp, unsigned char c) {
+void clearVicBmpCol(const bitmap *bmp, const unsigned char c) {
 	fillVicMem(bmp->bmpColMem, bmp->bmpColSize, c);
 }

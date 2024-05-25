@@ -28,7 +28,7 @@ typedef struct {
 /*
  * Update function for the payload.
  */
-void update1(observer *o) {
+void update1(const observer *o) {
 	// Cast to payload
 	payload *p = (payload*) o;
 	// Handle the update with data
@@ -38,7 +38,7 @@ void update1(observer *o) {
 /*
  * Update function for the payload.
  */
-void update2(observer *o) {
+void update2(const observer *o) {
 	// Cast to payload
 	payload *p = (payload*) o;
 	// Handle the update with data

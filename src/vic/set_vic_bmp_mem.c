@@ -7,6 +7,6 @@
 #include <stdlib.h>
 #include <vic.h>
 
-void setVicBmpMem(unsigned char bmpLoc) {
+void setVicBmpMem(const unsigned char bmpLoc) {
 	outp(vicMemCtrl, (inp(vicMemCtrl) & 0xf0) | (bmpLoc << 3));
 }

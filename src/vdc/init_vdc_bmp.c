@@ -10,7 +10,7 @@
 /*
  * Initialize screen struct for VIC.
  */
-void initVdcBmp(bitmap *bmp, unsigned int bmpMem, unsigned int colMem, unsigned char *chrMem) {
+void initVdcBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem) {
 	static unsigned char vdcColors[16] = { vdcBlack, vdcWhite, vdcDarkRed, vdcLightCyan,
 	vdcLightPurple, vdcDarkGreen, vdcDarkBlue, vdcLightYellow,
 	vdcDarkPurple, vdcDarkYellow, vdcLightRed, vdcDarkCyan, vdcDarkGray,

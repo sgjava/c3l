@@ -14,7 +14,7 @@
 /*
  * Convert name and ext from FCB to normal 8.3 file name string.
  */
-char* fcbToFileName(struct fcb *fcb) {
+char* fcbToFileName(const struct fcb *fcb) {
 	int i, j;
 	// Allocate memory for 8.3 style file name
 	char *fileName = (char*) malloc(13 * sizeof(char));

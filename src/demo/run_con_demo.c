@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <vic.h>
 
-void randSentence(console *con, unsigned char sentences, unsigned char color) {
+void randSentence(const console *con, const unsigned char sentences, const unsigned char color) {
 	static unsigned char colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
 	scrRed, scrLightRed};
 	unsigned char i;
@@ -46,7 +46,7 @@ void randSentence(console *con, unsigned char sentences, unsigned char color) {
 /*
  * Run console demo.
  */
-void runConDemo(console *con, unsigned char sentences) {
+void runConDemo(const console *con, const unsigned char sentences) {
 	randSentence(con, sentences, 0);
 	randSentence(con, sentences, 1);
 }

@@ -9,7 +9,7 @@
 /*
  * Set standard character mode (no MCM or ECM).
  */
-void setVicChrMode(unsigned char mmuRcr, unsigned char vicBank, unsigned char scrLoc, unsigned char chrLoc) {
+void setVicChrMode(const unsigned char mmuRcr, const unsigned char vicBank, const unsigned char scrLoc, const unsigned char chrLoc) {
 	setVicMmuBank(mmuRcr);
 	setVicBank(vicBank);
 	setVicMode(0, 0, 0);

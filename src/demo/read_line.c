@@ -12,7 +12,7 @@
 /*
  * Simple screen line editor.
  */
-void readLine(console *con) {
+void readLine(const console *con) {
 	screen *scr = con->scr;
 	char *str;
 	clearHomeCon(con);

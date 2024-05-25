@@ -10,7 +10,7 @@
 /*
  * Initialize screen struct for VIC.
  */
-void initVicScr(screen *scr, unsigned int scrMem, unsigned int chrMem) {
+void initVicScr(const screen *scr, const unsigned int scrMem, const unsigned int chrMem) {
 	static unsigned char vicColors[16] = { vicBlack, vicWhite, vicRed, vicCyan,
 	vicPurple, vicGreen, vicBlue, vicYellow, vicOrange, vicBrown, vicLightRed,
 	vicDarkGray, vicMedGray, vicLightGreen, vicLightBlue, vicLightGray };

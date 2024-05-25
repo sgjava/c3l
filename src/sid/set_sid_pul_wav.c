@@ -10,7 +10,7 @@
 /*
  * Set pulse waveform width.
  */
-void setSidPulWav(unsigned int voice, unsigned int width) {
+void setSidPulWav(const unsigned int voice, const unsigned int width) {
 	outp(voice + 2, (unsigned char ) width);
 	outp(voice + 3, (unsigned char ) (width >> 8));
 }

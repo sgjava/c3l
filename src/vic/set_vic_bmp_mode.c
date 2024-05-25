@@ -9,7 +9,7 @@
 /*
  * Set bitmap mode.
  */
-void setVicBmpMode(unsigned char mmuRcr, unsigned char vicBank,
+void setVicBmpMode(const unsigned char mmuRcr, const unsigned char vicBank,
 		unsigned char scrLoc, unsigned char bmpLoc) {
 	/*
 	 * For some reason this function must be included in the app

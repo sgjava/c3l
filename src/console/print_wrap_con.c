@@ -7,7 +7,7 @@
 #include <console.h>
 #include <string.h>
 
-void printWrapCon(console *con, char *str) {
+void printWrapCon(const console *con, const char *str) {
 	/* Screen width should not exceed buffer size +1 */
 	char buffer[81];
 	unsigned int i = 0, wordLen, len = strlen(str);

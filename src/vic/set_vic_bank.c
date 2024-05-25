@@ -11,7 +11,7 @@
 /*
  * Set VIC bank to 0 - 3.
  */
-void setVicBank(unsigned char vicBank) {
+void setVicBank(const unsigned char vicBank) {
 	unsigned char saveDdr = inp(cia2+ciaDdrA);
 	/* Set DDR port A to write */
 	outp(cia2+ciaDdrA, inp(cia2+ciaDdrA) | 0x03);

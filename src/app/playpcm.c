@@ -41,7 +41,7 @@ unsigned long getFileSize(char *fileName) {
 /*
  Swap nibbles in buffer for inverted RAWs.
  */
-void swapNibbles(unsigned char *buffer, unsigned int len) {
+void swapNibbles(const unsigned char *buffer, const unsigned int len) {
 	unsigned char tens;
 	unsigned long startCia, endCia;
 	unsigned int i;
@@ -61,8 +61,8 @@ void swapNibbles(unsigned char *buffer, unsigned int len) {
 /*
  Play sample from buffer.
  */
-void play(unsigned char *buffer, unsigned int len, unsigned int hz,
-		unsigned char bits) {
+void play(const unsigned char *buffer, const unsigned int len, const unsigned int hz,
+		const unsigned char bits) {
 	unsigned char tens;
 	unsigned long startCia, endCia;
 	/* Start HZ timer in continuous mode */
@@ -94,7 +94,7 @@ void play(unsigned char *buffer, unsigned int len, unsigned int hz,
 /*
  Load file into buffer.
  */
-void loadAll(unsigned char *buffer, unsigned int len, char *fileName) {
+void loadAll(const unsigned char *buffer, const unsigned int len, const char *fileName) {
 	unsigned char tens;
 	unsigned long startCia, endCia;
 	FILE *rawFile;

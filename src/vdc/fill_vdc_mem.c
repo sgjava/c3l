@@ -9,7 +9,7 @@
 /*
  * Fast fill using block writes.
  */
-void fillVdcMem(unsigned char *mem, unsigned int len, unsigned char value) {
+void fillVdcMem(const unsigned char *mem, const unsigned int len, const unsigned char value) {
 	unsigned char blocks, remain;
 	unsigned char i;
 	outVdc(vdcUpdAddrHi, (unsigned char) ((unsigned int) mem >> 8));

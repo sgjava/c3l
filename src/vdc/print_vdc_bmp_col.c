@@ -12,7 +12,7 @@
  * Print with color. Optimized by setting VDC address once for each scan line.
  * Right now this is for 640x200 mode which doesn't support color.
  */
-void printVdcBmpCol(bitmap *bmp, unsigned char x, unsigned char y, unsigned char color, char *str) {
+void printVdcBmpCol(const bitmap *bmp, const unsigned char x, const unsigned char y, const unsigned char color,const  char *str) {
 	unsigned int vdcMem = (unsigned int) bmp->bmpMem;
 	unsigned int dispOfs = ((y * bmp->scrWidth) * 8) + vdcMem + x;
 	unsigned int len = strlen(str);

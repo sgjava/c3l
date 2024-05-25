@@ -17,7 +17,7 @@
 /*
  * MS delay up to 65535.
  */
-void delay(unsigned int ms) {
+void delay(const unsigned int ms) {
 	/* Timer A counts milliseconds */
 	startTimerAB(cia2, ciaMs, ms, ciaCountA);
 	outp(cia2 + ciaCtrlRegA, ciaCpuCont);

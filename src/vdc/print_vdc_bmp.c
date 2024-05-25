@@ -11,7 +11,7 @@
 /*
  * Print without color. Optimized by setting VDC address once for each scan line.
  */
-void printVdcBmp(bitmap *bmp, unsigned char x, unsigned char y, char *str) {
+void printVdcBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str) {
 	unsigned int vdcMem = (unsigned int) bmp->bmpMem;
 	unsigned int dispOfs = ((y * bmp->scrWidth) * 8) + vdcMem + x;
 	unsigned int len = strlen(str);

@@ -19,7 +19,7 @@
 /*
  * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
  */
-void init(bitmap *bmp, unsigned char *chr) {
+void init(const bitmap *bmp, const unsigned char *chr) {
 	initCia();
 	initVdcBmp(bmp, vdcScrMem, vdcColMem, chr);
 	initVdcBmpMode(bmp, chr, bmpBlack, bmpWhite);
@@ -28,7 +28,7 @@ void init(bitmap *bmp, unsigned char *chr) {
 /*
  * Restore VDC registers, screen color, screen memory and char set memory location for CP/M return.
  */
-void done(bitmap *bmp, unsigned char *chr) {
+void done(const bitmap *bmp, const unsigned char *chr) {
 	doneVdc();
 	doneCia();
 	/* Copy character set from memory to VDC */
@@ -38,7 +38,7 @@ void done(bitmap *bmp, unsigned char *chr) {
 /*
  * Run demo.
  */
-void run(bitmap *bmp) {
+void run(const bitmap *bmp) {
 	runGraphDemo(bmp);
 }
 

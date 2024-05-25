@@ -9,6 +9,6 @@
 /*
  * Convert BCD byte to base 10 byte.
  */
-unsigned char bcdToByte(unsigned char bcd) {
+unsigned char bcdToByte(const unsigned char bcd) {
 	return ((bcd >> 4) * 10) + (bcd & 0x0f);
 }

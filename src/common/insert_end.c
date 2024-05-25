@@ -12,7 +12,7 @@
 /*
  * Insert a node at the end of the list.
  */
-void insertEnd(node **head, char *data) {
+void insertEnd(const node **head, const char *data) {
 	node *newNode = createNode(data);
 	if (*head == NULL) {
 		*head = newNode;

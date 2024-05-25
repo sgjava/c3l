@@ -12,7 +12,7 @@
 /*
  * Run key scan demo.
  */
-void runKeyDemo(console *con) {
+void runKeyDemo(const console *con) {
 	screen *scr = con->scr;
 	char str[40];
 	printWrapCon(con,

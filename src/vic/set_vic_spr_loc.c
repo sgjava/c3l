@@ -10,7 +10,7 @@
 /*
  * Set sprite location.
  */
-void setVicSprLoc(unsigned char sprNum, unsigned int x, unsigned char y) {
+void setVicSprLoc(const unsigned char sprNum, const unsigned int x, const unsigned char y) {
 	static unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 	unsigned int num = sprNum << 1;
 	/* Set sprite X */

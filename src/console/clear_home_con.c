@@ -10,7 +10,7 @@
 /*
  * Clear screen, color and home cursor.
  */
-void clearHomeCon(console *con) {
+void clearHomeCon(const console *con) {
 	/* Clear screen to spaces */
 	(con->scr->clearScr)(con->scr, 32);
 	/* Clear color to white */

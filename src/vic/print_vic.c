@@ -11,7 +11,7 @@
 /*
  * Print without color.
  */
-void printVic(screen *scr, unsigned char x, unsigned char y, char *str) {
+void printVic(const screen *scr, const unsigned char x, const unsigned char y, const char *str) {
 	unsigned int scrOfs = (y * scr->scrWidth) + x;
 	unsigned int len = strlen(str);
 	unsigned int i;

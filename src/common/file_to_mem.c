@@ -10,7 +10,7 @@
 /*
  * Read binary file into memory.
  */
-void fileToMem(unsigned char *mem, unsigned int len, char *fileName) {
+void fileToMem(const unsigned char *mem, const unsigned int len, const char *fileName) {
 	FILE *file;
 	if ((file = fopen(fileName, "rb")) != NULL) {
 		fread(mem, sizeof(unsigned char), len, file);

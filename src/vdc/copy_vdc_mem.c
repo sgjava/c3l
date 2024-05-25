@@ -9,7 +9,7 @@
 /*
  *  Fast copy using block copy.
  */
-void copyVdcMem(unsigned int source, unsigned int dest, unsigned int len) {
+void copyVdcMem(const unsigned int source, const unsigned int dest, const unsigned int len) {
 	unsigned char blocks, remain;
 	unsigned char i;
 	outVdc(vdcUpdAddrHi, (unsigned char) (dest >> 8));

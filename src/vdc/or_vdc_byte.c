@@ -9,7 +9,7 @@
 /*
  * Or VDC byte with value and store it.
  */
-void orVdcByte(unsigned int vdcMem, unsigned char value) {
+void orVdcByte(const unsigned int vdcMem, const unsigned char value) {
 	unsigned char saveByte;
 	outVdc(vdcUpdAddrHi, (unsigned char) (vdcMem >> 8));
 	outVdc(vdcUpdAddrLo, (unsigned char) vdcMem);

@@ -12,7 +12,7 @@
 /*
  * Convert string from ASCII to PETSCII.
  */
-void asciiToPet(char *str) {
+void asciiToPet(const char *str) {
 	unsigned int len = strlen(str);
 	unsigned int i;
 	for (i = 0; i < len; i++) {

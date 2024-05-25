@@ -9,7 +9,7 @@
 /*
  * Draw rectangle using line drawing.
  */
-void drawRect(bitmap *bmp, int x, int y, int w, int h, unsigned char color) {
+void drawRect(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char color) {
 	/* Top */
 	drawLine(bmp, x, y, x + w - 1, y, color);
 	/* Left */

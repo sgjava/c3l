@@ -93,45 +93,46 @@
 
 extern void __LIB__ saveVdc();
 extern void __LIB__ restoreVdc();
-extern unsigned char __LIB__ inVdc(unsigned char regNum) __z88dk_fastcall;
-extern void __LIB__ outVdc(unsigned char regNum, unsigned char regVal);
-extern void __LIB__ setVdcDspPage(unsigned int dispPage, unsigned int attrPage);
-extern void __LIB__ setVdcFgBg(unsigned char f, unsigned char b);
+extern unsigned char __LIB__ inVdc(const unsigned char regNum) __z88dk_fastcall;
+extern void __LIB__ outVdc(const unsigned char regNum, const unsigned char regVal);
+extern void __LIB__ setVdcDspPage(const unsigned int dispPage, const unsigned int attrPage);
+extern void __LIB__ setVdcFgBg(const unsigned char f, const unsigned char b);
 extern void __LIB__ setVdcAttrsOn();
 extern void __LIB__ setVdcAttrsOff();
-extern void __LIB__ setVdcCursor(unsigned char top, unsigned char bottom, unsigned char mode);
-extern void __LIB__ orVdcByte(unsigned int vdcMem, unsigned char value);
-extern void __LIB__ andVdcByte(unsigned int vdcMem, unsigned char value);
-extern void __LIB__ fillVdcMem(unsigned char *mem, unsigned int len, unsigned char value);
-extern void __LIB__ copyVdcChrMem(unsigned char *mem, unsigned int vdcMem, unsigned int chars);
-extern void __LIB__ copyVdcMemChr(unsigned char *mem, unsigned int vdcMem, unsigned int chars);
-extern void __LIB__ clearVdcScr(screen *scr, unsigned char c);
-extern void __LIB__ clearVdcScrCol(screen *scr, unsigned char c);
-extern void __LIB__ printVdc(screen *scr, unsigned char x, unsigned char y, char *str);
-extern void __LIB__ printVdcCol(screen *scr, unsigned char x, unsigned char y, unsigned char color, char *str);
-extern void __LIB__ scrollVdcUpY(screen *scr, unsigned char y1, unsigned char y2);
-extern void __LIB__ scrollVdcUpYCol(screen *scr, unsigned char y1, unsigned char y2);
-extern void __LIB__ scrollVdcUp(screen *scr, unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2);
-extern void __LIB__ scrollVdcUpCol(screen *scr, unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2);
-extern void __LIB__ setVdcBmpMode(unsigned int dispPage, unsigned int attrPage);
-extern void __LIB__ copyVdcMem(unsigned int source, unsigned int dest, unsigned int len);
-extern void __LIB__ clearVdcBmp(bitmap *bmp, unsigned char c);
-extern void __LIB__ clearVdcBmpCol(bitmap *bmp, unsigned char c);
-extern void __LIB__ setVdcPix(bitmap *bmp, unsigned int x, unsigned int y, unsigned char color);
-extern void __LIB__ setVdcPixAsm(unsigned int x, unsigned int y, unsigned char color, unsigned int bmpMem) __smallc;
-extern void __LIB__ drawVdcLineH(bitmap *bmp, unsigned int x, unsigned int y, unsigned int len,
-unsigned char color);
-extern void __LIB__ drawVdcLineV(bitmap *bmp, unsigned int x, unsigned int y, unsigned int len,
-unsigned char color);
-extern void __LIB__ printVdcBmp(bitmap *bmp, unsigned char x, unsigned char y, char *str);
-extern void __LIB__ printVdcBmpCol(bitmap *bmp, unsigned char x, unsigned char y, unsigned char color,
-		char *str);
-extern void __LIB__ initVdcScr(screen *scr, unsigned int scrMem, unsigned int chrMem);
-extern void __LIB__ initVdcScrMode(screen *scr, unsigned char bgCol, unsigned char fgCol, unsigned char chrCol);
-extern void __LIB__ initVdcBmp(bitmap *bmp, unsigned int bmpMem, unsigned int colMem, unsigned char *chrMem);
-extern void __LIB__ initVdcBmpMode(bitmap *bmp, unsigned char *chrMem, unsigned char bgCol, unsigned char fgCol);
-extern void __LIB__ copyVdcToStr(screen* scr, unsigned int offest, char *str, unsigned int len);
-extern void __LIB__ vdcChrMemToFile(unsigned int vdcMem, unsigned int chars, char *fileName);
+extern void __LIB__ setVdcCursor(const unsigned char top, const unsigned char bottom, const unsigned char mode);
+extern void __LIB__ orVdcByte(const unsigned int vdcMem, const unsigned char value);
+extern void __LIB__ andVdcByte(const unsigned int vdcMem, const unsigned char value);
+extern void __LIB__ fillVdcMem(const unsigned char *mem, const unsigned int len, const unsigned char value);
+extern void __LIB__ copyVdcChrMem(const unsigned char *mem, const unsigned int vdcMem, const unsigned int chars);
+extern void __LIB__ copyVdcMemChr(const unsigned char *mem, const unsigned int vdcMem, const unsigned int chars);
+extern void __LIB__ clearVdcScr(const screen *scr, const unsigned char c);
+extern void __LIB__ clearVdcScrCol(const screen *scr, const unsigned char c);
+extern void __LIB__ printVdc(const screen *scr, const unsigned char x, const unsigned char y, const char *str);
+extern void __LIB__ printVdcCol(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color,
+		const char *str);
+extern void __LIB__ scrollVdcUpY(const screen *scr, const unsigned char y1, const unsigned char y2);
+extern void __LIB__ scrollVdcUpYCol(const screen *scr, const unsigned char y1, const unsigned char y2);
+extern void __LIB__ scrollVdcUp(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2,
+		const unsigned char y2);
+extern void __LIB__ scrollVdcUpCol(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2,
+		const unsigned char y2);
+extern void __LIB__ setVdcBmpMode(const unsigned int dispPage, const unsigned int attrPage);
+extern void __LIB__ copyVdcMem(const unsigned int source, const unsigned int dest, const unsigned int len);
+extern void __LIB__ clearVdcBmp(const bitmap *bmp, const unsigned char c);
+extern void __LIB__ clearVdcBmpCol(const bitmap *bmp, const unsigned char c);
+extern void __LIB__ setVdcPix(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color);
+extern void __LIB__ setVdcPixAsm(const unsigned int x, const unsigned int y, const unsigned char color, const unsigned int bmpMem) __smallc;
+extern void __LIB__ drawVdcLineH(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
+		const unsigned char color);
+extern void __LIB__ drawVdcLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color);
+extern void __LIB__ printVdcBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str);
+extern void __LIB__ printVdcBmpCol(const bitmap *bmp, const unsigned char x, const unsigned char y, const unsigned char color, const char *str);
+extern void __LIB__ initVdcScr(const screen *scr, const unsigned int scrMem, const unsigned int chrMem);
+extern void __LIB__ initVdcScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol);
+extern void __LIB__ initVdcBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem);
+extern void __LIB__ initVdcBmpMode(const bitmap *bmp, const unsigned char *chrMem, const unsigned char bgCol, const unsigned char fgCol);
+extern void __LIB__ copyVdcToStr(const screen *scr, const unsigned int offest, const char *str, const unsigned int len);
+extern void __LIB__ vdcChrMemToFile(const unsigned int vdcMem, const unsigned int chars, const char *fileName);
 extern void __LIB__ doneVdc();
 
 #endif

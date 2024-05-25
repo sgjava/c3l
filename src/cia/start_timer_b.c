@@ -12,7 +12,7 @@
 /*
  Start CIA timer B using Hz value and latch for mode.
  */
-void startTimerB(unsigned int cia, unsigned int hz, unsigned char latch) {
+void startTimerB(const unsigned int cia, const unsigned int hz, const unsigned char latch) {
 	unsigned int timerB = ciaTimerFreq / hz;
 	// CIA Timer B lo
 	outp(cia+ciaTimerBLo, (unsigned char ) timerB);

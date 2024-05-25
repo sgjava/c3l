@@ -10,6 +10,6 @@
 /*
  * Clear screen color.
  */
-void clearVdcScrCol(screen *scr, unsigned char c) {
+void clearVdcScrCol(const screen *scr, const unsigned char c) {
 	fillVdcMem(scr->scrColMem, scr->scrSize, scr->color[c]);
 }

@@ -38,7 +38,7 @@ void done() {
 /*
  * Run demo.
  */
-void run(console *con) {
+void run(const console *con) {
 	runConDemo(con, 200);
 }
 

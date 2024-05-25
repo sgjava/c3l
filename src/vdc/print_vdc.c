@@ -11,7 +11,7 @@
 /*
  * Print without color.
  */
-void printVdc(screen *scr, unsigned char x, unsigned char y, char *str) {
+void printVdc(const screen *scr, const unsigned char x, const unsigned char y, const char *str) {
 	unsigned int dispOfs = (y * scr->scrWidth) + (unsigned int) scr->scrMem + x;
 	unsigned int len = strlen(str);
 	unsigned int i;

@@ -10,7 +10,7 @@
  * Draw ellipse using the midpoint algorithm. The algorithm works by dividing
  * the ellipse into two halves and drawing each half separately.
  */
-void drawEllipse(bitmap *bmp, int xc, int yc, int a, int b, unsigned char color) {
+void drawEllipse(const bitmap *bmp, const int xc, const int yc, const int a, const int b, const unsigned char color) {
 	int a2 = a * a;
 	int b2 = b * b;
 	int fa2 = 4 * a2, fb2 = 4 * b2;

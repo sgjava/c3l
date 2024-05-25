@@ -19,7 +19,7 @@
 /*
  * Initialize key scan, screen and console.
  */
-void init(console *con, screen *scr) {
+void init(const console *con, const screen *scr) {
 	initCia();
 	initVdcScr(scr, vdcScrMem, vdcChrMem);
 	initVdcScrMode(scr, scrBlack, scrBlack, scrWhite);

@@ -19,7 +19,7 @@ static unsigned int LINES = 23;
 /*
  * Initialize key scan, VIC screen and console.
  */
-void initVic(console *con, screen *scr) {
+void initVic(const console *con, const screen *scr) {
 	/* Use ram at end of bank 1 for screen and copy VDC character set just above that */
 	initVicScr(scr, 0x7c00, 0x7000);
 	initVicScrMode(scr, scrBlack, scrBlack, scrWhite);
@@ -29,7 +29,7 @@ void initVic(console *con, screen *scr) {
 /*
  * Initialize key scan, VDC screen and console.
  */
-void initVdc(console *con, screen *scr) {
+void initVdc(const console *con, const screen *scr) {
 	initVdcScr(scr, vdcScrMem, vdcChrMem);
 	initVdcScrMode(scr, scrBlack, scrBlack, scrWhite);
 	initCon(con, scr);
@@ -47,7 +47,7 @@ void done() {
 /*
  * Run demo.
  */
-void run(console *vicCon, console *vdcCon, unsigned int cpmPrintMs, unsigned int cpmScrollMs, unsigned int lines) {
+void run(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs, const unsigned int cpmScrollMs, const unsigned int lines) {
 	runTextDemo(vicCon, vdcCon, cpmPrintMs, cpmScrollMs, lines);
 	clearHomeCon(vdcCon);
 	clearHomeCon(vicCon);

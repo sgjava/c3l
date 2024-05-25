@@ -10,7 +10,7 @@
 /*
  * Print PETSCII without color.
  */
-void printVicPet(screen *scr, unsigned char x, unsigned char y, char *str) {
+void printVicPet(const screen *scr, const unsigned char x, const unsigned char y, const char *str) {
 	asciiToPet(str);
 	printVic(scr, x, y, str);
 }

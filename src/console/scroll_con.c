@@ -11,7 +11,7 @@
 /*
  * Scroll and update cursor position based on string length.
  */
-void scrollCon(console *con, char *str) {
+void scrollCon(const console *con, const char *str) {
 	screen *scr = con->scr;
 	unsigned int scrOfs = offsetCon(con);
 	unsigned int len = strlen(str);

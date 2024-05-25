@@ -21,7 +21,7 @@
 /*
  * Initialize key scan, screen and console.
  */
-void init(console *con, screen *scr) {
+void init(const console *con, const screen *scr) {
 	initCia();
 	/* Use ram at end of bank 1 for screen and copy VDC character set just above that */
 	initVicScr(scr, 0x7c00, 0x7000);
@@ -40,7 +40,7 @@ void done() {
 /*
  * Run demo.
  */
-void run(console *con) {
+void run(const console *con) {
 	runKeyDemo(con);
 }
 

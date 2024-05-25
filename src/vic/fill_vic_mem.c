@@ -9,7 +9,7 @@
 /*
  * Fill memory with unsigned char value.
  */
-void fillVicMem(unsigned char *mem, unsigned int len, unsigned char value) {
+void fillVicMem(const unsigned char *mem, const unsigned int len, const unsigned char value) {
 	unsigned int i;
 	for (i = 0; i < len; i++) {
 		mem[i] = value;

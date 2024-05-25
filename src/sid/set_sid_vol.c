@@ -10,6 +10,6 @@
 /*
  * Set master volume and filter select.
  */
-void setSidVol(unsigned char amp, unsigned char filter) {
+void setSidVol(const unsigned char amp, const unsigned char filter) {
 	outp(sidVolume, filter | amp);
 }

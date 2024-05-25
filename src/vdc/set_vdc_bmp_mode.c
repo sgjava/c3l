@@ -9,7 +9,7 @@
 /*
  * Set bitmap memory location, attribute memory location and bitmap mode.
  */
-void setVdcBmpMode(unsigned int dispPage, unsigned int attrPage) {
+void setVdcBmpMode(const unsigned int dispPage, const unsigned int attrPage) {
 	setVdcDspPage(dispPage, attrPage);
 	outVdc(vdcHzSmScroll, inVdc(vdcHzSmScroll) | 0x80);
 }

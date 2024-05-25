@@ -10,6 +10,6 @@
 /*
  * Clear screen.
  */
-void clearVdcBmp(bitmap *bmp, unsigned char c) {
+void clearVdcBmp(const bitmap *bmp, const unsigned char c) {
 	fillVdcMem(bmp->bmpMem, bmp->bmpSize, c);
 }

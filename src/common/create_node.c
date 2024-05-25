@@ -13,7 +13,7 @@
 /*
  * Create a new node. Returns NULL on failure.
  */
-node* createNode(char *data) {
+node* createNode(const char *data) {
 	node *newNode = (node*) malloc(sizeof(node));
 	if (newNode != NULL) {
 		// Allocate memory for the string and copy data

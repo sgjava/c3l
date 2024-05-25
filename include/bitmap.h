@@ -39,13 +39,13 @@ typedef struct bitmap bitmap;
 /*
  * Bitmap function pointers.
  */
-typedef void (*setPixelPtr)(bitmap*, unsigned int, unsigned int, unsigned char);
-typedef void (*clearBmpPtr)(bitmap*, unsigned char);
-typedef void (*clearBmpColPtr)(bitmap*, unsigned char);
-typedef void (*drawLineHPtr)(bitmap*, unsigned int, unsigned int, unsigned int, unsigned char);
-typedef void (*drawLineVPtr)(bitmap*, unsigned int, unsigned int, unsigned int, unsigned char);
-typedef void (*printBmpPtr)(bitmap*, unsigned char, unsigned char, char*);
-typedef void (*printBmpColPtr)(bitmap*, unsigned char, unsigned char, unsigned char, char*);
+typedef void (*setPixelPtr)(const bitmap*, const unsigned int, const unsigned int, const unsigned char);
+typedef void (*clearBmpPtr)(const bitmap*, const unsigned char);
+typedef void (*clearBmpColPtr)(const bitmap*, const unsigned char);
+typedef void (*drawLineHPtr)(const bitmap*, const unsigned int, const unsigned int, const unsigned int, const unsigned char);
+typedef void (*drawLineVPtr)(const bitmap*, const unsigned int, const unsigned int, const unsigned int, const unsigned char);
+typedef void (*printBmpPtr)(const bitmap*, const unsigned char, const unsigned char, const char*);
+typedef void (*printBmpColPtr)(const bitmap*, const unsigned char, const unsigned char, const unsigned char, const char*);
 
 /*
  * We treat the bitmap struct like an object and encapsulate member variables and function pointers that allow polymorphism.
@@ -129,12 +129,11 @@ typedef struct bitmap {
 	printBmpColPtr printBmpCol;
 };
 
-extern void __LIB__ drawLine(bitmap *bmp, int x0, int y0, int x1, int y1, unsigned char color);
-extern void __LIB__ drawBezier(bitmap *bmp, int x0, int y0, int x1, int y1, int x2,
-		int y2, unsigned char color);
-extern void __LIB__ drawEllipse(bitmap *bmp, int xc, int yc, int a, int b, unsigned char color);
-extern void __LIB__ drawCircle(bitmap *bmp, int xc, int yc, int a, unsigned char color);
-extern void __LIB__ drawRect(bitmap *bmp, int x, int y, int w, int h, unsigned char color);
-extern void __LIB__ drawSquare(bitmap *bmp, int x, int y, int len, unsigned char color);
+extern void __LIB__ drawLine(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const unsigned char color);
+extern void __LIB__ drawBezier(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const int x2, const int y2, const unsigned char color);
+extern void __LIB__ drawEllipse(const bitmap *bmp, const int xc, const int yc, const int a, const int b,const  unsigned char color);
+extern void __LIB__ drawCircle(const bitmap *bmp, const int xc, const int yc, const int a, const unsigned char color);
+extern void __LIB__ drawRect(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char color);
+extern void __LIB__ drawSquare(const bitmap *bmp, const int x, const int y, const int len, const unsigned char color);
 
 #endif

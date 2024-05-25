@@ -13,7 +13,7 @@
 /*
  * Wait for Return.
  */
-void bitmapWaitKey(bitmap *bmp) {
+void bitmapWaitKey(const bitmap *bmp) {
 	(bmp->printBmp)(bmp, 0, bmp->scrHeight - 1, " Press Return ");
 	/* Debounce */
 	while (getKey(0) == 0xfd)
@@ -28,7 +28,7 @@ void bitmapWaitKey(bitmap *bmp) {
 /*
  * Draw box with label.
  */
-void drawBox(bitmap *bmp, int x, int y, int w, int h, char *str) {
+void drawBox(const bitmap *bmp, const int x, const int y,const  int w, const int h, const char *str) {
 	/* Bitmap printing uses same coordinates as character mode */
 	(bmp->printBmp)(bmp, x / 8, (y - 8) / 8, str);
 	drawRect(bmp, x, y, w, h, bmpWhite);
@@ -37,7 +37,7 @@ void drawBox(bitmap *bmp, int x, int y, int w, int h, char *str) {
 /*
  * Draw lines.
  */
-void lines(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void lines(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char count) {
 	unsigned char i;
 	drawBox(bmp, x, y, w, h, "Bresenham");
 	for (i = 0; i < count; i++) {
@@ -49,7 +49,7 @@ void lines(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw horizontal lines.
  */
-void horzLines(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void horzLines(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int y0;
 	drawBox(bmp, x, y, w, h, "Horz lines");
@@ -62,7 +62,7 @@ void horzLines(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw vertical lines.
  */
-void vertLines(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void vertLines(const bitmap *bmp, const int x,const  int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0;
 	drawBox(bmp, x, y, w, h, "Vert lines");
@@ -75,7 +75,7 @@ void vertLines(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw Bezier.
  */
-void bezier(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void bezier(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	drawBox(bmp, x, y, w, h, "Bezier");
 	for (i = 0; i < count; i++) {
@@ -87,7 +87,7 @@ void bezier(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw rectangles.
  */
-void rectangles(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void rectangles(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, w0, h0;
 	drawBox(bmp, x, y, w, h, "Rectangles");
@@ -103,7 +103,7 @@ void rectangles(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw squares.
  */
-void squares(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void squares(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, len;
 	drawBox(bmp, x, y, w, h, "Squares");
@@ -118,7 +118,7 @@ void squares(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw ellipses.
  */
-void ellipses(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void ellipses(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, a, b;
 	drawBox(bmp, x, y, w, h, "Ellipses");
@@ -134,7 +134,7 @@ void ellipses(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Draw circles.
  */
-void circles(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void circles(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, len;
 	drawBox(bmp, x, y, w, h, "Circles");
@@ -149,7 +149,7 @@ void circles(bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
 /*
  * Run graphics demo.
  */
-void runGraphDemo(bitmap *bmp) {
+void runGraphDemo(const bitmap *bmp) {
 	/* Calc 3x3 matrix using char layout since bitmap printing aligns to char mode boundaries */
 	unsigned int xSize = (bmp->scrWidth / 3) * 8 - 8;
 	unsigned int ySize = (bmp->scrHeight / 3) * 8 - 9;

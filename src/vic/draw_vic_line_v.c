@@ -10,7 +10,7 @@
 /*
  * Optimized vertical line algorithm uses less calculation than setVicPix.
  */
-void drawVicLineV(bitmap *bmp, unsigned int x, unsigned int y, unsigned int len, unsigned char color) {
+void drawVicLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color) {
 	static unsigned char bitTable[8] = { 128, 64, 32, 16, 8, 4, 2, 1 };
 	unsigned int pixByte = bmp->scrWidth * (y & 0xf8) + (x & 0x1f8) + (y & 0x07);
 	unsigned char vBit = bitTable[x & 0x07];

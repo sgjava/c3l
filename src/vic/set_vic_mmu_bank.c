@@ -11,7 +11,7 @@
 /*
  * Set VIC to MMU bank 0 or 1.
  */
-void setVicMmuBank(unsigned char mmuRcr) {
+void setVicMmuBank(const unsigned char mmuRcr) {
 	// I/O
 	outp(0x0ff00, 0x7e);
 	/* If bank 1 then set bit 6 of RCR */

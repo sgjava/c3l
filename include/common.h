@@ -37,28 +37,28 @@ typedef struct observer observer;
  * Define a function pointer type for the update method that observers must implement.
  */
 struct observer {
-	void (*update)(observer *o);
+	void (*update)(const observer *o);
 };
 
 /*
  * The subject needs to maintain a list of observers and provide methods to add, remove, and notify them.
  */
 typedef struct {
-	observer **observers;
+	const observer **observers;
 	int count;
 	int capacity;
 } subject;
 
-extern node __LIB__* createNode(char *data);
-extern void __LIB__ insertEnd(node **head, char *data);
-extern void __LIB__ freeList(node *head);
-extern int __LIB__ initDir(int login, int user, struct fcb *fcb, unsigned char dmaBuf[]);
-extern int __LIB__ getDir(struct fcb *fcb, unsigned char dmaBuf[], node *head);
-extern char __LIB__* fcbToFileName(struct fcb *fcb);
-extern void __LIB__ fileToMem(unsigned char *mem, unsigned int len, char *fileName);
-extern void __LIB__ subjectInit(subject *s);
-extern void __LIB__ subjectAddObserver(subject *s, observer *o);
-extern void __LIB__ subjectRemoveObserver(subject *s, observer *o);
-extern void __LIB__ subjectNotify(subject *s);
+extern node __LIB__* createNode(const char *data);
+extern void __LIB__ insertEnd(const node **head, const char *data);
+extern void __LIB__ freeList(const node *head);
+extern int __LIB__ initDir(const int login, const int user, const struct fcb *fcb, const unsigned char dmaBuf[]);
+extern int __LIB__ getDir(const struct fcb *fcb, const unsigned char dmaBuf[], const node *head);
+extern char __LIB__* fcbToFileName(const struct fcb *fcb);
+extern void __LIB__ fileToMem(const unsigned char *mem, const unsigned int len, const char *fileName);
+extern void __LIB__ subjectInit(const subject *s);
+extern void __LIB__ subjectAddObserver(const subject *s, const observer *o);
+extern void __LIB__ subjectRemoveObserver(const subject *s, const observer *o);
+extern void __LIB__ subjectNotify(const subject *s);
 
 #endif

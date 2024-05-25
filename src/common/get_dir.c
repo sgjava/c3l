@@ -13,7 +13,7 @@
 /*
  * Retrieve directory entries after initDir called.
  */
-int getDir(struct fcb *fcb, unsigned char dmaBuf[], node *head) {
+int getDir(const struct fcb *fcb, const unsigned char dmaBuf[], const node *head) {
 	int retVal, dmaOffset;
 	struct fcb retFcb;
 	// Prime the pump

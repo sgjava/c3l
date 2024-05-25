@@ -10,6 +10,6 @@
 /*
  * Clear screen unsigned char.
  */
-void clearVicBmp(bitmap *bmp, unsigned char c) {
+void clearVicBmp(const bitmap *bmp, const unsigned char c) {
 	fillVicMem(bmp->bmpMem, bmp->bmpSize, c);
 }

@@ -13,7 +13,7 @@
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
  * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
  */
-void initVicBmpMode(bitmap *bmp, unsigned char bgCol, unsigned char fgCol, unsigned char pixCol) {
+void initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol, const unsigned char pixCol) {
 	unsigned char vicBank;
 	saveVic();
 	/* Set border and background color */

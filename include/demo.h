@@ -13,18 +13,18 @@
 #include <bitmap.h>
 #include <console.h>
 
-extern void __LIB__ waitKey(screen *scr);
-extern void __LIB__ readLine(console *con);
-extern void __LIB__ keyboard(screen *scr);
-extern void __LIB__ runKeyDemo(console *con);
+extern void __LIB__ waitKey(const screen *scr);
+extern void __LIB__ readLine(const console *con);
+extern void __LIB__ keyboard(const screen *scr);
+extern void __LIB__ runKeyDemo(const console *con);
 extern char __LIB__ *generateSentence();
-extern void __LIB__ runConDemo(console *con, unsigned char sentences);
-extern void __LIB__ runGraphDemo(bitmap *bmp);
-extern void __LIB__ runGraphDemoI(console *con, bitmap *bmp, unsigned int code);
-extern void __LIB__ runDualDemo(console *vicCon, console *vdcCon);
-extern void __LIB__ runTextDemo(console *vicCon, console *vdcCon, unsigned int cpmPrintMs, unsigned int cpmScrollMs, unsigned int lines);
-extern unsigned int __LIB__ cpmPrint(char *str, unsigned int lines);
-extern unsigned int __LIB__ cpmScroll(unsigned int lines);
-extern void __LIB__ runTextDemo(console *vicCon, console *vdcCon, unsigned int cpmPrintMs, unsigned int cpmScrollMs, unsigned int lines) ;
+extern void __LIB__ runConDemo(const console *con, const unsigned char sentences);
+extern void __LIB__ runGraphDemo(const bitmap *bmp);
+extern void __LIB__ runGraphDemoI(const console *con, const bitmap *bmp, const unsigned int code);
+extern void __LIB__ runDualDemo(const console *vicCon, const console *vdcCon);
+extern void __LIB__ runTextDemo(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs, const unsigned int cpmScrollMs, const unsigned int lines);
+extern unsigned int __LIB__ cpmPrint(const char *str, const unsigned int lines);
+extern unsigned int __LIB__ cpmScroll(const unsigned int lines);
+extern void __LIB__ runTextDemo(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs, const unsigned int cpmScrollMs, const unsigned int lines) ;
 
 #endif

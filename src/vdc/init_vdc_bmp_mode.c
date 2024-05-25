@@ -11,7 +11,7 @@
 /*
  * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
  */
-void initVdcBmpMode(bitmap *bmp, unsigned char *chrMem, unsigned char bgCol, unsigned char fgCol) {
+void initVdcBmpMode(const bitmap *bmp, const unsigned char *chrMem, const unsigned char bgCol, const unsigned char fgCol) {
 	initCia();
 	saveVdc();
 	/* Turn off cursor for bitmap mode */

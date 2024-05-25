@@ -12,7 +12,7 @@
  * should be allocated manually since that's the top bank of memory and
  * not all 16K is available.
  */
-unsigned char* allocVicMem(unsigned char maxBank) {
+unsigned char* allocVicMem(const unsigned char maxBank) {
 	unsigned char bank, *vicMem;
 	unsigned int gap;
 	vicMem = (unsigned char*) malloc(1);

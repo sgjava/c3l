@@ -10,7 +10,7 @@
 /*
  * Get RTC register.
  */
-unsigned char getRtcReg(unsigned char reg) {
+unsigned char getRtcReg(const unsigned char reg) {
 	outp(rtcRegA, reg);
 	return inp(rtcRegB);
 }

@@ -13,7 +13,7 @@
  * Get standard or extended key code for single row. 0xff is returned if no key
  * pressed. keyRow is 0 - 10.
  */
-unsigned char getKey(unsigned char keyRow) {
+unsigned char getKey(const unsigned char keyRow) {
 	static unsigned char keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf,
 			0x7f };
 	unsigned char keyCode;

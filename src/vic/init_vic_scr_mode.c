@@ -12,7 +12,7 @@
 /*
  * Initialize VIC using VDC alt character set in RAM.
  */
-void initVicScrMode(screen *scr, unsigned char bgCol, unsigned char fgCol, unsigned char chrCol) {
+void initVicScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol) {
 	unsigned char vicBank;
 	saveVic();
 	/* Black screen and border */

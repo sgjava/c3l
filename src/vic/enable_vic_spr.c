@@ -10,7 +10,7 @@
 /*
  * Enable sprite.
  */
-void enableVicSpr(unsigned char sprNum) {
+void enableVicSpr(const unsigned char sprNum) {
 	static unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 	/* Sprite enable */
 	outp(vicSprEnable, inp(vicSprEnable) | sprTable[sprNum]);

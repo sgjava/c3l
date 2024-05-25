@@ -9,7 +9,7 @@
 /*
  * Copy VDC character set to memory.
  */
-void copyVdcChrMem(unsigned char *mem, unsigned int vdcMem, unsigned int chars) {
+void copyVdcChrMem(const unsigned char *mem, const unsigned int vdcMem, const unsigned int chars) {
 	unsigned char c;
 	unsigned int vdcOfs = vdcMem, memOfs = 0, i;
 	for (i = 0; i < chars; i++) {

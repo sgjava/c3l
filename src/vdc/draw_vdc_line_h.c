@@ -10,7 +10,7 @@
 /*
  * Optimized horizontal line algorithm up to 40x faster than Bresenham.
  */
-void drawVdcLineH(bitmap *bmp, unsigned int x, unsigned int y, unsigned int len, unsigned char color) {
+void drawVdcLineH(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color) {
 	static unsigned char fillTable[7] = { 0x7f, 0x3f, 0x1f, 0x0f, 0x07, 0x03, 0x01 };
 	unsigned int vdcMem = (unsigned int) bmp->bmpMem;
 	unsigned int pixByte = vdcMem + (y << 6) + (y << 4) + (x >> 3);

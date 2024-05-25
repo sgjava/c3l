@@ -13,7 +13,7 @@
 /*
  * Generate random sentences on both VIC and VDC,
  */
-void dualRandSentence(console *vicCon, console *vdcCon, unsigned char sentences,
+void dualRandSentence(const console *vicCon, const console *vdcCon, const unsigned char sentences,
 unsigned char color) {
 	static unsigned char colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
 	scrRed, scrLightRed };
@@ -55,7 +55,7 @@ unsigned char color) {
 /*
  * Display color mappings VIC and VDC,
  */
-void dualColors(console *vicCon, console *vdcCon) {
+void dualColors(const console *vicCon, const console *vdcCon) {
 	static char *colorNames[16][1] = { { "scrBlack" }, { "scrWhite" }, { "scrRed" }, {
 			"scrCyan" }, { "scrPurple" }, { "scrGreen" }, { "scrBlue" }, {
 			"scrYellow" }, { "scrOrange" }, { "scrBrown" }, { "scrLightRed" }, {
@@ -75,7 +75,7 @@ void dualColors(console *vicCon, console *vdcCon) {
 /*
  * Run demo.
  */
-void runDualDemo(console *vicCon, console *vdcCon) {
+void runDualDemo(const console *vicCon, const console *vdcCon) {
 	dualRandSentence(vicCon, vdcCon, 100, 0);
 	dualRandSentence(vicCon, vdcCon, 100, 1);
 	waitKey(vicCon->scr);

@@ -12,7 +12,7 @@
 /*
  * Initialize the subject.
  */
-void subjectInit(subject* s) {
+void subjectInit(const subject* s) {
 	// No observers initially
     s->count = 0;
     // Set initial capacity

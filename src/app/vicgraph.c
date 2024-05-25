@@ -23,7 +23,7 @@
 /*
  * Set VIC to MMU bank 0 or 1.
  */
-void setVicMmuBankLocal(unsigned char mmuRcr) {
+void setVicMmuBankLocal(const unsigned char mmuRcr) {
 	/* I/O */
 	outp(0x0ff00, 0x7e);
 	/* If bank 1 then set bit 6 of RCR */
@@ -40,7 +40,7 @@ void setVicMmuBankLocal(unsigned char mmuRcr) {
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
  * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
  */
-void init(bitmap *bmp) {
+void init(const bitmap *bmp) {
 	initCia();
 	initVicBmp(bmp, 0x6000, 0x4800, 0x4000);
 	setVicMmuBankLocal(1);
@@ -63,7 +63,7 @@ void done() {
 /*
  * Run demo.
  */
-void run(bitmap *bmp) {
+void run(const bitmap *bmp) {
 	runGraphDemo(bmp);
 }
 

@@ -11,7 +11,7 @@
 /*
  * Print PETSCII with color.
  */
-void printVicColPet(screen *scr, unsigned char x, unsigned char y, unsigned char color, char *str) {
+void printVicColPet(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color, const char *str) {
 	asciiToPet(str);
 	printVicCol(scr, x, y, scr->color[color], str);
 }

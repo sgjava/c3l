@@ -16,10 +16,9 @@
 /*
  * Set VIC raster interrupt address.
  */
-void setVicInt(unsigned char ras1, unsigned char mode1, unsigned char ras2, unsigned char mode2, screen *scr,
-		bitmap *bmp) {
-	unsigned char scrMcr, bmpMcr, bmpColMcr, chrMcr, vicBank = (unsigned int) scr->scrMem
-			/ 16384;
+void setVicInt(const unsigned char ras1, const unsigned char mode1, const unsigned char ras2, const unsigned char mode2,
+		const screen *scr, const bitmap *bmp) {
+	unsigned char scrMcr, bmpMcr, bmpColMcr, chrMcr, vicBank = (unsigned int) scr->scrMem / 16384;
 	/* From VIC perspective this is only relevant for text mode, but bitmap print routines use same character set */
 	chrMcr = (((unsigned int) scr->chrMem - (vicBank * 16384)) / 2048) << 1;
 	/* Setting for screen memory control register */
@@ -30,19 +29,17 @@ void setVicInt(unsigned char ras1, unsigned char mode1, unsigned char ras2, unsi
 	bmpColMcr = (((unsigned int) bmp->bmpColMem - (vicBank * 16384)) / 1024) << 4;
 	if (mode1 == 0x3b) {
 		/* Bitmap on top and text on bottom, memory control register and mode bytes packed into unsigned int */
-		vicSplitScr(ras1, (((bmpMcr | bmpColMcr)) << 8) | mode1, ras2,
-				(((scrMcr | chrMcr)) << 8) | mode2);
+		vicSplitScr(ras1, (((bmpMcr | bmpColMcr)) << 8) | mode1, ras2, (((scrMcr | chrMcr)) << 8) | mode2);
 	} else {
 		/* Text on top and bitmap on bottom, memory control register and mode bytes packed into unsigned int */
-		vicSplitScr(ras1, (((scrMcr | chrMcr)) << 8) | mode1, ras2,
-				(((bmpMcr | bmpColMcr)) << 8) | mode2);
+		vicSplitScr(ras1, (((scrMcr | chrMcr)) << 8) | mode1, ras2, (((bmpMcr | bmpColMcr)) << 8) | mode2);
 	}
 }
 
 /*
  * Enable VIC raster interrupt address.
  */
-void enableVicInt(unsigned int address) {
+void enableVicInt(const unsigned int address) {
 	unsigned int *intVec = (unsigned int*) 0xfdfe;
 #asm
 	di
@@ -60,7 +57,7 @@ void enableVicInt(unsigned int address) {
 /*
  * Disable VIC raster interrupt.
  */
-void disableVicInt(unsigned int address) {
+void disableVicInt(const unsigned int address) {
 	unsigned int *intVec = (unsigned int*) 0xfdfe;
 #asm
 	di
@@ -78,7 +75,7 @@ void disableVicInt(unsigned int address) {
 /*
  * Draw box with label.
  */
-void drawBoxI(bitmap *bmp, int x, int y, int w, int h, char *str) {
+void drawBoxI(const bitmap *bmp, const int x, const int y, const int w, const int h, const char *str) {
 	/* Bitmap printing uses same coordinates as character mode */
 	(bmp->printBmp)(bmp, x / 8, (y - 8) / 8, str);
 	drawRect(bmp, x, y, w, h, bmpWhite);
@@ -87,7 +84,7 @@ void drawBoxI(bitmap *bmp, int x, int y, int w, int h, char *str) {
 /*
  * Draw lines.
  */
-void linesI(console *con, bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void linesI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, x1, y1;
 	char str[41];
@@ -106,8 +103,8 @@ void linesI(console *con, bitmap *bmp, int x, int y, int w, int h, unsigned char
 /*
  * Draw horizontal lines.
  */
-void horzLinesI(console *con, bitmap *bmp, int x, int y, int w, int h,
-unsigned char count) {
+void horzLinesI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h,
+		const unsigned char count) {
 	unsigned char i;
 	int x0, y0, x1;
 	char str[41];
@@ -125,8 +122,8 @@ unsigned char count) {
 /*
  * Draw vertical lines.
  */
-void vertLinesI(console *con, bitmap *bmp, int x, int y, int w, int h,
-unsigned char count) {
+void vertLinesI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h,
+		const unsigned char count) {
 	unsigned char i;
 	int x0, y0, y1;
 	char str[41];
@@ -144,7 +141,7 @@ unsigned char count) {
 /*
  * Draw Bezier.
  */
-void bezierI(console *con, bitmap *bmp, int x, int y, int w, int h, unsigned char count) {
+void bezierI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, x1, y1, x2, y2;
 	char str[41];
@@ -156,8 +153,7 @@ void bezierI(console *con, bitmap *bmp, int x, int y, int w, int h, unsigned cha
 		y1 = (i * 3) + y;
 		x2 = x + w - 3;
 		y2 = (i * 4) + y;
-		sprintf(str, "drawBezier(%d, %d, %d, %d, %d, %d)", x0, y0, x1, y1, x2,
-				y2);
+		sprintf(str, "drawBezier(%d, %d, %d, %d, %d, %d)", x0, y0, x1, y1, x2, y2);
 		printLineCon(con, str);
 		drawBezier(bmp, x0, y0, x1, y1, x2, y2, bmpWhite);
 	}
@@ -166,8 +162,8 @@ void bezierI(console *con, bitmap *bmp, int x, int y, int w, int h, unsigned cha
 /*
  * Draw rectangles.
  */
-void rectanglesI(console *con, bitmap *bmp, int x, int y, int w, int h,
-unsigned char count) {
+void rectanglesI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h,
+		const unsigned char count) {
 	unsigned char i;
 	int x0, y0, w0, h0;
 	char str[41];
@@ -186,8 +182,7 @@ unsigned char count) {
 /*
  * Draw squares.
  */
-void squaresI(console *con, bitmap *bmp, int x, int y, int w, int h,
-unsigned char count) {
+void squaresI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, len;
 	char str[41];
@@ -205,8 +200,7 @@ unsigned char count) {
 /*
  * Draw ellipses.
  */
-void ellipsesI(console *con, bitmap *bmp, int x, int y, int w, int h,
-unsigned char count) {
+void ellipsesI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, a, b;
 	char str[41];
@@ -225,8 +219,7 @@ unsigned char count) {
 /*
  * Draw circles.
  */
-void circlesI(console *con, bitmap *bmp, int x, int y, int w, int h,
-unsigned char count) {
+void circlesI(const console *con, const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, len;
 	char str[41];
@@ -244,7 +237,7 @@ unsigned char count) {
 /*
  * Run graphics demo.
  */
-void runGraphDemoI(console *con, bitmap *bmp, unsigned int code) {
+void runGraphDemoI(const console *con, const bitmap *bmp, const unsigned int code) {
 	unsigned int *intVec = (unsigned int*) 0xfdfe, address = intVec[0];
 	/* Calc 3x3 matrix using char layout since bitmap printing aligns to char mode boundaries */
 	unsigned int xSize = (bmp->scrWidth / 3) * 8 - 8;

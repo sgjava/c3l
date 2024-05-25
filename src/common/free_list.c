@@ -12,7 +12,7 @@
 /*
  * Free memory allocated for the list.
  */
-void freeList(node *head) {
+void freeList(const node *head) {
 	while (head != NULL) {
 		node *temp = head;
 		head = head->next;

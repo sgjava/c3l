@@ -11,7 +11,7 @@
 /*
  * Print with color.
  */
-void printVdcCol(screen *scr, unsigned char x, unsigned char y, unsigned char color, char *str) {
+void printVdcCol(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color, const char *str) {
 	unsigned int len = strlen(str);
 	/* No need to print empty string */
 	if (len > 0) {

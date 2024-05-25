@@ -10,7 +10,7 @@
 /*
  * Make sprite appear in foreground.
  */
-void setVicSprFg(unsigned char sprNum) {
+void setVicSprFg(const unsigned char sprNum) {
 	static unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 	/* Sprite priority */
 	outp(vicSprFg, inp(vicSprFg) & ~sprTable[sprNum]);

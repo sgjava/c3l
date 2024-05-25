@@ -10,6 +10,6 @@
 /*
  * Set character set 0-7 memory location (2K per character set).
  */
-void setVicChrMem(unsigned char chrLoc) {
+void setVicChrMem(const unsigned char chrLoc) {
 	outp(vicMemCtrl, (inp(vicMemCtrl) & 0xf0) | (chrLoc << 1));
 }

@@ -28,7 +28,7 @@ void dispHelp() {
 /*
  Load phoneme into buffer.
  */
-void loadPhoneme(unsigned char *buffer, unsigned int len, char *fileName) {
+void loadPhoneme(const unsigned char *buffer, const unsigned int len, const char *fileName) {
 	FILE *rawFile;
 	if ((rawFile = fopen(fileName, "rb")) != NULL) {
 		printf("\nReading %s, %u bytes", fileName, len);
@@ -42,8 +42,8 @@ void loadPhoneme(unsigned char *buffer, unsigned int len, char *fileName) {
 /*
  Load all phonemes into buffers. Input file format should be FILE.RAW SIZE.
  */
-unsigned int loadAll(char *fileName, arpabetName name,
-		unsigned int arpabetLen[], unsigned char *arpabetBuf[]) {
+unsigned int loadAll(const char *fileName, const arpabetName name,
+		const unsigned int arpabetLen[], const unsigned char *arpabetBuf[]) {
 	unsigned char tens;
 	unsigned long startCia, endCia;
 	FILE *file;
@@ -89,8 +89,8 @@ unsigned int loadAll(char *fileName, arpabetName name,
 /*
  * Write all phonemes to a file with header describing Hz, bits, sample and length.
  */
-unsigned int writePhonemes(char *fileName, phonemes *p,
-		unsigned char *arpabetBuf[]) {
+unsigned int writePhonemes(const char *fileName, phonemes *p,
+		const unsigned char *arpabetBuf[]) {
 	unsigned char i, tens;
 	unsigned long startCia, endCia;
 	unsigned int totalSize = 0;

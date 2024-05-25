@@ -10,6 +10,6 @@
 /*
  * Start attack, decay, sustain cycle.  Gate bit is not needed.
  */
-void setSidAtt(unsigned int voice, unsigned char waveform) {
+void setSidAtt(const unsigned int voice, const unsigned char waveform) {
 	outp(voice + 4, waveform | sidGate);
 }

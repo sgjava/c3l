@@ -68,7 +68,7 @@ typedef struct sprite sprite;
  */
 typedef struct sprite {
 	// Definitions array
-	unsigned char *def;
+	const unsigned char *def;
 	// X position
 	unsigned int x;
 	// Y position
@@ -117,7 +117,7 @@ typedef struct sound {
 /*
  Load sprite into buffer.
  */
-void loadSprites(unsigned char *buffer, unsigned int len, char *fileName) {
+void loadSprites(const unsigned char *buffer, const unsigned int len, const char *fileName) {
 	FILE *file;
 	if ((file = fopen(fileName, "rb")) != NULL) {
 		printf("\nLoading %s, %u bytes to address 0x%04x", fileName, len, buffer);
@@ -131,7 +131,7 @@ void loadSprites(unsigned char *buffer, unsigned int len, char *fileName) {
 /*
  * Load sprites, initialize key scan and screen.
  */
-void init(screen *scr) {
+void init(const screen *scr) {
 	unsigned char i;
 	unsigned int libSize = LOAD_SPRITES * 64, sprMem;
 	char fileNames[LIB_SPRITES][13] = { "burwor.spr", "garwor.spr", "thorwor.spr", "worrior.spr", "wow.spr" };
@@ -161,7 +161,7 @@ void done() {
 /*
  * Move and animate sprites.
  */
-void moveSpr(screen *scr, unsigned char *sprPtr, sprite sprites[]) {
+void moveSpr(const screen *scr, const unsigned char *sprPtr, const sprite sprites[]) {
 	unsigned char i;
 	/* Raster off screen? */
 	while (inp(vicRaster) != 0xff)
@@ -182,7 +182,7 @@ void moveSpr(screen *scr, unsigned char *sprPtr, sprite sprites[]) {
 /*
  * Stateful sound effect. Called ~ 1/60 a second for NTSC.
  */
-void playSound(sound s[]) {
+void playSound(const sound s[]) {
 	unsigned char i;
 	// Cycle through all 3 voices
 	for (i = 0; i < SID_VOICES; ++i) {
@@ -220,7 +220,7 @@ void playSound(sound s[]) {
 /*
  * Set sound effect.
  */
-void setSound(sound s[]) {
+void setSound(const sound s[]) {
 	unsigned char i = 0;
 	static unsigned int voice[] = { sidVoice1, sidVoice2, sidVoice3 };
 	// Find free voice
@@ -245,7 +245,7 @@ void setSound(sound s[]) {
 /*
  * Collision detection and sound effect.
  */
-void collSpr(sprite sprites[], sound sounds[]) {
+void collSpr(const sprite sprites[], const sound sounds[]) {
 	unsigned char i, sprCol, sprBgCol, coll;
 	static unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 	// Sprite to sprite collision register
@@ -283,7 +283,7 @@ void collSpr(sprite sprites[], sound sounds[]) {
 /*
  * Set sprite struct members.
  */
-void setSpr(sprite *spr, int xDir, int yDir, unsigned char *seq) {
+void setSpr(const sprite *spr, const int xDir, const int yDir, const unsigned char *seq) {
 	spr->xDir = xDir;
 	spr->yDir = yDir;
 	spr->seq[0] = seq[0];
@@ -294,7 +294,7 @@ void setSpr(sprite *spr, int xDir, int yDir, unsigned char *seq) {
 /*
  * Pre-calculate movements and store in sprite struct.
  */
-void calcMoveSpr(screen *scr, sprite sprites[], sound sounds[]) {
+void calcMoveSpr(const screen *scr, const sprite sprites[], const sound sounds[]) {
 	unsigned char i, delay = 1, *sprPtr = scr->scrMem + vicSprMemOfs;
 	// Sprite sequences
 	unsigned char seq[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
@@ -351,10 +351,9 @@ void calcMoveSpr(screen *scr, sprite sprites[], sound sounds[]) {
 /*
  * Initialize sprite pointers and struct array.
  */
-void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
+void initSpr(const screen *scr, const unsigned char sprDef[], const sprite sprites[]) {
 	unsigned char i, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr = scr->scrMem + vicSprMemOfs;
-	unsigned char def, seq[] = { 0, 1, 2 };
-	unsigned char sprColor[5] = { scrCyan, scrYellow, scrGreen, scrPurple, scrLightBlue };
+	unsigned char seq[] = { 0, 1, 2 }, sprColor[5] = { scrCyan, scrYellow, scrGreen, scrPurple, scrLightBlue };
 	// Seed random number generator with VIC raster value
 	srand(inp(vicRaster));
 	// Configure all sprite definition offsets
@@ -364,9 +363,8 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 	// Configure all sprites
 	for (i = 0; i < MAX_SPRITES; ++i) {
 		// Configure sprite
-		def = rand() % 5;
-		sprites[i].def = &sprDef[def * 12];
-		sprites[i].defColor = sprColor[def];
+		sprites[i].def = &sprDef[(rand() % 5) * 12];
+		sprites[i].defColor = sprColor[rand() % 5];
 		sprites[i].curSeq = rand() % 3;
 		sprites[i].x = (i * 26) + 24;
 		sprites[i].y = 200;
@@ -387,7 +385,7 @@ void initSpr(screen *scr, unsigned char sprDef[], sprite sprites[]) {
 /*
  * Initialize sound.
  */
-void initSound(sound sounds[]) {
+void initSound(const sound sounds[]) {
 	unsigned char i;
 	for (i = 0; i < SID_VOICES; ++i) {
 		sounds[i].state = SID_DONE;
@@ -397,7 +395,7 @@ void initSound(sound sounds[]) {
 /*
  * Run demo.
  */
-void run(screen *scr) {
+void run(const screen *scr) {
 	unsigned char i;
 	char str[41];
 	unsigned char sprDef[TOTAL_SPRITES];

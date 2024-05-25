@@ -12,7 +12,7 @@
 /*
  * Handle backspace for editing.
  */
-void backSpace(console *con) {
+void backSpace(const console *con) {
 	unsigned int scrOfs = offsetCon(con) - 1;
 	char printBuf[3];
 	printBuf[0] = con->curChar;
@@ -31,7 +31,7 @@ void backSpace(console *con) {
  * Use screen memory as simple input line. Only backspace supported, but insert
  * and delete could be added later.
  */
-char* readLineCon(console *con, unsigned char len) {
+char* readLineCon(const console *con, unsigned char len) {
 	screen *scr = con->scr;
 	char *str, printBuf[2];
 	unsigned char strLen = 0, keyVal, lastKeyVal = 0, curOn = con->curOn, i;

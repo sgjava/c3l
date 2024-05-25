@@ -10,7 +10,7 @@
 /*
  * Copy VDC character set to memory to a file.
  */
-void vdcChrMemToFile(unsigned int vdcMem, unsigned int chars, char *fileName) {
+void vdcChrMemToFile(const unsigned int vdcMem, const unsigned int chars, const char *fileName) {
 	unsigned char c;
 	unsigned int vdcOfs = vdcMem, i;
 	unsigned char charBuf[8];

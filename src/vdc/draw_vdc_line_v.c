@@ -10,7 +10,7 @@
 /*
  * Optimized vertical line algorithm uses less calculation and flow control than drawLine.
  */
-void drawVdcLineV(bitmap *bmp, unsigned int x, unsigned int y, unsigned int len, unsigned char color) {
+void drawVdcLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color) {
 	unsigned char i, end = y + len;
 	/* Plot pixels */
 	for (i = y; i < end; i++) {

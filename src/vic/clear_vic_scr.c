@@ -10,6 +10,6 @@
 /*
  * Clear screen using 16 bit word.
  */
-void clearVicScr(screen *scr, unsigned char c) {
+void clearVicScr(const screen *scr, const unsigned char c) {
 	fillVicMem(scr->scrMem, scr->scrSize, c);
 }

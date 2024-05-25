@@ -11,7 +11,7 @@
 /*
  * Get key column. If column not found then 8 is returned.
  */
-unsigned char getKeyCol(unsigned char keyVal) {
+unsigned char getKeyCol(const unsigned char keyVal) {
 	static unsigned char keyCol[8] = { 0xfe, 0xfd, 0xfb, 0xf7, 0xef, 0xdf, 0xbf,
 			0x7f };
 	unsigned char i = 0;

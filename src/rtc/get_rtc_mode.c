@@ -9,6 +9,6 @@
 /*
  * Set RTC mode.
  */
-void setRtcMode(unsigned char mode) {
+void setRtcMode(const unsigned char mode) {
 	setRtcReg(rtcMode, mode);
 }

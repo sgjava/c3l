@@ -12,7 +12,7 @@
 /*
  * Remove an observer from the subject.
  */
-void subjectRemoveObserver(subject* s, observer* o) {
+void subjectRemoveObserver(const subject* s, const observer* o) {
 	// Find the observer
     for (int i = 0; i < s->count; ++i) {
         if (s->observers[i] == o) {

@@ -10,7 +10,7 @@
 /**
  * Set RTC register.
  */
-void setRtcReg(unsigned char reg, unsigned char value) {
+void setRtcReg(const unsigned char reg, const unsigned char value) {
 	outp(rtcRegA, reg);
 	outp(rtcRegB, value);
 }

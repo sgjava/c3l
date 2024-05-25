@@ -10,6 +10,6 @@
 /*
  * Clear color memory. Color memory is port mapped.
  */
-void clearVicCol(screen *scr, unsigned char c) {
+void clearVicCol(const screen *scr, const unsigned char c) {
 	fillVicMemCol((unsigned int) scr->scrColMem, scr->scrSize, scr->color[c]);
 }

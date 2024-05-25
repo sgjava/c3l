@@ -34,7 +34,7 @@ void dispHelp() {
 /*
  Convert 8 bit raw data to 4 bit raw data.
  */
-unsigned int convert8to4(unsigned char *buffer, unsigned int bufSize) {
+unsigned int convert8to4(const unsigned char *buffer, const unsigned int bufSize) {
 	unsigned int i;
 	for (i = 0; i < bufSize; i += 2) {
 		buffer[i >> 1] = (buffer[i] & 0xf0) | (buffer[i + 1] >> 4);
@@ -46,7 +46,7 @@ unsigned int convert8to4(unsigned char *buffer, unsigned int bufSize) {
 /*
  Convert 8 bit raw data to 2 bit raw data.
  */
-unsigned int convert8to2(unsigned char *buffer, unsigned int bufSize) {
+unsigned int convert8to2(const unsigned char *buffer, const unsigned int bufSize) {
 	unsigned int i, s;
 	unsigned char sample;
 	for (i = 0, s = 0; i < bufSize; i += 4, ++s) {
@@ -61,7 +61,7 @@ unsigned int convert8to2(unsigned char *buffer, unsigned int bufSize) {
 /*
  Convert 8 bit raw data to 1 bit raw data.
  */
-unsigned int convert8to1(unsigned char *buffer, unsigned int bufSize) {
+unsigned int convert8to1(const unsigned char *buffer, const unsigned int bufSize) {
 	static unsigned char bitTable[8] = { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04,
 			0x02, 0x01 };
 	unsigned char sample;
@@ -83,7 +83,7 @@ unsigned int convert8to1(unsigned char *buffer, unsigned int bufSize) {
 /*
  Convert 8 bit raw data to 4, 2 or 1 bit raw data.
  */
-void convert(char *inFileName, char *outFileName, unsigned char bits) {
+void convert(const char *inFileName, const char *outFileName, const unsigned char bits) {
 	unsigned char tens;
 	FILE *inFile, *outFile;
 	unsigned int bytesRead, bytesWrite;
@@ -136,7 +136,7 @@ void changeExt(char *filename, const char *newExtension) {
 /*
  * Process files based on standard CP/M search.
  */
-processFiles(char *inFileName, unsigned char bits) {
+processFiles(const char *inFileName, const unsigned char bits) {
 	int curDisk, curUser, retVal, dmaOffset, i, j;
 	char name[9], ext[4], dest[13];
 	node *head = NULL;

@@ -11,7 +11,7 @@
 /*
  * Wait for Return key to be pressed.
  */
-void waitKey(screen *scr) {
+void waitKey(const screen *scr) {
 	(scr->printCol)(scr, 0, scr->scrHeight - 1, scrYellow, "Press Return");
 	/* Debounce */
 	while (getKey(0) == 0xfd)

@@ -10,7 +10,7 @@
 /*
  * Bresenham’s line algorithm. Color is 1 to set or 0 to clear pixel.
  */
-void drawLine(bitmap *bmp, int x0, int y0, int x1, int y1, unsigned char color) {
+void drawLine(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const unsigned char color) {
 	int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
 	int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
 	int err = (dx > dy ? dx : -dy) / 2, e2;

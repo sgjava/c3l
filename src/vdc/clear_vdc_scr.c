@@ -10,6 +10,6 @@
 /*
  * Clear screen.
  */
-void clearVdcScr(screen *scr, unsigned char c) {
+void clearVdcScr(const screen *scr, const unsigned char c) {
 	fillVdcMem(scr->scrMem, scr->scrSize, c);
 }

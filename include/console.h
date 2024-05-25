@@ -24,7 +24,7 @@ typedef struct console {
 	/*
 	 * Screen struct.
 	 */
-	screen *scr;
+	const screen *scr;
 	/*
 	 * Cursor X location.
 	 */
@@ -51,14 +51,14 @@ typedef struct console {
 	unsigned char color;
 };
 
-extern void __LIB__ initCon(console *con, screen *scr);
-extern void __LIB__ scrollCon(console *con, char *str);
-extern void __LIB__ printCon(console *con, char *str);
-extern void __LIB__ printLineCon(console *con, char *str);
-extern char __LIB__ *readLineCon(console *con, unsigned char len);
-extern unsigned int __LIB__ offsetCon(console *con);
-extern void __LIB__ setCurCon(console *con, unsigned int offset);
-extern void __LIB__ printWrapCon(console *con, char *str);
-extern void __LIB__ clearHomeCon(console *con);
+extern void __LIB__ initCon(const console *con, const screen *scr);
+extern void __LIB__ scrollCon(const console *con, const char *str);
+extern void __LIB__ printCon(const console *con, const char *str);
+extern void __LIB__ printLineCon(const console *con, const char *str);
+extern char __LIB__ *readLineCon(const console *con, const unsigned char len);
+extern unsigned int __LIB__ offsetCon(const console *con);
+extern void __LIB__ setCurCon(const console *con, const unsigned int offset);
+extern void __LIB__ printWrapCon(const console *con, const char *str);
+extern void __LIB__ clearHomeCon(const console *con);
 
 #endif

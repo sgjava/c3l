@@ -10,8 +10,8 @@
 /*
  * Bézier curve using Bresenham’s line algorithm.
  */
-void drawBezier(bitmap *bmp, int x0, int y0, int x1, int y1, int x2, int y2,
-unsigned char color) {
+void drawBezier(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const int x2, const int y2,
+		const unsigned char color) {
 	int sx = x0 < x2 ? 1 : -1;
 	int sy = y0 < y2 ? 1 : -1;
 	int x = x2 - x0;

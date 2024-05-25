@@ -10,7 +10,7 @@
 /*
  * Set pixel.
  */
-void setVicPix(bitmap *bmp, unsigned int x, unsigned int y, unsigned char color) {
+void setVicPix(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color) {
 	/* Call assembler code */
 	setVicPixAsm(x, y, bmp->color[color], (unsigned int) bmp->bmpMem);
 }

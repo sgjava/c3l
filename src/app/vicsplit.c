@@ -21,7 +21,7 @@ extern void irq1(void);
 /*
  * Initialize key scan, screen and bitmap.
  */
-void init(console *con, screen *scr, bitmap *bmp) {
+void init(const console *con, const screen *scr, const bitmap *bmp) {
 	initCia();
 	/* Use ram at end of bank 1 for text and bitmap */
 	initVicScr(scr, 0x8800, 0x8000);
@@ -46,7 +46,7 @@ void done() {
 /*
  * Find IRQ code signature and run demo. If assembler code changes then signature must change as well.
  */
-void run(unsigned char *memEnd, console *con, bitmap *bmp) {
+void run(const unsigned char *memEnd, const console *con, const bitmap *bmp) {
 	unsigned int found;
 	unsigned char *memStart = (unsigned char*) 0x0100;
 	/* This is the z80 signature used to find the custom interrupt code inside vicSplitScr */

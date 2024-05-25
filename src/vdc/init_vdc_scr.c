@@ -10,7 +10,7 @@
 /*
  * Configure screen struct for VDC.
  */
-void initVdcScr(screen *scr, unsigned int scrMem, unsigned int chrMem) {
+void initVdcScr(const screen *scr, const unsigned int scrMem, const unsigned int chrMem) {
 	static unsigned char vdcColors[16] = { vdcBlack, vdcWhite, vdcDarkRed, vdcLightCyan,
 	vdcLightPurple, vdcDarkGreen, vdcDarkBlue, vdcLightYellow,
 	vdcDarkPurple, vdcDarkYellow, vdcLightRed, vdcDarkCyan, vdcDarkGray,

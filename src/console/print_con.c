@@ -11,7 +11,7 @@
 /*
  * Print to console.
  */
-void printCon(console *con, char *str) {
+void printCon(const console *con, const char *str) {
 	screen *scr = con->scr;
 	unsigned int scrOfs;
 	scrollCon(con, str);

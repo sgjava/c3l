@@ -9,6 +9,6 @@
 /*
  * Calculate offset in screen memory based on cursor position.
  */
-unsigned int offsetCon(console *con) {
+unsigned int offsetCon(const console *con) {
 	return con->curY * con->scr->scrWidth + con->curX;
 }

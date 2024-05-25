@@ -11,7 +11,7 @@
 /*
  * Print with color.
  */
-void printVicCol(screen *scr, unsigned char x, unsigned char y, unsigned char color, char *str) {
+void printVicCol(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color, const char *str) {
 	unsigned int colOfs = (unsigned int) scr->scrColMem + (y * scr->scrWidth) + x;
 	unsigned int len = strlen(str);
 	/* 0 length not allowed for fillVicMemCol */

@@ -10,7 +10,7 @@
 /*
  * Set voice frequency.
  */
-void setSidFreq(unsigned int voice, unsigned int freq) {
+void setSidFreq(const unsigned int voice, const unsigned int freq) {
 	outp(voice, (unsigned char ) freq);
 	outp(voice + 1, (unsigned char ) (freq >> 8));
 }

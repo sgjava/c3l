@@ -56,21 +56,21 @@
 
 #define ciaMs 1022            /* ~1 millisecond using CIA microsecond timer */
 
-extern unsigned char __LIB__ getKeyCol(unsigned char keyVal);
-extern unsigned char __LIB__ getLsKeyCol(unsigned char keyVal);
-extern unsigned char __LIB__ getRsKeyCol(unsigned char keyVal);
-extern unsigned char __LIB__ getKey(unsigned char keyRow);
-extern void __LIB__ getKeys(unsigned char* ciaKeyScan);
+extern unsigned char __LIB__ getKeyCol(const unsigned char keyVal);
+extern unsigned char __LIB__ getLsKeyCol(const unsigned char keyVal);
+extern unsigned char __LIB__ getRsKeyCol(const unsigned char keyVal);
+extern unsigned char __LIB__ getKey(const unsigned char keyRow);
+extern void __LIB__ getKeys(const unsigned char* ciaKeyScan);
 extern unsigned char __LIB__ decodeKey();
 extern void __LIB__ initCia();
 extern void __LIB__ doneCia();
-extern void __LIB__ startTimerAB(unsigned int cia, unsigned int timerA, unsigned int timerB, unsigned char latch);
-extern void __LIB__ setCiaTod(unsigned int cia, unsigned char hour, unsigned char min, unsigned char sec, unsigned char tenth);
-extern void __LIB__ startTimerA(unsigned int cia, unsigned int hz, unsigned char latch);
-extern void __LIB__ startTimerB(unsigned int cia, unsigned int hz, unsigned char latch);
+extern void __LIB__ startTimerAB(const unsigned int cia, const unsigned int timerA, const unsigned int timerB, const unsigned char latch);
+extern void __LIB__ setCiaTod(const unsigned int cia, const unsigned char hour, const unsigned char min, const unsigned char sec, const unsigned char tenth);
+extern void __LIB__ startTimerA(const unsigned int cia, const unsigned int hz, const unsigned char latch);
+extern void __LIB__ startTimerB(const unsigned int cia, const unsigned int hz, const unsigned char latch);
 extern unsigned char __LIB__ getJoystick1();
 extern unsigned char __LIB__ getJoystick2();
-extern unsigned long __LIB__ todToMs(unsigned int cia);
-extern unsigned char __LIB__ bcdToByte(unsigned char bcd);
+extern unsigned long __LIB__ todToMs(const unsigned int cia);
+extern unsigned char __LIB__ bcdToByte(const unsigned char bcd);
 
 #endif

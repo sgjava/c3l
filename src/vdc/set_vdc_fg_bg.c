@@ -9,6 +9,6 @@
 /*
  * Set foreground and background color.
  */
-void setVdcFgBg(unsigned char f, unsigned char b) {
+void setVdcFgBg(const unsigned char f, const unsigned char b) {
 	outVdc(vdcFgBgColor, (f << 4) | (b & 0x0f));
 }
