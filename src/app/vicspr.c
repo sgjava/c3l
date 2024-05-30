@@ -23,7 +23,7 @@
 /*
  * Sprite libraries to load.
  */
-#define LIB_SPRITES 5
+#define LIB_SPRITES 6
 
 /*
  * Sprite definitions to load.
@@ -79,6 +79,8 @@ typedef struct sprite {
 	unsigned char color;
 	// Update color flag
 	unsigned char updateColor;
+	// Multi color flag
+	unsigned char multiColor;
 	// X direction
 	int xDir;
 	// Y direction
@@ -134,7 +136,7 @@ void loadSprites(const unsigned char *buffer, const unsigned int len, const char
 void init(const screen *scr) {
 	unsigned char i;
 	unsigned int libSize = LOAD_SPRITES * 64, sprMem;
-	char fileNames[LIB_SPRITES][13] = { "burwor.spr", "garwor.spr", "thorwor.spr", "worrior.spr", "wow.spr" };
+	char fileNames[LIB_SPRITES][13] = { "burwor.spr", "garwor.spr", "thorwor.spr", "worrior.spr", "wow.spr", "worluck.spr" };
 	// Use ram at end of bank 1 for character set screen just above that
 	initVicScr(scr, 0x7400, 0x7800);
 	initVicScrMode(scr, scrBlack, scrBlue, scrWhite);
@@ -352,10 +354,14 @@ void calcMoveSpr(const screen *scr, const sprite sprites[], const sound sounds[]
  * Initialize sprite pointers and struct array.
  */
 void initSpr(const screen *scr, const unsigned char sprDef[], const sprite sprites[]) {
-	unsigned char i, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr = scr->scrMem + vicSprMemOfs;
+	unsigned char i, def, vicBank = (unsigned int) scr->scrMem / 16384, *sprPtr = scr->scrMem + vicSprMemOfs;
 	unsigned char seq[] = { 0, 1, 2 }, sprColor[5] = { scrCyan, scrYellow, scrGreen, scrPurple, scrLightBlue };
+	unsigned char sprTable[8] = { 1, 2, 4, 8, 16, 32, 64, 128 };
 	// Seed random number generator with VIC raster value
 	srand(inp(vicRaster));
+	// Set multi color colors
+	outp(vicSprMcmCol0, scr->color[scrRed]);
+	outp(vicSprMcmCol1, scr->color[scrLightBlue]);
 	// Configure all sprite definition offsets
 	for (i = 0; i < TOTAL_SPRITES; i++) {
 		sprDef[i] = (((unsigned int) scr->scrMem) - (vicBank * 16384) - ((i + 1) * 64)) / 64;
@@ -363,9 +369,15 @@ void initSpr(const screen *scr, const unsigned char sprDef[], const sprite sprit
 	// Configure all sprites
 	for (i = 0; i < MAX_SPRITES; ++i) {
 		// Configure sprite
-		sprites[i].def = &sprDef[(rand() % 5) * 12];
-		sprites[i].defColor = sprColor[rand() % 5];
-		sprites[i].curSeq = rand() % 3;
+		def = rand() % LIB_SPRITES;
+		sprites[i].def = &sprDef[def * 12];
+		// Set random color unless multi color sprite
+		if (def > 0) {
+			sprites[i].defColor = sprColor[rand() % 5];
+		} else {
+			sprites[i].defColor = scrYellow;
+		}
+		sprites[i].curSeq = rand() % SEQ_SPRITES;
 		sprites[i].x = (i * 26) + 24;
 		sprites[i].y = 200;
 		sprites[i].color = sprites[i].defColor;
@@ -377,6 +389,12 @@ void initSpr(const screen *scr, const unsigned char sprDef[], const sprite sprit
 		setVicSprLoc(i, sprites[i].x, sprites[i].y);
 		// Set sprite color
 		outp(vicSpr0Col + i, scr->color[sprites[i].color]);
+		// If first sprite library use multicolor mode
+		if (def == 0) {
+			outp(vicSprMcm, inp(vicSprMcm) | sprTable[i]);
+		} else {
+			outp(vicSprMcm, inp(vicSprMcm) & ~sprTable[i]);
+		}
 		// Enable sprite
 		enableVicSpr(i);
 	}

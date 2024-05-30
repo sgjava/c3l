@@ -44,11 +44,11 @@ rm -f YX.wav
 for filename in *.wav; do
     [ -e "$filename" ] || continue
     name=$(basename "$filename" .wav)
-    ffmpeg -hide_banner -loglevel error -i "$filename" -f u8 -ac 1 -ar 17000 -acodec pcm_u8 "$name.SND"
+    ffmpeg -hide_banner -loglevel error -i "$filename" -f u8 -ac 1 -ar 8000 -acodec pcm_u8 "$name.SND"
     # Get snd file size
     filesize=$(stat --format=%s "$name.SND")
     # Calculate 4 bit raw file size   
-    echo "$name.RAW $((filesize/8))\r" >> fileinfo.txt    
+    echo "$name.RAW $((filesize/2))\r" >> fileinfo.txt    
 done
 
 # Add script to erase all snd files once converted

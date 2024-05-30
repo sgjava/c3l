@@ -39,6 +39,12 @@ for file in wow12.prg wow11.prg wow10.prg wow09.prg wow08.prg wow07.prg wow06.pr
     dd if="$file" bs=1 skip=2 >> wow.spr
 done
 
+# Misc library (there's only 8 sprites, so we repeat some)
+rm -f worluck.spr
+for file in misc08.prg misc07.prg misc08.prg misc07.prg misc08.prg misc07.prg misc08.prg misc07.prg misc08.prg misc07.prg misc08.prg misc07.prg; do
+    dd if="$file" bs=1 skip=2 >> worluck.spr
+done
+
 # Copy sprite libraries to resources
 cp *.spr ../../resources/.
 
