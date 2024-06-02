@@ -14,7 +14,8 @@ void drawEllipse(const bitmap *bmp, const int xc, const int yc, const int a, con
     long a2 = (long) a * a;
     long b2 = (long) b * b;
     long fa2 = 4 * a2, fb2 = 4 * b2;
-    long x, y, sigma;
+    long sigma;
+    int x, y;
 
     /* First half */
     for (x = 0, y = b, sigma = 2 * b2 + a2 * (1 - 2 * b); b2 * x <= a2 * y; x++) {
