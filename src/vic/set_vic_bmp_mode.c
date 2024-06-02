@@ -9,8 +9,8 @@
 /*
  * Set bitmap mode.
  */
-void setVicBmpMode(const unsigned char mmuRcr, const unsigned char vicBank,
-		unsigned char scrLoc, unsigned char bmpLoc) {
+void setVicBmpMode(const unsigned char mmuRcr, const unsigned char vicBank, unsigned char scrLoc, unsigned char bmpLoc,
+		const unsigned char mcm) {
 	/*
 	 * For some reason this function must be included in the app
 	 * source file instead of the lib or it hangs. It works fine
@@ -18,7 +18,7 @@ void setVicBmpMode(const unsigned char mmuRcr, const unsigned char vicBank,
 	 */
 	//setVicMmuBank(mmuRcr);
 	setVicBank(vicBank);
-	setVicMode(0, 1, 0);
+	setVicMode(0, 1, mcm);
 	setVicScrMem(scrLoc);
 	setVicBmpMem(bmpLoc);
 }

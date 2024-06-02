@@ -16,6 +16,11 @@
 #include <string.h>
 #include <vic.h>
 
+#pragma output noprotectmsdos
+#pragma output CRT_STACK_SIZE = 1024
+// Protect VIC memory < 0xc000
+#pragma output CRT_HEAP_ADDRESS = 0xc000
+
 extern void irq1(void);
 
 /*

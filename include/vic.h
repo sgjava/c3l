@@ -95,27 +95,37 @@ extern void __LIB__ setVicChrMode(const unsigned char mmuRcr, const unsigned cha
 extern void __LIB__ clearVicScr(const screen *scr, const unsigned char c);
 extern void __LIB__ clearVicCol(const screen *scr, const unsigned char c);
 extern void __LIB__ printVic(const screen *scr, const unsigned char x, const unsigned char y, const char *str);
-extern void __LIB__ printVicCol(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color, const char *str);
+extern void __LIB__ printVicCol(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color,
+		const char *str);
 extern void __LIB__ printVicPet(const screen *scr, const unsigned char x, const unsigned char y, const char *str);
-extern void __LIB__ printVicColPet(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color, const char *str);
+extern void __LIB__ printVicColPet(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char color,
+		const char *str);
 extern void __LIB__ scrollVicUpY(const screen *scr, const unsigned char y1, const unsigned char y2);
 extern void __LIB__ scrollVicUpYCol(const screen *scr, const unsigned char y1, const unsigned char y2);
 extern void __LIB__ scrollVicUpAsm(const unsigned int start, const unsigned char length, const unsigned char lines) __smallc;
 extern void __LIB__ scrollVicUpColAsm(const unsigned int start, const unsigned char length, const unsigned char lines) __smallc;
-extern void __LIB__ scrollVicUp(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2, const unsigned char y2);
-extern void __LIB__ scrollVicUpCol(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2, const unsigned char y2);
+extern void __LIB__ scrollVicUp(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2,
+		const unsigned char y2);
+extern void __LIB__ scrollVicUpCol(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2,
+		const unsigned char y2);
 extern char __LIB__* readVicLine(const screen *scr, const unsigned char x, const unsigned char y, const unsigned char len);
 extern void __LIB__ setVicBmpMem(const unsigned char bmpLoc);
-extern void __LIB__ setVicBmpMode(const unsigned char mmuRcr, const unsigned char vicBank, const unsigned char scrLoc, const unsigned char bmpLoc);
+extern void __LIB__ setVicBmpMode(const unsigned char mmuRcr, const unsigned char vicBank, const unsigned char scrLoc,
+		const unsigned char bmpLoc, const unsigned char mcm);
 extern void __LIB__ clearVicBmp(const bitmap *bmp, const unsigned char c);
 extern void __LIB__ clearVicBmpCol(const bitmap *bmp, const unsigned char c);
 extern void __LIB__ setVicPix(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color);
 extern void __LIB__ setVicPixAsm(const unsigned int x, const unsigned int y, const unsigned char color, const unsigned int bmpMem) __smallc;
-extern void __LIB__ drawVicLineH(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color);
-extern void __LIB__ drawVicLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color);
+extern void __LIB__ setVicPixMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color);
+extern void __LIB__ drawVicLineH(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
+		const unsigned char color);
+extern void __LIB__ drawVicLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
+		const unsigned char color);
 extern void __LIB__ printVicBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str);
-extern void __LIB__ printVicBmpCol(const bitmap *bmp, const unsigned char x, const unsigned char y, const unsigned char color, const char *str);
-extern void __LIB__ configVicSpr(const screen *scr, const unsigned char *spr, const unsigned char sprNum, const unsigned char sprCol);
+extern void __LIB__ printVicBmpCol(const bitmap *bmp, const unsigned char x, const unsigned char y, const unsigned char color,
+		const char *str);
+extern void __LIB__ configVicSpr(const screen *scr, const unsigned char *spr, const unsigned char sprNum,
+		const unsigned char sprCol);
 extern void __LIB__ enableVicSpr(const unsigned char sprNum);
 extern void __LIB__ disableVicSpr(const unsigned char sprNum);
 extern void __LIB__ setVicSprLoc(const unsigned char sprNum, const unsigned int x, const unsigned char y);
@@ -125,9 +135,14 @@ extern void __LIB__ initVicScr(const screen *scr, const unsigned int scrMem, con
 extern void __LIB__ initVicScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol,
 		const unsigned char chrCol);
 extern void __LIB__ initVicBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned int chrMem);
-extern void __LIB__ initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol, const unsigned char pixCol);
+extern void __LIB__ initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol,
+		const unsigned char pixCol);
+extern void __LIB__ initVicBmpMc(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned int chrMem);
+extern void __LIB__ initVicBmpModeMc(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol, const unsigned char pixCol1,
+		const unsigned char pixCol2, const unsigned char pixCol3);
 extern void __LIB__ copyVicToStr(const screen *scr, const unsigned int offset, const char *str, const unsigned int len);
-extern void __LIB__ vicSplitScr(const unsigned int raster1, const unsigned int ctrlReg1, const unsigned int raster2, const unsigned int ctrlReg2) __smallc;
+extern void __LIB__ vicSplitScr(const unsigned int raster1, const unsigned int ctrlReg1, const unsigned int raster2,
+		const unsigned int ctrlReg2) __smallc;
 extern void __LIB__ doneVic();
 
 #endif

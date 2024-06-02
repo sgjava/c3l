@@ -13,7 +13,8 @@
  * Copy VDC char set to memory, set screen color, MMU bank, VIC bank, screen
  * memory and bitmap memory. Clear bitmap memory, color memory then enable screen.
  */
-void initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol, const unsigned char pixCol) {
+void initVicBmpModeMc(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol, const unsigned char pixCol1,
+		const unsigned char pixCol2, const unsigned char pixCol3) {
 	unsigned char vicBank;
 	saveVic();
 	/* Set border and background color */
@@ -22,14 +23,15 @@ void initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned
 	/* Clear bitmap */
 	(bmp->clearBmp)(bmp, 0);
 	/* Set foreground and background pixel colors */
-	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol] << 4) | (bmp->color[bgCol] & 0x0f));
+	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol2] << 4) | (bmp->color[pixCol1] & 0x0f));
+	// Set pixes color 3
+	fillVicMemCol(vicColMem, bmp->bmpColSize, bmp->color[pixCol3]);
 	/* Copy VDC alt char set to VIC mem */
 	copyVdcChrMem(bmp->bmpChrMem, 0x3000, 256);
-	/* Set standard bitmap mode using MMU bank 1 */
+	/* Set multicolor bitmap mode using MMU bank 1 */
 	vicBank = (unsigned int) bmp->bmpMem / 16384;
-	setVicBmpMode(1, vicBank,
-			((unsigned int) bmp->bmpColMem - (vicBank * 16384)) / 1024,
-			((unsigned int) bmp->bmpMem - (vicBank * 16384)) / 8192, 0);
+	setVicBmpMode(1, vicBank, ((unsigned int) bmp->bmpColMem - (vicBank * 16384)) / 1024,
+			((unsigned int) bmp->bmpMem - (vicBank * 16384)) / 8192, 1);
 	/* Enable screen */
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }
