@@ -119,6 +119,8 @@ extern void __LIB__ setVicPixAsm(const unsigned int x, const unsigned int y, con
 extern void __LIB__ setVicPixMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color);
 extern void __LIB__ drawVicLineH(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
 		const unsigned char color);
+extern void __LIB__ drawVicLineHMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
+		const unsigned char color);
 extern void __LIB__ drawVicLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
 		const unsigned char color);
 extern void __LIB__ printVicBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str);

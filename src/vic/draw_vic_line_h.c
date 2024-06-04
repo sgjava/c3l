@@ -21,11 +21,9 @@ void drawVicLineH(const bitmap *bmp, const unsigned int x, const unsigned int y,
 	if (firstBits > 0) {
 		/* Handle left over bits on first byte */
 		if (color) {
-			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte]
-					| fillTable[firstBits - 1];
+			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] | fillTable[firstBits - 1];
 		} else {
-			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte]
-					& ~fillTable[firstBits - 1];
+			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] & ~fillTable[firstBits - 1];
 		}
 		pixByte += 8;
 	}
@@ -47,11 +45,9 @@ void drawVicLineH(const bitmap *bmp, const unsigned int x, const unsigned int y,
 	/* Handle left over bits on last byte */
 	if (lastBits > 0) {
 		if (color) {
-			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte]
-					| ~fillTable[lastBits - 1];
+			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] | ~fillTable[lastBits - 1];
 		} else {
-			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte]
-					& fillTable[lastBits - 1];
+			bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] & fillTable[lastBits - 1];
 		}
 	}
 }

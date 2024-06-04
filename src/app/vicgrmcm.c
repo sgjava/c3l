@@ -43,7 +43,7 @@ void init(const bitmap *bmp) {
 	initCia();
 	initVicBmpMc(bmp, 0x6000, 0x4800, 0x4000);
 	setVicMmuBankLocal(1);
-	initVicBmpModeMc(bmp, bmpBlack, bmpBlack, bmpWhite, bmpRed, bmpBlue);
+	initVicBmpModeMc(bmp, bmpBlack, bmpLightBlue, bmpWhite, bmpRed, bmpBlue);
 }
 
 /*
@@ -102,12 +102,25 @@ void circles(const bitmap *bmp, const int x, const int y, const unsigned char co
 }
 
 /*
+ * Draw horizontal lines.
+ */
+void horzLines(const bitmap *bmp, const int x, const int y, const unsigned char count) {
+	unsigned char i, color = 1;
+	for (i = 0; i < count; i++) {
+		drawLine(bmp, x, y + i, bmp->bmpWidth - 1, y + i, color++);
+		if (color > 3) {
+			color = 1;
+		}
+	}
+}
+
+/*
  * Run demo.
  */
 void run(const bitmap *bmp) {
-	srand(inp(vicRaster));
 	bezier(bmp, 0, 0, bmp->bmpWidth - 1, bmp->bmpHeight - 1, 14);
 	circles(bmp, bmp->bmpWidth / 2, bmp->bmpHeight / 2, 10);
+	horzLines(bmp, 0, bmp->bmpHeight - 50, 10);
 	bitmapWaitKey(bmp);
 }
 

@@ -11,12 +11,16 @@
  * Set pixel.
  */
 void setVicPixMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color) {
-	unsigned char charX = x / 4;
-	unsigned char charY = y / 8;
-	unsigned int charIndex = charY * 40 + charX;
-	unsigned int bitmapByteAddr = (charIndex * 8) + (y % 8);
-	unsigned int pixelIndex = (x % 4) * 2;
-	// Update the bitmap memory
-	bmp->bmpMem[bitmapByteAddr] &= ~(3 << (6 - pixelIndex)); // Clear the bits
-	bmp->bmpMem[bitmapByteAddr] |= (color << (6 - pixelIndex)); // Set the color bits
+    // Precompute often used values
+    unsigned char pixelIndex = (x & 3) * 2;
+    unsigned char charX = x >> 2;  // x / 4
+    unsigned char charY = y >> 3;  // y / 8
+    unsigned int charIndex = (charY * 40) + charX;
+    unsigned int bitmapByteAddr = (charIndex << 3) + (y & 7);  // (charIndex * 8) + (y % 8)
+
+    // Update the bitmap memory
+    unsigned char mask = 3 << (6 - pixelIndex);
+    unsigned char pixelValue = color << (6 - pixelIndex);
+
+    bmp->bmpMem[bitmapByteAddr] = (bmp->bmpMem[bitmapByteAddr] & ~mask) | pixelValue;
 }
