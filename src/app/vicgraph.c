@@ -64,7 +64,7 @@ void done() {
  * Run demo.
  */
 void run(const bitmap *bmp) {
-	runGraphDemo(bmp);
+	runGraphDemo(bmp, 1);
 }
 
 main() {

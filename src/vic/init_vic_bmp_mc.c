@@ -36,7 +36,7 @@ void initVicBmpMc(const bitmap *bmp, const unsigned int bmpMem, const unsigned i
 	bmp->clearBmpCol = clearVicBmpCol;
 	bmp->setPixel = setVicPixMc;
 	bmp->drawLineH = drawVicLineHMc;
-	bmp->drawLineV = drawVicLineV;
+	bmp->drawLineV = drawVicLineVMc;
 	bmp->printBmp = printVicBmp;
 	bmp->printBmpCol = printVicBmpCol;
 }

@@ -123,6 +123,8 @@ extern void __LIB__ drawVicLineHMc(const bitmap *bmp, const unsigned int x, cons
 		const unsigned char color);
 extern void __LIB__ drawVicLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
 		const unsigned char color);
+extern void __LIB__ drawVicLineVMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
+		const unsigned char color);
 extern void __LIB__ printVicBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str);
 extern void __LIB__ printVicBmpCol(const bitmap *bmp, const unsigned char x, const unsigned char y, const unsigned char color,
 		const char *str);
@@ -140,8 +142,8 @@ extern void __LIB__ initVicBmp(const bitmap *bmp, const unsigned int bmpMem, con
 extern void __LIB__ initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol,
 		const unsigned char pixCol);
 extern void __LIB__ initVicBmpMc(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned int chrMem);
-extern void __LIB__ initVicBmpModeMc(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol, const unsigned char pixCol1,
-		const unsigned char pixCol2, const unsigned char pixCol3);
+extern void __LIB__ initVicBmpModeMc(const bitmap *bmp, const unsigned char bgCol, const unsigned char fgCol,
+		const unsigned char pixCol1, const unsigned char pixCol2, const unsigned char pixCol3);
 extern void __LIB__ copyVicToStr(const screen *scr, const unsigned int offset, const char *str, const unsigned int len);
 extern void __LIB__ vicSplitScr(const unsigned int raster1, const unsigned int ctrlReg1, const unsigned int raster2,
 		const unsigned int ctrlReg2) __smallc;

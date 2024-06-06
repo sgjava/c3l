@@ -28,18 +28,18 @@ void bitmapWaitKey(const bitmap *bmp) {
 /*
  * Draw box with label.
  */
-void drawBox(const bitmap *bmp, const int x, const int y,const  int w, const int h, const char *str) {
+void drawBox(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char pixSize, const char *str) {
 	/* Bitmap printing uses same coordinates as character mode */
-	(bmp->printBmp)(bmp, x / 8, (y - 8) / 8, str);
+	(bmp->printBmp)(bmp, (x / 8) * pixSize, (y - 8) / 8, str);
 	drawRect(bmp, x, y, w, h, bmpWhite);
 }
 
 /*
  * Draw lines.
  */
-void lines(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char count) {
+void lines(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
-	drawBox(bmp, x, y, w, h, "Bresenham");
+	drawBox(bmp, x, y, w, h, pixSize, "Bresenham");
 	for (i = 0; i < count; i++) {
 		drawLine(bmp, x + 2, rand() % (h - 4) + y + 2, x + w - 3,
 				rand() % (h - 4) + y + 2, bmpWhite);
@@ -49,10 +49,10 @@ void lines(const bitmap *bmp, const int x, const int y,const  int w, const int h
 /*
  * Draw horizontal lines.
  */
-void horzLines(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char count) {
+void horzLines(const bitmap *bmp, const int x, const int y,const  int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
 	int y0;
-	drawBox(bmp, x, y, w, h, "Horz lines");
+	drawBox(bmp, x, y, w, h, pixSize, "Horz lines");
 	for (i = 0; i < count; i++) {
 		y0 = rand() % (h - 4) + y + 2;
 		drawLine(bmp, x + 2, y0, x + w - 3, y0, bmpWhite);
@@ -62,10 +62,10 @@ void horzLines(const bitmap *bmp, const int x, const int y,const  int w, const i
 /*
  * Draw vertical lines.
  */
-void vertLines(const bitmap *bmp, const int x,const  int y, const int w, const int h, const unsigned char count) {
+void vertLines(const bitmap *bmp, const int x,const  int y, const int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
 	int x0;
-	drawBox(bmp, x, y, w, h, "Vert lines");
+	drawBox(bmp, x, y, w, h, pixSize, "Vert lines");
 	for (i = 0; i < count; i++) {
 		x0 = rand() % (w - 4) + x + 2;
 		drawLine(bmp, x0, y + 2, x0, y + h - 3, bmpWhite);
@@ -75,9 +75,9 @@ void vertLines(const bitmap *bmp, const int x,const  int y, const int w, const i
 /*
  * Draw Bezier.
  */
-void bezier(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
+void bezier(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
-	drawBox(bmp, x, y, w, h, "Bezier");
+	drawBox(bmp, x, y, w, h, pixSize, "Bezier");
 	for (i = 0; i < count; i++) {
 		drawBezier(bmp, (i * 2) + x + 3, y + 3, x + (w / 2), (i * 3) + y,
 				x + w - 3, (i * 4) + y, bmpWhite);
@@ -87,10 +87,10 @@ void bezier(const bitmap *bmp, const int x, const int y, const int w, const int 
 /*
  * Draw rectangles.
  */
-void rectangles(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
+void rectangles(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, w0, h0;
-	drawBox(bmp, x, y, w, h, "Rectangles");
+	drawBox(bmp, x, y, w, h, pixSize, "Rectangles");
 	for (i = 0; i < count; i++) {
 		w0 = rand() % (w - 10) + 5;
 		h0 = rand() % (h - 10) + 5;
@@ -103,10 +103,10 @@ void rectangles(const bitmap *bmp, const int x, const int y, const int w, const 
 /*
  * Draw squares.
  */
-void squares(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
+void squares(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, len;
-	drawBox(bmp, x, y, w, h, "Squares");
+	drawBox(bmp, x, y, w, h, pixSize, "Squares");
 	for (i = 0; i < count; i++) {
 		len = rand() % 20 + 10;
 		x0 = rand() % (w - len - 2) + x + 2;
@@ -118,10 +118,10 @@ void squares(const bitmap *bmp, const int x, const int y, const int w, const int
 /*
  * Draw ellipses.
  */
-void ellipses(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
+void ellipses(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, a, b;
-	drawBox(bmp, x, y, w, h, "Ellipses");
+	drawBox(bmp, x, y, w, h, pixSize, "Ellipses");
 	for (i = 0; i < count; i++) {
 		a = rand() % 10 + 10;
 		b = rand() % 8 + 10;
@@ -134,10 +134,10 @@ void ellipses(const bitmap *bmp, const int x, const int y, const int w, const in
 /*
  * Draw circles.
  */
-void circles(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char count) {
+void circles(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char pixSize, const unsigned char count) {
 	unsigned char i;
 	int x0, y0, len;
-	drawBox(bmp, x, y, w, h, "Circles");
+	drawBox(bmp, x, y, w, h, pixSize, "Circles");
 	for (i = 0; i < count; i++) {
 		len = rand() % (h / 5) + 10;
 		x0 = rand() % (w / 3) + (w / 3) + x + 5;
@@ -149,23 +149,23 @@ void circles(const bitmap *bmp, const int x, const int y, const int w, const int
 /*
  * Run graphics demo.
  */
-void runGraphDemo(const bitmap *bmp) {
+void runGraphDemo(const bitmap *bmp, const unsigned char pixSize) {
 	/* Calc 3x3 matrix using char layout since bitmap printing aligns to char mode boundaries */
-	unsigned int xSize = (bmp->scrWidth / 3) * 8 - 8;
-	unsigned int ySize = (bmp->scrHeight / 3) * 8 - 9;
+	unsigned int xSize = (bmp->bmpWidth / 3)  - 8;
+	unsigned int ySize = (bmp->bmpHeight / 3) - 11;
 	unsigned int x = 0, y = 8;
 	srand(inp(vicRaster));
-	lines(bmp, x, y, xSize, ySize, 10);
-	horzLines(bmp, x += xSize + 8, y, xSize, ySize, 10);
-	vertLines(bmp, x += xSize + 8, y, xSize, ySize, 10);
+	lines(bmp, x, y, xSize, ySize, pixSize, 10);
+	horzLines(bmp, x += xSize + 8, y, xSize, ySize, pixSize, 10);
+	vertLines(bmp, x += xSize + 8, y, xSize, ySize, pixSize, 10);
 	x = 0;
 	y = ySize + 17;
-	bezier(bmp, x, y, xSize, ySize, 14);
-	rectangles(bmp, x += xSize + 8, y, xSize, ySize, 10);
-	squares(bmp, x += xSize + 8, y, xSize, ySize, 10);
+	bezier(bmp, x, y, xSize, ySize, pixSize, 14);
+	rectangles(bmp, x += xSize + 8, y, xSize, ySize, pixSize, 10);
+	squares(bmp, x += xSize + 8, y, xSize, ySize, pixSize, 10);
 	x = 0;
 	y += ySize + 9;
-	ellipses(bmp, x, y, xSize, ySize, 10);
-	circles(bmp, x += xSize + 8, y, xSize, ySize, 10);
+	ellipses(bmp, x, y, xSize, ySize, pixSize, 10);
+	circles(bmp, x += xSize + 8, y, xSize, ySize, pixSize, 10);
 	bitmapWaitKey(bmp);
 }
