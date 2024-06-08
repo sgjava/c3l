@@ -18,7 +18,7 @@
 #pragma output noprotectmsdos
 #pragma output CRT_STACK_SIZE = 1024
 // Protect VIC memory < 0x8000
-#pragma output CRT_HEAP_ADDRESS = 0x8000
+#pragma output CRT_HEAP_ADDRESS = 0xc000
 
 /*
  * Set VIC to MMU bank 0 or 1.
@@ -42,9 +42,9 @@ void setVicMmuBankLocal(const unsigned char mmuRcr) {
  */
 void init(const bitmap *bmp) {
 	initCia();
-	initVicBmp(bmp, 0x6000, 0x4800, 0x4000);
+	initVicBmp(bmp, 0xa000, 0x8800, 0x8000);
 	setVicMmuBankLocal(1);
-	initVicBmpMode(bmp, bmpBlack, bmpBlack, bmpWhite);
+	initVicBmpMode(bmp, bmpBlack, bmpLightBlue, bmpWhite);
 }
 
 /*
@@ -64,7 +64,7 @@ void done() {
  * Run demo.
  */
 void run(const bitmap *bmp) {
-	runGraphDemo(bmp, 1);
+	runGraphDemo(bmp);
 }
 
 main() {

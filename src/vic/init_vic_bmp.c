@@ -28,6 +28,8 @@ void initVicBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int
 	bmp->bmpSize = ((unsigned long) bmp->bmpWidth * bmp->bmpHeight) / 8;
 	bmp->scrWidth = 40;
 	bmp->scrHeight = 25;
+	bmp->colors = 2;
+	bmp->pixWidth = 1;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
 	/* Based on NTSC */
 	bmp->aspectRatioMul = 3;

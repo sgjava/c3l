@@ -24,14 +24,14 @@ void initVicBmpModeMc(const bitmap *bmp, const unsigned char bgCol, const unsign
 	(bmp->clearBmp)(bmp, 0);
 	/* Set foreground and background pixel colors */
 	(bmp->clearBmpCol)(bmp, (bmp->color[pixCol2] << 4) | (bmp->color[pixCol1] & 0x0f));
-	// Set pixes color 3
+	// Set pixel color 3
 	fillVicMemCol(vicColMem, bmp->bmpColSize, bmp->color[pixCol3]);
-	/* Copy VDC alt char set to VIC mem */
+	// Copy VDC alt char set to VIC mem, but this is not multicolor
 	copyVdcChrMem(bmp->bmpChrMem, 0x3000, 256);
-	/* Set multicolor bitmap mode using MMU bank 1 */
+	// Set multicolor bitmap mode using MMU bank 1
 	vicBank = (unsigned int) bmp->bmpMem / 16384;
 	setVicBmpMode(1, vicBank, ((unsigned int) bmp->bmpColMem - (vicBank * 16384)) / 1024,
 			((unsigned int) bmp->bmpMem - (vicBank * 16384)) / 8192, 1);
-	/* Enable screen */
+	// Enable screen
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
 }

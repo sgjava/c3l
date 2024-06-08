@@ -8,6 +8,7 @@
 
 #include <cia.h>
 #include <bitmap.h>
+#include <common.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <vic.h>
@@ -17,8 +18,8 @@
 
 #pragma output noprotectmsdos
 #pragma output CRT_STACK_SIZE = 1024
-// Protect VIC memory < 0x8000
-#pragma output CRT_HEAP_ADDRESS = 0x8000
+// Protect VIC memory < 0xc000
+#pragma output CRT_HEAP_ADDRESS = 0xc000
 
 /*
  * Set VIC to MMU bank 0 or 1.
@@ -42,9 +43,10 @@ void setVicMmuBankLocal(const unsigned char mmuRcr) {
  */
 void init(const bitmap *bmp) {
 	initCia();
-	initVicBmpMc(bmp, 0x6000, 0x4800, 0x4000);
+	initVicBmpMc(bmp, 0xa000, 0x8800, 0x8000);
 	setVicMmuBankLocal(1);
-	initVicBmpModeMc(bmp, bmpBlack, bmpLightBlue, bmpWhite, bmpRed, bmpBlue);
+	initVicBmpModeMc(bmp, bmpBlack, bmpLightBlue, bmpWhite, bmpYellow, bmpBlue);
+	fileToMem(bmp->bmpChrMem + 256, 768, "mc.chr");
 }
 
 /*
@@ -64,7 +66,7 @@ void done() {
  * Run demo.
  */
 void run(const bitmap *bmp) {
-	runGraphDemo(bmp, 2);
+	runGraphDemo(bmp);
 }
 
 main() {

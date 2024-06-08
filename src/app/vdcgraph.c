@@ -39,7 +39,7 @@ void done(const bitmap *bmp, const unsigned char *chr) {
  * Run demo.
  */
 void run(const bitmap *bmp) {
-	runGraphDemo(bmp, 1);
+	runGraphDemo(bmp);
 }
 
 main() {

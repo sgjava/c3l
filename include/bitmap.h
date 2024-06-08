@@ -51,87 +51,54 @@ typedef void (*printBmpColPtr)(const bitmap*, const unsigned char, const unsigne
  * We treat the bitmap struct like an object and encapsulate member variables and function pointers that allow polymorphism.
  */
 typedef struct bitmap {
-	/*
-	 * Color mapping
-	 */
+	// Pixel width.
+	unsigned char pixWidth;
+	// Number of colors
+	unsigned char colors;
+	// Color mapping
 	unsigned char color[16];
-	/*
-	 * Screen width in characters.
-	 */
+	// Screen width in characters.
 	unsigned char scrWidth;
-	/*
-	 * Screen height in characters.
-	 */
+	// Screen height in characters.
 	unsigned char scrHeight;
-	/*
-	 * Screen width in pixels.
-	 */
+	// Screen width in pixels.
 	unsigned int bmpWidth;
-	/*
-	 * Screen height in pixels.
-	 */
+	// Screen height in pixels.
 	unsigned int bmpHeight;
-	/*
-	 * Bitmap size in bytes.
-	 */
+	// Bitmap size in bytes.
 	unsigned int bmpSize;
-	/*
-	 * Bitmap memory location.
-	 */
+	// Bitmap memory location.
 	unsigned char *bmpMem;
-	/*
-	 * Bitmap color location.
-	 */
+	// Bitmap color location.
 	unsigned char *bmpColMem;
-	/*
-	 * Bitmap color size.
-	 */
+	// Bitmap color size.
 	unsigned int bmpColSize;
-	/*
-	 * Bitmap character set location.
-	 */
+	// Bitmap character set location.
 	unsigned char *bmpChrMem;
-	/*
-	 * Aspect ratio multiplier used by circle and square functions.
-	 */
+	// Aspect ratio multiplier used by circle and square functions.
 	unsigned char aspectRatioMul;
-	/*
-	 * Aspect ratio divisor used by circle and square functions.
-	 */
+	// Aspect ratio divisor used by circle and square functions.
 	unsigned char aspectRatioDiv;
-	/*
-	 * Set pixel.
-	 */
+	// Set pixel.
 	setPixelPtr setPixel;
-	/*
-	 * Clear bitmap.
-	 */
+	// Clear bitmap.
 	clearBmpPtr clearBmp;
-	/*
-	 * Clear bitmap color.
-	 */
+	// Clear bitmap color.
 	clearBmpColPtr clearBmpCol;
-	/*
-	 * Draw horizontal line.
-	 */
+	// Draw horizontal line.
 	drawLineHPtr drawLineH;
-	/*
-	 * Draw vertical line.
-	 */
+	// Draw vertical line.
 	drawLineVPtr drawLineV;
-	/*
-	 * Print bitmap text without color.
-	 */
+	// Print bitmap text without color.
 	printBmpPtr printBmp;
-	/*
-	 * Print bitmap text with color.
-	 */
+	// Print bitmap text with color.
 	printBmpColPtr printBmpCol;
 };
 
 extern void __LIB__ drawLine(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const unsigned char color);
-extern void __LIB__ drawBezier(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const int x2, const int y2, const unsigned char color);
-extern void __LIB__ drawEllipse(const bitmap *bmp, const int xc, const int yc, const int a, const int b,const  unsigned char color);
+extern void __LIB__ drawBezier(const bitmap *bmp, const int x0, const int y0, const int x1, const int y1, const int x2,
+		const int y2, const unsigned char color);
+extern void __LIB__ drawEllipse(const bitmap *bmp, const int xc, const int yc, const int a, const int b, const unsigned char color);
 extern void __LIB__ drawCircle(const bitmap *bmp, const int xc, const int yc, const int a, const unsigned char color);
 extern void __LIB__ drawRect(const bitmap *bmp, const int x, const int y, const int w, const int h, const unsigned char color);
 extern void __LIB__ drawSquare(const bitmap *bmp, const int x, const int y, const int len, const unsigned char color);
