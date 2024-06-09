@@ -2,6 +2,8 @@
 
 C3L, which stands for Commodore 128 CP/M C Library, is a contemporary API built upon the ANSI C standard. It is specifically crafted to streamline the utilization of C128 distinctive features within the CP/M environment.
 
+I am often asked why I chose CP/M instead of the "native" Z80 mode. The origins of C3L are rooted in Turbo Pascal and ANSI C, dating back to the late 80s and early 90s. During that time, the code was actually developed on the C128 in CP/M mode. The advantages of using CP/M with Z88DK include more straightforward file I/O and the absence of a need for a BASIC loader. However, you can still build native applications with C3L that do not require file I/O or cpm.h. You will need to make the necessary adjustments yourself, as others have done over the years.
+
 ## Features snapshot
 * Utilize modern Integrated Development Environments (IDEs) to develop code and identify syntax errors prior to compilation.
 * High-performance abstraction layer for VDC and VIC text and bitmap modes, enabling the creation of dual monitor mixed-mode applications effortlessly.
@@ -26,6 +28,12 @@ If you have VICE already setup you can run the demo applications using the [disk
 * `b`:
 * `dualcon`
 * To list all the demos just `dir *.com`
+* demo.d71 is general demos
+* graphics.d71 is graphics related
+* talk.d71 voice synthesis 
+* playpcm.d71 PCM sound related
+
+It's best to log into drive B since programs will default to current drive for required files.
 
 ## Set up development environment
 To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu VM, Eclipse, Z88DK, VICE and ctools. This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework for your personal projects unrelated to C3L.
@@ -143,7 +151,6 @@ character and color scroll at same time to reduce this at the cost of performanc
 * Scroll any area of screen
 
 ## Basic console
-
 If your app requires more of a console abstraction then use [console](https://github.com/sgjava/c3l/blob/main/include/console.h).
 It operates like a normal console keeping track of the cursor and scrolling. There 
 is also a print function that allows word wrapping.

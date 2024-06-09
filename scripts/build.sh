@@ -4,7 +4,7 @@
 #
 # @author: sgoldsmith
 #
-# Make library source, create c3l.lib, compile apps and create disk images.
+# Make library source, create c3l.lib, demo.lib, compile apps and create disk images.
 #
 # Steven P. Goldsmith
 # sgjava@gmail.com
@@ -31,9 +31,9 @@ mkdir ./build/app
 
 # Build demo apps
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/baseline.com ./src/app/baseline.c -L./build/lib -lc3l
-zcc +cpm -vn -I"$HOME/z88dk/include" -I./include -o ./build/app/ciaapp.com ./src/app/ciademo.c -L./build/lib -lc3l
-zcc +cpm -vn -I"$HOME/z88dk/include" -I./include -o ./build/app/rtcapp.com ./src/app/rtcdemo.c -L./build/lib -lc3l
-zcc +cpm -vn -I"$HOME/z88dk/include" -I./include -o ./build/app/sidapp.com ./src/app/siddemo.c -L./build/lib -lc3l
+zcc +cpm -vn -I"$HOME/z88dk/include" -I./include -o ./build/app/ciademo.com ./src/app/ciademo.c -L./build/lib -lc3l
+zcc +cpm -vn -I"$HOME/z88dk/include" -I./include -o ./build/app/rtcdemo.com ./src/app/rtcdemo.c -L./build/lib -lc3l
+zcc +cpm -vn -I"$HOME/z88dk/include" -I./include -o ./build/app/siddemo.com ./src/app/siddemo.c -L./build/lib -lc3l
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/convpcm.com ./src/app/convpcm.c -L./build/lib -lc3l
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/cpmdir.com ./src/app/cpmdir.c -L./build/lib -lc3l
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/playpcm.com ./src/app/playpcm.c -L./build/lib -lc3l
@@ -53,24 +53,48 @@ zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/textpe
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/observer.com ./src/app/observer.c -L./build/lib -lc3l
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicgrmcm.com ./src/app/vicgrmcm.c -L./build/lib -lc3l -ldemo
 
-# Remove curent demo disk image
-rm -f ./disks/demo.d71
-# Create new demo disk image
-cformat -2 ./disks/demo.d71
-# Copy all com files to demo disk
-ctools ./disks/demo.d71 p ./build/app/*.com
-# Copy resource files to demo disk
-ctools ./disks/demo.d71 p ./resources/test.sub
-ctools ./disks/demo.d71 p ./resources/*.chr
-ctools ./disks/demo.d71 p ./resources/*.spr
+# Remove curent disk image
+rm -f ./disks/graphics.d71
+# Create new disk image
+cformat -2 ./disks/graphics.d71
+# Copy graphics related files to disk
+ctools ./disks/graphics.d71 p ./build/app/vdcgraph.com
+ctools ./disks/graphics.d71 p ./build/app/vicgraph.com
+ctools ./disks/graphics.d71 p ./build/app/vicsplit.com
+ctools ./disks/graphics.d71 p ./build/app/vicgrmcm.com
+ctools ./disks/graphics.d71 p ./build/app/vicspr.com
+ctools ./disks/graphics.d71 p ./build/app/vdcfile.com
+# Copy resource files to disk
+ctools ./disks/graphics.d71 p ./resources/*.chr
+ctools ./disks/graphics.d71 p ./resources/*.spr
 
-# Remove curent playpcm disk image
+# Remove curent disk image
+rm -f ./disks/demo.d71
+# Create new disk image
+cformat -2 ./disks/demo.d71
+# Copy com files to demo disk
+ctools ./disks/demo.d71 p ./build/app/baseline.com
+ctools ./disks/demo.d71 p ./build/app/ciademo.com
+ctools ./disks/demo.d71 p ./build/app/rtcdemo.com
+ctools ./disks/demo.d71 p ./build/app/siddemo.com
+ctools ./disks/demo.d71 p ./build/app/cpmdir.com
+ctools ./disks/demo.d71 p ./build/app/vdccon.com
+ctools ./disks/demo.d71 p ./build/app/viccon.com
+ctools ./disks/demo.d71 p ./build/app/dualcon.com
+ctools ./disks/demo.d71 p ./build/app/vicdev.com
+ctools ./disks/demo.d71 p ./build/app/vdcdev.com
+ctools ./disks/demo.d71 p ./build/app/textperf.com
+ctools ./disks/demo.d71 p ./build/app/observer.com
+# Copy resource files to disk
+ctools ./disks/demo.d71 p ./resources/test.sub
+
+# Remove curent disk image
 rm -f ./disks/playpcm.d71
 # Create new app disk image
 cformat -2 ./disks/playpcm.d71
-# Copy resource files to app disk
+# Copy resource files to disk
 ctools ./disks/playpcm.d71 p ./resources/*.snd
 ctools ./disks/playpcm.d71 p ./resources/*.raw
-# Copy com files to playpcm disk
+# Copy com files to disk
 ctools ./disks/playpcm.d71 p ./build/app/convpcm.com
 ctools ./disks/playpcm.d71 p ./build/app/playpcm.com
