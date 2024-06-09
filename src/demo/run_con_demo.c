@@ -12,16 +12,14 @@
 
 void randSentence(const console *con, const unsigned char sentences, const unsigned char color) {
 	static unsigned char colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
-	scrRed, scrLightRed};
+	scrRed, scrLightRed };
 	unsigned char i;
 	char *str;
 	if (color) {
-		printWrapCon(con,
-				"Here we use the console functions with color which are slower than no color.");
+		printWrapCon(con, "Here we use the console functions with color which are slower than no color.");
 		con->colorOn = 1;
 	} else {
-		printWrapCon(con,
-				"Here we use the console functions without color which are faster.");
+		printWrapCon(con, "Here we use the console functions without color which are faster.");
 		con->colorOn = 0;
 	}
 	waitKey(con->scr);

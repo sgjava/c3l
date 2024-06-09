@@ -10,15 +10,12 @@
 /*
  * Optimized vertical line algorithm uses less calculation than setVicPix.
  */
-void drawVicLineVMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color) {
-    // Colors 0-3 pixels
-    static const unsigned char bitTable[4][4] = {
-        { 0x3f, 0xcf, 0xf3, 0xfc },
-        { 0x40, 0x10, 0x04, 0x01 },
-        { 0x80, 0x20, 0x08, 0x02 },
-        { 0xc0, 0x30, 0x0c, 0x03 }
-    };
-    unsigned int pixByte = bmp->scrWidth * (y & 0xf8) + (x << 1 & 0x1f8) + (y & 0x07);
+void drawVicLineVMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len,
+		const unsigned char color) {
+	// Colors 0-3 pixels
+	static const unsigned char bitTable[4][4] = { { 0x3f, 0xcf, 0xf3, 0xfc }, { 0x40, 0x10, 0x04, 0x01 },
+			{ 0x80, 0x20, 0x08, 0x02 }, { 0xc0, 0x30, 0x0c, 0x03 } };
+	unsigned int pixByte = bmp->scrWidth * (y & 0xf8) + (x << 1 & 0x1f8) + (y & 0x07);
 	unsigned char i;
 	unsigned char vBit = bitTable[color][x & 0x03];
 	/* Plot pixels */

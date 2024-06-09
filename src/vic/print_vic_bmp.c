@@ -11,7 +11,7 @@
 /*
  * Print with foreground/background color.
  */
-void printVicBmp(const bitmap *bmp, const unsigned char x,const  unsigned char y, const char *str) {
+void printVicBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str) {
 	unsigned int *bmp16 = (unsigned int*) bmp->bmpMem;
 	unsigned int *chr16 = (unsigned int*) bmp->bmpChrMem;
 	unsigned int bmpOfs = (y * 160) + (x * 4);

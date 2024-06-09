@@ -20,23 +20,19 @@ void scrollCon(const console *con, const char *str) {
 		unsigned char y = (scrOfs + len - scr->scrSize) / scr->scrWidth + 1;
 		/* First scroll, so bottom line can be blanked */
 		if (con->colorOn) {
-			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1,
-					scr->scrHeight - 1);
+			(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 		} else {
 			(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 		}
-		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth,
-				scr->scrWidth, 32);
+		(scr->fillMem)(scr->scrMem + scr->scrSize - scr->scrWidth, scr->scrWidth, 32);
 		scrOfs = scrOfs - (y * scr->scrWidth);
 		y -= 1;
 		/* Scroll Y lines */
 		for (; y > 0; y--) {
 			if (con->colorOn) {
-				(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1,
-						scr->scrHeight - 1);
+				(scr->scrollUpCol)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 			} else {
-				(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1,
-						scr->scrHeight - 1);
+				(scr->scrollUp)(scr, 0, 0, scr->scrWidth - 1, scr->scrHeight - 1);
 			}
 		}
 		/* Set new cursor position for print */

@@ -23,7 +23,6 @@ unsigned long todToMs(const unsigned int cia) {
 	} else {
 		hour = bcdToByte(hour);
 	}
-	return (hour * 3600000) + (bcdToByte(inp(cia + ciaTodMin)) * 60000)
-			+ (bcdToByte(inp(cia + ciaTodSec)) * 1000)
+	return (hour * 3600000) + (bcdToByte(inp(cia + ciaTodMin)) * 60000) + (bcdToByte(inp(cia + ciaTodSec)) * 1000)
 			+ (bcdToByte(inp(cia + ciaTodTen)) * 100);
 }

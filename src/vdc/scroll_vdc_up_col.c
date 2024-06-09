@@ -10,7 +10,8 @@
 /*
  * Scroll color window up given x1, y1, x2, y2 rectangle in current page.
  */
-void scrollVdcUpCol(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2, const unsigned char y2) {
+void scrollVdcUpCol(const screen *scr, const unsigned char x1, const unsigned char y1, const unsigned char x2,
+		const unsigned char y2) {
 	/* If line is screen width use optimized function */
 	if (x2 - x1 + 1 == scr->scrWidth) {
 		scrollVdcUpYCol(scr, y1, y2);

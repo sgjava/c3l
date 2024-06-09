@@ -61,8 +61,7 @@ void swapNibbles(const unsigned char *buffer, const unsigned int len) {
 /*
  Play sample from buffer.
  */
-void play(const unsigned char *buffer, const unsigned int len, const unsigned int hz,
-		const unsigned char bits) {
+void play(const unsigned char *buffer, const unsigned int len, const unsigned int hz, const unsigned char bits) {
 	unsigned char tens;
 	unsigned long startCia, endCia;
 	/* Start HZ timer in continuous mode */

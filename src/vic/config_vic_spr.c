@@ -14,8 +14,7 @@
 void configVicSpr(const screen *scr, const unsigned char *spr, const unsigned char sprNum, const unsigned char sprCol) {
 	unsigned char vicBank = (unsigned int) scr->scrMem / 16384;
 	/* Set sprite memory location */
-	scr->scrMem[vicSprMemOfs + sprNum] = ((unsigned int) spr - (vicBank * 16384))
-			/ 64;
+	scr->scrMem[vicSprMemOfs + sprNum] = ((unsigned int) spr - (vicBank * 16384)) / 64;
 	/* Sprite color */
 	outp(vicSpr0Col + sprNum, sprCol);
 }

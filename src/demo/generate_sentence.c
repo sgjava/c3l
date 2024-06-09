@@ -13,8 +13,7 @@
  */
 char* generateSentence() {
 	static char *articles[] = { "The", "A" };
-	static char *nouns[] = { "blue jay", "cardinal", "eastern phoebe",
-			"grackle", "sandhill crane" };
+	static char *nouns[] = { "blue jay", "cardinal", "eastern phoebe", "grackle", "sandhill crane" };
 	static char *verbs[] = { "flies", "jumps", "sleeps", "eats", "walks" };
 	static char *adjectives[] = { "big", "small", "angry", "wet", "happy" };
 	char *sentence = malloc(100);
@@ -23,7 +22,6 @@ char* generateSentence() {
 	int verbIndex = rand() % (sizeof(verbs) / sizeof(verbs[0]));
 	int adjectiveIndex = rand() % (sizeof(adjectives) / sizeof(adjectives[0]));
 	sentence[0] = '\0';
-	sprintf(sentence, "%s %s %s %s.", articles[articleIndex],
-			adjectives[adjectiveIndex], nouns[nounIndex], verbs[verbIndex]);
+	sprintf(sentence, "%s %s %s %s.", articles[articleIndex], adjectives[adjectiveIndex], nouns[nounIndex], verbs[verbIndex]);
 	return sentence;
 }

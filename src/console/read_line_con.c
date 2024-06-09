@@ -79,8 +79,7 @@ char* readLineCon(const console *con, unsigned char len) {
 	outp(cia2+ciaCtrlRegA, ciaStopTimer);
 	str = (char*) malloc(strLen + 1);
 	/* Screen to string */
-	(scr->copyScrToStr)(scr, (con->curY * scr->scrWidth) + con->curX - strLen,
-			str, strLen);
+	(scr->copyScrToStr)(scr, (con->curY * scr->scrWidth) + con->curX - strLen, str, strLen);
 	/* Remove cursor from end of input */
 	(scr->print)(scr, con->curX, con->curY, " ");
 	con->curOn = curOn;

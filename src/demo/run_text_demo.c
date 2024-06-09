@@ -189,10 +189,9 @@ unsigned int vicColorScroll(const console *con, const unsigned int lines) {
 /*
  * Run demo.
  */
-void runTextDemo(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs,
-		const unsigned int cpmScrollMs, const unsigned int lines) {
-	static char *LINE_80 =
-			"01234567890123456789012345678901234567890123456789012345678901234567890123456789";
+void runTextDemo(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs, const unsigned int cpmScrollMs,
+		const unsigned int lines) {
+	static char *LINE_80 = "01234567890123456789012345678901234567890123456789012345678901234567890123456789";
 	static char *LINE_40 = "0123456789012345678901234567890123456789";
 	char str[41];
 	unsigned int vdcPrintMs = vdcPrint(vdcCon, LINE_80, lines);
@@ -212,22 +211,17 @@ void runTextDemo(const console *vicCon, const console *vdcCon, const unsigned in
 	printLineCon(vicCon, str);
 	sprintf(str, "VDC scrollCon       %04u ms per line", (vdcScrollMs / lines));
 	printLineCon(vicCon, str);
-	sprintf(str, "VDC printCon color  %04u ms per line",
-			(vdcColPrintMs / lines));
+	sprintf(str, "VDC printCon color  %04u ms per line", (vdcColPrintMs / lines));
 	printLineCon(vicCon, str);
-	sprintf(str, "VDC scrollCon color %04u ms per line",
-			(vdcColScrollMs / lines));
+	sprintf(str, "VDC scrollCon color %04u ms per line", (vdcColScrollMs / lines));
 	printLineCon(vicCon, str);
-	sprintf(str, "VIC printCon        %04u ms per line",
-			((vicPrintMs * 2) / lines));
+	sprintf(str, "VIC printCon        %04u ms per line", ((vicPrintMs * 2) / lines));
 	printLineCon(vicCon, str);
 	sprintf(str, "VIC scrollCon       %04u ms per line", (vicScrollMs / lines));
 	printLineCon(vicCon, str);
-	sprintf(str, "VIC printCon color  %04u ms per line",
-			((vicColPrintMs * 2) / lines));
+	sprintf(str, "VIC printCon color  %04u ms per line", ((vicColPrintMs * 2) / lines));
 	printLineCon(vicCon, str);
-	sprintf(str, "VIC scrollCon color %04u ms per line",
-			(vicColScrollMs / lines));
+	sprintf(str, "VIC scrollCon color %04u ms per line", (vicColScrollMs / lines));
 	printLineCon(vicCon, str);
 	waitKey(vicCon->scr);
 }

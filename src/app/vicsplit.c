@@ -36,8 +36,7 @@ void init(const console *con, const screen *scr, const bitmap *bmp) {
 	/* Clear bitmap */
 	(bmp->clearBmp)(bmp, 0);
 	/* Set foreground and background pixel colors */
-	(bmp->clearBmpCol)(bmp,
-			(bmp->color[bmpWhite] << 4) | (bmp->color[bmpBlack] & 0x0f));
+	(bmp->clearBmpCol)(bmp, (bmp->color[bmpWhite] << 4) | (bmp->color[bmpBlack] & 0x0f));
 }
 
 /*

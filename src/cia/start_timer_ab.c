@@ -10,8 +10,7 @@
 /*
  * Set CIA count down timers. Timer B counts timer A.
  */
-void startTimerAB(const unsigned int cia, const unsigned int timerA, const unsigned int timerB,
-		const unsigned char latch) {
+void startTimerAB(const unsigned int cia, const unsigned int timerA, const unsigned int timerB, const unsigned char latch) {
 	// CIA Timer A lo
 	outp(cia + ciaTimerALo, (unsigned char ) timerA);
 	// CIA Timer A hi

@@ -13,8 +13,7 @@
 /*
  * Generate random sentences on both VIC and VDC,
  */
-void dualRandSentence(const console *vicCon, const console *vdcCon, const unsigned char sentences,
-unsigned char color) {
+void dualRandSentence(const console *vicCon, const console *vdcCon, const unsigned char sentences, unsigned char color) {
 	static unsigned char colors[] = { scrGreen, scrLightGreen, scrBlue, scrLightBlue,
 	scrRed, scrLightRed };
 	unsigned char i;
@@ -30,10 +29,8 @@ unsigned char color) {
 	srand(inp(vicRaster));
 	for (i = 0; i < sentences; i++) {
 		if (color) {
-			vicCon->color =
-					colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
-			vdcCon->color =
-					colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
+			vicCon->color = colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
+			vdcCon->color = colors[rand() % (sizeof(colors) / sizeof(colors[0]))];
 		}
 		str = generateSentence();
 		printWrapCon(vicCon, str);
@@ -56,11 +53,9 @@ unsigned char color) {
  * Display color mappings VIC and VDC,
  */
 void dualColors(const console *vicCon, const console *vdcCon) {
-	static char *colorNames[16][1] = { { "scrBlack" }, { "scrWhite" }, { "scrRed" }, {
-			"scrCyan" }, { "scrPurple" }, { "scrGreen" }, { "scrBlue" }, {
-			"scrYellow" }, { "scrOrange" }, { "scrBrown" }, { "scrLightRed" }, {
-			"scrDarkGray" }, { "scrMedGray" }, { "scrLightGreen" }, {
-			"scrLightBlue" }, { "scrLightGray" }};
+	static char *colorNames[16][1] = { { "scrBlack" }, { "scrWhite" }, { "scrRed" }, { "scrCyan" }, { "scrPurple" }, { "scrGreen" },
+			{ "scrBlue" }, { "scrYellow" }, { "scrOrange" }, { "scrBrown" }, { "scrLightRed" }, { "scrDarkGray" }, { "scrMedGray" },
+			{ "scrLightGreen" }, { "scrLightBlue" }, { "scrLightGray" } };
 	unsigned char i;
 	vicCon->colorOn = 1;
 	vdcCon->colorOn = 1;

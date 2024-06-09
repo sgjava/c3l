@@ -23,8 +23,7 @@ void initVicScrMode(const screen *scr, const unsigned char bgCol, const unsigned
 	/* Clear screen to spaces */
 	(scr->clearScr)(scr, 32);
 	/* Only copy VDC character set if RAM used */
-	if ((unsigned int) scr->chrMem != 0x1000 && (unsigned int) scr->chrMem != 0x1800
-			&& (unsigned int) scr->chrMem != 0x9000
+	if ((unsigned int) scr->chrMem != 0x1000 && (unsigned int) scr->chrMem != 0x1800 && (unsigned int) scr->chrMem != 0x9000
 			&& (unsigned int) scr->chrMem != 0x9800) {
 		/* Copy VDC alt char set to VIC mem */
 		copyVdcChrMem(scr->chrMem, 0x3000, 256);

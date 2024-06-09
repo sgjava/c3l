@@ -17,6 +17,6 @@
 main() {
 	printf("\nDefault mode Binary, 24h, DST\n");
 	setRtcMode(rtcDefaultMode);
-    printf("Date %02u/%02u/20%02u, Time: %02u:%02u:%02u\n", getRtcReg(rtcMonth), getRtcReg(rtcDay),
-			getRtcReg(rtcYear), getRtcReg(rtcHours), getRtcReg(rtcMinutes), getRtcReg(rtcSeconds));
+	printf("Date %02u/%02u/20%02u, Time: %02u:%02u:%02u\n", getRtcReg(rtcMonth), getRtcReg(rtcDay), getRtcReg(rtcYear),
+			getRtcReg(rtcHours), getRtcReg(rtcMinutes), getRtcReg(rtcSeconds));
 }

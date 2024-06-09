@@ -12,8 +12,7 @@
  */
 void setVicMode(const unsigned char ecm, const unsigned char bmm, const unsigned char mcm) {
 	/* Set enhanced color and char/bitmap mode */
-	outp(vicCtrlReg1,
-			(inp(vicCtrlReg1) & 0x9f) | ((ecm * 0x40) + (bmm * 0x20)));
+	outp(vicCtrlReg1, (inp(vicCtrlReg1) & 0x9f) | ((ecm * 0x40) + (bmm * 0x20)));
 	/* Set multicolor mode */
 	outp(vicCtrlReg2, (inp(vicCtrlReg2) & 0xef) | (mcm * 0x10));
 }

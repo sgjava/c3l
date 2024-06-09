@@ -13,8 +13,7 @@
  *
  * Note CIA 2 timer A is used.
  */
-void readSidPots(const unsigned char *x1, const unsigned char *y1, const unsigned char *x2,
-		const unsigned char *y2) {
+void readSidPots(const unsigned char *x1, const unsigned char *y1, const unsigned char *x2, const unsigned char *y2) {
 	unsigned char saveReg = inp(cia1 + ciaDdrA);
 	// Set bits 6 and 7 to output
 	outp(cia1 + ciaDdrA, ciaPots);

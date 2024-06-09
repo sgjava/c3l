@@ -50,8 +50,7 @@ unsigned int convert8to2(const unsigned char *buffer, const unsigned int bufSize
 	unsigned int i, s;
 	unsigned char sample;
 	for (i = 0, s = 0; i < bufSize; i += 4, ++s) {
-		sample = ((buffer[i] >> 6) & 0x03) | ((buffer[i + 1] >> 4) & 0x0c)
-				| ((buffer[i + 2] >> 2) & 0x30) | (buffer[i + 3] & 0xc0);
+		sample = ((buffer[i] >> 6) & 0x03) | ((buffer[i + 1] >> 4) & 0x0c) | ((buffer[i + 2] >> 2) & 0x30) | (buffer[i + 3] & 0xc0);
 		buffer[s] = sample;
 	}
 	/* Four 2-bit samples in a byte */
@@ -62,8 +61,7 @@ unsigned int convert8to2(const unsigned char *buffer, const unsigned int bufSize
  Convert 8 bit raw data to 1 bit raw data.
  */
 unsigned int convert8to1(const unsigned char *buffer, const unsigned int bufSize) {
-	static unsigned char bitTable[8] = { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04,
-			0x02, 0x01 };
+	static unsigned char bitTable[8] = { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
 	unsigned char sample;
 	unsigned int i, b;
 	for (i = 0; i < bufSize; i += 8) {
@@ -94,8 +92,7 @@ void convert(const char *inFileName, const char *outFileName, const unsigned cha
 			if ((outFile = fopen(outFileName, "wb")) != NULL) {
 				printf("Converting %s to %s\n", inFileName, outFileName);
 				do {
-					bytesRead = fread(buffer, sizeof(unsigned char), BUF_SIZE,
-							inFile);
+					bytesRead = fread(buffer, sizeof(unsigned char), BUF_SIZE, inFile);
 					// Convert 8 bit to 4, 2 or 1
 					switch (bits) {
 					case 1:

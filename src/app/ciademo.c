@@ -37,9 +37,7 @@ main() {
 	/* Stop timer A/B */
 	outp(cia2 + ciaCtrlRegA, ciaStopTimer);
 	endCia = todToMs(cia1);
-	timerVal = 0xffff
-			- (inp(cia2 + ciaTimerBHi) * 256 + inp(cia2 + ciaTimerBLo));
-	printf("Milliseconds CIA timer %u, CIA TOD %lu\n", timerVal,
-			(endCia - startCia));
+	timerVal = 0xffff - (inp(cia2 + ciaTimerBHi) * 256 + inp(cia2 + ciaTimerBLo));
+	printf("Milliseconds CIA timer %u, CIA TOD %lu\n", timerVal, (endCia - startCia));
 	doneCia();
 }

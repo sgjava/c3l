@@ -42,8 +42,8 @@ void loadPhoneme(const unsigned char *buffer, const unsigned int len, const char
 /*
  Load all phonemes into buffers. Input file format should be FILE.RAW SIZE.
  */
-unsigned int loadAll(const char *fileName, const arpabetName name,
-		const unsigned int arpabetLen[], const unsigned char *arpabetBuf[]) {
+unsigned int loadAll(const char *fileName, const arpabetName name, const unsigned int arpabetLen[],
+		const unsigned char *arpabetBuf[]) {
 	unsigned char tens;
 	unsigned long startCia, endCia;
 	FILE *file;
@@ -78,8 +78,7 @@ unsigned int loadAll(const char *fileName, const arpabetName name,
 		}
 		fclose(file);
 		endCia = todToMs(cia1);
-		printf("\n\n%d files loaded, %u total bytes, %lu ms", i, totalSize,
-				endCia - startCia);
+		printf("\n\n%d files loaded, %u total bytes, %lu ms", i, totalSize, endCia - startCia);
 	} else {
 		puts("\nUnable to open file.");
 	}
@@ -89,8 +88,7 @@ unsigned int loadAll(const char *fileName, const arpabetName name,
 /*
  * Write all phonemes to a file with header describing Hz, bits, sample and length.
  */
-unsigned int writePhonemes(const char *fileName, phonemes *p,
-		const unsigned char *arpabetBuf[]) {
+unsigned int writePhonemes(const char *fileName, phonemes *p, const unsigned char *arpabetBuf[]) {
 	unsigned char i, tens;
 	unsigned long startCia, endCia;
 	unsigned int totalSize = 0;
@@ -106,14 +104,12 @@ unsigned int writePhonemes(const char *fileName, phonemes *p,
 		fwrite(p, sizeof(unsigned char), sizeof(phonemes), file);
 		for (i = 0; i < PHONEMES; ++i) {
 			printf("\nWriting %s, %u bytes", p->name[i], p->arpabetLen[i]);
-			fwrite(arpabetBuf[i], sizeof(unsigned char), p->arpabetLen[i],
-					file);
+			fwrite(arpabetBuf[i], sizeof(unsigned char), p->arpabetLen[i], file);
 			totalSize += p->arpabetLen[i];
 		}
 		fclose(file);
 		endCia = todToMs(cia1);
-		printf("\n\n%d buffers written, %u total bytes, %lu ms", i, totalSize,
-				endCia - startCia);
+		printf("\n\n%d buffers written, %u total bytes, %lu ms", i, totalSize, endCia - startCia);
 	}
 	return totalSize;
 }
@@ -149,8 +145,7 @@ main(int argc, char *argv[]) {
 			free(p);
 		}
 		if (totalRead == 0 || totalRead != totalWrite) {
-			printf("\n\nTotal read %u not equal to total write %u", totalRead,
-					totalWrite);
+			printf("\n\nTotal read %u not equal to total write %u", totalRead, totalWrite);
 		}
 		/* Free buffers */
 		for (i = 0; i < PHONEMES; ++i) {

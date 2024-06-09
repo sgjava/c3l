@@ -47,7 +47,8 @@ void done() {
 /*
  * Run demo.
  */
-void run(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs, const unsigned int cpmScrollMs, const unsigned int lines) {
+void run(const console *vicCon, const console *vdcCon, const unsigned int cpmPrintMs, const unsigned int cpmScrollMs,
+		const unsigned int lines) {
 	runTextDemo(vicCon, vdcCon, cpmPrintMs, cpmScrollMs, lines);
 	clearHomeCon(vdcCon);
 	clearHomeCon(vicCon);

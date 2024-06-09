@@ -15,8 +15,7 @@ void printVdcCol(const screen *scr, const unsigned char x, const unsigned char y
 	unsigned int len = strlen(str);
 	/* No need to print empty string */
 	if (len > 0) {
-		fillVdcMem((unsigned char*) (y * scr->scrWidth) + (unsigned int) scr->scrColMem + x,
-				len, scr->color[color]);
+		fillVdcMem((unsigned char*) (y * scr->scrWidth) + (unsigned int) scr->scrColMem + x, len, scr->color[color]);
 		printVdc(scr, x, y, str);
 	}
 }

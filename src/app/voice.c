@@ -126,8 +126,7 @@ void playStr(const char *word, const char *str, const phonemes *p, const unsigne
 	for (i = 0; i < ph; ++i) {
 		/* Handle phoneme not found */
 		if (arpabetPos[i] > -1) {
-			play(arpabetBuf[arpabetPos[i]], p->arpabetLen[arpabetPos[i]],
-					p->bits);
+			play(arpabetBuf[arpabetPos[i]], p->arpabetLen[arpabetPos[i]], p->bits);
 			delay(30);
 		}
 	}

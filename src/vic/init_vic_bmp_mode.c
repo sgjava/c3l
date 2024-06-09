@@ -27,8 +27,7 @@ void initVicBmpMode(const bitmap *bmp, const unsigned char bgCol, const unsigned
 	copyVdcChrMem(bmp->bmpChrMem, 0x3000, 256);
 	/* Set standard bitmap mode using MMU bank 1 */
 	vicBank = (unsigned int) bmp->bmpMem / 16384;
-	setVicBmpMode(1, vicBank,
-			((unsigned int) bmp->bmpColMem - (vicBank * 16384)) / 1024,
+	setVicBmpMode(1, vicBank, ((unsigned int) bmp->bmpColMem - (vicBank * 16384)) / 1024,
 			((unsigned int) bmp->bmpMem - (vicBank * 16384)) / 8192, 0);
 	/* Enable screen */
 	outp(vicCtrlReg1, (inp(vicCtrlReg1) | 0x10));
