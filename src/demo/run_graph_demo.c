@@ -135,7 +135,7 @@ void squares(const bitmap *bmp, const int x, const int y, const int w, const int
 	for (i = 0; i < count; i++) {
 		len = rand() % 15 + 7;
 		x0 = rand() % (w - len - 2) + x + 2;
-		y0 = rand() % (h - len - 4) + y;
+		y0 = rand() % (h - len - 4) + y + 2;
 		if (bmp->colors > 2) {
 			color = (rand() % 3) + 1;
 		}
