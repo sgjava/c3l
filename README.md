@@ -164,7 +164,7 @@ is also a print function that allows word wrapping.
 
 ## High performance bitmap graphics
 
-![VIC](images/vicgraph.png "VIC") ![VDC](images/vdcgraph.png "VDC")
+![VICMC](images/vicgrmcm.png "VICMC") ![VIC](images/vicgraph.png "VIC") ![VDC](images/vdcgraph.png "VDC")
 
 [Bitmap](https://github.com/sgjava/c3l/blob/main/include/bitmap.h) provides an 
 abstraction for common graphic functions.
