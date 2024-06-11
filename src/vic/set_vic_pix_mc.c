@@ -8,7 +8,7 @@
 #include <vic.h>
 
 /*
- * Set pixel.
+ * Set multicolor pixel.
  */
 void setVicPixMc(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color) {
 	// Colors 0-3 pixels
@@ -17,9 +17,6 @@ void setVicPixMc(const bitmap *bmp, const unsigned int x, const unsigned int y, 
 	// Calculate the starting byte position in the bitmap memory
 	unsigned int pixByte = bmp->scrWidth * (y & 0xf8) + (x << 1 & 0x1f8) + (y & 0x07);
 	unsigned char vBit = bitTable[color][x & 0x03];
-	if (color) {
-		bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] | vBit;
-	} else {
-		bmp->bmpMem[pixByte] = bmp->bmpMem[pixByte] & vBit;
-	}
+    // Clear the relevant bits and apply the color bit
+    bmp->bmpMem[pixByte] = (bmp->bmpMem[pixByte] & ~vBit) | (color ? vBit : 0);
 }
