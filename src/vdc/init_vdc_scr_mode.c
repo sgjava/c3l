@@ -8,11 +8,12 @@
 #include <vdc.h>
 
 /*
- * Configure screen struct for VDC and clear screen.
+ * Configure for VDC mode and clear screen.
  */
 void initVdcScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol) {
 	saveVdc();
 	setVdcCursor(0, 0, vdcCurNone);
+	setVdcDspPage(scr->scrMem, scr->scrColMem);
 	(scr->clearScrCol)(scr, chrCol);
 	(scr->clearScr)(scr, 32);
 	setVdcFgBg(scr->color[fgCol], scr->color[bgCol]);

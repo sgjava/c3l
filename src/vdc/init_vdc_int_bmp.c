@@ -8,9 +8,9 @@
 #include <vdc.h>
 
 /*
- * Initialize screen struct for VDC.
+ * Initialize screen struct for VIC.
  */
-void initVdcBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem) {
+void initVdcIntBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem) {
 	static unsigned char vdcColors[16] = { vdcBlack, vdcWhite, vdcDarkRed, vdcLightCyan,
 	vdcLightPurple, vdcDarkGreen, vdcDarkBlue, vdcLightYellow,
 	vdcDarkPurple, vdcDarkYellow, vdcLightRed, vdcDarkCyan, vdcDarkGray,
@@ -26,16 +26,16 @@ void initVdcBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int
 	bmp->bmpColMem = (unsigned char*) colMem;
 	bmp->bmpMem = (unsigned char*) bmpMem;
 	bmp->bmpWidth = 640;
-	bmp->bmpHeight = 200;
+	bmp->bmpHeight = 400;
 	bmp->bmpSize = ((unsigned long) bmp->bmpWidth * bmp->bmpHeight) / 8;
 	bmp->scrWidth = 80;
-	bmp->scrHeight = 25;
+	bmp->scrHeight = 50;
 	bmp->colors = 2;
 	bmp->pixWidth = 1;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
 	/* Based on NTSC */
-	bmp->aspectRatioMul = 1;
-	bmp->aspectRatioDiv = 2;
+	bmp->aspectRatioMul = 5;
+	bmp->aspectRatioDiv = 8;
 	bmp->clearBmp = clearVdcBmp;
 	bmp->clearBmpCol = clearVdcBmpCol;
 	bmp->setPixel = setVdcPix;

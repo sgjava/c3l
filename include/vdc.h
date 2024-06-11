@@ -90,6 +90,9 @@
 #define vdcScrMem 0x0000  /* VDC default screen memory */
 #define vdcColMem 0x0800  /* VDC default attribute memory */
 #define vdcChrMem 0x2000  /* VDC default character set memory */
+#define vdcScrIntMem 0x0000  /* VDC interlace default screen memory */
+#define vdcColIntMem 0x1000  /* VDC interlace default attribute memory */
+#define vdcChrIntMem 0x2000  /* VDC interlace default character set memory */
 
 extern void __LIB__ saveVdc();
 extern void __LIB__ restoreVdc();
@@ -127,12 +130,19 @@ extern void __LIB__ drawVdcLineH(const bitmap *bmp, const unsigned int x, const 
 extern void __LIB__ drawVdcLineV(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned int len, const unsigned char color);
 extern void __LIB__ printVdcBmp(const bitmap *bmp, const unsigned char x, const unsigned char y, const char *str);
 extern void __LIB__ printVdcBmpCol(const bitmap *bmp, const unsigned char x, const unsigned char y, const unsigned char color, const char *str);
-extern void __LIB__ initVdcScr(const screen *scr, const unsigned int scrMem, const unsigned int chrMem);
+extern void __LIB__ initVdcScr(const screen *scr, const unsigned int scrMem, const unsigned int colMem, const unsigned int chrMem);
 extern void __LIB__ initVdcScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol);
 extern void __LIB__ initVdcBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem);
 extern void __LIB__ initVdcBmpMode(const bitmap *bmp, const unsigned char *chrMem, const unsigned char bgCol, const unsigned char fgCol);
 extern void __LIB__ copyVdcToStr(const screen *scr, const unsigned int offest, const char *str, const unsigned int len);
 extern void __LIB__ vdcChrMemToFile(const unsigned int vdcMem, const unsigned int chars, const char *fileName);
 extern void __LIB__ doneVdc();
+extern void __LIB__ vdcChrMemToFile(const unsigned int vdcMem, const unsigned int chars, const char *fileName);
+extern  unsigned char __LIB__ isVdc64k();
+extern void __LIB__ setVdc64k();
+extern void __LIB__ initVdcIntScr(const screen *scr, const unsigned int scrMem, const unsigned int colMem, const unsigned int chrMem) ;
+extern void __LIB__  initVdcIntScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol);
+extern void __LIB__ initVdcIntBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem);
+extern void __LIB__ initVdcIntBmpMode(const bitmap *bmp, const unsigned char *chrMem, const unsigned char bgCol, const unsigned char fgCol);
 
 #endif

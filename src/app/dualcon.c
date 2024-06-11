@@ -32,7 +32,7 @@ void initVic(const console *con, const screen *scr) {
  * Initialize key scan, VDC screen and console.
  */
 void initVdc(const console *con, const screen *scr) {
-	initVdcScr(scr, vdcScrMem, vdcChrMem);
+	initVdcScr(scr, vdcScrMem, vdcColMem, vdcChrMem);
 	initVdcScrMode(scr, scrBlack, scrBlack, scrWhite);
 	initCon(con, scr);
 }

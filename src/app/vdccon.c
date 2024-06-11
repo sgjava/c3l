@@ -1,7 +1,7 @@
 /*
  * C128 CP/M C Library C3L
  *
- * C128 keyboard demo.
+ * C128 console demo.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
@@ -22,7 +22,7 @@
  */
 void init(console *con, screen *scr) {
 	initCia();
-	initVdcScr(scr, vdcScrMem, vdcChrMem);
+	initVdcScr(scr, vdcScrMem, vdcColMem, vdcChrMem);
 	initVdcScrMode(scr, scrBlack, scrBlack, scrWhite);
 	initCon(con, scr);
 }

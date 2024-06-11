@@ -4,15 +4,13 @@
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
-#include <cia.h>
 #include <bitmap.h>
 #include <vdc.h>
 
 /*
- * Configure CIA, copy fonts to memory, set screen struct for VDC and clear screen.
+ * Copy fonts to memory, set screen struct for VDC and clear screen.
  */
 void initVdcBmpMode(const bitmap *bmp, const unsigned char *chrMem, const unsigned char bgCol, const unsigned char fgCol) {
-	initCia();
 	saveVdc();
 	/* Turn off cursor for bitmap mode */
 	setVdcCursor(0, 0, vdcCurNone);

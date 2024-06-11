@@ -8,9 +8,9 @@
 #include <vdc.h>
 
 /*
- * Configure screen struct for VDC.
+ * Configure screen struct for VDC interlace mode.
  */
-void initVdcScr(const screen *scr, const unsigned int scrMem, const unsigned int colMem, const unsigned int chrMem) {
+void initVdcIntScr(const screen *scr, const unsigned int scrMem, const unsigned int colMem, const unsigned int chrMem) {
 	static unsigned char vdcColors[16] = { vdcBlack, vdcWhite, vdcDarkRed, vdcLightCyan,
 	vdcLightPurple, vdcDarkGreen, vdcDarkBlue, vdcLightYellow,
 	vdcDarkPurple, vdcDarkYellow, vdcLightRed, vdcDarkCyan, vdcDarkGray,
@@ -21,11 +21,11 @@ void initVdcScr(const screen *scr, const unsigned int scrMem, const unsigned int
 		scr->color[i] = vdcAltChrSet | vdcColors[i];
 	}
 	scr->scrWidth = 80;
-	scr->scrHeight = 25;
+	scr->scrHeight = 50;
 	scr->scrSize = scr->scrWidth * scr->scrHeight;
 	scr->chrMem = (unsigned char*) chrMem;
 	scr->scrMem = (unsigned char*) scrMem;
-	scr->scrColMem = (unsigned char*) vdcColMem;
+	scr->scrColMem = (unsigned char*) colMem;
 	scr->clearScr = clearVdcScr;
 	scr->clearScrCol = clearVdcScrCol;
 	scr->print = printVdc;

@@ -1,17 +1,18 @@
 /*
  * C128 CP/M C Library C3L
  *
- * C128 keyboard demo.
+ * C128 console demo.
  *
  * Copyright (c) Steven P. Goldsmith. All rights reserved.
  */
 
 #include <cia.h>
 #include <console.h>
-#include <demo.h>
 #include <screen.h>
 #include <stdlib.h>
 #include <vdc.h>
+
+#include "demo.h"
 
 #pragma output noprotectmsdos
 #pragma output CRT_STACK_SIZE = 1024
@@ -19,10 +20,10 @@
 /*
  * Initialize key scan, screen and console.
  */
-void init(const console *con, const screen *scr) {
+void init(console *con, screen *scr) {
 	initCia();
-	initVdcScr(scr, vdcScrMem, vdcColMem, vdcChrMem);
-	initVdcScrMode(scr, scrBlack, scrBlack, scrWhite);
+	initVdcIntScr(scr, vdcScrIntMem, vdcColIntMem, vdcChrIntMem);
+	initVdcIntScrMode(scr, scrBlack, scrBlack, scrWhite);
 	initCon(con, scr);
 }
 
@@ -37,8 +38,8 @@ void done() {
 /*
  * Run demo.
  */
-void run(console *con) {
-	runKeyDemo(con);
+void run(const console *con) {
+	runConDemo(con, 200);
 }
 
 main() {

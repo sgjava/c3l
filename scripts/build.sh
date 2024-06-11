@@ -52,6 +52,7 @@ zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicspr
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/textperf.com ./src/app/textperf.c -L./build/lib -lc3l -ldemo
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/observer.com ./src/app/observer.c -L./build/lib -lc3l
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicgrmcm.com ./src/app/vicgrmcm.c -L./build/lib -lc3l -ldemo
+zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vdcconi.com ./src/app/vdcconi.c -L./build/lib -lc3l -ldemo
 
 # Remove curent disk image
 rm -f ./disks/graphics.d71
@@ -85,6 +86,7 @@ ctools ./disks/demo.d71 p ./build/app/vicdev.com
 ctools ./disks/demo.d71 p ./build/app/vdcdev.com
 ctools ./disks/demo.d71 p ./build/app/textperf.com
 ctools ./disks/demo.d71 p ./build/app/observer.com
+ctools ./disks/demo.d71 p ./build/app/vdcconi.com
 # Copy resource files to disk
 ctools ./disks/demo.d71 p ./resources/test.sub
 
