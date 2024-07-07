@@ -26,10 +26,10 @@ void initVdcIntBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned 
 	bmp->bmpColMem = (unsigned char*) colMem;
 	bmp->bmpMem = (unsigned char*) bmpMem;
 	bmp->bmpWidth = 640;
-	bmp->bmpHeight = 400;
+	bmp->bmpHeight = 480;
 	bmp->bmpSize = ((unsigned long) bmp->bmpWidth * bmp->bmpHeight) / 8;
 	bmp->scrWidth = 80;
-	bmp->scrHeight = 50;
+	bmp->scrHeight = 60;
 	bmp->colors = 2;
 	bmp->pixWidth = 1;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
@@ -38,7 +38,7 @@ void initVdcIntBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned 
 	bmp->aspectRatioDiv = 8;
 	bmp->clearBmp = clearVdcBmp;
 	bmp->clearBmpCol = clearVdcBmpCol;
-	bmp->setPixel = setVdcPix;
+	bmp->setPixel = setVdcIntPix;
 	bmp->drawLineH = drawVdcLineH;
 	bmp->drawLineV = drawVdcLineV;
 	bmp->printBmp = printVdcBmp;

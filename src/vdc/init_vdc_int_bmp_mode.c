@@ -16,8 +16,10 @@ void initVdcIntBmpMode(const bitmap *bmp, const unsigned char *chrMem, const uns
 	setVdcCursor(0, 0, vdcCurNone);
 	/* Copy VDC char sets to mem bufer */
 	copyVdcChrMem(chrMem, 0x2000, 512);
-	setVdcAttrsOff();
-	setVdcBmpMode((unsigned int) bmp->bmpMem, (unsigned int) bmp->bmpColMem);
+	// Set 64K mode if not set
+	if (!isVdc64k()) {
+		setVdc64k();
+	}
 	outVdc(vdcHzTotal, 126);
 	outVdc(vdcHzDisp, 80);
 	outVdc(vdcHzSyncPos, 102);
@@ -32,7 +34,8 @@ void initVdcIntBmpMode(const bitmap *bmp, const unsigned char *chrMem, const uns
 	outVdc(vdcAddrIncPerRow, 0);
 	/* Set bitmap mode */
 	setVdcFgBg(bmp->color[fgCol], bmp->color[bgCol]);
-	setVdcAttrsOn();
+	setVdcAttrsOff();
 	setVdcBmpMode((unsigned int) bmp->bmpMem, (unsigned int) bmp->bmpColMem);
+	(bmp->clearBmpCol)(bmp, (bmp->color[bmpWhite]));
 	(bmp->clearBmp)(bmp, 0);
 }

@@ -144,5 +144,7 @@ extern void __LIB__ initVdcIntScr(const screen *scr, const unsigned int scrMem, 
 extern void __LIB__  initVdcIntScrMode(const screen *scr, const unsigned char bgCol, const unsigned char fgCol, const unsigned char chrCol);
 extern void __LIB__ initVdcIntBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned int colMem, const unsigned char *chrMem);
 extern void __LIB__ initVdcIntBmpMode(const bitmap *bmp, const unsigned char *chrMem, const unsigned char bgCol, const unsigned char fgCol);
+extern void __LIB__ setVdcIntPixAsm(const unsigned int x, const unsigned int y, const unsigned char color, const unsigned int bmpMem) __smallc;
+extern void __LIB__ setVdcIntPix(const bitmap *bmp, const unsigned int x, const unsigned int y, const unsigned char color);
 
 #endif

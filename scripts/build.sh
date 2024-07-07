@@ -53,6 +53,7 @@ zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/textpe
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/observer.com ./src/app/observer.c -L./build/lib -lc3l
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vicgrmcm.com ./src/app/vicgrmcm.c -L./build/lib -lc3l -ldemo
 zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vdcconi.com ./src/app/vdcconi.c -L./build/lib -lc3l -ldemo
+zcc +cpm -vn -DAMALLOC -I"$HOME/z88dk/include" -I./include -o ./build/app/vdcgrint.com ./src/app/vdcgrint.c -L./build/lib -lc3l -ldemo
 
 # Remove curent disk image
 rm -f ./disks/graphics.d71
@@ -65,6 +66,7 @@ ctools ./disks/graphics.d71 p ./build/app/vicsplit.com
 ctools ./disks/graphics.d71 p ./build/app/vicgrmcm.com
 ctools ./disks/graphics.d71 p ./build/app/vicspr.com
 ctools ./disks/graphics.d71 p ./build/app/vdcfile.com
+ctools ./disks/graphics.d71 p ./build/app/vdcgrint.com
 # Copy resource files to disk
 ctools ./disks/graphics.d71 p ./resources/*.chr
 ctools ./disks/graphics.d71 p ./resources/*.spr
