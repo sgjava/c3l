@@ -42,7 +42,7 @@ Within the "c3l/scripts" directory, you will find a file called "build.sh." This
 them, and ultimately creates new d71 disks.
 
 #### Build [VICE](http://vice-emu.sourceforge.net)
-* `sudo apt install git curl build-essential autoconf libgtk-3-dev libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev libevdev-dev`
+* `sudo apt install git curl build-essential autoconf libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev libevdev-dev`
 * `cd`
 * `git clone --depth 1 https://github.com/VICE-Team/svn-mirror`
 * `cd svn-mirror/vice`
@@ -57,7 +57,7 @@ them, and ultimately creates new d71 disks.
 * `mkdir .local/bin`
 * `git clone --depth 1 https://github.com/markus-perl/ffmpeg-build-script.git`
 * `cd ffmpeg-build-script`
-* `nano build-ffmpeg` and change to `FFMPEG_VERSION=4.4`
+* `nano build-ffmpeg`
     * Change `FFMPEG_VERSION=4.4`
     * Comment out `CONFIGURE_OPTIONS+=("--enable-libwebp")`
 * `./build-ffmpeg --enable-gpl-and-non-free --build`
