@@ -36,6 +36,6 @@ void initVdcIntBmpMode(const bitmap *bmp, const unsigned char *chrMem, const uns
 	setVdcFgBg(bmp->color[fgCol], bmp->color[bgCol]);
 	setVdcAttrsOff();
 	setVdcBmpMode((unsigned int) bmp->bmpMem, (unsigned int) bmp->bmpColMem);
-	(bmp->clearBmpCol)(bmp, (bmp->color[bmpWhite]));
-	(bmp->clearBmp)(bmp, 0);
+	//(bmp->clearBmpCol)(bmp, (bmp->color[bmpWhite]));
+	//(bmp->clearBmp)(bmp, 0);
 }

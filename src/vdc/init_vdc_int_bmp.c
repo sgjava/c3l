@@ -26,10 +26,10 @@ void initVdcIntBmp(const bitmap *bmp, const unsigned int bmpMem, const unsigned 
 	bmp->bmpColMem = (unsigned char*) colMem;
 	bmp->bmpMem = (unsigned char*) bmpMem;
 	bmp->bmpWidth = 640;
-	bmp->bmpHeight = 480;
+	bmp->bmpHeight = 400;
 	bmp->bmpSize = ((unsigned long) bmp->bmpWidth * bmp->bmpHeight) / 8;
 	bmp->scrWidth = 80;
-	bmp->scrHeight = 60;
+	bmp->scrHeight = 50;
 	bmp->colors = 2;
 	bmp->pixWidth = 1;
 	bmp->bmpColSize = bmp->scrWidth * bmp->scrHeight;
