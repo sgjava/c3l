@@ -36,10 +36,9 @@ If you have VICE already setup you can run the demo applications using the [disk
 It's best to log into drive B since programs will default to current drive for required files.
 
 ## Set up development environment
-To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu 24.04 VM, Eclipse, Z88DK, VICE and ctools. This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework for your personal projects unrelated to C3L.
+To enhance efficiency and standardize the development environment, I have adopted the following tools: Ubuntu 24.04 VM, Eclipse, Z88DK, VICE, ctools and cc1541. This combination offers the most expedient approach for C development on the C128 CP/M platform. It is worth noting that you can also adapt this framework for your personal projects unrelated to C3L.
 
-Within the "c3l/scripts" directory, you will find a file called "build.sh." This script builds the C3L library, compiles demos, exports
-them, and ultimately creates new d71 disks.
+Within the "c3l/scripts" directory, you will find a file called "build.sh." This script builds the C3L library, compiles demos, exports them, and ultimately creates new d71 disks.
 
 #### Build [VICE](http://vice-emu.sourceforge.net)
 * `sudo apt install git curl build-essential autoconf libvte-2.91-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libxaw7-dev libxxf86vm-dev libaudio-dev libasound2-dev libpulse-dev libreadline-dev libudev-dev libusb-1.0-0-dev flex bison dos2unix xa65 libglew-dev texlive-full libcurl4-openssl-dev libswresample-dev libevdev-dev`
